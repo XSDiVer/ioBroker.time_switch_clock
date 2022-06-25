@@ -19,7 +19,7 @@
 		"title": "time_switch_clock",
 		"titleLang": {
 			"en": "time_switch_clock",
-			"de": "time_switch_clock",
+			"de": "Zeitschaltuhr",
 			"ru": "time_switch_clock",
 			"pt": "time_switch_clock",
 			"nl": "time_switch_clock",
@@ -42,7 +42,7 @@
 			"zh-cn": "例如计时器"
 		},
 		"authors": [
-			"XSDiVer <mario-cutillo@gmx.de>"
+			"XSDiVer <Tachyonen@quantentunnel.de>"
 		],
 		"keywords": [
 			"timer",
@@ -75,12 +75,24 @@
 				"js-controller": ">=2.0.0"
 			},
 			"vis"
-		]
+		],
+		"globalDependencies": [
+            {
+                "admin": ">=5.3.2"
+            }
+        ]
 	},
 	"native": {
-		"option1": true,
-		"option2": "42"
-	},
+        "Montag": false,
+        "Dienstag": false,
+        "Mittwoch": false,
+        "Donnerstag": false,
+		"Freitag": false,
+		"Samstag": false,
+		"Sonntag": false,
+		"Stunden": "00",
+		"Minuten": "00"
+    },
 	"objects": [],
 	"instanceObjects": [
 		{
@@ -101,6 +113,109 @@
 				"read": true,
 				"write": false,
 				"def": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "Wochentage.Montag",
+			"type": "state",
+			"common": {
+				"role": "state",
+				"name": "Montag",
+				"type": "boolean",
+				"read": true,
+				"write": true,
+				"def": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "Wochentage.Dienstag",
+			"type": "state",
+			"common": {
+				"role": "state",
+				"name": "Dienstag",
+				"type": "boolean",
+				"read": true,
+				"write": true,
+				"def": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "Wochentage.Mittwoch",
+			"type": "state",
+			"common": {
+				"role": "state",
+				"name": "Mittwoch",
+				"type": "boolean",
+				"read": true,
+				"write": true,
+				"def": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "Wochentage.Donnerstag",
+			"type": "state",
+			"common": {
+				"role": "state",
+				"name": "Donnerstag",
+				"type": "boolean",
+				"read": true,
+				"write": true,
+				"def": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "Wochentage.Freitag",
+			"type": "state",
+			"common": {
+				"role": "state",
+				"name": "Freitag",
+				"type": "boolean",
+				"read": true,
+				"write": true,
+				"def": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "Wochentage.Samstag",
+			"type": "state",
+			"common": {
+				"role": "state",
+				"name": "Samstag",
+				"type": "boolean",
+				"read": true,
+				"write": true,
+				"def": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "Wochentage.Sonntag",
+			"type": "state",
+			"common": {
+				"role": "state",
+				"name": "Sonntag",
+				"type": "boolean",
+				"read": true,
+				"write": true,
+				"def": false
+			},
+			"native": {}
+		},
+		{
+			"_id": "Zeitplan.Uhrzeit1",
+			"type": "state",
+			"common": {
+				"role": "state",
+				"name": "Uhrzeit1",
+				"type": "string",
+				"read": true,
+				"write": true
 			},
 			"native": {}
 		}

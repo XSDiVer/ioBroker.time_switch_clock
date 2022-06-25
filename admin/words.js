@@ -20,8 +20,8 @@ systemDictionary = {
 		'pl': 'Ustawienia adaptera dla time_switch_clock',
 		'zh-cn': 'time_switch_clock的适配器设置'
 	},
-	'option1': {
-		'en': 'option1',
+	'Option 1': {
+		'en': 'Option 1',
 		'de': 'Option 1',
 		'ru': 'Опция 1',
 		'pt': 'Opção 1',
@@ -32,8 +32,8 @@ systemDictionary = {
 		'pl': 'opcja 1',
 		'zh-cn': '选项1'
 	},
-	'option2': {
-		'en': 'option2',
+	'Option 2': {
+		'en': 'Option 2',
 		'de': 'Option 2',
 		'ru': 'вариант 2',
 		'pt': 'opção 2',

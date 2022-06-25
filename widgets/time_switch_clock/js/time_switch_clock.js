@@ -3,7 +3,7 @@
 
 	version: "0.0.1"
 
-	Copyright 2022 XSDiVer mario-cutillo@gmx.de
+	Copyright 2022 XSDiVer Tachyonen@quantentunnel.de
 */
 'use strict';
 
