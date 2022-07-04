@@ -8,6 +8,7 @@
 // The adapter-core module gives you access to the core ioBroker functions
 // you need to create an adapter
 const utils = require('@iobroker/adapter-core');
+<<<<<<< HEAD
 //const { get } = require('http');
 //const { validatePackageFiles } = require('@iobroker/testing/build/tests/packageFiles');
 //const { validatePackageFiles } = require('@iobroker/testing/build/tests/packageFiles');
@@ -15,6 +16,10 @@ const utils = require('@iobroker/adapter-core');
 const schedule = require('node-schedule');
 const SetWochentage = [];
 const SetSchedule = [];
+=======
+//const { truncate } = require('fs');
+const schedule = require('node-schedule');
+>>>>>>> c1f51792c6e6613115ea09cea193509aa0ffafc1
 
 // Load your modules here, e.g.:
 // const fs = require("fs");
@@ -44,6 +49,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 		this.log.warn('Adapter gestartet!');
 
+<<<<<<< HEAD
 		//States der Datenpunkte auslesen:
 		const SUN = await this.getStateAsync('Wochentage.Sonntag');
 		const statusSUN = SUN.val;
@@ -193,6 +199,30 @@ class TimeSwitchClock extends utils.Adapter {
 
 		const startZeit = async () => {
 			schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
+=======
+		//Schedule mit Variablen
+		await this.setStateAsync('Wochentage.Montag',  this.config.Montag, true);
+		await this.setStateAsync('Wochentage.Dienstag',  this.config.Dienstag, true);
+		await this.setStateAsync('Wochentage.Mittwoch',  this.config.Mittwoch, true);
+		await this.setStateAsync('Wochentage.Donnerstag',  this.config.Donnerstag, true);
+		await this.setStateAsync('Wochentage.Freitag',  this.config.Freitag, true);
+		await this.setStateAsync('Wochentage.Samstag',  this.config.Samstag, true);
+		await this.setStateAsync('Wochentage.Sonntag',  this.config.Sonntag, true);
+
+		await this.setStateAsync('Zeitplan.Uhrzeit1', this.config.Stunden + ':' + this.config.Minuten);
+
+		//Wochentage müssen noch geholt werden - sind noch manuell gesetzt.
+		const Wochentage = '0,6';
+
+		const hh = this.config.Stunden;
+		const mm = this.config.Minuten;
+
+		this.log.warn('hh = ' + hh + ' - mm = ' + mm + ' - Wochentage = ' + Wochentage);
+
+		//Schedule zusammen setzten
+		const startZeit = async () => {
+			schedule.scheduleJob(mm.toString().trim() + ' ' + hh.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + Wochentage.toString().trim(), async () =>
+>>>>>>> c1f51792c6e6613115ea09cea193509aa0ffafc1
 				this.log.warn('Schedule ausgelöst!'));
 		};
 		//Schedule zusammen setzten - ENDE
@@ -201,6 +231,7 @@ class TimeSwitchClock extends utils.Adapter {
 		startZeit();
 		//Schedule starten -- ENDE
 
+<<<<<<< HEAD
 
 		//Überprüfen ob die Datenpunkte angelegt sind
 		await this.setObjectNotExistsAsync('Wochentage.Sonntag', {
@@ -300,6 +331,23 @@ class TimeSwitchClock extends utils.Adapter {
 		this.subscribeStates('Wochentage.Samstag');
 		this.subscribeStates('Wochentage.Sonntag');
 
+=======
+		//Schedule mit Variablen -- ENDE
+
+		// Reset the connection indicator during startup
+		this.setState('info.connection', true, true);
+
+		//hier werden Datenpunkt Änderungen im Log angezeigt
+
+		this.subscribeStates('Wochentage.Montag');
+		this.subscribeStates('Wochentage.Dienstag');
+		this.subscribeStates('Wochentage.Mittwoch');
+		this.subscribeStates('Wochentage.Donnerstag');
+		this.subscribeStates('Wochentage.Freitag');
+		this.subscribeStates('Wochentage.Samstag');
+		this.subscribeStates('Wochentage.Sonntag');
+
+>>>>>>> c1f51792c6e6613115ea09cea193509aa0ffafc1
 	}
 
 
@@ -321,6 +369,7 @@ class TimeSwitchClock extends utils.Adapter {
 		}
 	}
 
+<<<<<<< HEAD
 	// If you need to react to object changes, uncomment the following block and the corresponding line in the constructor.
 	// You also need to subscribe to the objects with `this.subscribeObjects`, similar to `this.subscribeStates`.
 	/**
@@ -339,6 +388,8 @@ class TimeSwitchClock extends utils.Adapter {
 		}
 	}
 
+=======
+>>>>>>> c1f51792c6e6613115ea09cea193509aa0ffafc1
 	/**
 	 * Is called if a subscribed state changes
 	 * @param {string} id
@@ -348,6 +399,7 @@ class TimeSwitchClock extends utils.Adapter {
 	async onStateChange(id, state) {
 
 		if (state) {
+<<<<<<< HEAD
 
 			//bei Änderung der Datenpunkte true oder false auswerten
 			const SUN = await this.getStateAsync('Wochentage.Sonntag');
@@ -615,6 +667,20 @@ class TimeSwitchClock extends utils.Adapter {
 			//Ende von Setstate
 
 
+=======
+			// The state was changed
+			this.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
+
+			//Hier wird in gelb im Log id ist true ausgegeben, wenn der Wert auf true gesetzt wird.
+			if (state.val == true) {
+				this.log.error(id + ' ist = true !');
+			}
+
+			if (state.val == false) {
+				this.log.error(id + ' ist = false !');
+			}
+
+>>>>>>> c1f51792c6e6613115ea09cea193509aa0ffafc1
 		} else {
 			// The state was deleted
 			this.log.info(`state ${id} deleted`);
