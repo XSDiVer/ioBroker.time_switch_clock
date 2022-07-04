@@ -6,43 +6,43 @@
 			"0.0.1": {
 				"en": "initial release",
 				"de": "Erstveröffentlichung",
-				"ru": "Начальная версия",
+				"ru": "????????? ??????",
 				"pt": "lançamento inicial",
 				"nl": "Eerste uitgave",
 				"fr": "Première version",
 				"it": "Versione iniziale",
 				"es": "Versión inicial",
 				"pl": "Pierwsze wydanie",
-				"zh-cn": "首次出版"
+				"zh-cn": "????"
 			}
 		},
 		"title": "time_switch_clock",
 		"titleLang": {
 			"en": "time_switch_clock",
-			"de": "time_switch_clock",
+			"de": "Zeitschaltuhr",
 			"ru": "time_switch_clock",
 			"pt": "time_switch_clock",
 			"nl": "time_switch_clock",
 			"fr": "time_switch_clock",
 			"it": "time_switch_clock",
 			"es": "time_switch_clock",
-			"pl": "zegar_przełącznika_czasu",
+			"pl": "zegar_przelacznika_czasu",
 			"zh-cn": "time_switch_clock"
 		},
 		"desc": {
 			"en": "Timer for e.g. water valves or other things",
 			"de": "Timer für z.B. ",
-			"ru": "Таймер, например. ",
+			"ru": "??????, ????????. ",
 			"pt": "Temporizador para, por exemplo, ",
 			"nl": "Timer voor bijv. ",
 			"fr": "Minuterie pour par ex. ",
 			"it": "Timer per es. ",
 			"es": "Temporizador para, p. ",
 			"pl": "Timer m.in. ",
-			"zh-cn": "例如计时器"
+			"zh-cn": "?????"
 		},
 		"authors": [
-			"XSDiVer <mario-cutillo@gmx.de>"
+			"XSDiVer <Tachyonen@quantentunnel.de>"
 		],
 		"keywords": [
 			"timer",
@@ -75,11 +75,12 @@
 				"js-controller": ">=2.0.0"
 			},
 			"vis"
-		]
-	},
-	"native": {
-		"option1": true,
-		"option2": "42"
+		],
+		"globalDependencies": [
+            {
+                "admin": ">=5.3.2"
+            }
+        ]
 	},
 	"objects": [],
 	"instanceObjects": [
@@ -104,5 +105,6 @@
 			},
 			"native": {}
 		}
+		
 	]
 }

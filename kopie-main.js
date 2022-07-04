@@ -66,19 +66,6 @@ class TimeSwitchClock extends utils.Adapter {
 		const SAT = await this.getStateAsync('Wochentage.Samstag');
 		const statusSAT = SAT.val;
 
-		const Uhrzeit_1 = await this.getStateAsync('Zeitplan.Uhrzeit1');
-		const status_Uhrzeit_1 = Uhrzeit_1.val;
-		const [HH, MM] = status_Uhrzeit_1.split(':');
-
-		this.log.warn('Uhrzeit_1 --  ' + status_Uhrzeit_1);
-		this.log.warn('HH --  ' + HH);
-		this.log.warn('MM --  ' + MM);
-
-
-		//const hh_Ventil_1_ZP_2 = this.formatDate(this.getDateObject(this.getState("0_userdata.0.Bewässerung.Ventil_1.Ventil_1_ZP_2").val), "SS");
-
-		//const mm = this.config.Minuten;
-
 		this.log.error('-------------------');
 		this.log.error('FR = ' + statusFRI);
 		this.log.error('DO = ' + statusTHU);
@@ -94,14 +81,9 @@ class TimeSwitchClock extends utils.Adapter {
 		if (statusSUN == true) {
 			SetWochentage.splice(0,1, 'Sonntag');
 			SetSchedule.splice(0,0, 0);
-			//SetWochentage.sort();
-			//this.log.error('SetWochentage: ' + SetWochentage);
 
 		}  else if (statusSUN == false) {
-			//const kill = SetWochentage.indexOf('Sonntag');
 			SetWochentage.splice(0,1, '');
-			//this.log.error('kill: ' + kill);
-			//this.log.error('Array ' + SetWochentage);
 
 		}	else {
 			this.log.error('else... ' + statusSUN);
@@ -183,23 +165,47 @@ class TimeSwitchClock extends utils.Adapter {
 		//SetWochentage.sort();
 		this.log.error('SetWochentage: ' + SetWochentage);
 
+		/*
+		//Array SetWochentage auf Werte überprüfen und neues Array SetSchedule erstellen
+		const killSO = SetWochentage.indexOf('Sonntag');
+		if (killSO != -1) {
+			SetSchedule.splice(0,0, '0');
+		}
+
+		const killMO = SetWochentage.indexOf('Montag');
+		if (killMO != -1) {
+			SetSchedule.splice(0,0, '1');
+		}
+
+		const killDI = SetWochentage.indexOf('Dienstag');
+		if (killDI != -1) {
+			SetSchedule.splice(0,0, '2');
+		}
+
+		const killMI = SetWochentage.indexOf('Mittwoch');
+		if (killMI != -1) {
+			SetSchedule.splice(0,0, '3');
+		}
+
+		const killDO = SetWochentage.indexOf('Donnerstag');
+		if (killDO != -1) {
+			SetSchedule.splice(0,0, '4');
+		}
+
+		const killFR = SetWochentage.indexOf('Freitag');
+		if (killFR != -1) {
+			SetSchedule.splice(0,0, '5');
+		}
+
+		const killSA = SetWochentage.indexOf('Samstag');
+		if (killSA != -1) {
+			SetSchedule.splice(0,0, '6');
+		}
+		*/
 		//Array SetSchedule sortieren und in Log ausgeben
 		SetSchedule.sort();
 		this.log.error('SetSchedule: ' + SetSchedule);
 
-		//Schedule zusammen setzten
-
-		this.log.warn('hh = ' + HH + ' - mm = ' + MM + ' - Wochentage = ' + SetSchedule);
-
-		const startZeit = async () => {
-			schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
-				this.log.warn('Schedule ausgelöst!'));
-		};
-		//Schedule zusammen setzten - ENDE
-
-		//Schedule starten
-		startZeit();
-		//Schedule starten -- ENDE
 
 
 		//Überprüfen ob die Datenpunkte angelegt sind
