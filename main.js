@@ -15,6 +15,7 @@ const utils = require('@iobroker/adapter-core');
 const schedule = require('node-schedule');
 const SetWochentage = [];
 const SetSchedule = [];
+//const Uhrzeit = [];
 
 // Load your modules here, e.g.:
 // const fs = require("fs");
@@ -31,7 +32,7 @@ class TimeSwitchClock extends utils.Adapter {
 		});
 		this.on('ready', this.onReady.bind(this));
 		this.on('stateChange', this.onStateChange.bind(this));
-		// this.on('objectChange', this.onObjectChange.bind(this));
+		this.on('objectChange', this.onObjectChange.bind(this));
 		// this.on('message', this.onMessage.bind(this));
 		this.on('unload', this.onUnload.bind(this));
 	}
@@ -70,14 +71,14 @@ class TimeSwitchClock extends utils.Adapter {
 		const status_Uhrzeit_1 = Uhrzeit_1.val;
 		const [HH, MM] = status_Uhrzeit_1.split(':');
 
+		//HH:MM
+		//Uhrzeit.splice(0,1, HH);
+		//Uhrzeit.splice(1,1, MM);
+		//this.log.warn('Array Uhrzeit --  ' + Uhrzeit);
+
 		this.log.warn('Uhrzeit_1 --  ' + status_Uhrzeit_1);
 		this.log.warn('HH --  ' + HH);
 		this.log.warn('MM --  ' + MM);
-
-
-		//const hh_Ventil_1_ZP_2 = this.formatDate(this.getDateObject(this.getState("0_userdata.0.Bewässerung.Ventil_1.Ventil_1_ZP_2").val), "SS");
-
-		//const mm = this.config.Minuten;
 
 		this.log.error('-------------------');
 		this.log.error('FR = ' + statusFRI);
@@ -191,16 +192,16 @@ class TimeSwitchClock extends utils.Adapter {
 
 		this.log.warn('hh = ' + HH + ' - mm = ' + MM + ' - Wochentage = ' + SetSchedule);
 
-		const startZeit = async () => {
-			schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
-				this.log.warn('Schedule ausgelöst!'));
+		this.startZeit = async () => {
+			const XSDSJ_1 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
+				this.log.warn('Schedule ausgelöst!')); +
+			this.log.warn('Schedule gesetzt für -- ' + HH + ':' + MM + ' -- ' + SetSchedule);
 		};
 		//Schedule zusammen setzten - ENDE
 
 		//Schedule starten
-		startZeit();
+		//this.startZeit();
 		//Schedule starten -- ENDE
-
 
 		//Überprüfen ob die Datenpunkte angelegt sind
 		await this.setObjectNotExistsAsync('Wochentage.Sonntag', {
@@ -292,6 +293,8 @@ class TimeSwitchClock extends utils.Adapter {
 
 		//hier werden Datenpunkt Änderungen im Log angezeigt
 
+		this.subscribeStates(('Zeitplan.Uhrzeit1'));
+
 		this.subscribeStates('Wochentage.Montag');
 		this.subscribeStates('Wochentage.Dienstag');
 		this.subscribeStates('Wochentage.Mittwoch');
@@ -348,6 +351,16 @@ class TimeSwitchClock extends utils.Adapter {
 	async onStateChange(id, state) {
 
 		if (state) {
+
+			//Uhrzeit geändert:
+			const Uhrzeit_1 = await this.getStateAsync('Zeitplan.Uhrzeit1');
+			const status_Uhrzeit_1 = Uhrzeit_1.val;
+			const [HH, MM] = status_Uhrzeit_1.split(':');
+			this.log.warn('ChangeState Uhrzeit: -- ' + HH + ':' + MM);
+			//HH:MM
+			//Uhrzeit.splice(0,1, HH);
+			//Uhrzeit.splice(1,1, MM);
+			//this.log.warn('Array Uhrzeit --  ' + Uhrzeit);
 
 			//bei Änderung der Datenpunkte true oder false auswerten
 			const SUN = await this.getStateAsync('Wochentage.Sonntag');
@@ -613,6 +626,9 @@ class TimeSwitchClock extends utils.Adapter {
 			SetSchedule.sort();
 			this.log.error('SetSchedule: ' + SetSchedule);
 			//Ende von Setstate
+
+			schedule.gracefulShutdown();
+			this.startZeit();
 
 
 		} else {
