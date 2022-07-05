@@ -5,19 +5,10 @@
  * Created with @iobroker/create-adapter v2.1.1
  */
 
-// The adapter-core module gives you access to the core ioBroker functions
-// you need to create an adapter
 const utils = require('@iobroker/adapter-core');
-//const { get } = require('http');
-//const { validatePackageFiles } = require('@iobroker/testing/build/tests/packageFiles');
-//const { validatePackageFiles } = require('@iobroker/testing/build/tests/packageFiles');
-//const { truncate } = require('fs');
 const schedule = require('node-schedule');
 const SetWochentage = [];
 const SetSchedule = [];
-
-// Load your modules here, e.g.:
-// const fs = require("fs");
 
 class TimeSwitchClock extends utils.Adapter {
 
@@ -31,8 +22,6 @@ class TimeSwitchClock extends utils.Adapter {
 		});
 		this.on('ready', this.onReady.bind(this));
 		this.on('stateChange', this.onStateChange.bind(this));
-		// this.on('objectChange', this.onObjectChange.bind(this));
-		// this.on('message', this.onMessage.bind(this));
 		this.on('unload', this.onUnload.bind(this));
 	}
 
@@ -69,13 +58,9 @@ class TimeSwitchClock extends utils.Adapter {
 		const Uhrzeit_1 = await this.getStateAsync('Zeitplan.Uhrzeit1');
 		const status_Uhrzeit_1 = Uhrzeit_1.val;
 		const [HH, MM] = status_Uhrzeit_1.split(':');
-
-		this.log.warn('Uhrzeit_1 --  ' + status_Uhrzeit_1);
+		
 		this.log.warn('HH --  ' + HH);
 		this.log.warn('MM --  ' + MM);
-
-
-		//const hh_Ventil_1_ZP_2 = this.formatDate(this.getDateObject(this.getState("0_userdata.0.Bewässerung.Ventil_1.Ventil_1_ZP_2").val), "SS");
 
 		//const mm = this.config.Minuten;
 
@@ -199,8 +184,6 @@ class TimeSwitchClock extends utils.Adapter {
 
 		//Schedule starten
 		startZeit();
-		//Schedule starten -- ENDE
-
 
 		//Überprüfen ob die Datenpunkte angelegt sind
 		await this.setObjectNotExistsAsync('Wochentage.Sonntag', {
