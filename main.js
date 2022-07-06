@@ -5,20 +5,11 @@
  * Created with @iobroker/create-adapter v2.1.1
  */
 
-// The adapter-core module gives you access to the core ioBroker functions
-// you need to create an adapter
 const utils = require('@iobroker/adapter-core');
-//const { get } = require('http');
-//const { validatePackageFiles } = require('@iobroker/testing/build/tests/packageFiles');
-//const { validatePackageFiles } = require('@iobroker/testing/build/tests/packageFiles');
-//const { truncate } = require('fs');
 const schedule = require('node-schedule');
 const SetWochentage = [];
 const SetSchedule = [];
-//const Uhrzeit = [];
-
-// Load your modules here, e.g.:
-// const fs = require("fs");
+const Uhrzeit = [];
 
 class TimeSwitchClock extends utils.Adapter {
 
@@ -72,9 +63,9 @@ class TimeSwitchClock extends utils.Adapter {
 		const [HH, MM] = status_Uhrzeit_1.split(':');
 
 		//HH:MM
-		//Uhrzeit.splice(0,1, HH);
-		//Uhrzeit.splice(1,1, MM);
-		//this.log.warn('Array Uhrzeit --  ' + Uhrzeit);
+		Uhrzeit.splice(0,1, HH);
+		Uhrzeit.splice(1,1, MM);
+		this.log.warn('Array Uhrzeit --  ' + Uhrzeit);
 
 		this.log.warn('Uhrzeit_1 --  ' + status_Uhrzeit_1);
 		this.log.warn('HH --  ' + HH);
@@ -193,7 +184,7 @@ class TimeSwitchClock extends utils.Adapter {
 		this.log.warn('hh = ' + HH + ' - mm = ' + MM + ' - Wochentage = ' + SetSchedule);
 
 		this.startZeit = async () => {
-			const XSDSJ_1 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
+			schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
 				this.log.warn('Schedule ausgelöst!')); +
 			this.log.warn('Schedule gesetzt für -- ' + HH + ':' + MM + ' -- ' + SetSchedule);
 		};
