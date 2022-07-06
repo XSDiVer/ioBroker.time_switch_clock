@@ -1,11 +1,13 @@
 // @ts-nocheck
 'use strict';
 
+//const { Adapter } = require('@iobroker/adapter-core');
 /*
  * Created with @iobroker/create-adapter v2.1.1
  */
 
 const utils = require('@iobroker/adapter-core');
+//const { triggerAsyncId } = require('async_hooks');
 const schedule = require('node-schedule');
 const SetWochentage = [];
 const SetSchedule = [];
@@ -34,7 +36,7 @@ class TimeSwitchClock extends utils.Adapter {
 	async onReady() {
 		// Initialize your adapter here
 
-		this.log.warn('Adapter gestartet!');
+		this.log.info('Adapter TimeSwitchClock gestartet!');
 
 		//States der Datenpunkte auslesen:
 		const SUN = await this.getStateAsync('Wochentage.Sonntag');
@@ -60,17 +62,19 @@ class TimeSwitchClock extends utils.Adapter {
 
 		const Uhrzeit_1 = await this.getStateAsync('Zeitplan.Uhrzeit1');
 		const status_Uhrzeit_1 = Uhrzeit_1.val;
-		const [HH, MM] = status_Uhrzeit_1.split(':');
+		const [HH_1, MM_1] = status_Uhrzeit_1.split(':');
 
 		//HH:MM
-		Uhrzeit.splice(0,1, HH);
-		Uhrzeit.splice(1,1, MM);
-		this.log.warn('Array Uhrzeit --  ' + Uhrzeit);
+		Uhrzeit.splice(0,1, HH_1);
+		Uhrzeit.splice(1,1, MM_1);
+		//this.log.warn('Array Uhrzeit --  ' + Uhrzeit);
 
-		this.log.warn('Uhrzeit_1 --  ' + status_Uhrzeit_1);
-		this.log.warn('HH --  ' + HH);
-		this.log.warn('MM --  ' + MM);
+		//const HH = Uhrzeit[0];
+		//const MM = Uhrzeit[1];
 
+		//this.log.warn('Uhrzeit_1 -- HH & MM ' + HH + ':' + MM);
+
+		/*
 		this.log.error('-------------------');
 		this.log.error('FR = ' + statusFRI);
 		this.log.error('DO = ' + statusTHU);
@@ -80,6 +84,7 @@ class TimeSwitchClock extends utils.Adapter {
 		this.log.error('SO = ' + statusSUN);
 		this.log.error('SA = ' + statusSAT);
 		this.log.error ('Wochentage auslesen');
+		*/
 
 		//in Array einfügen oder löschen wenn false
 		//Sonntag
@@ -172,22 +177,32 @@ class TimeSwitchClock extends utils.Adapter {
 		}
 
 		//Array sortieren & Array 'SetWochentage' in Log ausgeben
-		//SetWochentage.sort();
-		this.log.error('SetWochentage: ' + SetWochentage);
+		SetWochentage.sort();
+		//this.log.error('SetWochentage: ' + SetWochentage);
 
 		//Array SetSchedule sortieren und in Log ausgeben
 		SetSchedule.sort();
-		this.log.error('SetSchedule: ' + SetSchedule);
+		//this.log.error('SetSchedule: ' + SetSchedule);
+
+		//Wenn Array Setschedule = leer - Error ausgeben
+		if (SetSchedule == '') {
+			this.log.error('Es MUSS mindestens ein Wochentag gesetzt sein, damit ein Schedule gesetzt werden kann');
+		} else {
+
+			this.log.info('Wochentag(e) gesetzt. -- ' + SetWochentage);
+		}
 
 		//Schedule zusammen setzten
-
-		this.log.warn('hh = ' + HH + ' - mm = ' + MM + ' - Wochentage = ' + SetSchedule);
+		//this.log.warn('hh = ' + HH + ' - mm = ' + MM + ' - Wochentage = ' + SetSchedule);
 
 		this.startZeit = async () => {
+			const HH = Uhrzeit[0];
+			const MM = Uhrzeit[1];
 			schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
-				this.log.warn('Schedule ausgelöst!')); +
-			this.log.warn('Schedule gesetzt für -- ' + HH + ':' + MM + ' -- ' + SetSchedule);
+				this.setState('trigger', true, true) && this.log.warn('Schedule ausgelöst!')); +
+			this.log.info('Schedule wird ausgelöst um -- ' + HH + ':' + MM + ' -- ' + SetWochentage);
 		};
+
 		//Schedule zusammen setzten - ENDE
 
 		//Schedule starten
@@ -195,6 +210,18 @@ class TimeSwitchClock extends utils.Adapter {
 		//Schedule starten -- ENDE
 
 		//Überprüfen ob die Datenpunkte angelegt sind
+		await this.setObjectNotExistsAsync('trigger', {
+			type: 'state',
+			common: {
+				name: 'trigger',
+				type: 'boolean',
+				role: 'indicator',
+				read: true,
+				write: false,
+			},
+			native: {},
+		});
+
 		await this.setObjectNotExistsAsync('Wochentage.Sonntag', {
 			type: 'state',
 			common: {
@@ -282,9 +309,14 @@ class TimeSwitchClock extends utils.Adapter {
 		// Reset the connection indicator during startup
 		this.setState('info.connection', true, true);
 
+		//Datenpunkt trigger auf false setzen
+		this.setState('trigger', false, true);
+
 		//hier werden Datenpunkt Änderungen im Log angezeigt
 
 		this.subscribeStates(('Zeitplan.Uhrzeit1'));
+
+		this.subscribeStates('trigger');
 
 		this.subscribeStates('Wochentage.Montag');
 		this.subscribeStates('Wochentage.Dienstag');
@@ -345,118 +377,123 @@ class TimeSwitchClock extends utils.Adapter {
 
 			//Uhrzeit geändert:
 			const Uhrzeit_1 = await this.getStateAsync('Zeitplan.Uhrzeit1');
-			const status_Uhrzeit_1 = Uhrzeit_1.val;
-			const [HH, MM] = status_Uhrzeit_1.split(':');
-			this.log.warn('ChangeState Uhrzeit: -- ' + HH + ':' + MM);
-			//HH:MM
-			//Uhrzeit.splice(0,1, HH);
-			//Uhrzeit.splice(1,1, MM);
-			//this.log.warn('Array Uhrzeit --  ' + Uhrzeit);
+			if (Uhrzeit_1) {
+
+				const status_Uhrzeit_1 = Uhrzeit_1.val;
+				const [HH_1, MM_1] = status_Uhrzeit_1.split(':');
+				//this.log.error ('Uhrzeit_1 - true ' + HH_1 + ' -- ' + MM_1 );
+				Uhrzeit.splice(0,1, HH_1);
+				Uhrzeit.splice(1,1, MM_1);
+				//this.log.warn('Uhrzeit Array --- ' + Uhrzeit);
+
+			} else {
+				this.log.error('Uhrzeit1 Error');
+			}
 
 			//bei Änderung der Datenpunkte true oder false auswerten
 			const SUN = await this.getStateAsync('Wochentage.Sonntag');
 			const statusSUN = SUN.val;
 			const Sunday = async () => {
 				if (statusSUN == true) {
-					this.log.error ('SO ist ' + statusSUN);
+					this.log.info('SO ist ' + statusSUN);
 				} else if (statusSUN == false) {
-					this.log.error('So ist ' + statusSUN);
+					this.log.info('So ist ' + statusSUN);
 				} else {
 					this.log.error('Error SO = ' + statusSUN);
 				}};
 
 			if (id == 'time_switch_clock.0.Wochentage.Sonntag') {
-				Sunday();
+				//Sunday();
 			}
 
 			const MON = await this.getStateAsync('Wochentage.Montag');
 			const statusMON = MON.val;
 			const Monday = async () => {
 				if (statusMON == true) {
-					this.log.error ('MO ist ' + statusMON);
+					this.log.info('MO ist ' + statusMON);
 				} else if (statusMON == false) {
-					this.log.error('MO ist ' + statusMON);
+					this.log.info('MO ist ' + statusMON);
 				} else {
 					this.log.error('Error MO = ' + statusMON);
 				}};
 
 			if (id == 'time_switch_clock.0.Wochentage.Montag') {
-				Monday();
+				//Monday();
 			}
 
 			const TUE = await this.getStateAsync('Wochentage.Dienstag');
 			const statusTUE = TUE.val;
 			const Tuesday = async () => {
 				if (statusTUE == true) {
-					this.log.error ('DI ist ' + statusTUE);
+					this.log.info('DI ist ' + statusTUE);
 				} else if (statusTUE == false) {
-					this.log.error('DI ist ' + statusTUE);
+					this.log.info('DI ist ' + statusTUE);
 				} else {
 					this.log.error('Error DI = ' + statusTUE);
 				}};
 
 			if (id == 'time_switch_clock.0.Wochentage.Dienstag') {
-				Tuesday();
+				//Tuesday();
 			}
 
 			const WED = await this.getStateAsync('Wochentage.Mittwoch');
 			const statusWED = WED.val;
 			const Wednesday = async () => {
 				if (statusWED == true) {
-					this.log.error ('MI ist ' + statusWED);
+					this.log.info('MI ist ' + statusWED);
 				} else if (statusWED == false) {
-					this.log.error('MI ist ' + statusWED);
+					this.log.info('MI ist ' + statusWED);
 				} else {
 					this.log.error('Error MI = ' + statusWED);
 				}};
 
 			if (id == 'time_switch_clock.0.Wochentage.Mittwoch') {
-				Wednesday();
+				//Wednesday();
 			}
 
 			const THU = await this.getStateAsync('Wochentage.Donnerstag');
 			const statusTHU = THU.val;
 			const Thursday = async () => {
 				if (statusTHU == true) {
-					this.log.error ('DO ist ' + statusTHU);
+					this.log.info('DO ist ' + statusTHU);
 				} else if (statusTHU == false) {
-					this.log.error('DO ist ' + statusTHU);
+					this.log.info('DO ist ' + statusTHU);
 				} else {
 					this.log.error('Error DO = ' + statusTHU);
 				}};
 
 			if (id == 'time_switch_clock.0.Wochentage.Donnerstag') {
-				Thursday();
+				//Thursday();
 			}
 
 			const FRI = await this.getStateAsync('Wochentage.Freitag');
 			const statusFRI = FRI.val;
 			const Friday = async () => {
 				if (statusFRI == true) {
-					this.log.error ('FR ist ' + statusFRI);
+					this.log.info('FR ist ' + statusFRI);
 				} else if (statusFRI == false) {
-					this.log.error('FR ist ' + statusFRI);
+					this.log.info('FR ist ' + statusFRI);
 				} else {
 					this.log.error('Error FR = ' + statusFRI);
 				}};
 
 			if (id == 'time_switch_clock.0.Wochentage.Freitag') {
-				Friday();
+				//Friday();
 			}
 
 			const SAT = await this.getStateAsync('Wochentage.Samstag');
 			const statusSAT = SAT.val;
 			const Saturday = async () => {
 				if (statusSAT == true) {
-					this.log.error ('SA ist ' + statusSAT);
+					this.log.info ('SA ist ' + statusSAT);
 				} else if (statusSAT == false) {
-					this.log.error('SA ist ' + statusSAT);
+					this.log.info('SA ist ' + statusSAT);
 				} else {
 					this.log.error('Error SA = ' + statusSAT);
 				}};
 
 			if (id == 'time_switch_clock.0.Wochentage.Samstag') {
-				Saturday();
+				//Saturday();
 			}
 
 			//bei Änderung des der Datenpunkte Array neu schreiben
@@ -609,16 +646,44 @@ class TimeSwitchClock extends utils.Adapter {
 				SetSchedule.splice(SetSchedule.findIndex(searchSA),1);
 			}
 
-			//Array sortieren & Array 'SetWochentage' in Log ausgeben
-			//SetWochentage.sort();
-			this.log.error('SetWochentage: ' + SetWochentage);
+
+			//trigger Datenpunkt wenn true - wieder auf false setzen
+			const triggerState = await this.getStateAsync('trigger');
+			const StatusTrigger = triggerState.val;
+			const triggerAction_true = async () => {
+				if (StatusTrigger == true) {
+					this.log.warn('StatusTrigger -- ' + StatusTrigger);
+					this.setState('trigger', false, true);
+				} else if (StatusTrigger == false) {
+					this.log.warn('Trigger wurde auf ' + StatusTrigger + ' gesetzt');
+				} else {
+					this.log.error('Error StatusTrigger ' + StatusTrigger);
+				}};
+
+			triggerAction_true();
+
+			//Array 'SetWochentage' in Log ausgeben
+			//this.log.error('SetWochentage: ' + SetWochentage);
 
 			//Array SetSchedule sortieren und in Log ausgeben
 			SetSchedule.sort();
-			this.log.error('SetSchedule: ' + SetSchedule);
+			//this.log.error('SetSchedule: ' + SetSchedule);
+
+			//Wenn Array Setschedule = leer - Error ausgeben
+			if (SetSchedule == '') {
+				this.log.error('Es MUSS mindestens ein Wochentag gesetzt sein, damit ein Schedule gesetzt werden kann');
+			} else {
+
+				SetWochentage.sort();
+				this.log.info('Wochentag(e) gesetzt. -- ' + SetWochentage);
+			}
+
 			//Ende von Setstate
 
+			//Alle Schedules löschen...
 			schedule.gracefulShutdown();
+
+			//Schedule neu erstellen siehe oben in der on.Ready function
 			this.startZeit();
 
 
