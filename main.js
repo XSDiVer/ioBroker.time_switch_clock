@@ -195,29 +195,58 @@ class TimeSwitchClock extends utils.Adapter {
 		//Schedule zusammen setzten
 		//this.log.warn('hh = ' + HH + ' - mm = ' + MM + ' - Wochentage = ' + SetSchedule);
 
-		this.startZeit = async () => {
+		this.Schedule_1 = async () => {
 			const HH = Uhrzeit[0];
 			const MM = Uhrzeit[1];
-			schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
-				this.setState('trigger', true, true) && this.log.warn('Schedule ausgelöst!')); +
-			this.log.info('Schedule wird ausgelöst um -- ' + HH + ':' + MM + ' -- ' + SetWochentage);
+			this.mySchedule_1 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
+				this.setState('trigger_1.trigger_1', true, true) && this.log.warn('Schedule ausgelöst!')); +
+			(this.setState('trigger_1.trigger_1_is_set', + HH + ':' + MM + ' -- ' + SetWochentage, true) && this.log.info('Schedule ist gesetzt -- ' + HH + ':' + MM + ' -- ' + SetWochentage));
 		};
 
 		//Schedule zusammen setzten - ENDE
 
+		this.cancelSchedule_1 = async () => {
+			(this.mySchedule_1.cancel() && this.log.warn('Schedule 1 wurde gelöscht!'));
+		};
+
 		//Schedule starten
-		//this.startZeit();
+		//this.Schedule_1();
 		//Schedule starten -- ENDE
+		//this.mySchedule_1.cancel();
 
 		//Überprüfen ob die Datenpunkte angelegt sind
-		await this.setObjectNotExistsAsync('trigger', {
+		await this.setObjectNotExistsAsync('trigger_1.trigger_1', {
 			type: 'state',
 			common: {
-				name: 'trigger',
+				name: 'trigger_1',
 				type: 'boolean',
 				role: 'indicator',
 				read: true,
 				write: false,
+			},
+			native: {},
+		});
+
+		await this.setObjectNotExistsAsync('trigger_1.trigger_1_is_set', {
+			type: 'state',
+			common: {
+				name: 'trigger_1_is_set',
+				type: 'string',
+				role: 'text',
+				read: true,
+				write: false,
+			},
+			native: {},
+		});
+
+		await this.setObjectNotExistsAsync('trigger_1.trigger_1_Stop', {
+			type: 'state',
+			common: {
+				name: 'trigger_1_Stop',
+				type: 'boolean',
+				role: 'indicator',
+				read: true,
+				write: true,
 			},
 			native: {},
 		});
@@ -309,14 +338,19 @@ class TimeSwitchClock extends utils.Adapter {
 		// Reset the connection indicator during startup
 		this.setState('info.connection', true, true);
 
-		//Datenpunkt trigger auf false setzen
-		this.setState('trigger', false, true);
+		//Datenpunkt trigger 1 auf false setzen
+		this.setState('trigger_1.trigger_1', false, true);
+		this.setState('trigger_1.trigger_1_Stop', false, true);
+
+		//test
+		this.setState('trigger_1.trigger_1_is_set', '-', true);
 
 		//hier werden Datenpunkt Änderungen im Log angezeigt
 
 		this.subscribeStates(('Zeitplan.Uhrzeit1'));
 
-		this.subscribeStates('trigger');
+		this.subscribeStates('trigger_1.trigger_1');
+		this.subscribeStates('trigger_1.trigger_1_Stop');
 
 		this.subscribeStates('Wochentage.Montag');
 		this.subscribeStates('Wochentage.Dienstag');
@@ -647,17 +681,36 @@ class TimeSwitchClock extends utils.Adapter {
 			}
 
 
-			//trigger Datenpunkt wenn true - wieder auf false setzen
-			const triggerState = await this.getStateAsync('trigger');
+			//tigger_1_Stop Datenpunkt wenn true - Schedule canceln
+			const triggerStop_1 = await this.getStateAsync('trigger_1.trigger_1_Stop');
+			const StatusTriggerStop = triggerStop_1.val;
+			const triggerStopAction_true = async () => {
+				if (StatusTriggerStop == true) {
+
+					this.cancelSchedule_1();
+
+				} else if (StatusTriggerStop == false) {
+
+					this.Schedule_1();
+
+				} else {
+					this.log.error('Error StatusTriggerStop' + StatusTriggerStop);
+				}};
+
+			triggerStopAction_true();
+
+
+			//trigger_1 Datenpunkt wenn true - wieder auf false setzen
+			const triggerState = await this.getStateAsync('trigger_1.trigger_1');
 			const StatusTrigger = triggerState.val;
 			const triggerAction_true = async () => {
 				if (StatusTrigger == true) {
-					this.log.warn('StatusTrigger -- ' + StatusTrigger);
-					this.setState('trigger', false, true);
+					this.log.warn('StatusTrigger 1 -- ' + StatusTrigger);
+					this.setState('trigger_1.trigger_1', false, true);
 				} else if (StatusTrigger == false) {
-					this.log.warn('Trigger wurde auf ' + StatusTrigger + ' gesetzt');
+					this.log.warn('Trigger 1 wurde auf ' + StatusTrigger + ' gesetzt');
 				} else {
-					this.log.error('Error StatusTrigger ' + StatusTrigger);
+					this.log.error('Error StatusTrigger 1 ' + StatusTrigger);
 				}};
 
 			triggerAction_true();
@@ -681,10 +734,11 @@ class TimeSwitchClock extends utils.Adapter {
 			//Ende von Setstate
 
 			//Alle Schedules löschen...
-			schedule.gracefulShutdown();
+			//schedule.gracefulShutdown();
 
 			//Schedule neu erstellen siehe oben in der on.Ready function
-			this.startZeit();
+			//this.Schedule_1();
+			//this.cancelSchedule_1();
 
 
 		} else {
