@@ -9,6 +9,7 @@
 const utils = require('@iobroker/adapter-core');
 //const { triggerAsyncId } = require('async_hooks');
 const schedule = require('node-schedule');
+//const { runInThisContext } = require('vm');
 const SetWochentage = [];
 const SetSchedule = [];
 const Uhrzeit = [];
@@ -65,40 +66,18 @@ class TimeSwitchClock extends utils.Adapter {
 		const [HH_1, MM_1] = status_Uhrzeit_1.split(':');
 
 		//HH:MM
+
 		Uhrzeit.splice(0,1, HH_1);
 		Uhrzeit.splice(1,1, MM_1);
-		//this.log.warn('Array Uhrzeit --  ' + Uhrzeit);
-
-		//const HH = Uhrzeit[0];
-		//const MM = Uhrzeit[1];
-
-		//this.log.warn('Uhrzeit_1 -- HH & MM ' + HH + ':' + MM);
-
-		/*
-		this.log.error('-------------------');
-		this.log.error('FR = ' + statusFRI);
-		this.log.error('DO = ' + statusTHU);
-		this.log.error('MI = ' + statusWED);
-		this.log.error('DI = ' + statusTUE);
-		this.log.error('MO = ' + statusMON);
-		this.log.error('SO = ' + statusSUN);
-		this.log.error('SA = ' + statusSAT);
-		this.log.error ('Wochentage auslesen');
-		*/
 
 		//in Array einfügen oder löschen wenn false
 		//Sonntag
 		if (statusSUN == true) {
 			SetWochentage.splice(0,1, 'Sonntag');
 			SetSchedule.splice(0,0, 0);
-			//SetWochentage.sort();
-			//this.log.error('SetWochentage: ' + SetWochentage);
 
 		}  else if (statusSUN == false) {
-			//const kill = SetWochentage.indexOf('Sonntag');
 			SetWochentage.splice(0,1, '');
-			//this.log.error('kill: ' + kill);
-			//this.log.error('Array ' + SetWochentage);
 
 		}	else {
 			this.log.error('else... ' + statusSUN);
@@ -176,45 +155,51 @@ class TimeSwitchClock extends utils.Adapter {
 			this.log.error('else... ' + statusSAT);
 		}
 
-		//Array sortieren & Array 'SetWochentage' in Log ausgeben
+		//Array sortieren
 		SetWochentage.sort();
-		//this.log.error('SetWochentage: ' + SetWochentage);
 
-		//Array SetSchedule sortieren und in Log ausgeben
+		//Array SetSchedule sortieren
 		SetSchedule.sort();
-		//this.log.error('SetSchedule: ' + SetSchedule);
-
-		//Wenn Array Setschedule = leer - Error ausgeben
-		if (SetSchedule == '') {
-			this.log.error('Es MUSS mindestens ein Wochentag gesetzt sein, damit ein Schedule gesetzt werden kann');
-		} else {
-
-			this.log.info('Wochentag(e) gesetzt. -- ' + SetWochentage);
-		}
 
 		//Schedule zusammen setzten
-		//this.log.warn('hh = ' + HH + ' - mm = ' + MM + ' - Wochentage = ' + SetSchedule);
-
 		this.Schedule_1 = async () => {
 			const HH = Uhrzeit[0];
 			const MM = Uhrzeit[1];
-			this.mySchedule_1 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
-				this.setState('trigger_1.trigger_1', true, true) && this.log.warn('Schedule ausgelöst!')); +
-			(this.setState('trigger_1.trigger_1_is_set', + HH + ':' + MM + ' -- ' + SetWochentage, true) && this.log.info('Schedule ist gesetzt -- ' + HH + ':' + MM + ' -- ' + SetWochentage));
+			if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59) {
+				this.mySchedule_1 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
+					this.setState('trigger_1.trigger_1', true, true) && this.log.warn('Schedule ausgelöst!')); +
+				(this.setState('trigger_1.trigger_1_is_set', '' + this.mySchedule_1.nextInvocation(), true) && this.log.info('Schedule ist gesetzt -- ' + HH + ':' + MM + ' -- ' + SetWochentage));
+			} else if (HH < 0 || HH > 23 || MM < 0 || MM > 59) {
+
+				//this.log.error('Uhrzeit stimmt nicht! -- ' + HH + ' -- ' + MM);
+				this.setState('trigger_1.trigger_1_Start', false, true);
+
+			}
 		};
 
 		//Schedule zusammen setzten - ENDE
 
 		this.cancelSchedule_1 = async () => {
-			(this.mySchedule_1.cancel() && this.log.warn('Schedule 1 wurde gelöscht!'));
+			this.HH = Uhrzeit[0];
+			this.MM = Uhrzeit[1];
+			if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59) {
+				this.mySchedule_1.cancel() && this.log.info('Schedule 1 wurde gelöscht!');
+
+			} else if (this.HH < 0 || this.HH > 23 || this.MM < 0 || this.MM > 59) {
+
+				this.log.error('Keine gültige Uhrzeit!');
+
+			} else if (SetSchedule.length == 0) {
+
+				this.log.error('Kein Wochentag gesetzt!');
+
+			}
 		};
 
 		//Schedule starten
-		//this.Schedule_1();
-		//Schedule starten -- ENDE
-		//this.mySchedule_1.cancel();
+		this.Schedule_1();
 
-		//Überprüfen ob die Datenpunkte angelegt sind
+		//Überprüfen ob die Datenpunkte angelegt sind, wenn nicht werden sie neu angelegt
 		await this.setObjectNotExistsAsync('trigger_1.trigger_1', {
 			type: 'state',
 			common: {
@@ -239,10 +224,10 @@ class TimeSwitchClock extends utils.Adapter {
 			native: {},
 		});
 
-		await this.setObjectNotExistsAsync('trigger_1.trigger_1_Stop', {
+		await this.setObjectNotExistsAsync('trigger_1.trigger_1_Start', {
 			type: 'state',
 			common: {
-				name: 'trigger_1_Stop',
+				name: 'trigger_1_Start',
 				type: 'boolean',
 				role: 'indicator',
 				read: true,
@@ -340,7 +325,6 @@ class TimeSwitchClock extends utils.Adapter {
 
 		//Datenpunkt trigger 1 auf false setzen
 		this.setState('trigger_1.trigger_1', false, true);
-		this.setState('trigger_1.trigger_1_Stop', false, true);
 
 		//test
 		this.setState('trigger_1.trigger_1_is_set', '-', true);
@@ -350,7 +334,7 @@ class TimeSwitchClock extends utils.Adapter {
 		this.subscribeStates(('Zeitplan.Uhrzeit1'));
 
 		this.subscribeStates('trigger_1.trigger_1');
-		this.subscribeStates('trigger_1.trigger_1_Stop');
+		this.subscribeStates('trigger_1.trigger_1_Start');
 
 		this.subscribeStates('Wochentage.Montag');
 		this.subscribeStates('Wochentage.Dienstag');
@@ -361,7 +345,6 @@ class TimeSwitchClock extends utils.Adapter {
 		this.subscribeStates('Wochentage.Sonntag');
 
 	}
-
 
 	/**
 	 * Is called when adapter shuts down - callback has to be called under any circumstances!
@@ -409,21 +392,6 @@ class TimeSwitchClock extends utils.Adapter {
 
 		if (state) {
 
-			//Uhrzeit geändert:
-			const Uhrzeit_1 = await this.getStateAsync('Zeitplan.Uhrzeit1');
-			if (Uhrzeit_1) {
-
-				const status_Uhrzeit_1 = Uhrzeit_1.val;
-				const [HH_1, MM_1] = status_Uhrzeit_1.split(':');
-				//this.log.error ('Uhrzeit_1 - true ' + HH_1 + ' -- ' + MM_1 );
-				Uhrzeit.splice(0,1, HH_1);
-				Uhrzeit.splice(1,1, MM_1);
-				//this.log.warn('Uhrzeit Array --- ' + Uhrzeit);
-
-			} else {
-				this.log.error('Uhrzeit1 Error');
-			}
-
 			//bei Änderung der Datenpunkte true oder false auswerten
 			const SUN = await this.getStateAsync('Wochentage.Sonntag');
 			const statusSUN = SUN.val;
@@ -437,7 +405,7 @@ class TimeSwitchClock extends utils.Adapter {
 				}};
 
 			if (id == 'time_switch_clock.0.Wochentage.Sonntag') {
-				//Sunday();
+				Sunday();
 			}
 
 			const MON = await this.getStateAsync('Wochentage.Montag');
@@ -452,7 +420,7 @@ class TimeSwitchClock extends utils.Adapter {
 				}};
 
 			if (id == 'time_switch_clock.0.Wochentage.Montag') {
-				//Monday();
+				Monday();
 			}
 
 			const TUE = await this.getStateAsync('Wochentage.Dienstag');
@@ -467,7 +435,7 @@ class TimeSwitchClock extends utils.Adapter {
 				}};
 
 			if (id == 'time_switch_clock.0.Wochentage.Dienstag') {
-				//Tuesday();
+				Tuesday();
 			}
 
 			const WED = await this.getStateAsync('Wochentage.Mittwoch');
@@ -482,7 +450,7 @@ class TimeSwitchClock extends utils.Adapter {
 				}};
 
 			if (id == 'time_switch_clock.0.Wochentage.Mittwoch') {
-				//Wednesday();
+				Wednesday();
 			}
 
 			const THU = await this.getStateAsync('Wochentage.Donnerstag');
@@ -497,7 +465,7 @@ class TimeSwitchClock extends utils.Adapter {
 				}};
 
 			if (id == 'time_switch_clock.0.Wochentage.Donnerstag') {
-				//Thursday();
+				Thursday();
 			}
 
 			const FRI = await this.getStateAsync('Wochentage.Freitag');
@@ -512,7 +480,7 @@ class TimeSwitchClock extends utils.Adapter {
 				}};
 
 			if (id == 'time_switch_clock.0.Wochentage.Freitag') {
-				//Friday();
+				Friday();
 			}
 
 			const SAT = await this.getStateAsync('Wochentage.Samstag');
@@ -527,7 +495,7 @@ class TimeSwitchClock extends utils.Adapter {
 				}};
 
 			if (id == 'time_switch_clock.0.Wochentage.Samstag') {
-				//Saturday();
+				Saturday();
 			}
 
 			//bei Änderung des der Datenpunkte Array neu schreiben
@@ -680,66 +648,67 @@ class TimeSwitchClock extends utils.Adapter {
 				SetSchedule.splice(SetSchedule.findIndex(searchSA),1);
 			}
 
+			//Uhrzeit geändert:
+			const Uhrzeit_1 = await this.getStateAsync('Zeitplan.Uhrzeit1');
+			if (Uhrzeit_1) {
 
-			//tigger_1_Stop Datenpunkt wenn true - Schedule canceln
-			const triggerStop_1 = await this.getStateAsync('trigger_1.trigger_1_Stop');
-			const StatusTriggerStop = triggerStop_1.val;
-			const triggerStopAction_true = async () => {
-				if (StatusTriggerStop == true) {
+				const status_Uhrzeit_1 = Uhrzeit_1.val;
+				const [HH_1, MM_1] = status_Uhrzeit_1.split(':');
 
-					this.cancelSchedule_1();
+				Uhrzeit.splice(0,1, HH_1);
+				Uhrzeit.splice(1,1, MM_1);
 
-				} else if (StatusTriggerStop == false) {
+			} else {
+
+				this.log.error('Uhrzeit1 Error');
+
+			}
+
+			//tigger_1_Start Datenpunkt wenn false - Schedule canceln - SetSchedule = Wochentage Array mit Zaheln
+			const triggerStart_1 = await this.getStateAsync('trigger_1.trigger_1_Start');
+			const StatusTriggerStart = triggerStart_1.val;
+
+			const triggerStartAction_true = async () => {
+				if (StatusTriggerStart == true && SetSchedule.length !== 0) {
 
 					this.Schedule_1();
 
-				} else {
-					this.log.error('Error StatusTriggerStop' + StatusTriggerStop);
+				} else if (StatusTriggerStart == true && SetSchedule.length == 0) {
+
+					this.setState('trigger_1.trigger_1_is_set', 'not scheduled', true);
+					this.cancelSchedule_1();
+
+				} else if (StatusTriggerStart == false) {
+
+					this.cancelSchedule_1();
+					this.setState('trigger_1.trigger_1_is_set', 'not scheduled', true);
+
 				}};
 
-			triggerStopAction_true();
+			triggerStartAction_true();
 
 
-			//trigger_1 Datenpunkt wenn true - wieder auf false setzen
+			//trigger_1 Datenpunkt wenn true - wieder auf false setzen - weil nur als Auslöser gedacht für z. B. Blockly
 			const triggerState = await this.getStateAsync('trigger_1.trigger_1');
 			const StatusTrigger = triggerState.val;
+
 			const triggerAction_true = async () => {
 				if (StatusTrigger == true) {
-					this.log.warn('StatusTrigger 1 -- ' + StatusTrigger);
+
+					this.log.info('StatusTrigger 1 -- ' + StatusTrigger);
 					this.setState('trigger_1.trigger_1', false, true);
+
 				} else if (StatusTrigger == false) {
-					this.log.warn('Trigger 1 wurde auf ' + StatusTrigger + ' gesetzt');
+
+					//this.log.info('Trigger 1 wurde wieder auf ' + StatusTrigger + ' gesetzt');
+
 				} else {
 					this.log.error('Error StatusTrigger 1 ' + StatusTrigger);
 				}};
 
 			triggerAction_true();
 
-			//Array 'SetWochentage' in Log ausgeben
-			//this.log.error('SetWochentage: ' + SetWochentage);
-
-			//Array SetSchedule sortieren und in Log ausgeben
 			SetSchedule.sort();
-			//this.log.error('SetSchedule: ' + SetSchedule);
-
-			//Wenn Array Setschedule = leer - Error ausgeben
-			if (SetSchedule == '') {
-				this.log.error('Es MUSS mindestens ein Wochentag gesetzt sein, damit ein Schedule gesetzt werden kann');
-			} else {
-
-				SetWochentage.sort();
-				this.log.info('Wochentag(e) gesetzt. -- ' + SetWochentage);
-			}
-
-			//Ende von Setstate
-
-			//Alle Schedules löschen...
-			//schedule.gracefulShutdown();
-
-			//Schedule neu erstellen siehe oben in der on.Ready function
-			//this.Schedule_1();
-			//this.cancelSchedule_1();
-
 
 		} else {
 			// The state was deleted
