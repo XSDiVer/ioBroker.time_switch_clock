@@ -7,6 +7,7 @@
  */
 
 const utils = require('@iobroker/adapter-core');
+//const { info } = require('console');
 //const { triggerAsyncId } = require('async_hooks');
 const schedule = require('node-schedule');
 //const { runInThisContext } = require('vm');
@@ -66,7 +67,6 @@ class TimeSwitchClock extends utils.Adapter {
 		const [HH_1, MM_1] = status_Uhrzeit_1.split(':');
 
 		//HH:MM
-
 		Uhrzeit.splice(0,1, HH_1);
 		Uhrzeit.splice(1,1, MM_1);
 
@@ -165,13 +165,19 @@ class TimeSwitchClock extends utils.Adapter {
 		this.Schedule_1 = async () => {
 			const HH = Uhrzeit[0];
 			const MM = Uhrzeit[1];
+
 			if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59) {
 				this.mySchedule_1 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
-					this.setState('trigger_1.trigger_1', true, true) && this.log.warn('Schedule ausgelöst!')); +
-				(this.setState('trigger_1.trigger_1_is_set', '' + this.mySchedule_1.nextInvocation(), true) && this.log.info('Schedule ist gesetzt -- ' + HH + ':' + MM + ' -- ' + SetWochentage));
+					this.setState('trigger_1.trigger_1', true, true) && this.log.info('Schedule 1 ausgelöst!')); +
+				(this.setState('trigger_1.trigger_1_is_set', '' + this.mySchedule_1.nextInvocation(), true) && this.log.info('next Schedule -- ' + this.mySchedule_1.nextInvocation()));
+
 			} else if (HH < 0 || HH > 23 || MM < 0 || MM > 59) {
 
-				//this.log.error('Uhrzeit stimmt nicht! -- ' + HH + ' -- ' + MM);
+				this.log.error('Uhrzeit stimmt nicht! -- ' + HH + ':' + MM);
+				this.setState('trigger_1.trigger_1_Start', false, true);
+
+			} else {
+				this.log.error('irgendwas stimmt nicht --- Uhrzeit = ' + Uhrzeit);
 				this.setState('trigger_1.trigger_1_Start', false, true);
 
 			}
@@ -199,42 +205,95 @@ class TimeSwitchClock extends utils.Adapter {
 		//Schedule starten
 		this.Schedule_1();
 
+		this.setStateAsync('info.Anzahl', + this.config.Anzahl, true );
+
+		if (this.config.Anzahl == null) {
+
+			this.log.error('Anzahl ist NULL!');
+
+		} else if (this.config.Anzahl !== null) {
+
+			this.log.error('Anzahl ist -- ' + this.config.Anzahl);
+
+		}
+
 		//Überprüfen ob die Datenpunkte angelegt sind, wenn nicht werden sie neu angelegt
-		await this.setObjectNotExistsAsync('trigger_1.trigger_1', {
-			type: 'state',
-			common: {
-				name: 'trigger_1',
-				type: 'boolean',
-				role: 'indicator',
-				read: true,
-				write: false,
-			},
-			native: {},
+
+		if (this.config.Anzahl > 0) {
+
+			await this.setObjectNotExistsAsync('trigger_1.trigger_1', {
+				type: 'state',
+				common: {
+					name: 'trigger_1',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_1.trigger_1_is_set', {
+				type: 'state',
+				common: {
+					name: 'trigger_1_is_set',
+					type: 'string',
+					role: 'text',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_1.trigger_1_Start', {
+				type: 'state',
+				common: {
+					name: 'trigger_1_Start',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+		} else if (this.config.Anzahl <= 0) {
+
+
+			//this.delObject('trigger_1');
+			//this.delObject('trigger_1.trigger_1_is_set');
+			//this.delObject('trigger_1.trigger_1_Start');
+
+			this.log.error('trigger 1 gelöscht');
+
+		}
+
+		//this.log.warn (this.findForeignObject);
+
+		/*
+		adapter.getForeignObject('otherAdapter.X.someState', function (err, obj) {
+			if (err) {
+				adapter.log.error(err);
+			} else {
+				adapter.log.info(JSON.stringify(obj));
+			}
 		});
 
-		await this.setObjectNotExistsAsync('trigger_1.trigger_1_is_set', {
-			type: 'state',
-			common: {
-				name: 'trigger_1_is_set',
-				type: 'string',
-				role: 'text',
-				read: true,
-				write: false,
-			},
-			native: {},
-		});
+		adapter.getObject('myObject', function (err, obj) {
 
-		await this.setObjectNotExistsAsync('trigger_1.trigger_1_Start', {
-			type: 'state',
-			common: {
-				name: 'trigger_1_Start',
-				type: 'boolean',
-				role: 'indicator',
-				read: true,
-				write: true,
-			},
-			native: {},
 		});
+		*/
+
+		/*
+		if (!this.setObjectNotExists ('trigger_1.trigger_1_Start') == true) {
+
+			this.log.warn('Trigger_1_Start 1st');
+
+		} else {
+
+			this.log.warn('Trigger_1_Start 2nd');
+
+		}
+		*/
 
 		await this.setObjectNotExistsAsync('Wochentage.Sonntag', {
 			type: 'state',
@@ -321,13 +380,59 @@ class TimeSwitchClock extends utils.Adapter {
 		});
 
 		// Reset the connection indicator during startup
+
 		this.setState('info.connection', true, true);
 
 		//Datenpunkt trigger 1 auf false setzen
 		this.setState('trigger_1.trigger_1', false, true);
 
-		//test
-		this.setState('trigger_1.trigger_1_is_set', '-', true);
+		//*******************************
+		//test - ob Datenpunkt existiert.
+		//*******************************
+
+
+		try {
+
+			const obj = await this.getObjectAsync('trigger_1');
+
+			if (obj) {
+
+				this.log.warn('datenpunkt existiert -- ' + obj);
+
+			} else {
+
+				this.log.warn('datenpunkt existiert NICHT -- ' + obj);
+
+			}
+
+		} catch (e) {
+
+			this.log.warn('catch block! -- ' + e);
+
+		}
+
+
+		try {
+
+			const obj_2 = await this.objectExists('trigger_1.trigger_1');
+
+			if (obj_2) {
+
+				this.log.warn('datenpunkt existiert');
+
+			} else {
+
+				this.log.warn('datenpunkt existiert NICHT');
+
+			}
+		} catch (e) {
+
+			this.log.warn('catch block! -- ' + e);
+
+		}
+
+		//Test ENDE
+
 
 		//hier werden Datenpunkt Änderungen im Log angezeigt
 

@@ -1,2 +1,17 @@
 {
+    "type": "tabs",
+    "items": {
+        "Wochentage": {
+            "type": "panel",
+            "label": "Wie viele Schedules?",
+            "items": {
+                "Anzahl": {
+                    "newLine": true,
+                    "type": "number",
+                    "label": "Anzahl"
+            }
+        
+            }
+                }
+            }
 }

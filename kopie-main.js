@@ -244,6 +244,14 @@ class TimeSwitchClock extends utils.Adapter {
 		//Schedule starten -- ENDE
 		//this.mySchedule_1.cancel();
 
+		/*
+		//getForeignState wenn mans mal brauchen sollte...
+		const Foreign = await this.getForeignStateAsync ('0_userdata.0.example_state');
+		const statusfo = Foreign.val;
+		this.log.error('ForeignState  -- ' + statusfo);
+		*/
+
+
 		//Überprüfen ob die Datenpunkte angelegt sind
 		await this.setObjectNotExistsAsync('trigger_1.trigger_1', {
 			type: 'state',

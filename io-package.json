@@ -82,6 +82,9 @@
             }
         ]
 	},
+	"native": {
+        "Anzahl": 1
+    },
 	"objects": [],
 	"instanceObjects": [
 		{
@@ -104,6 +107,19 @@
 				"def": false
 			},
 			"native": {}
+		},
+		{
+			"_id": "info.Anzahl",
+			"type": "state",
+			"common": {
+				"role": "state",
+				"name": "Anzahl",
+				"type": "number",
+				"read": true,
+				"write": false
+			},
+			"native": {}
 		}
+		
 	]
 }
