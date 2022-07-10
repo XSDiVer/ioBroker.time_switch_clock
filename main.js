@@ -183,8 +183,30 @@ class TimeSwitchClock extends utils.Adapter {
 			}
 		};
 
+		this.Schedule_2 = async () => {
+			const HH = Uhrzeit[0];
+			const MM = Uhrzeit[1];
+
+			if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59) {
+				this.mySchedule_2 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
+					this.setState('trigger_2.trigger_2', true, true) && this.log.info('Schedule 2 ausgelöst!')); +
+				(this.setState('trigger_2.trigger_2_is_set', '' + this.mySchedule_2.nextInvocation(), true) && this.log.info('next Schedule -- ' + this.mySchedule_2.nextInvocation()));
+
+			} else if (HH < 0 || HH > 23 || MM < 0 || MM > 59) {
+
+				this.log.error('Uhrzeit stimmt nicht! -- ' + HH + ':' + MM);
+				this.setState('trigger_2.trigger_2_Start', false, true);
+
+			} else {
+				this.log.error('irgendwas stimmt nicht --- Uhrzeit = ' + Uhrzeit);
+				this.setState('trigger_2.trigger_2_Start', false, true);
+
+			}
+		};
+
 		//Schedule zusammen setzten - ENDE
 
+		//Cancel Schedules
 		this.cancelSchedule_1 = async () => {
 			this.HH = Uhrzeit[0];
 			this.MM = Uhrzeit[1];
@@ -202,6 +224,25 @@ class TimeSwitchClock extends utils.Adapter {
 			}
 		};
 
+		this.cancelSchedule_2 = async () => {
+			this.HH = Uhrzeit[0];
+			this.MM = Uhrzeit[1];
+			if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59) {
+				this.mySchedule_2.cancel() && this.log.info('Schedule 2 wurde gelöscht!');
+
+			} else if (this.HH < 0 || this.HH > 23 || this.MM < 0 || this.MM > 59) {
+
+				this.log.error('Keine gültige Uhrzeit!');
+
+			} else if (SetSchedule.length == 0) {
+
+				this.log.error('Kein Wochentag gesetzt!');
+
+			}
+		};
+
+		//Cancel Schedules ENDE
+
 		//Schedule starten
 		this.Schedule_1();
 
@@ -218,8 +259,7 @@ class TimeSwitchClock extends utils.Adapter {
 		}
 
 		//Überprüfen ob die Datenpunkte angelegt sind, wenn nicht werden sie neu angelegt
-
-		if (this.config.Anzahl > 0) {
+		if (this.config.Anzahl == 1) {
 
 			await this.setObjectNotExistsAsync('trigger_1.trigger_1', {
 				type: 'state',
@@ -256,44 +296,838 @@ class TimeSwitchClock extends utils.Adapter {
 				},
 				native: {},
 			});
-		} else if (this.config.Anzahl <= 0) {
 
 
-			//this.delObject('trigger_1');
-			//this.delObject('trigger_1.trigger_1_is_set');
-			//this.delObject('trigger_1.trigger_1_Start');
+			//alle anderen Datenpunkte löschen die aus Schdedule Anzahl > 1 sind
+			const trigger_2 = await this.getObjectAsync('trigger_2.trigger_2') || await this.getObjectAsync('trigger_2.trigger_2_is_set') || await this.getObjectAsync('trigger_2.trigger_2_Start');
+			if (trigger_2) {
 
-			this.log.error('trigger 1 gelöscht');
+				this.log.warn('datenpunkte trigger_2 existieren');
+				//und werden gelöscht
+				await this.delObjectAsync('trigger_2.trigger_2');
+				await this.delObjectAsync('trigger_2.trigger_2_is_set');
+				await this.delObjectAsync('trigger_2.trigger_2_Start');
 
-		}
-
-		//this.log.warn (this.findForeignObject);
-
-		/*
-		adapter.getForeignObject('otherAdapter.X.someState', function (err, obj) {
-			if (err) {
-				adapter.log.error(err);
 			} else {
-				adapter.log.info(JSON.stringify(obj));
+
+				this.log.warn('datenpunkte trigger_2 existieren NICHT');
+
 			}
-		});
 
-		adapter.getObject('myObject', function (err, obj) {
+			const trigger_3 = await this.getObjectAsync('trigger_3.trigger_3') || await this.getObjectAsync('trigger_3.trigger_3_is_set') || await this.getObjectAsync('trigger_3.trigger_3_Start');
+			if (trigger_3) {
 
-		});
-		*/
+				this.log.warn('datenpunkte trigger_3 existieren');
+				//und werden gelöscht
+				await this.delObjectAsync('trigger_3.trigger_3');
+				await this.delObjectAsync('trigger_3.trigger_3_is_set');
+				await this.delObjectAsync('trigger_3.trigger_3_Start');
 
-		/*
-		if (!this.setObjectNotExists ('trigger_1.trigger_1_Start') == true) {
+			} else {
 
-			this.log.warn('Trigger_1_Start 1st');
+				this.log.warn('datenpunkte trigger_3 existieren NICHT');
 
-		} else {
+			}
 
-			this.log.warn('Trigger_1_Start 2nd');
+			const trigger_4 = await this.getObjectAsync('trigger_4.trigger_4') || await this.getObjectAsync('trigger_4.trigger_4_is_set') || await this.getObjectAsync('trigger_4.trigger_4_Start');
+			if (trigger_4) {
+
+				this.log.warn('datenpunkte trigger_4 existieren');
+				//und werden gelöscht
+				await this.delObjectAsync('trigger_4.trigger_4');
+				await this.delObjectAsync('trigger_4.trigger_4_is_set');
+				await this.delObjectAsync('trigger_4.trigger_4_Start');
+
+			} else {
+
+				this.log.warn('datenpunkte trigger_4 existieren NICHT');
+
+			}
+
+			const trigger_5 = await this.getObjectAsync('trigger_5.trigger_5') || await this.getObjectAsync('trigger_5.trigger_5_is_set') || await this.getObjectAsync('trigger_5.trigger_5_Start');
+			if (trigger_5) {
+
+				this.log.warn('datenpunkte trigger_5 existieren');
+				//und werden gelöscht
+				await this.delObjectAsync('trigger_5.trigger_5');
+				await this.delObjectAsync('trigger_5.trigger_5_is_set');
+				await this.delObjectAsync('trigger_5.trigger_5_Start');
+
+			} else {
+
+				this.log.warn('datenpunkte trigger_5 existieren NICHT');
+
+			}
+
+			const trigger_6 = await this.getObjectAsync('trigger_6.trigger_6') || await this.getObjectAsync('trigger_6.trigger_6_is_set') || await this.getObjectAsync('trigger_6.trigger_6_Start');
+			if (trigger_6) {
+
+				this.log.warn('datenpunkte trigger_6 existieren');
+				//und werden gelöscht
+				await this.delObjectAsync('trigger_6.trigger_6');
+				await this.delObjectAsync('trigger_6.trigger_6_is_set');
+				await this.delObjectAsync('trigger_6.trigger_6_Start');
+
+			} else {
+
+				this.log.warn('datenpunkte trigger_6 existieren NICHT');
+
+			}
+
+
+		} else if (this.config.Anzahl == 2) {
+
+			await this.setObjectNotExistsAsync('trigger_2.trigger_2', {
+				type: 'state',
+				common: {
+					name: 'trigger_2',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_2.trigger_2_is_set', {
+				type: 'state',
+				common: {
+					name: 'trigger_2_is_set',
+					type: 'string',
+					role: 'text',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_2.trigger_2_Start', {
+				type: 'state',
+				common: {
+					name: 'trigger_2_Start',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			this.subscribeStates('trigger_2.trigger_2');
+			this.subscribeStates('trigger_2.trigger_2_Start');
+
+			//alle anderen Datenpunkte löschen die aus Schdedule Anzahl > 2 sind
+			const trigger_3 = await this.getObjectAsync('trigger_3.trigger_3') || await this.getObjectAsync('trigger_3.trigger_3_is_set') || await this.getObjectAsync('trigger_3.trigger_3_Start');
+			if (trigger_3) {
+
+				this.log.warn('datenpunkte trigger_3 existieren');
+				//und werden gelöscht
+				await this.delObjectAsync('trigger_3.trigger_3');
+				await this.delObjectAsync('trigger_3.trigger_3_is_set');
+				await this.delObjectAsync('trigger_3.trigger_3_Start');
+
+			} else {
+
+				this.log.warn('datenpunkte trigger_3 existieren NICHT');
+
+			}
+
+			const trigger_4 = await this.getObjectAsync('trigger_4.trigger_4') || await this.getObjectAsync('trigger_4.trigger_4_is_set') || await this.getObjectAsync('trigger_4.trigger_4_Start');
+			if (trigger_4) {
+
+				this.log.warn('datenpunkte trigger_4 existieren');
+				//und werden gelöscht
+				await this.delObjectAsync('trigger_4.trigger_4');
+				await this.delObjectAsync('trigger_4.trigger_4_is_set');
+				await this.delObjectAsync('trigger_4.trigger_4_Start');
+
+			} else {
+
+				this.log.warn('datenpunkte trigger_4 existieren NICHT');
+
+			}
+
+			const trigger_5 = await this.getObjectAsync('trigger_5.trigger_5') || await this.getObjectAsync('trigger_5.trigger_5_is_set') || await this.getObjectAsync('trigger_5.trigger_5_Start');
+			if (trigger_5) {
+
+				this.log.warn('datenpunkte trigger_5 existieren');
+				//und werden gelöscht
+				await this.delObjectAsync('trigger_5.trigger_5');
+				await this.delObjectAsync('trigger_5.trigger_5_is_set');
+				await this.delObjectAsync('trigger_5.trigger_5_Start');
+
+			} else {
+
+				this.log.warn('datenpunkte trigger_5 existieren NICHT');
+
+			}
+
+			const trigger_6 = await this.getObjectAsync('trigger_6.trigger_6') || await this.getObjectAsync('trigger_6.trigger_6_is_set') || await this.getObjectAsync('trigger_6.trigger_6_Start');
+			if (trigger_6) {
+
+				this.log.warn('datenpunkte trigger_6 existieren');
+				//und werden gelöscht
+				await this.delObjectAsync('trigger_6.trigger_6');
+				await this.delObjectAsync('trigger_6.trigger_6_is_set');
+				await this.delObjectAsync('trigger_6.trigger_6_Start');
+
+			} else {
+
+				this.log.warn('datenpunkte trigger_6 existieren NICHT');
+
+			}
+
+		} else if (this.config.Anzahl == 3) {
+
+			await this.setObjectNotExistsAsync('trigger_2.trigger_2', {
+				type: 'state',
+				common: {
+					name: 'trigger_2',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_2.trigger_2_is_set', {
+				type: 'state',
+				common: {
+					name: 'trigger_2_is_set',
+					type: 'string',
+					role: 'text',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_2.trigger_2_Start', {
+				type: 'state',
+				common: {
+					name: 'trigger_2_Start',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_3.trigger_3', {
+				type: 'state',
+				common: {
+					name: 'trigger_3',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_3.trigger_3_is_set', {
+				type: 'state',
+				common: {
+					name: 'trigger_3_is_set',
+					type: 'string',
+					role: 'text',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_3.trigger_3_Start', {
+				type: 'state',
+				common: {
+					name: 'trigger_3_Start',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			this.subscribeStates('trigger_2.trigger_2');
+			this.subscribeStates('trigger_2.trigger_2_Start');
+
+			this.subscribeStates('trigger_3.trigger_3');
+			this.subscribeStates('trigger_3.trigger_3_Start');
+
+			//alle anderen Datenpunkte löschen die aus Schdedule Anzahl > 3 sind
+			const trigger_4 = await this.getObjectAsync('trigger_4.trigger_4') || await this.getObjectAsync('trigger_4.trigger_4_is_set') || await this.getObjectAsync('trigger_4.trigger_4_Start');
+			if (trigger_4) {
+
+				this.log.warn('datenpunkte trigger_4 existieren');
+				//und werden gelöscht
+				await this.delObjectAsync('trigger_4.trigger_4');
+				await this.delObjectAsync('trigger_4.trigger_4_is_set');
+				await this.delObjectAsync('trigger_4.trigger_4_Start');
+
+			} else {
+
+				this.log.warn('datenpunkte trigger_4 existieren NICHT');
+
+			}
+
+			const trigger_5 = await this.getObjectAsync('trigger_5.trigger_5') || await this.getObjectAsync('trigger_5.trigger_5_is_set') || await this.getObjectAsync('trigger_5.trigger_5_Start');
+			if (trigger_5) {
+
+				this.log.warn('datenpunkte trigger_5 existieren');
+				//und werden gelöscht
+				await this.delObjectAsync('trigger_5.trigger_5');
+				await this.delObjectAsync('trigger_5.trigger_5_is_set');
+				await this.delObjectAsync('trigger_5.trigger_5_Start');
+
+			} else {
+
+				this.log.warn('datenpunkte trigger_5 existieren NICHT');
+
+			}
+
+			const trigger_6 = await this.getObjectAsync('trigger_6.trigger_6') || await this.getObjectAsync('trigger_6.trigger_6_is_set') || await this.getObjectAsync('trigger_6.trigger_6_Start');
+			if (trigger_6) {
+
+				this.log.warn('datenpunkte trigger_6 existieren');
+				//und werden gelöscht
+				await this.delObjectAsync('trigger_6.trigger_6');
+				await this.delObjectAsync('trigger_6.trigger_6_is_set');
+				await this.delObjectAsync('trigger_6.trigger_6_Start');
+
+			} else {
+
+				this.log.warn('datenpunkte trigger_6 existieren NICHT');
+
+			}
+
+		} else if (this.config.Anzahl == 4) {
+
+			await this.setObjectNotExistsAsync('trigger_2.trigger_2', {
+				type: 'state',
+				common: {
+					name: 'trigger_2',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_2.trigger_2_is_set', {
+				type: 'state',
+				common: {
+					name: 'trigger_2_is_set',
+					type: 'string',
+					role: 'text',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_2.trigger_2_Start', {
+				type: 'state',
+				common: {
+					name: 'trigger_2_Start',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_3.trigger_3', {
+				type: 'state',
+				common: {
+					name: 'trigger_3',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_3.trigger_3_is_set', {
+				type: 'state',
+				common: {
+					name: 'trigger_3_is_set',
+					type: 'string',
+					role: 'text',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_3.trigger_3_Start', {
+				type: 'state',
+				common: {
+					name: 'trigger_3_Start',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_4.trigger_4', {
+				type: 'state',
+				common: {
+					name: 'trigger_4',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_4.trigger_4_is_set', {
+				type: 'state',
+				common: {
+					name: 'trigger_4_is_set',
+					type: 'string',
+					role: 'text',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_4.trigger_4_Start', {
+				type: 'state',
+				common: {
+					name: 'trigger_4_Start',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			this.subscribeStates('trigger_2.trigger_2');
+			this.subscribeStates('trigger_2.trigger_2_Start');
+
+			this.subscribeStates('trigger_3.trigger_3');
+			this.subscribeStates('trigger_3.trigger_3_Start');
+
+			this.subscribeStates('trigger_4.trigger_4');
+			this.subscribeStates('trigger_4.trigger_4_Start');
+
+			//alle anderen Datenpunkte löschen die aus Schdedule Anzahl > 4 sind
+			const trigger_5 = await this.getObjectAsync('trigger_5.trigger_5') || await this.getObjectAsync('trigger_5.trigger_5_is_set') || await this.getObjectAsync('trigger_5.trigger_5_Start');
+			if (trigger_5) {
+
+				this.log.warn('datenpunkte trigger_5 existieren');
+				//und werden gelöscht
+				await this.delObjectAsync('trigger_5.trigger_5');
+				await this.delObjectAsync('trigger_5.trigger_5_is_set');
+				await this.delObjectAsync('trigger_5.trigger_5_Start');
+
+			} else {
+
+				this.log.warn('datenpunkte trigger_5 existieren NICHT');
+
+			}
+
+			const trigger_6 = await this.getObjectAsync('trigger_6.trigger_6') || await this.getObjectAsync('trigger_6.trigger_6_is_set') || await this.getObjectAsync('trigger_6.trigger_6_Start');
+			if (trigger_6) {
+
+				this.log.warn('datenpunkte trigger_6 existieren');
+				//und werden gelöscht
+				await this.delObjectAsync('trigger_6.trigger_6');
+				await this.delObjectAsync('trigger_6.trigger_6_is_set');
+				await this.delObjectAsync('trigger_6.trigger_6_Start');
+
+			} else {
+
+				this.log.warn('datenpunkte trigger_6 existieren NICHT');
+
+			}
+
+		} else if (this.config.Anzahl == 5) {
+
+			await this.setObjectNotExistsAsync('trigger_2.trigger_2', {
+				type: 'state',
+				common: {
+					name: 'trigger_2',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_2.trigger_2_is_set', {
+				type: 'state',
+				common: {
+					name: 'trigger_2_is_set',
+					type: 'string',
+					role: 'text',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_2.trigger_2_Start', {
+				type: 'state',
+				common: {
+					name: 'trigger_2_Start',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_3.trigger_3', {
+				type: 'state',
+				common: {
+					name: 'trigger_3',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_3.trigger_3_is_set', {
+				type: 'state',
+				common: {
+					name: 'trigger_3_is_set',
+					type: 'string',
+					role: 'text',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_3.trigger_3_Start', {
+				type: 'state',
+				common: {
+					name: 'trigger_3_Start',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_4.trigger_4', {
+				type: 'state',
+				common: {
+					name: 'trigger_4',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_4.trigger_4_is_set', {
+				type: 'state',
+				common: {
+					name: 'trigger_4_is_set',
+					type: 'string',
+					role: 'text',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_4.trigger_4_Start', {
+				type: 'state',
+				common: {
+					name: 'trigger_4_Start',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_5.trigger_5', {
+				type: 'state',
+				common: {
+					name: 'trigger_5',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_5.trigger_5_is_set', {
+				type: 'state',
+				common: {
+					name: 'trigger_5_is_set',
+					type: 'string',
+					role: 'text',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_5.trigger_5_Start', {
+				type: 'state',
+				common: {
+					name: 'trigger_5_Start',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			this.subscribeStates('trigger_2.trigger_2');
+			this.subscribeStates('trigger_2.trigger_2_Start');
+
+			this.subscribeStates('trigger_3.trigger_3');
+			this.subscribeStates('trigger_3.trigger_3_Start');
+
+			this.subscribeStates('trigger_4.trigger_4');
+			this.subscribeStates('trigger_4.trigger_4_Start');
+
+			this.subscribeStates('trigger_5.trigger_5');
+			this.subscribeStates('trigger_5.trigger_5_Start');
+
+			//alle anderen Datenpunkte löschen die aus Schdedule Anzahl > 5 sind
+			const trigger_6 = await this.getObjectAsync('trigger_6.trigger_6') || await this.getObjectAsync('trigger_6.trigger_6_is_set') || await this.getObjectAsync('trigger_6.trigger_6_Start');
+			if (trigger_6) {
+
+				this.log.warn('datenpunkte trigger_6 existieren');
+				//und werden gelöscht
+				await this.delObjectAsync('trigger_6.trigger_6');
+				await this.delObjectAsync('trigger_6.trigger_6_is_set');
+				await this.delObjectAsync('trigger_6.trigger_6_Start');
+
+			} else {
+
+				this.log.warn('datenpunkte trigger_6 existieren NICHT');
+
+			}
+
+		} else if (this.config.Anzahl == 6) {
+
+			await this.setObjectNotExistsAsync('trigger_2.trigger_2', {
+				type: 'state',
+				common: {
+					name: 'trigger_2',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_2.trigger_2_is_set', {
+				type: 'state',
+				common: {
+					name: 'trigger_2_is_set',
+					type: 'string',
+					role: 'text',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_2.trigger_2_Start', {
+				type: 'state',
+				common: {
+					name: 'trigger_2_Start',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_3.trigger_3', {
+				type: 'state',
+				common: {
+					name: 'trigger_3',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_3.trigger_3_is_set', {
+				type: 'state',
+				common: {
+					name: 'trigger_3_is_set',
+					type: 'string',
+					role: 'text',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_3.trigger_3_Start', {
+				type: 'state',
+				common: {
+					name: 'trigger_3_Start',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_4.trigger_4', {
+				type: 'state',
+				common: {
+					name: 'trigger_4',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_4.trigger_4_is_set', {
+				type: 'state',
+				common: {
+					name: 'trigger_4_is_set',
+					type: 'string',
+					role: 'text',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_4.trigger_4_Start', {
+				type: 'state',
+				common: {
+					name: 'trigger_4_Start',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_5.trigger_5', {
+				type: 'state',
+				common: {
+					name: 'trigger_5',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_5.trigger_5_is_set', {
+				type: 'state',
+				common: {
+					name: 'trigger_5_is_set',
+					type: 'string',
+					role: 'text',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_5.trigger_5_Start', {
+				type: 'state',
+				common: {
+					name: 'trigger_5_Start',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_6.trigger_6', {
+				type: 'state',
+				common: {
+					name: 'trigger_6',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_6.trigger_6_is_set', {
+				type: 'state',
+				common: {
+					name: 'trigger_6_is_set',
+					type: 'string',
+					role: 'text',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_6.trigger_6_Start', {
+				type: 'state',
+				common: {
+					name: 'trigger_6_Start',
+					type: 'boolean',
+					role: 'indicator',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			this.subscribeStates('trigger_2.trigger_2');
+			this.subscribeStates('trigger_2.trigger_2_Start');
+
+			this.subscribeStates('trigger_3.trigger_3');
+			this.subscribeStates('trigger_3.trigger_3_Start');
+
+			this.subscribeStates('trigger_4.trigger_4');
+			this.subscribeStates('trigger_4.trigger_4_Start');
+
+			this.subscribeStates('trigger_5.trigger_5');
+			this.subscribeStates('trigger_5.trigger_5_Start');
+
+			this.subscribeStates('trigger_5.trigger_6');
+			this.subscribeStates('trigger_5.trigger_6_Start');
 
 		}
-		*/
+		//Datepunkt abfragen erstellen löschen ENDE
+		//*****************************************
+
 
 		await this.setObjectNotExistsAsync('Wochentage.Sonntag', {
 			type: 'state',
@@ -385,54 +1219,6 @@ class TimeSwitchClock extends utils.Adapter {
 
 		//Datenpunkt trigger 1 auf false setzen
 		this.setState('trigger_1.trigger_1', false, true);
-
-		//*******************************
-		//test - ob Datenpunkt existiert.
-		//*******************************
-
-
-		try {
-
-			const obj = await this.getObjectAsync('trigger_1');
-
-			if (obj) {
-
-				this.log.warn('datenpunkt existiert -- ' + obj);
-
-			} else {
-
-				this.log.warn('datenpunkt existiert NICHT -- ' + obj);
-
-			}
-
-		} catch (e) {
-
-			this.log.warn('catch block! -- ' + e);
-
-		}
-
-
-		try {
-
-			const obj_2 = await this.objectExists('trigger_1.trigger_1');
-
-			if (obj_2) {
-
-				this.log.warn('datenpunkt existiert');
-
-			} else {
-
-				this.log.warn('datenpunkt existiert NICHT');
-
-			}
-		} catch (e) {
-
-			this.log.warn('catch block! -- ' + e);
-
-		}
-
-		//Test ENDE
-
 
 		//hier werden Datenpunkt Änderungen im Log angezeigt
 
@@ -769,7 +1555,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			}
 
-			//tigger_1_Start Datenpunkt wenn false - Schedule canceln - SetSchedule = Wochentage Array mit Zaheln
+			//trigger_1_Start Datenpunkt wenn false - Schedule canceln - SetSchedule = Wochentage Array mit Zahlen
 			const triggerStart_1 = await this.getStateAsync('trigger_1.trigger_1_Start');
 			const StatusTriggerStart = triggerStart_1.val;
 
@@ -792,8 +1578,30 @@ class TimeSwitchClock extends utils.Adapter {
 
 			triggerStartAction_true();
 
+			const triggerStart_2 = await this.getStateAsync('trigger_2.trigger_2_Start');
+			const StatusTriggerStart2 = triggerStart_2.val;
 
-			//trigger_1 Datenpunkt wenn true - wieder auf false setzen - weil nur als Auslöser gedacht für z. B. Blockly
+			const triggerStartAction_2_true = async () => {
+				if (StatusTriggerStart2 == true && SetSchedule.length !== 0) {
+
+					this.Schedule_2();
+
+				} else if (StatusTriggerStart2 == true && SetSchedule.length == 0) {
+
+					this.setState('trigger_2.trigger_2_is_set', 'not scheduled', true);
+					this.cancelSchedule_2();
+
+				} else if (StatusTriggerStart2 == false) {
+
+					this.cancelSchedule_2();
+					this.setState('trigger_2.trigger_2_is_set', 'not scheduled', true);
+
+				}};
+
+			triggerStartAction_2_true();
+
+
+			//trigger_1 Datenpunkt wenn true - wieder auf false setzen - weil nur als Auslöser gedacht für z.B. Blockly
 			const triggerState = await this.getStateAsync('trigger_1.trigger_1');
 			const StatusTrigger = triggerState.val;
 
