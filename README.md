@@ -21,7 +21,7 @@ Timer for e.g. water valves or other things
 	### **WORK IN PROGRESS**
 -->
 
-### **WORK IN PROGRESS**
+### 0.0.2 (2022-07-11)
 * (XSDiVer) initial release
 
 ## License
