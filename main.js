@@ -1825,7 +1825,7 @@ class TimeSwitchClock extends utils.Adapter {
 			const StatusTriggerStart = triggerStart_1.val;
 
 			const SetTrigger_1 = await this.getStateAsync('info.SetTrigger');
-			const SetTrigger_now_1 = SetTrigger_1.val;
+			const SetTrigger_now_1 = SetTrigger_1 ? SetTrigger_1.val: false;
 
 			const triggerStartAction_true = async () => {
 				if (StatusTriggerStart == true && SetSchedule.length !== 0 && SetTrigger_now_1 == 1) {
