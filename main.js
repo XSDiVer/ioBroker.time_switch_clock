@@ -349,7 +349,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				} else if (SetSchedule.length == 0) {
 
-					this.log.error('Kein Wochentag gesetzt!');
+					//this.log.error('Kein Wochentag gesetzt!');
 				}
 			} catch (notinuse) {
 
@@ -373,7 +373,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				} else if (SetSchedule.length == 0) {
 
-					this.log.error('Kein Wochentag gesetzt!');
+					//this.log.error('Kein Wochentag gesetzt!');
 				}
 			} catch (notinuse) {
 
@@ -397,7 +397,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				} else if (SetSchedule.length == 0) {
 
-					this.log.error('Kein Wochentag gesetzt!');
+					//this.log.error('Kein Wochentag gesetzt!');
 				}
 			} catch (notinuse) {
 
@@ -421,7 +421,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				} else if (SetSchedule.length == 0) {
 
-					this.log.error('Kein Wochentag gesetzt!');
+					//this.log.error('Kein Wochentag gesetzt!');
 				}
 			} catch (notinuse) {
 
@@ -445,7 +445,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				} else if (SetSchedule.length == 0) {
 
-					this.log.error('Kein Wochentag gesetzt!');
+					//this.log.error('Kein Wochentag gesetzt!');
 				}
 			} catch (notinuse) {
 
@@ -471,45 +471,6 @@ class TimeSwitchClock extends utils.Adapter {
 
 		}
 
-		/*
-		//Diese 3 Datenpunkte immer anlegen - unabhängig von der this.config.Anzahl
-		//ggf. in die io-package.json aufnehmen?
-		await this.setObjectNotExistsAsync('trigger_1.trigger_1', {
-			type: 'state',
-			common: {
-				name: 'trigger_1',
-				type: 'boolean',
-				role: 'indicator',
-				read: true,
-				write: false,
-			},
-			native: {},
-		});
-
-		await this.setObjectNotExistsAsync('trigger_1.trigger_1_is_set', {
-			type: 'state',
-			common: {
-				name: 'trigger_1_is_set',
-				type: 'string',
-				role: 'text',
-				read: true,
-				write: false,
-			},
-			native: {},
-		});
-
-		await this.setObjectNotExistsAsync('trigger_1.trigger_1_Start', {
-			type: 'state',
-			common: {
-				name: 'trigger_1_Start',
-				type: 'boolean',
-				role: 'indicator',
-				read: true,
-				write: true,
-			},
-			native: {},
-		});
-		*/
 
 		//Überprüfen ob die Datenpunkte angelegt sind, wenn nicht werden sie neu angelegt
 		if (this.config.Anzahl == 1) {
@@ -714,7 +675,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			} else {
 
-				this.log.warn('datenpunkte trigger_5 existieren NICHT');
+				//this.log.warn('datenpunkte trigger_5 existieren NICHT');
 
 			}
 
@@ -833,7 +794,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			} else {
 
-				this.log.warn('datenpunkte trigger_4 existieren NICHT');
+				//this.log.warn('datenpunkte trigger_4 existieren NICHT');
 
 			}
 
@@ -848,7 +809,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			} else {
 
-				this.log.warn('datenpunkte trigger_5 existieren NICHT');
+				//this.log.warn('datenpunkte trigger_5 existieren NICHT');
 
 			}
 
@@ -863,7 +824,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			} else {
 
-				this.log.warn('datenpunkte trigger_6 existieren NICHT');
+				//this.log.warn('datenpunkte trigger_6 existieren NICHT');
 
 			}
 
@@ -1006,7 +967,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			} else {
 
-				this.log.warn('datenpunkte trigger_5 existieren NICHT');
+				//this.log.warn('datenpunkte trigger_5 existieren NICHT');
 
 			}
 
@@ -1021,7 +982,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			} else {
 
-				this.log.warn('datenpunkte trigger_6 existieren NICHT');
+				//this.log.warn('datenpunkte trigger_6 existieren NICHT');
 
 			}
 
@@ -1205,7 +1166,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			} else {
 
-				this.log.warn('datenpunkte trigger_6 existieren NICHT');
+				//this.log.warn('datenpunkte trigger_6 existieren NICHT');
 
 			}
 
@@ -1886,10 +1847,10 @@ class TimeSwitchClock extends utils.Adapter {
 					if (StatusTriggerStart == true && SetSchedule.length !== 0 && SetTrigger_now_1 == 1) {
 
 						this.Schedule_1();
-						//this.SetMyTrigger(); siehe oebn - brauch man das?
 
-					} else if (StatusTriggerStart == true && SetSchedule.length == 0) {
+					} else if (StatusTriggerStart == true && SetSchedule.length == 0 && SetTrigger_now_1 == 1) {
 
+						this.log.error('kein Wochentag gesetzt in Trigger 1!');
 						this.setState('trigger_1.trigger_1_is_set', 'not scheduled', true);
 						this.cancelSchedule_1();
 
@@ -1898,13 +1859,14 @@ class TimeSwitchClock extends utils.Adapter {
 						this.cancelSchedule_1();
 						this.setState('trigger_1.trigger_1_is_set', 'not scheduled', true);
 
-					}};
+					}
+				};
 
 				triggerStartAction_true();
 
 			} else {
 
-				this.log.error('datenpunkte trigger_2 existieren NICHT');
+				//this.log.error('datenpunkte trigger_2 existieren NICHT');
 
 			}
 
@@ -1927,8 +1889,9 @@ class TimeSwitchClock extends utils.Adapter {
 
 						this.Schedule_2();
 
-					} else if (StatusTriggerStart2 == true && SetSchedule.length == 0) {
+					} else if (StatusTriggerStart2 == true && SetSchedule.length == 0 && SetTrigger_now_2 == 2) {
 
+						this.log.error('kein Wochentag gesetzt in Trigger 2!');
 						this.setState('trigger_2.trigger_2_is_set', 'not scheduled', true);
 						this.cancelSchedule_2();
 
@@ -1943,7 +1906,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			} else {
 
-				this.log.error('datenpunkte trigger_2 existieren NICHT');
+				//this.log.error('datenpunkte trigger_2 existieren NICHT');
 
 			}
 
@@ -1966,8 +1929,9 @@ class TimeSwitchClock extends utils.Adapter {
 
 						this.Schedule_3();
 
-					} else if (StatusTriggerStart3 == true && SetSchedule.length == 0) {
+					} else if (StatusTriggerStart3 == true && SetSchedule.length == 0 && SetTrigger_now_3 == 3) {
 
+						this.log.error('kein Wochentag gesetzt in Trigger 3!');
 						this.setState('trigger_3.trigger_3_is_set', 'not scheduled', true);
 						this.cancelSchedule_3();
 
@@ -1982,7 +1946,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			} else {
 
-				this.log.error('datenpunkte trigger_3 existieren NICHT');
+				//this.log.error('datenpunkte trigger_3 existieren NICHT');
 
 			}
 
@@ -2009,8 +1973,9 @@ class TimeSwitchClock extends utils.Adapter {
 
 						this.Schedule_4();
 
-					} else if (StatusTriggerStart4 == true && SetSchedule.length == 0) {
+					} else if (StatusTriggerStart4 == true && SetSchedule.length == 0 && SetTrigger_now_4 == 4) {
 
+						this.log.error('kein Wochentag gesetzt in Trigger 4!');
 						this.setState('trigger_4.trigger_4_is_set', 'not scheduled', true);
 						this.cancelSchedule_4();
 
@@ -2027,7 +1992,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			} else {
 
-				this.log.error('datenpunkte trigger_4 existieren NICHT');
+				//this.log.error('datenpunkte trigger_4 existieren NICHT');
 
 			}
 
@@ -2052,8 +2017,9 @@ class TimeSwitchClock extends utils.Adapter {
 
 						this.Schedule_5();
 
-					} else if (StatusTriggerStart5 == true && SetSchedule.length == 0) {
+					} else if (StatusTriggerStart5 == true && SetSchedule.length == 0 && SetTrigger_now_5 == 5) {
 
+						this.log.error('kein Wochentag gesetzt in Trigger 5!');
 						this.setState('trigger_5.trigger_5_is_set', 'not scheduled', true);
 						this.cancelSchedule_5();
 
@@ -2070,7 +2036,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			} else {
 
-				this.log.error('datenpunkte trigger_5 existieren NICHT');
+				//this.log.error('datenpunkte trigger_5 existieren NICHT');
 
 			}
 
@@ -2094,8 +2060,9 @@ class TimeSwitchClock extends utils.Adapter {
 
 						this.Schedule_6();
 
-					} else if (StatusTriggerStart6 == true && SetSchedule.length == 0) {
+					} else if (StatusTriggerStart6 == true && SetSchedule.length == 0 && SetTrigger_now_6 == 6) {
 
+						this.log.error('kein Wochentag gesetzt in Trigger 6!');
 						this.setState('trigger_6.trigger_6_is_set', 'not scheduled', true);
 						this.cancelSchedule_6();
 
@@ -2112,17 +2079,9 @@ class TimeSwitchClock extends utils.Adapter {
 
 			} else {
 
-				this.log.error('datenpunkte trigger_6 existieren NICHT');
+				//this.log.error('datenpunkte trigger_6 existieren NICHT');
 
 			}
-
-
-
-
-
-
-
-
 
 
 			//trigger_1 Datenpunkt wenn true - wieder auf false setzen - weil nur als Auslöser gedacht für z.B. Blockly
