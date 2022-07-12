@@ -329,7 +329,7 @@ class TimeSwitchClock extends utils.Adapter {
 				}
 			} catch (notinuse) {
 
-				this.log.info('Schedule_1_Start ist false');
+				//this.log.info('Schedule_1_Start ist false');
 
 			}
 		};
@@ -353,7 +353,7 @@ class TimeSwitchClock extends utils.Adapter {
 				}
 			} catch (notinuse) {
 
-				this.log.info('Schedule_2_Start ist false');
+				//this.log.info('Schedule_2_Start ist false');
 
 			}
 		};
@@ -377,7 +377,7 @@ class TimeSwitchClock extends utils.Adapter {
 				}
 			} catch (notinuse) {
 
-				this.log.info('Schedule_3_Start ist false');
+				//this.log.info('Schedule_3_Start ist false');
 
 			}
 		};
@@ -401,7 +401,7 @@ class TimeSwitchClock extends utils.Adapter {
 				}
 			} catch (notinuse) {
 
-				this.log.info('Schedule_4_Start ist false');
+				//this.log.info('Schedule_4_Start ist false');
 
 			}
 		};
@@ -425,7 +425,7 @@ class TimeSwitchClock extends utils.Adapter {
 				}
 			} catch (notinuse) {
 
-				this.log.info('Schedule_5_Start ist false');
+				//this.log.info('Schedule_5_Start ist false');
 
 			}
 		};
@@ -449,7 +449,7 @@ class TimeSwitchClock extends utils.Adapter {
 				}
 			} catch (notinuse) {
 
-				this.log.info('Schedule_6_Start ist false');
+				//this.log.info('Schedule_6_Start ist false');
 
 			}
 		};
@@ -1847,6 +1847,7 @@ class TimeSwitchClock extends utils.Adapter {
 					if (StatusTriggerStart == true && SetSchedule.length !== 0 && SetTrigger_now_1 == 1) {
 
 						this.Schedule_1();
+						this.log.info('next Schedule 1 - ' + this.mySchedule_1.nextInvocation());
 
 					} else if (StatusTriggerStart == true && SetSchedule.length == 0 && SetTrigger_now_1 == 1) {
 
@@ -1888,6 +1889,7 @@ class TimeSwitchClock extends utils.Adapter {
 					if (StatusTriggerStart2 == true && SetSchedule.length !== 0 && SetTrigger_now_2 == 2) {
 
 						this.Schedule_2();
+						this.log.info('next Schedule 2 - ' + this.mySchedule_2.nextInvocation());
 
 					} else if (StatusTriggerStart2 == true && SetSchedule.length == 0 && SetTrigger_now_2 == 2) {
 
@@ -1928,6 +1930,7 @@ class TimeSwitchClock extends utils.Adapter {
 					if (StatusTriggerStart3 == true && SetSchedule.length !== 0 && SetTrigger_now_3 == 3) {
 
 						this.Schedule_3();
+						this.log.info('next Schedule 3 - ' + this.mySchedule_3.nextInvocation());
 
 					} else if (StatusTriggerStart3 == true && SetSchedule.length == 0 && SetTrigger_now_3 == 3) {
 
@@ -1972,6 +1975,7 @@ class TimeSwitchClock extends utils.Adapter {
 					if (StatusTriggerStart4 == true && SetSchedule.length !== 0 && SetTrigger_now_4 == 4) {
 
 						this.Schedule_4();
+						this.log.info('next Schedule 4 - ' + this.mySchedule_4.nextInvocation());
 
 					} else if (StatusTriggerStart4 == true && SetSchedule.length == 0 && SetTrigger_now_4 == 4) {
 
@@ -2016,6 +2020,7 @@ class TimeSwitchClock extends utils.Adapter {
 					if (StatusTriggerStart5 == true && SetSchedule.length !== 0 && SetTrigger_now_5 == 5) {
 
 						this.Schedule_5();
+						this.log.info('next Schedule 5 - ' + this.mySchedule_5.nextInvocation());
 
 					} else if (StatusTriggerStart5 == true && SetSchedule.length == 0 && SetTrigger_now_5 == 5) {
 
@@ -2059,6 +2064,7 @@ class TimeSwitchClock extends utils.Adapter {
 					if (StatusTriggerStart6 == true && SetSchedule.length !== 0 && SetTrigger_now_6 == 6) {
 
 						this.Schedule_6();
+						this.log.info('next Schedule 6 - ' + this.mySchedule_6.nextInvocation());
 
 					} else if (StatusTriggerStart6 == true && SetSchedule.length == 0 && SetTrigger_now_6 == 6) {
 
