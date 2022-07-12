@@ -1,125 +1,136 @@
 {
-	"common": {
-		"name": "time_switch_clock",
-		"version": "0.0.2",
-		"news": {
-			"0.0.1": {
-				"en": "initial release",
-				"de": "Erstveröffentlichung",
-				"ru": "????????? ??????",
-				"pt": "lançamento inicial",
-				"nl": "Eerste uitgave",
-				"fr": "Première version",
-				"it": "Versione iniziale",
-				"es": "Versión inicial",
-				"pl": "Pierwsze wydanie",
-				"zh-cn": "????"
-			}
-		},
-		"title": "time_switch_clock",
-		"titleLang": {
-			"en": "time_switch_clock",
-			"de": "Zeitschaltuhr",
-			"ru": "time_switch_clock",
-			"pt": "time_switch_clock",
-			"nl": "time_switch_clock",
-			"fr": "time_switch_clock",
-			"it": "time_switch_clock",
-			"es": "time_switch_clock",
-			"pl": "zegar_przelacznika_czasu",
-			"zh-cn": "time_switch_clock"
-		},
-		"desc": {
-			"en": "Timer for e.g. water valves or other things",
-			"de": "Timer für z.B. ",
-			"ru": "??????, ????????. ",
-			"pt": "Temporizador para, por exemplo, ",
-			"nl": "Timer voor bijv. ",
-			"fr": "Minuterie pour par ex. ",
-			"it": "Timer per es. ",
-			"es": "Temporizador para, p. ",
-			"pl": "Timer m.in. ",
-			"zh-cn": "?????"
-		},
-		"authors": [
-			"XSDiVer <Tachyonen@quantentunnel.de>"
-		],
-		"keywords": [
-			"timer",
-			"clock",
-			"time",
-			"switch"
-		],
-		"license": "MIT",
-		"platform": "Javascript/Node.js",
-		"main": "main.js",
-		"icon": "time_switch_clock.png",
-		"enabled": true,
-		"extIcon": "https://raw.githubusercontent.com/XSDiVer/ioBroker.time_switch_clock/main/admin/time_switch_clock.png",
-		"readme": "https://github.com/XSDiVer/ioBroker.time_switch_clock/blob/main/README.md",
-		"loglevel": "info",
-		"restartAdapters": [
-			"vis"
-		],
-		"localLinks": {
-			"_default": "%web_protocol%://%ip%:%web_port%/vis/edit.html"
-		},
-		"mode": "daemon",
-		"type": "iot-systems",
-		"compact": true,
-		"connectionType": "local",
-		"dataSource": "push",
-		"materialize": true,
-		"dependencies": [
-			{
-				"js-controller": ">=2.0.0"
-			},
-			"vis"
-		],
-		"globalDependencies": [
+    "common": {
+        "name": "time_switch_clock",
+        "version": "0.0.3",
+        "news": {
+            "0.0.3": {
+                "en": "Beta Version without VIS Widget",
+                "de": "Beta Version ohne VIS Widget",
+                "ru": "Beta версия без VIS Widget",
+                "pt": "Versão Beta sem VIS Widget",
+                "nl": "Beta Version zonder VIS Widget",
+                "fr": "Beta Version sans VIS Widget",
+                "it": "Versione Beta senza VIS Widget",
+                "es": "Versión beta sin VIS Widget",
+                "pl": "Wersja bez VIS Widget",
+                "zh-cn": "Beta Version no VISWdget"
+            },
+            "0.0.1": {
+                "en": "initial release",
+                "de": "Erstveröffentlichung",
+                "ru": "????????? ??????",
+                "pt": "lançamento inicial",
+                "nl": "Eerste uitgave",
+                "fr": "Première version",
+                "it": "Versione iniziale",
+                "es": "Versión inicial",
+                "pl": "Pierwsze wydanie",
+                "zh-cn": "????"
+            }
+        },
+        "title": "time_switch_clock",
+        "titleLang": {
+            "en": "time_switch_clock",
+            "de": "Zeitschaltuhr",
+            "ru": "time_switch_clock",
+            "pt": "time_switch_clock",
+            "nl": "time_switch_clock",
+            "fr": "time_switch_clock",
+            "it": "time_switch_clock",
+            "es": "time_switch_clock",
+            "pl": "zegar_przelacznika_czasu",
+            "zh-cn": "time_switch_clock"
+        },
+        "desc": {
+            "en": "Timer for e.g. water valves or other things",
+            "de": "Timer für z.B. ",
+            "ru": "??????, ????????. ",
+            "pt": "Temporizador para, por exemplo, ",
+            "nl": "Timer voor bijv. ",
+            "fr": "Minuterie pour par ex. ",
+            "it": "Timer per es. ",
+            "es": "Temporizador para, p. ",
+            "pl": "Timer m.in. ",
+            "zh-cn": "?????"
+        },
+        "authors": [
+            "XSDiVer <Tachyonen@quantentunnel.de>"
+        ],
+        "keywords": [
+            "timer",
+            "clock",
+            "time",
+            "switch"
+        ],
+        "license": "MIT",
+        "platform": "Javascript/Node.js",
+        "main": "main.js",
+        "icon": "time_switch_clock.png",
+        "enabled": true,
+        "extIcon": "https://raw.githubusercontent.com/XSDiVer/ioBroker.time_switch_clock/main/admin/time_switch_clock.png",
+        "readme": "https://github.com/XSDiVer/ioBroker.time_switch_clock/blob/main/README.md",
+        "loglevel": "info",
+        "restartAdapters": [
+            "vis"
+        ],
+        "localLinks": {
+            "_default": "%web_protocol%://%ip%:%web_port%/vis/edit.html"
+        },
+        "mode": "daemon",
+        "type": "iot-systems",
+        "compact": true,
+        "connectionType": "local",
+        "dataSource": "push",
+        "materialize": true,
+        "dependencies": [
+            {
+                "js-controller": ">=2.0.0"
+            },
+            "vis"
+        ],
+        "globalDependencies": [
             {
                 "admin": ">=5.0.0"
             }
         ]
-	},
-	"native": {
+    },
+    "native": {
         "Anzahl": 1
     },
-	"objects": [],
-	"instanceObjects": [
-		{
-			"_id": "info",
-			"type": "channel",
-			"common": {
-				"name": "Information"
-			},
-			"native": {}
-		},
-		{
-			"_id": "info.connection",
-			"type": "state",
-			"common": {
-				"role": "indicator.connected",
-				"name": "Device or service connected",
-				"type": "boolean",
-				"read": true,
-				"write": false,
-				"def": false
-			},
-			"native": {}
-		},
-		{
-			"_id": "info.Anzahl",
-			"type": "state",
-			"common": {
-				"role": "state",
-				"name": "Anzahl",
-				"type": "number",
-				"read": true,
-				"write": false
-			},
-			"native": {}
-		}
-		
-	]
+    "objects": [],
+    "instanceObjects": [
+        {
+            "_id": "info",
+            "type": "channel",
+            "common": {
+                "name": "Information"
+            },
+            "native": {}
+        },
+        {
+            "_id": "info.connection",
+            "type": "state",
+            "common": {
+                "role": "indicator.connected",
+                "name": "Device or service connected",
+                "type": "boolean",
+                "read": true,
+                "write": false,
+                "def": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "info.Anzahl",
+            "type": "state",
+            "common": {
+                "role": "state",
+                "name": "Anzahl",
+                "type": "number",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        }
+    ]
 }
