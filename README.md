@@ -17,12 +17,9 @@ Timer for e.g. water valves or other things
 
 ## Changelog
 
-<!--
-Placeholder 4 the next Verion...
--->
+* Beta Version without VIS Widget
 
 ### **WORK IN PROGRESS**
-### 0.0.3 (2022-07-12)
 
 * Beta Version without VIS Widget
 
