@@ -15,6 +15,12 @@
 
 Timer for e.g. water valves or other things
 
+## Changelog
+
+<!--
+Placeholder 4 the next Verion...
+-->
+
 ### **WORK IN PROGRESS**
 ### 0.0.3 (2022-07-12)
 
