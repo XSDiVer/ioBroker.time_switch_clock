@@ -171,7 +171,7 @@ class TimeSwitchClock extends utils.Adapter {
 			if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59) {
 				this.mySchedule_1 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
 					this.setState('trigger_1.trigger_1', true, true) && this.log.info('Schedule 1 ausgelöst!')); +
-				(this.setState('trigger_1.trigger_1_is_set', '' + HH + ':' + MM + ' -- ' + SetWochentage, true) && this.log.info('next Schedule 1 - ' + this.mySchedule_1.nextInvocation()));
+				(this.setState('trigger_1.trigger_1_is_set', '' + HH + ':' + MM + ' -- ' + SetWochentage, true) /*&& this.log.info('next Schedule 1 - ' + this.mySchedule_1.nextInvocation())*/);
 
 			} else if (HH < 0 || HH > 23 || MM < 0 || MM > 59) {
 
@@ -193,7 +193,7 @@ class TimeSwitchClock extends utils.Adapter {
 			if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59) {
 				this.mySchedule_2 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
 					this.setState('trigger_2.trigger_2', true, true) && this.log.info('Schedule 2 ausgelöst!')); +
-				(this.setState('trigger_2.trigger_2_is_set', '' + HH + ':' + MM + ' -- ' + SetWochentage, true) && this.log.info('next Schedule 2 -- ' + this.mySchedule_2.nextInvocation()));
+				(this.setState('trigger_2.trigger_2_is_set', '' + HH + ':' + MM + ' -- ' + SetWochentage, true) /*&& this.log.info('next Schedule 2 -- ' + this.mySchedule_2.nextInvocation())*/);
 
 			} else if (HH < 0 || HH > 23 || MM < 0 || MM > 59) {
 
@@ -215,7 +215,7 @@ class TimeSwitchClock extends utils.Adapter {
 			if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59) {
 				this.mySchedule_3 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
 					this.setState('trigger_3.trigger_3', true, true) && this.log.info('Schedule 3 ausgelöst!')); +
-				(this.setState('trigger_3.trigger_3_is_set', '' + HH + ':' + MM + ' -- ' + SetWochentage, true) && this.log.info('next Schedule 3 -- ' + this.mySchedule_3.nextInvocation()));
+				(this.setState('trigger_3.trigger_3_is_set', '' + HH + ':' + MM + ' -- ' + SetWochentage, true) /*&& this.log.info('next Schedule 3 -- ' + this.mySchedule_3.nextInvocation())*/);
 
 			} else if (HH < 0 || HH > 23 || MM < 0 || MM > 59) {
 
@@ -237,7 +237,7 @@ class TimeSwitchClock extends utils.Adapter {
 			if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59) {
 				this.mySchedule_4 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
 					this.setState('trigger_4.trigger_4', true, true) && this.log.info('Schedule 4 ausgelöst!')); +
-				(this.setState('trigger_4.trigger_4_is_set', '' + HH + ':' + MM + ' -- ' + SetWochentage, true) && this.log.info('next Schedule 4 -- ' + this.mySchedule_4.nextInvocation()));
+				(this.setState('trigger_4.trigger_4_is_set', '' + HH + ':' + MM + ' -- ' + SetWochentage, true) /*&& this.log.info('next Schedule 4 -- ' + this.mySchedule_4.nextInvocation())*/);
 
 			} else if (HH < 0 || HH > 23 || MM < 0 || MM > 59) {
 
@@ -259,7 +259,7 @@ class TimeSwitchClock extends utils.Adapter {
 			if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59) {
 				this.mySchedule_5 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
 					this.setState('trigger_5.trigger_5', true, true) && this.log.info('Schedule 5 ausgelöst!')); +
-				(this.setState('trigger_5.trigger_5_is_set', '' + HH + ':' + MM + ' -- ' + SetWochentage, true) && this.log.info('next Schedule 5 -- ' + this.mySchedule_5.nextInvocation()));
+				(this.setState('trigger_5.trigger_5_is_set', '' + HH + ':' + MM + ' -- ' + SetWochentage, true) /*&& this.log.info('next Schedule 5 -- ' + this.mySchedule_5.nextInvocation())*/);
 
 			} else if (HH < 0 || HH > 23 || MM < 0 || MM > 59) {
 
@@ -281,7 +281,7 @@ class TimeSwitchClock extends utils.Adapter {
 			if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59) {
 				this.mySchedule_6 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
 					this.setState('trigger_6.trigger_6', true, true) && this.log.info('Schedule 6 ausgelöst!')); +
-				(this.setState('trigger_6.trigger_6_is_set', '' + HH + ':' + MM + ' -- ' + SetWochentage, true) && this.log.info('next Schedule 6 -- ' + this.mySchedule_6.nextInvocation()));
+				(this.setState('trigger_6.trigger_6_is_set', '' + HH + ':' + MM + ' -- ' + SetWochentage, true) /*&& this.log.info('next Schedule 6 -- ' + this.mySchedule_6.nextInvocation())*/);
 
 			} else if (HH < 0 || HH > 23 || MM < 0 || MM > 59) {
 
