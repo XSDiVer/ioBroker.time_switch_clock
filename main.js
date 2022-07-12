@@ -1503,7 +1503,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			this.setStateAsync('info.connection', { val: false, ack: true });
 			schedule.gracefulShutdown();
-			this.log.warn('Adapter gestoppt! - Alle Schedules gelöscht!');
+			this.log.info('Adapter gestoppt! - Alle Schedules gelöscht!');
 
 			callback();
 		} catch (e) {
@@ -1821,31 +1821,41 @@ class TimeSwitchClock extends utils.Adapter {
 			//trigger_1_Start Datenpunkt wenn false - Schedule canceln - SetSchedule = Wochentage Array mit Zahlen -
 			//SetTrigger ist die Auswahl welcher Trigger mit mit Uhrzeit und Wochentagen gefüttert werden soll
 
-			const triggerStart_1 = await this.getStateAsync('trigger_1.trigger_1_Start');
-			const StatusTriggerStart = triggerStart_1.val;
+			const trigger_1Start_test = await this.getObjectAsync('trigger_1.trigger_1_Start');
 
-			const SetTrigger_1 = await this.getStateAsync('info.SetTrigger');
-			const SetTrigger_now_1 = SetTrigger_1 ? SetTrigger_1.val: false;
+			if (trigger_1Start_test) {
 
-			const triggerStartAction_true = async () => {
-				if (StatusTriggerStart == true && SetSchedule.length !== 0 && SetTrigger_now_1 == 1) {
+				const triggerStart_1 = await this.getStateAsync('trigger_1.trigger_1_Start');
+				const StatusTriggerStart = triggerStart_1.val;
 
-					this.Schedule_1();
-					//this.SetMyTrigger(); siehe oebn - brauch man das?
+				const SetTrigger_1 = await this.getStateAsync('info.SetTrigger');
+				const SetTrigger_now_1 = SetTrigger_1 ? SetTrigger_1.val: false;
 
-				} else if (StatusTriggerStart == true && SetSchedule.length == 0) {
+				const triggerStartAction_true = async () => {
+					if (StatusTriggerStart == true && SetSchedule.length !== 0 && SetTrigger_now_1 == 1) {
 
-					this.setState('trigger_1.trigger_1_is_set', 'not scheduled', true);
-					this.cancelSchedule_1();
+						this.Schedule_1();
+						//this.SetMyTrigger(); siehe oebn - brauch man das?
 
-				} else if (StatusTriggerStart == false) {
+					} else if (StatusTriggerStart == true && SetSchedule.length == 0) {
 
-					this.cancelSchedule_1();
-					this.setState('trigger_1.trigger_1_is_set', 'not scheduled', true);
+						this.setState('trigger_1.trigger_1_is_set', 'not scheduled', true);
+						this.cancelSchedule_1();
 
-				}};
+					} else if (StatusTriggerStart == false) {
 
-			triggerStartAction_true();
+						this.cancelSchedule_1();
+						this.setState('trigger_1.trigger_1_is_set', 'not scheduled', true);
+
+					}};
+
+				triggerStartAction_true();
+
+			} else {
+
+				this.log.error('datenpunkte trigger_2 existieren NICHT');
+
+			}
 
 
 			//trigger_2_Start Datenpunkt wenn false - Schedule canceln - SetSchedule = Wochentage Array mit Zahlen -
