@@ -1541,7 +1541,8 @@ class TimeSwitchClock extends utils.Adapter {
 
 			//bei Änderung der Datenpunkte true oder false auswerten
 			const SUN = await this.getStateAsync('Wochentage.Sonntag');
-			const statusSUN = SUN.val;
+			const statusSUN = SUN ? SUN.val: false;
+
 			const Sunday = async () => {
 				if (statusSUN == true) {
 					this.log.info('SO ist ' + statusSUN);
@@ -1556,7 +1557,8 @@ class TimeSwitchClock extends utils.Adapter {
 			}
 
 			const MON = await this.getStateAsync('Wochentage.Montag');
-			const statusMON = MON.val;
+			const statusMON = MON ? MON.val: false;
+
 			const Monday = async () => {
 				if (statusMON == true) {
 					this.log.info('MO ist ' + statusMON);
@@ -1571,7 +1573,8 @@ class TimeSwitchClock extends utils.Adapter {
 			}
 
 			const TUE = await this.getStateAsync('Wochentage.Dienstag');
-			const statusTUE = TUE.val;
+			const statusTUE = TUE ? TUE.val: false;
+
 			const Tuesday = async () => {
 				if (statusTUE == true) {
 					this.log.info('DI ist ' + statusTUE);
@@ -1586,7 +1589,8 @@ class TimeSwitchClock extends utils.Adapter {
 			}
 
 			const WED = await this.getStateAsync('Wochentage.Mittwoch');
-			const statusWED = WED.val;
+			const statusWED = WED ? WED.val: false;
+
 			const Wednesday = async () => {
 				if (statusWED == true) {
 					this.log.info('MI ist ' + statusWED);
@@ -1601,7 +1605,8 @@ class TimeSwitchClock extends utils.Adapter {
 			}
 
 			const THU = await this.getStateAsync('Wochentage.Donnerstag');
-			const statusTHU = THU.val;
+			const statusTHU = THU ? THU.val: false;
+
 			const Thursday = async () => {
 				if (statusTHU == true) {
 					this.log.info('DO ist ' + statusTHU);
@@ -1616,7 +1621,8 @@ class TimeSwitchClock extends utils.Adapter {
 			}
 
 			const FRI = await this.getStateAsync('Wochentage.Freitag');
-			const statusFRI = FRI.val;
+			const statusFRI = FRI ? FRI.val: false;
+
 			const Friday = async () => {
 				if (statusFRI == true) {
 					this.log.info('FR ist ' + statusFRI);
@@ -1631,7 +1637,8 @@ class TimeSwitchClock extends utils.Adapter {
 			}
 
 			const SAT = await this.getStateAsync('Wochentage.Samstag');
-			const statusSAT = SAT.val;
+			const statusSAT = SAT ? SAT.val: true;
+
 			const Saturday = async () => {
 				if (statusSAT == true) {
 					this.log.info ('SA ist ' + statusSAT);
