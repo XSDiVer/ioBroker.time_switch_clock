@@ -460,6 +460,45 @@ class TimeSwitchClock extends utils.Adapter {
 
 		}
 
+		//Diese 3 Datenpunkte immer anlegen - unabhängig von der this.config.Anzahl
+		//ggf. in die io-package.json aufnehmen?
+		await this.setObjectNotExistsAsync('trigger_1.trigger_1', {
+			type: 'state',
+			common: {
+				name: 'trigger_1',
+				type: 'boolean',
+				role: 'indicator',
+				read: true,
+				write: false,
+			},
+			native: {},
+		});
+
+		await this.setObjectNotExistsAsync('trigger_1.trigger_1_is_set', {
+			type: 'state',
+			common: {
+				name: 'trigger_1_is_set',
+				type: 'string',
+				role: 'text',
+				read: true,
+				write: false,
+			},
+			native: {},
+		});
+
+		await this.setObjectNotExistsAsync('trigger_1.trigger_1_Start', {
+			type: 'state',
+			common: {
+				name: 'trigger_1_Start',
+				type: 'boolean',
+				role: 'indicator',
+				read: true,
+				write: true,
+			},
+			native: {},
+		});
+
+
 		//Überprüfen ob die Datenpunkte angelegt sind, wenn nicht werden sie neu angelegt
 		if (this.config.Anzahl == 1) {
 
