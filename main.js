@@ -41,6 +41,9 @@ class TimeSwitchClock extends utils.Adapter {
 
 		this.log.info('Adapter TimeSwitchClock gestartet!');
 
+		Uhrzeit.splice(0,0, '00');
+		Uhrzeit.splice(0,1, '00');
+
 		//States der Datenpunkte auslesen:
 		const SUN = await this.getStateAsync('Wochentage.Sonntag');
 		const statusSUN = SUN ? SUN.val: false;
@@ -64,7 +67,7 @@ class TimeSwitchClock extends utils.Adapter {
 		const statusSAT = SAT ? SAT.val: false;
 
 		const Uhrzeit_1 = await this.getStateAsync('Zeitplan.Uhrzeit1');
-		const status_Uhrzeit_1 = Uhrzeit_1 ? Uhrzeit_1.val: ['00,00'];
+		const status_Uhrzeit_1 = Uhrzeit_1.val;
 
 		const [HH_1, MM_1] = status_Uhrzeit_1.split(':');
 
