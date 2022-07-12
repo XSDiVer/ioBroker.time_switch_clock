@@ -15,7 +15,7 @@
 
 Timer for e.g. water valves or other things
 
-## Changelog
+### 0.0.3 (2022-07-12)
 
 * Beta Version without VIS Widget
 
