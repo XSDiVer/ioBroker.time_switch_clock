@@ -163,6 +163,18 @@ class TimeSwitchClock extends utils.Adapter {
 		//Array SetSchedule sortieren
 		SetSchedule.sort();
 
+		await this.setObjectNotExistsAsync('trigger_1.trigger_1_is_set', {
+			type: 'state',
+			common: {
+				name: 'trigger_1_is_set',
+				type: 'string',
+				role: 'text',
+				read: true,
+				write: false,
+			},
+			native: {},
+		});
+
 		//Schedule zusammen setzten
 		this.Schedule_1 = async () => {
 			const HH = Uhrzeit[0];
@@ -460,6 +472,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 		}
 
+		/*
 		//Diese 3 Datenpunkte immer anlegen - unabhängig von der this.config.Anzahl
 		//ggf. in die io-package.json aufnehmen?
 		await this.setObjectNotExistsAsync('trigger_1.trigger_1', {
@@ -497,7 +510,7 @@ class TimeSwitchClock extends utils.Adapter {
 			},
 			native: {},
 		});
-
+		*/
 
 		//Überprüfen ob die Datenpunkte angelegt sind, wenn nicht werden sie neu angelegt
 		if (this.config.Anzahl == 1) {
