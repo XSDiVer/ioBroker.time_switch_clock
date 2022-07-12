@@ -755,6 +755,7 @@ class TimeSwitchClock extends utils.Adapter {
 				native: {},
 			});
 
+
 			this.subscribeStates('trigger_2.trigger_2');
 			this.subscribeStates('trigger_2.trigger_2_Start');
 
@@ -766,6 +767,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			this.setState('trigger_2.trigger_2_Start', false, true);
 			this.setState('trigger_3.trigger_3_Start', false, true);
+
 
 			//alle anderen Datenpunkte löschen die aus Schdedule Anzahl > 3 sind
 			const trigger_4 = await this.getObjectAsync('trigger_4.trigger_4') || await this.getObjectAsync('trigger_4.trigger_4_is_set') || await this.getObjectAsync('trigger_4.trigger_4_Start');
@@ -1811,44 +1813,40 @@ class TimeSwitchClock extends utils.Adapter {
 			//trigger_1_Start Datenpunkt wenn false - Schedule canceln - SetSchedule = Wochentage Array mit Zahlen -
 			//SetTrigger ist die Auswahl welcher Trigger mit mit Uhrzeit und Wochentagen gefüttert werden soll
 
-			try {
-				const triggerStart_1 = await this.getStateAsync('trigger_1.trigger_1_Start');
-				const StatusTriggerStart = triggerStart_1.val;
+			const triggerStart_1 = await this.getStateAsync('trigger_1.trigger_1_Start');
+			const StatusTriggerStart = triggerStart_1.val;
 
-				const SetTrigger_1 = await this.getStateAsync('info.SetTrigger');
-				const SetTrigger_now_1 = SetTrigger_1.val;
+			const SetTrigger_1 = await this.getStateAsync('info.SetTrigger');
+			const SetTrigger_now_1 = SetTrigger_1.val;
 
-				const triggerStartAction_true = async () => {
-					if (StatusTriggerStart == true && SetSchedule.length !== 0 && SetTrigger_now_1 == 1) {
+			const triggerStartAction_true = async () => {
+				if (StatusTriggerStart == true && SetSchedule.length !== 0 && SetTrigger_now_1 == 1) {
 
-						this.Schedule_1();
-						//this.SetMyTrigger(); siehe oebn - brauch man das?
+					this.Schedule_1();
+					//this.SetMyTrigger(); siehe oebn - brauch man das?
 
-					} else if (StatusTriggerStart == true && SetSchedule.length == 0) {
+				} else if (StatusTriggerStart == true && SetSchedule.length == 0) {
 
-						this.setState('trigger_1.trigger_1_is_set', 'not scheduled', true);
-						this.cancelSchedule_1();
+					this.setState('trigger_1.trigger_1_is_set', 'not scheduled', true);
+					this.cancelSchedule_1();
 
-					} else if (StatusTriggerStart == false) {
+				} else if (StatusTriggerStart == false) {
 
-						this.cancelSchedule_1();
-						this.setState('trigger_1.trigger_1_is_set', 'not scheduled', true);
+					this.cancelSchedule_1();
+					this.setState('trigger_1.trigger_1_is_set', 'not scheduled', true);
 
-					}};
+				}};
 
-				triggerStartAction_true();
-
-			} catch (err) {
-
-				//this.log.error('error catch 1 -- ' + err);
-
-			}
+			triggerStartAction_true();
 
 
 			//trigger_2_Start Datenpunkt wenn false - Schedule canceln - SetSchedule = Wochentage Array mit Zahlen -
 			//SetTrigger ist die Auswahl welcher Trigger mit mit Uhrzeit und Wochentagen gefüttert werden soll
 
-			try {
+			const trigger_2Start_test = await this.getObjectAsync('trigger_2.trigger_2_Start');
+
+			if (trigger_2Start_test) {
+
 				const triggerStart_2 = await this.getStateAsync('trigger_2.trigger_2_Start');
 				const StatusTriggerStart2 = triggerStart_2.val;
 
@@ -1874,9 +1872,9 @@ class TimeSwitchClock extends utils.Adapter {
 
 				triggerStartAction_2_true();
 
-			} catch (err) {
+			} else {
 
-				//this.log.error('error catch 2 -- ' + err);
+				this.log.error('datenpunkte trigger_2 existieren NICHT');
 
 			}
 
@@ -1884,7 +1882,10 @@ class TimeSwitchClock extends utils.Adapter {
 			//trigger_3_Start Datenpunkt wenn false - Schedule canceln - SetSchedule = Wochentage Array mit Zahlen -
 			//SetTrigger ist die Auswahl welcher Trigger mit mit Uhrzeit und Wochentagen gefüttert werden soll
 
-			try {
+			const trigger_3Start_test = await this.getObjectAsync('trigger_3.trigger_3_Start');
+
+			if (trigger_3Start_test) {
+
 				const triggerStart_3 = await this.getStateAsync('trigger_3.trigger_3_Start');
 				const StatusTriggerStart3 = triggerStart_3.val;
 
@@ -1910,9 +1911,9 @@ class TimeSwitchClock extends utils.Adapter {
 
 				triggerStartAction_3_true();
 
-			} catch (err) {
+			} else {
 
-				//this.log.error('error catch 3 -- ' + err);
+				this.log.error('datenpunkte trigger_3 existieren NICHT');
 
 			}
 
@@ -1920,7 +1921,13 @@ class TimeSwitchClock extends utils.Adapter {
 			//trigger_4_Start Datenpunkt wenn false - Schedule canceln - SetSchedule = Wochentage Array mit Zahlen -
 			//SetTrigger ist die Auswahl welcher Trigger mit mit Uhrzeit und Wochentagen gefüttert werden soll
 
-			try {
+
+			const trigger_4Start_test = await this.getObjectAsync('trigger_4.trigger_4_Start');
+
+			if (trigger_4Start_test) {
+
+				//this.log.error('datenpunkte trigger_4 existieren alles ok!');
+
 				const triggerStart_4 = await this.getStateAsync('trigger_4.trigger_4_Start');
 				const StatusTriggerStart4 = triggerStart_4.val;
 
@@ -1949,17 +1956,21 @@ class TimeSwitchClock extends utils.Adapter {
 
 				triggerStartAction_4_true();
 
-			} catch (err) {
+			} else {
 
-				//this.log.error('error catch 4 -- ' + err);
+				this.log.error('datenpunkte trigger_4 existieren NICHT');
 
 			}
+
 
 
 			//trigger_5_Start Datenpunkt wenn false - Schedule canceln - SetSchedule = Wochentage Array mit Zahlen -
 			//SetTrigger ist die Auswahl welcher Trigger mit mit Uhrzeit und Wochentagen gefüttert werden soll
 
-			try {
+			const trigger_5Start_test = await this.getObjectAsync('trigger_5.trigger_5_Start');
+
+			if (trigger_5Start_test) {
+
 				const triggerStart_5 = await this.getStateAsync('trigger_5.trigger_5_Start');
 				const StatusTriggerStart5 = triggerStart_5.val;
 
@@ -1988,9 +1999,9 @@ class TimeSwitchClock extends utils.Adapter {
 
 				triggerStartAction_5_true();
 
-			} catch (err) {
+			} else {
 
-				//this.log.error('error catch 5 -- ' + err);
+				this.log.error('datenpunkte trigger_5 existieren NICHT');
 
 			}
 
@@ -1998,7 +2009,10 @@ class TimeSwitchClock extends utils.Adapter {
 			//trigger_6_Start Datenpunkt wenn false - Schedule canceln - SetSchedule = Wochentage Array mit Zahlen -
 			//SetTrigger ist die Auswahl welcher Trigger mit mit Uhrzeit und Wochentagen gefüttert werden soll
 
-			try {
+			const trigger_6Start_test = await this.getObjectAsync('trigger_6.trigger_6_Start');
+
+			if (trigger_6Start_test) {
+
 				const triggerStart_6 = await this.getStateAsync('trigger_6.trigger_6_Start');
 				const StatusTriggerStart6 = triggerStart_6.val;
 
@@ -2027,11 +2041,13 @@ class TimeSwitchClock extends utils.Adapter {
 
 				triggerStartAction_6_true();
 
-			} catch (err) {
+			} else {
 
-				//this.log.error('error catch 6 -- ' + err);
+				this.log.error('datenpunkte trigger_6 existieren NICHT');
 
 			}
+
+
 
 
 
