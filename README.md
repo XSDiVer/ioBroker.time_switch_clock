@@ -15,22 +15,27 @@
 
 Timer for e.g. water valves or other things
 
-Dieser Adapter löst bis zu 6 verschiedene Datenpunkte aus <trigger_1 - trigger_6>.
+Dieser Adapter löst bis zu 6 verschiedene Datenpunkte aus -trigger_1 - trigger_6-.
 Dieser Trigger kann in einem Blockly verwendet werden um einen Datenpunkt nach Wahl auszulösen.
 
-Die einzelnen trigger können über <SetTrigger> ausgewählt werden.
+Die einzelnen trigger können über -SetTrigger- ausgewählt werden.
 Einfach die gewünschte Nummer des Triggers der gesetzt werden soll in,
-<SetTrigger> eintagen -- Bsp.: für Trigger_1 eine 1 in <SetTrigger> eintragen.
+-SetTrigger- eintragen -- Bsp.: für Trigger_1 eine 1 in -SetTrigger- eintragen.
 
-Jetzt kann man über die Datenpunkte: <Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag & Sonntag>
-einstellen, an welchem Tag der <trigger_1 - trigger_6> ausgelöst werden soll.
+Jetzt kann man über die Datenpunkte: -Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag & Sonntag-
+einstellen, an welchem Tag der -trigger_1 - trigger_6- ausgelöst werden soll.
 
-Bei <Uhrzeit> trägt man die Uhrzeit ein, um die der jeweilige <trigger_1 - trigger_6> ausgelöst werden soll.
-Die <Uhrzeit> wird im Format <HH:MM> gesetzt. Wobei HH für Stunden und MM für Minuten steht.
+Bei -Uhrzeit- trägt man die Uhrzeit ein, um die der jeweilige -trigger_1 - trigger_6- ausgelöst werden soll.
+Die -Uhrzeit- wird im Format -HH:MM- gesetzt. Wobei HH für Stunden und MM für Minuten steht.
 
-Hat man alle <trigger_1 - trigger_6> wie gewünscht eingestellt, 
-sollte man  <SetTrigger> auf z.B. 0 setzen -- damit sich durch Änderungen an Uhrzeit
-oder Wochentagen -- kein <trigger_1 - trigger_6> verstellt, bzw. neu gesetzt wird...
+Hat man alle -trigger_1 - trigger_6- wie gewünscht eingestellt, 
+sollte man  -SetTrigger- auf z.B. 0 setzen -- damit sich durch Änderungen an Uhrzeit
+oder Wochentagen -- kein -trigger_1 - trigger_6- verstellt, bzw. neu gesetzt wird.
+
+Dieser Adapter ist vorallem zur Verarbeitung mit der VIS gedacht und soll
+das erstellen einer Zeitschaltung erleichtern.
+
+-- todo: Astro Funktionen sollten implementiert werden.
 
 ## Changelog
 <!-- Platzhalter für nächstes Change Log. -->
