@@ -11,7 +11,6 @@ const utils = require('@iobroker/adapter-core');
 //const { triggerAsyncId } = require('async_hooks');
 const schedule = require('node-schedule');
 //const { runInThisContext } = require('vm');
-//const { runInThisContext } = require('vm');
 const SetWochentage = [];
 const SetSchedule = [];
 const Uhrzeit = [];
