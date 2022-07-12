@@ -16,10 +16,8 @@
 Timer for e.g. water valves or other things
 
 ## Changelog
-<!--
-	Placeholder for the next version (at the beginning of the line):
-	### **WORK IN PROGRESS**
--->
+
+* Beta Version without VIS Widget
 
 ### 0.0.2 (2022-07-11)
 * (XSDiVer) initial release
