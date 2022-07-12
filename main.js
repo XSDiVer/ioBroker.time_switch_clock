@@ -64,7 +64,8 @@ class TimeSwitchClock extends utils.Adapter {
 		const statusSAT = SAT ? SAT.val: false;
 
 		const Uhrzeit_1 = await this.getStateAsync('Zeitplan.Uhrzeit1');
-		const status_Uhrzeit_1 = Uhrzeit_1.val;
+		const status_Uhrzeit_1 = Uhrzeit_1 ? Uhrzeit_1.val: ['00,00'];
+
 		const [HH_1, MM_1] = status_Uhrzeit_1.split(':');
 
 		//HH:MM
