@@ -364,7 +364,7 @@ class TimeSwitchClock extends utils.Adapter {
 			} else {
 
 				this.log.error('irgendwas stimmt nicht bei Schedule 6 -- Uhrzeit ' + Uhrzeit);
-				this.setState('trigger_5.trigger_6_Start', false, true);
+				this.setState('trigger_6.trigger_6_Start', false, true);
 
 			}
 		};
@@ -1430,8 +1430,8 @@ class TimeSwitchClock extends utils.Adapter {
 			this.subscribeStates('trigger_5.trigger_5');
 			this.subscribeStates('trigger_5.trigger_5_Start');
 
-			this.subscribeStates('trigger_5.trigger_6');
-			this.subscribeStates('trigger_5.trigger_6_Start');
+			this.subscribeStates('trigger_6.trigger_6');
+			this.subscribeStates('trigger_6.trigger_6_Start');
 
 			this.setState('trigger_2.trigger_2', false, true);
 			this.setState('trigger_3.trigger_3', false, true);
@@ -2021,7 +2021,6 @@ class TimeSwitchClock extends utils.Adapter {
 
 			//trigger_4_Start Datenpunkt wenn false - Schedule canceln - SetSchedule = Wochentage Array mit Zahlen -
 			//SetTrigger ist die Auswahl welcher Trigger mit mit Uhrzeit und Wochentagen gefüttert werden soll
-
 
 			const trigger_4Start_test = await this.getObjectAsync('trigger_4.trigger_4_Start');
 
