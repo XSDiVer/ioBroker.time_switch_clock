@@ -172,6 +172,7 @@ class TimeSwitchClock extends utils.Adapter {
 		});
 
 		//Schedule zusammen setzten
+
 		this.Schedule_1 = async () => {
 
 			const HH = Uhrzeit[0];
@@ -377,24 +378,30 @@ class TimeSwitchClock extends utils.Adapter {
 
 			this.HH = Uhrzeit[0];
 			this.MM = Uhrzeit[1];
-			if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59 && typeof this.mySchedule_1 !== 'undefined') {
-				this.mySchedule_1.cancel() && this.log.info('Schedule 1 wurde gelöscht!');
 
-			} else if (this.HH < 0 || this.HH > 23 || this.MM < 0 || this.MM > 59) {
+			try {
+				if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59 && typeof this.mySchedule_1 !== 'undefined') {
+					this.mySchedule_1.cancel() && this.log.info('Schedule 1 wurde gelöscht!');
 
-				this.log.error('Keine gültige Uhrzeit!');
+				} else if (this.HH < 0 || this.HH > 23 || this.MM < 0 || this.MM > 59) {
 
-			} else if (SetSchedule.length == 0) {
+					this.log.error('Keine gültige Uhrzeit!');
 
-				this.log.error('Kein Wochentag gesetzt!');
+				} else if (SetSchedule.length == 0) {
 
-			} else if (typeof this.mySchedule_1 == 'undefined') {
+					this.log.error('Kein Wochentag gesetzt!');
 
-				this.log.info('Schedule_1 nothing to cancel' );
+				} else if (typeof this.mySchedule_1 == 'undefined') {
 
-			} else {
+					this.log.info('Schedule_1 nothing to cancel' );
 
-				this.log.error('Unknown Error -- 347');
+				} else {
+
+					this.log.error('Unknown Error -- 347');
+
+				}} catch (e) {
+
+				this.log.error('catch -- ' + e);
 
 			}
 
