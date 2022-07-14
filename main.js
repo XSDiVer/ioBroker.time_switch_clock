@@ -10,7 +10,7 @@ const utils = require('@iobroker/adapter-core');
 const schedule = require('node-schedule');
 const SetWeekdays = [];
 const SetSchedule = [];
-const Uhrzeit = [];
+const Time = [];
 
 class TimeSwitchClock extends utils.Adapter {
 
@@ -58,15 +58,6 @@ class TimeSwitchClock extends utils.Adapter {
 
 		const SAT = await this.getStateAsync('Weekdays.Saturday');
 		const statusSAT = SAT ? SAT.val: true;
-
-		//const Uhrzeit_1 = await this.getStateAsync('Setup.Uhrzeit1');
-		//const status_Uhrzeit_1 = Uhrzeit_1 ? Uhrzeit_1.val: '00:00';
-
-		//const [HH_1, MM_1] = status_Uhrzeit_1.split(':');
-
-		//HH:MM
-		//Uhrzeit.splice(0,1, HH_1);
-		//Uhrzeit.splice(1,1, MM_1);
 
 		//in Array einfügen oder löschen wenn false
 		//Sunday
@@ -175,8 +166,8 @@ class TimeSwitchClock extends utils.Adapter {
 
 		this.Schedule_1 = async () => {
 
-			const HH = Uhrzeit[0];
-			const MM = Uhrzeit[1];
+			const HH = Time[0];
+			const MM = Time[1];
 
 			if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_1 !== 'undefined') {
 
@@ -190,7 +181,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				this.mySchedule_1 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
 					this.setState('trigger_1.trigger_1', true, true) && this.log.info('Schedule 1 ausgelöst!')); +
-				(this.setState('trigger_1.trigger_1_is_set', '' + HH + ':' + MM + ' -- ' + SetWeekdays, true) );
+				(this.setState('trigger_1.trigger_1_is_set', '' + HH + ':' + MM + ' -- ' + SetWeekdays, true));
 
 			} else if (HH < 0 || HH > 23 || MM < 0 || MM > 59) {
 
@@ -199,7 +190,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			} else {
 
-				this.log.error('irgendwas stimmt nicht bei Schedule 1 -- Uhrzeit ' + Uhrzeit);
+				this.log.error('irgendwas stimmt nicht bei Schedule 1 -- Uhrzeit ' + Time);
 				this.setState('trigger_1.trigger_1_Start', false, true);
 
 			}
@@ -208,8 +199,8 @@ class TimeSwitchClock extends utils.Adapter {
 
 		this.Schedule_2 = async () => {
 
-			const HH = Uhrzeit[0];
-			const MM = Uhrzeit[1];
+			const HH = Time[0];
+			const MM = Time[1];
 
 			if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_2 !== 'undefined') {
 
@@ -232,7 +223,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			} else {
 
-				this.log.error('irgendwas stimmt nicht bei Schedule 2 -- Uhrzeit ' + Uhrzeit);
+				this.log.error('irgendwas stimmt nicht bei Schedule 2 -- Uhrzeit ' + Time);
 				this.setState('trigger_2.trigger_2_Start', false, true);
 
 			}
@@ -241,8 +232,8 @@ class TimeSwitchClock extends utils.Adapter {
 
 		this.Schedule_3 = async () => {
 
-			const HH = Uhrzeit[0];
-			const MM = Uhrzeit[1];
+			const HH = Time[0];
+			const MM = Time[1];
 
 			if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_3 !== 'undefined') {
 
@@ -265,7 +256,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			} else {
 
-				this.log.error('irgendwas stimmt nicht bei Schedule 3 -- Uhrzeit ' + Uhrzeit);
+				this.log.error('irgendwas stimmt nicht bei Schedule 3 -- Uhrzeit ' + Time);
 				this.setState('trigger_3.trigger_3_Start', false, true);
 
 			}
@@ -274,8 +265,8 @@ class TimeSwitchClock extends utils.Adapter {
 
 		this.Schedule_4 = async () => {
 
-			const HH = Uhrzeit[0];
-			const MM = Uhrzeit[1];
+			const HH = Time[0];
+			const MM = Time[1];
 
 			if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_4 !== 'undefined') {
 
@@ -298,7 +289,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			} else {
 
-				this.log.error('irgendwas stimmt nicht bei Schedule 4 -- Uhrzeit ' + Uhrzeit);
+				this.log.error('irgendwas stimmt nicht bei Schedule 4 -- Uhrzeit ' + Time);
 				this.setState('trigger_4.trigger_4_Start', false, true);
 
 			}
@@ -307,8 +298,8 @@ class TimeSwitchClock extends utils.Adapter {
 
 		this.Schedule_5 = async () => {
 
-			const HH = Uhrzeit[0];
-			const MM = Uhrzeit[1];
+			const HH = Time[0];
+			const MM = Time[1];
 
 			if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_5 !== 'undefined') {
 
@@ -331,7 +322,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			} else {
 
-				this.log.error('irgendwas stimmt nicht bei Schedule 5 -- Uhrzeit ' + Uhrzeit);
+				this.log.error('irgendwas stimmt nicht bei Schedule 5 -- Uhrzeit ' + Time);
 				this.setState('trigger_5.trigger_5_Start', false, true);
 
 			}
@@ -340,8 +331,8 @@ class TimeSwitchClock extends utils.Adapter {
 
 		this.Schedule_6 = async () => {
 
-			const HH = Uhrzeit[0];
-			const MM = Uhrzeit[1];
+			const HH = Time[0];
+			const MM = Time[1];
 
 			if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_6 !== 'undefined') {
 
@@ -364,7 +355,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			} else {
 
-				this.log.error('irgendwas stimmt nicht bei Schedule 6 -- Uhrzeit ' + Uhrzeit);
+				this.log.error('irgendwas stimmt nicht bei Schedule 6 -- Uhrzeit ' + Time);
 				this.setState('trigger_6.trigger_6_Start', false, true);
 
 			}
@@ -376,8 +367,8 @@ class TimeSwitchClock extends utils.Adapter {
 		//Cancel Schedules
 		this.cancelSchedule_1 = async () => {
 
-			this.HH = Uhrzeit[0];
-			this.MM = Uhrzeit[1];
+			this.HH = Time[0];
+			this.MM = Time[1];
 
 			try {
 				if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59 && typeof this.mySchedule_1 !== 'undefined') {
@@ -411,8 +402,8 @@ class TimeSwitchClock extends utils.Adapter {
 		this.cancelSchedule_2 = async () => {
 
 			try {
-				this.HH = Uhrzeit[0];
-				this.MM = Uhrzeit[1];
+				this.HH = Time[0];
+				this.MM = Time[1];
 				if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59) {
 					this.mySchedule_2.cancel() && this.log.info('Schedule 2 wurde gelöscht!');
 
@@ -435,8 +426,8 @@ class TimeSwitchClock extends utils.Adapter {
 		this.cancelSchedule_3 = async () => {
 
 			try {
-				this.HH = Uhrzeit[0];
-				this.MM = Uhrzeit[1];
+				this.HH = Time[0];
+				this.MM = Time[1];
 				if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59) {
 					this.mySchedule_3.cancel() && this.log.info('Schedule 3 wurde gelöscht!');
 
@@ -459,8 +450,8 @@ class TimeSwitchClock extends utils.Adapter {
 		this.cancelSchedule_4 = async () => {
 
 			try {
-				this.HH = Uhrzeit[0];
-				this.MM = Uhrzeit[1];
+				this.HH = Time[0];
+				this.MM = Time[1];
 				if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59) {
 					this.mySchedule_4.cancel() && this.log.info('Schedule 4 wurde gelöscht!');
 
@@ -483,8 +474,8 @@ class TimeSwitchClock extends utils.Adapter {
 		this.cancelSchedule_5 = async () => {
 
 			try {
-				this.HH = Uhrzeit[0];
-				this.MM = Uhrzeit[1];
+				this.HH = Time[0];
+				this.MM = Time[1];
 				if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59) {
 					this.mySchedule_5.cancel() && this.log.info('Schedule 5 wurde gelöscht!');
 
@@ -507,8 +498,8 @@ class TimeSwitchClock extends utils.Adapter {
 		this.cancelSchedule_6 = async () => {
 
 			try {
-				this.HH = Uhrzeit[0];
-				this.MM = Uhrzeit[1];
+				this.HH = Time[0];
+				this.MM = Time[1];
 				if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59) {
 					this.mySchedule_6.cancel() && this.log.info('Schedule 6 wurde gelöscht!');
 
@@ -669,49 +660,86 @@ class TimeSwitchClock extends utils.Adapter {
 			},
 			native: {},
 		});
+
+		await this.setObjectNotExistsAsync('trigger_1.trigger_1', {
+			type: 'state',
+			common: {
+				name: 'trigger_1',
+				type: 'boolean',
+				role: 'indicator',
+				read: true,
+				write: false,
+			},
+			native: {},
+		});
+
+		await this.setObjectNotExistsAsync('trigger_1.trigger_1_is_set', {
+			type: 'state',
+			common: {
+				name: 'trigger_1_is_set',
+				type: 'string',
+				role: 'text',
+				read: true,
+				write: false,
+			},
+			native: {},
+		});
+
+		await this.setObjectNotExistsAsync('trigger_1.trigger_1_Start', {
+			type: 'state',
+			common: {
+				name: 'trigger_1_Start',
+				type: 'boolean',
+				role: 'indicator',
+				read: true,
+				write: true,
+			},
+			native: {},
+		});
+
+		await this.setObjectNotExistsAsync('trigger_1.t1_next', {
+			type: 'state',
+			common: {
+				name: 't1_next',
+				type: 'string',
+				role: 'indicator',
+				read: true,
+				write: true,
+			},
+			native: {},
+		});
+
+		await this.setObjectNotExistsAsync('trigger_1.t1_time', {
+			type: 'state',
+			common: {
+				name: 't1_time',
+				type: 'string',
+				role: 'indicator',
+				read: true,
+				write: true,
+			},
+			native: {},
+		});
+
+		await this.setObjectNotExistsAsync('trigger_1.t1_weekdays', {
+			type: 'state',
+			common: {
+				name: 't1_weekdays',
+				type: 'string',
+				role: 'indicator',
+				read: true,
+				write: true,
+			},
+			native: {},
+		});
+
+
 		//Permanente Datenpunkte erstellen ENDE
 
 
 		//Überprüfen ob die Datenpunkte angelegt sind, wenn nicht werden sie neu angelegt
 		//in Abhängigkeit zur Anzahl der Trigger die in der this.config eingestellt sind
 		if (this.config.numberoftriggers == 1) {
-
-			await this.setObjectNotExistsAsync('trigger_1.trigger_1', {
-				type: 'state',
-				common: {
-					name: 'trigger_1',
-					type: 'boolean',
-					role: 'indicator',
-					read: true,
-					write: false,
-				},
-				native: {},
-			});
-
-			await this.setObjectNotExistsAsync('trigger_1.trigger_1_is_set', {
-				type: 'state',
-				common: {
-					name: 'trigger_1_is_set',
-					type: 'string',
-					role: 'text',
-					read: true,
-					write: false,
-				},
-				native: {},
-			});
-
-			await this.setObjectNotExistsAsync('trigger_1.trigger_1_Start', {
-				type: 'state',
-				common: {
-					name: 'trigger_1_Start',
-					type: 'boolean',
-					role: 'indicator',
-					read: true,
-					write: true,
-				},
-				native: {},
-			});
-
 
 			//alle anderen Datenpunkte löschen die aus Schdedule Anzahl > 1 sind
 			const trigger_2 = await this.getObjectAsync('trigger_2.trigger_2') || await this.getObjectAsync('trigger_2.trigger_2_is_set') || await this.getObjectAsync('trigger_2.trigger_2_Start');
@@ -1672,7 +1700,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			const Stunden = async () => {
 
-				this.log.warn('HH wurde geändert -- ' + hoursval);
+				this.log.info('HH wurde geändert -- ' + hoursval);
 
 			};
 
@@ -1686,7 +1714,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			const Minuten = async () => {
 
-				this.log.warn('mm wurden geändert -- ' + minutesval);
+				this.log.info('mm wurden geändert -- ' + minutesval);
 
 			};
 
@@ -1964,10 +1992,8 @@ class TimeSwitchClock extends utils.Adapter {
 			if (HH_1) {
 
 				const new_HH_1 = HH_1 ? HH_1.val: '00';
-				//const [HH_1, MM_1] = status_Uhrzeit_1.split(':');
 
-				Uhrzeit.splice(0,1, new_HH_1);
-				//Uhrzeit.splice(1,1, MM_1);
+				Time.splice(0,1, new_HH_1);
 
 			} else {
 
@@ -1981,10 +2007,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				const new_mm_1 = mm_1 ? mm_1.val: '00';
 
-				//const [HH_1, MM_1] = status_Uhrzeit_1.split(':');
-
-				//Uhrzeit.splice(0,1, new_HH_1);
-				Uhrzeit.splice(1,1, new_mm_1);
+				Time.splice(1,1, new_mm_1);
 
 			} else {
 
@@ -2027,6 +2050,14 @@ class TimeSwitchClock extends utils.Adapter {
 					if (StatusTriggerStart == true && SetSchedule.length !== 0 && SetTrigger_now_1 == 1) {
 
 						this.Schedule_1();
+						this.log.info('next Schedule 1 - ' + this.mySchedule_1.nextInvocation());
+
+						let date = this.mySchedule_1.nextInvocation();
+
+						date = this.formatDate(new Date(date), 'hh:mm - DD.MM.YYYY');
+
+						this.setState('trigger_1.t1_next', date, true);
+
 
 					} else if (StatusTriggerStart == true && SetSchedule.length == 0 && SetTrigger_now_1 == 1) {
 
