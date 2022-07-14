@@ -35,13 +35,19 @@ oder Wochentagen -- kein -trigger_1 - trigger_6- verstellt, bzw. neu gesetzt wir
 Dieser Adapter ist vorallem zur Verarbeitung mit der VIS gedacht und soll
 das erstellen einer Zeitschaltung erleichtern.
 
+
+Hier ist ein Beispiel den man im VIS als View importieren kann,
+sehr elementar gehalten - dient nur zur Veranschaulichung:
+ 
+<a href="https://github.com/XSDiVer/ioBroker.time_switch_clock/blob/main/Docs/example_View"> example VIS View</a>
+
 -- todo: Astro Funktionen sollten implementiert werden.
 
 ## Changelog
 <!-- Platzhalter für nächstes Change Log. -->
 
 ### 0.0.3 (2022-07-12)
-* Beta Version without VIS Widget
+* Beta Version with example VIS View 
 
 ### 0.0.2 (2022-07-11)
 * (XSDiVer) initial release
