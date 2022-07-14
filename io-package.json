@@ -95,7 +95,7 @@
         ]
     },
     "native": {
-        "Anzahl": 1
+        "numberoftriggers": 1
     },
     "objects": [],
     "instanceObjects": [
@@ -121,11 +121,11 @@
             "native": {}
         },
         {
-            "_id": "info.Anzahl",
+            "_id": "Setup.number_of_triggers",
             "type": "state",
             "common": {
                 "role": "state",
-                "name": "Anzahl",
+                "name": "numberoftriggers",
                 "type": "number",
                 "read": true,
                 "write": false

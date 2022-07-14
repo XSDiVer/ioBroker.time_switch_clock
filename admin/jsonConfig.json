@@ -3,9 +3,9 @@
     "items": {
         "Wochentage": {
             "type": "panel",
-            "label": "Wie viele Schedules?",
+            "label": "How many Schedules should be initilalized?",
             "items": {
-                "Anzahl": {
+                "numberoftriggers": {
                     "newLine": true,
                     "type": "number",
                     "min": 1,
@@ -13,7 +13,7 @@
                     "sm": 12,
                     "md": 6,
                     "lg": 6,
-                    "label": "Anzahl"
+                    "label": "number of triggers"
                 }
         
             }
