@@ -12,6 +12,9 @@ const SetWeekdays = [];
 const SetSchedule = [];
 const Time = [];
 
+const time_t1arr = [];
+const time_t2arr = [];
+
 class TimeSwitchClock extends utils.Adapter {
 
 	/**
@@ -145,17 +148,17 @@ class TimeSwitchClock extends utils.Adapter {
 		}
 
 		//Array sortieren
-		SetWeekdays.sort();
+		//SetWeekdays.sort();
 
 		//Array SetSchedule sortieren
-		SetSchedule.sort();
+		//SetSchedule.sort();
 
 		await this.setObjectNotExistsAsync('trigger_1.trigger_1_is_set', {
 			type: 'state',
 			common: {
 				name: 'trigger_1_is_set',
 				type: 'string',
-				role: 'text',
+				role: 'state',
 				read: true,
 				write: false,
 			},
@@ -175,13 +178,13 @@ class TimeSwitchClock extends utils.Adapter {
 
 				this.mySchedule_1 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
 					this.setState('trigger_1.trigger_1', true, true) && this.log.info('Schedule 1 ausgelöst!')); +
-				this.setState('trigger_1.trigger_1_is_set', '' + HH + ':' + MM + ' -- ' + SetWeekdays, true);
+				this.setState('trigger_1.trigger_1_is_set', '' + HH + ':' + MM + ' -- ' + SetWeekdays, true) + this.log.error('HH und MM -- ' + HH + ':' + MM);
 
 			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_1 == 'undefined') {
 
 				this.mySchedule_1 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
 					this.setState('trigger_1.trigger_1', true, true) && this.log.info('Schedule 1 ausgelöst!')); +
-				(this.setState('trigger_1.trigger_1_is_set', '' + HH + ':' + MM + ' -- ' + SetWeekdays, true));
+				this.setState('trigger_1.trigger_1_is_set', '' + HH + ':' + MM + ' -- ' + SetWeekdays, true) + this.log.error('HH und MM -- ' + HH + ':' + MM);
 
 			} else if (HH < 0 || HH > 23 || MM < 0 || MM > 59) {
 
@@ -417,7 +420,7 @@ class TimeSwitchClock extends utils.Adapter {
 				}
 			} catch (notinuse) {
 
-				this.log.info('Schedule_2_Start ist false' + notinuse);
+				//this.log.info('Schedule_2_Start ist false' + notinuse);
 
 			}
 		};
@@ -441,7 +444,7 @@ class TimeSwitchClock extends utils.Adapter {
 				}
 			} catch (notinuse) {
 
-				this.log.info('Schedule_3_Start ist false' + notinuse);
+				//this.log.info('Schedule_3_Start ist false' + notinuse);
 
 			}
 		};
@@ -542,7 +545,7 @@ class TimeSwitchClock extends utils.Adapter {
 			common: {
 				name: 'HH',
 				type: 'string',
-				role: 'indicator',
+				role: 'state',
 				read: true,
 				write: true,
 			},
@@ -556,7 +559,7 @@ class TimeSwitchClock extends utils.Adapter {
 			common: {
 				name: 'mm',
 				type: 'string',
-				role: 'indicator',
+				role: 'state',
 				read: true,
 				write: true,
 			},
@@ -570,7 +573,7 @@ class TimeSwitchClock extends utils.Adapter {
 			common: {
 				name: 'SetTrigger',
 				type: 'string',
-				role: 'indicator',
+				role: 'state',
 				read: true,
 				write: true,
 			},
@@ -582,7 +585,7 @@ class TimeSwitchClock extends utils.Adapter {
 			common: {
 				name: 'Sunday',
 				type: 'boolean',
-				role: 'indicator',
+				role: 'state',
 				read: true,
 				write: true,
 			},
@@ -594,7 +597,7 @@ class TimeSwitchClock extends utils.Adapter {
 			common: {
 				name: 'Monday',
 				type: 'boolean',
-				role: 'indicator',
+				role: 'state',
 				read: true,
 				write: true,
 			},
@@ -606,7 +609,7 @@ class TimeSwitchClock extends utils.Adapter {
 			common: {
 				name: 'Tuesday',
 				type: 'boolean',
-				role: 'indicator',
+				role: 'state',
 				read: true,
 				write: true,
 			},
@@ -618,7 +621,7 @@ class TimeSwitchClock extends utils.Adapter {
 			common: {
 				name: 'Wednesday',
 				type: 'boolean',
-				role: 'indicator',
+				role: 'state',
 				read: true,
 				write: true,
 			},
@@ -630,7 +633,7 @@ class TimeSwitchClock extends utils.Adapter {
 			common: {
 				name: 'Thursday',
 				type: 'boolean',
-				role: 'indicator',
+				role: 'state',
 				read: true,
 				write: true,
 			},
@@ -642,7 +645,7 @@ class TimeSwitchClock extends utils.Adapter {
 			common: {
 				name: 'Friday',
 				type: 'boolean',
-				role: 'indicator',
+				role: 'state',
 				read: true,
 				write: true,
 			},
@@ -654,7 +657,7 @@ class TimeSwitchClock extends utils.Adapter {
 			common: {
 				name: 'Saturday',
 				type: 'boolean',
-				role: 'indicator',
+				role: 'state',
 				read: true,
 				write: true,
 			},
@@ -666,7 +669,7 @@ class TimeSwitchClock extends utils.Adapter {
 			common: {
 				name: 'trigger_1',
 				type: 'boolean',
-				role: 'indicator',
+				role: 'state',
 				read: true,
 				write: false,
 			},
@@ -678,7 +681,7 @@ class TimeSwitchClock extends utils.Adapter {
 			common: {
 				name: 'trigger_1_is_set',
 				type: 'string',
-				role: 'text',
+				role: 'state',
 				read: true,
 				write: false,
 			},
@@ -690,19 +693,19 @@ class TimeSwitchClock extends utils.Adapter {
 			common: {
 				name: 'trigger_1_Start',
 				type: 'boolean',
-				role: 'indicator',
+				role: 'state',
 				read: true,
 				write: true,
 			},
 			native: {},
 		});
 
-		await this.setObjectNotExistsAsync('trigger_1.t1_next', {
+		await this.setObjectNotExistsAsync('trigger_1.t1_weekdays', {
 			type: 'state',
 			common: {
-				name: 't1_next',
-				type: 'string',
-				role: 'indicator',
+				name: 't1_weekdays',
+				type: 'array',
+				role: 'list',
 				read: true,
 				write: true,
 			},
@@ -714,19 +717,7 @@ class TimeSwitchClock extends utils.Adapter {
 			common: {
 				name: 't1_time',
 				type: 'string',
-				role: 'indicator',
-				read: true,
-				write: true,
-			},
-			native: {},
-		});
-
-		await this.setObjectNotExistsAsync('trigger_1.t1_weekdays', {
-			type: 'state',
-			common: {
-				name: 't1_weekdays',
-				type: 'string',
-				role: 'indicator',
+				role: 'state',
 				read: true,
 				write: true,
 			},
@@ -750,6 +741,9 @@ class TimeSwitchClock extends utils.Adapter {
 				await this.delObjectAsync('trigger_2.trigger_2');
 				await this.delObjectAsync('trigger_2.trigger_2_is_set');
 				await this.delObjectAsync('trigger_2.trigger_2_Start');
+				await this.delObjectAsync('trigger_2.t2_weekdays');
+				await this.delObjectAsync('trigger_2.t2_time');
+
 
 			} else {
 
@@ -825,7 +819,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_2',
 					type: 'boolean',
-					role: 'indicator',
+					role: 'state',
 					read: true,
 					write: false,
 				},
@@ -837,7 +831,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_2_is_set',
 					type: 'string',
-					role: 'text',
+					role: 'state',
 					read: true,
 					write: false,
 				},
@@ -849,7 +843,31 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_2_Start',
 					type: 'boolean',
-					role: 'indicator',
+					role: 'state',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_2.t2_weekdays', {
+				type: 'state',
+				common: {
+					name: 't2_weekdays',
+					type: 'array',
+					role: 'list',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_2.t2_time', {
+				type: 'state',
+				common: {
+					name: 't2_time',
+					type: 'string',
+					role: 'state',
 					read: true,
 					write: true,
 				},
@@ -930,7 +948,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_2',
 					type: 'boolean',
-					role: 'indicator',
+					role: 'state',
 					read: true,
 					write: false,
 				},
@@ -942,7 +960,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_2_is_set',
 					type: 'string',
-					role: 'text',
+					role: 'state',
 					read: true,
 					write: false,
 				},
@@ -954,7 +972,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_2_Start',
 					type: 'boolean',
-					role: 'indicator',
+					role: 'state',
 					read: true,
 					write: true,
 				},
@@ -966,7 +984,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_3',
 					type: 'boolean',
-					role: 'indicator',
+					role: 'state',
 					read: true,
 					write: false,
 				},
@@ -978,7 +996,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_3_is_set',
 					type: 'string',
-					role: 'text',
+					role: 'state',
 					read: true,
 					write: false,
 				},
@@ -990,7 +1008,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_3_Start',
 					type: 'boolean',
-					role: 'indicator',
+					role: 'state',
 					read: true,
 					write: true,
 				},
@@ -1064,7 +1082,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_2',
 					type: 'boolean',
-					role: 'indicator',
+					role: 'state',
 					read: true,
 					write: false,
 				},
@@ -1076,7 +1094,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_2_is_set',
 					type: 'string',
-					role: 'text',
+					role: 'state',
 					read: true,
 					write: false,
 				},
@@ -1088,7 +1106,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_2_Start',
 					type: 'boolean',
-					role: 'indicator',
+					role: 'state',
 					read: true,
 					write: true,
 				},
@@ -1100,7 +1118,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_3',
 					type: 'boolean',
-					role: 'indicator',
+					role: 'state',
 					read: true,
 					write: false,
 				},
@@ -1112,7 +1130,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_3_is_set',
 					type: 'string',
-					role: 'text',
+					role: 'state',
 					read: true,
 					write: false,
 				},
@@ -1124,7 +1142,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_3_Start',
 					type: 'boolean',
-					role: 'indicator',
+					role: 'state',
 					read: true,
 					write: true,
 				},
@@ -1136,7 +1154,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_4',
 					type: 'boolean',
-					role: 'indicator',
+					role: 'state',
 					read: true,
 					write: false,
 				},
@@ -1148,7 +1166,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_4_is_set',
 					type: 'string',
-					role: 'text',
+					role: 'state',
 					read: true,
 					write: false,
 				},
@@ -1160,7 +1178,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_4_Start',
 					type: 'boolean',
-					role: 'indicator',
+					role: 'state',
 					read: true,
 					write: true,
 				},
@@ -1222,7 +1240,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_2',
 					type: 'boolean',
-					role: 'indicator',
+					role: 'state',
 					read: true,
 					write: false,
 				},
@@ -1234,7 +1252,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_2_is_set',
 					type: 'string',
-					role: 'text',
+					role: 'state',
 					read: true,
 					write: false,
 				},
@@ -1246,7 +1264,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_2_Start',
 					type: 'boolean',
-					role: 'indicator',
+					role: 'state',
 					read: true,
 					write: true,
 				},
@@ -1258,7 +1276,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_3',
 					type: 'boolean',
-					role: 'indicator',
+					role: 'state',
 					read: true,
 					write: false,
 				},
@@ -1270,7 +1288,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_3_is_set',
 					type: 'string',
-					role: 'text',
+					role: 'state',
 					read: true,
 					write: false,
 				},
@@ -1282,7 +1300,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_3_Start',
 					type: 'boolean',
-					role: 'indicator',
+					role: 'state',
 					read: true,
 					write: true,
 				},
@@ -1294,7 +1312,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_4',
 					type: 'boolean',
-					role: 'indicator',
+					role: 'state',
 					read: true,
 					write: false,
 				},
@@ -1306,7 +1324,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_4_is_set',
 					type: 'string',
-					role: 'text',
+					role: 'state',
 					read: true,
 					write: false,
 				},
@@ -1318,7 +1336,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_4_Start',
 					type: 'boolean',
-					role: 'indicator',
+					role: 'state',
 					read: true,
 					write: true,
 				},
@@ -1330,7 +1348,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_5',
 					type: 'boolean',
-					role: 'indicator',
+					role: 'state',
 					read: true,
 					write: false,
 				},
@@ -1342,7 +1360,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_5_is_set',
 					type: 'string',
-					role: 'text',
+					role: 'state',
 					read: true,
 					write: false,
 				},
@@ -1354,7 +1372,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_5_Start',
 					type: 'boolean',
-					role: 'indicator',
+					role: 'state',
 					read: true,
 					write: true,
 				},
@@ -1406,7 +1424,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_2',
 					type: 'boolean',
-					role: 'indicator',
+					role: 'state',
 					read: true,
 					write: false,
 				},
@@ -1418,7 +1436,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_2_is_set',
 					type: 'string',
-					role: 'text',
+					role: 'state',
 					read: true,
 					write: false,
 				},
@@ -1430,7 +1448,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_2_Start',
 					type: 'boolean',
-					role: 'indicator',
+					role: 'state',
 					read: true,
 					write: true,
 				},
@@ -1442,7 +1460,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_3',
 					type: 'boolean',
-					role: 'indicator',
+					role: 'state',
 					read: true,
 					write: false,
 				},
@@ -1454,7 +1472,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_3_is_set',
 					type: 'string',
-					role: 'text',
+					role: 'state',
 					read: true,
 					write: false,
 				},
@@ -1466,7 +1484,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_3_Start',
 					type: 'boolean',
-					role: 'indicator',
+					role: 'state',
 					read: true,
 					write: true,
 				},
@@ -1478,7 +1496,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_4',
 					type: 'boolean',
-					role: 'indicator',
+					role: 'state',
 					read: true,
 					write: false,
 				},
@@ -1490,7 +1508,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_4_is_set',
 					type: 'string',
-					role: 'text',
+					role: 'state',
 					read: true,
 					write: false,
 				},
@@ -1502,7 +1520,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_4_Start',
 					type: 'boolean',
-					role: 'indicator',
+					role: 'state',
 					read: true,
 					write: true,
 				},
@@ -1514,7 +1532,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_5',
 					type: 'boolean',
-					role: 'indicator',
+					role: 'state',
 					read: true,
 					write: false,
 				},
@@ -1526,7 +1544,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_5_is_set',
 					type: 'string',
-					role: 'text',
+					role: 'state',
 					read: true,
 					write: false,
 				},
@@ -1538,7 +1556,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_5_Start',
 					type: 'boolean',
-					role: 'indicator',
+					role: 'state',
 					read: true,
 					write: true,
 				},
@@ -1550,7 +1568,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_6',
 					type: 'boolean',
-					role: 'indicator',
+					role: 'state',
 					read: true,
 					write: false,
 				},
@@ -1562,7 +1580,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_6_is_set',
 					type: 'string',
-					role: 'text',
+					role: 'state',
 					read: true,
 					write: false,
 				},
@@ -1574,7 +1592,7 @@ class TimeSwitchClock extends utils.Adapter {
 				common: {
 					name: 'trigger_6_Start',
 					type: 'boolean',
-					role: 'indicator',
+					role: 'state',
 					read: true,
 					write: true,
 				},
@@ -1977,7 +1995,7 @@ class TimeSwitchClock extends utils.Adapter {
 				SetSchedule.splice(SetSchedule.findIndex(searchFR),1);
 			}
 
-			const killSA = SetWeekdays.indexOf('Samstag');
+			const killSA = SetWeekdays.indexOf('Saturday');
 			if (killSA != -1 && SetSchedule.indexOf(6) == -1) {
 				SetSchedule.splice(0,0, 6);
 
@@ -1991,9 +2009,30 @@ class TimeSwitchClock extends utils.Adapter {
 			const HH_1 = await this.getStateAsync('Setup.HH');
 			if (HH_1) {
 
-				const new_HH_1 = HH_1 ? HH_1.val: '00';
+				const SetTrigger_1 = await this.getStateAsync('Setup.SetTrigger');
+				const SetTrigger_now_1 = SetTrigger_1 ? SetTrigger_1.val: '0';
 
-				Time.splice(0,1, new_HH_1);
+				if (SetTrigger_now_1 == 1) {
+
+					const new_HH_1 = HH_1 ? HH_1.val: '00';
+
+					Time.splice(0,1, new_HH_1);
+
+					time_t1arr.splice(0,1, new_HH_1);
+
+					this.log.warn('hier ist die neue HH für SetTrigger = 1 -- ' + new_HH_1);
+
+				} else if (SetTrigger_now_1 == 2) {
+
+					const new_HH_1 = HH_1 ? HH_1.val: '00';
+
+					Time.splice(0,1, new_HH_1);
+
+					time_t2arr.splice(0,1, new_HH_1);
+
+					this.log.warn('hier ist die neue HH für SetTrigger = 2 -- ' + new_HH_1);
+				}
+
 
 			} else {
 
@@ -2005,9 +2044,33 @@ class TimeSwitchClock extends utils.Adapter {
 			const mm_1 = await this.getStateAsync('Setup.mm');
 			if (mm_1) {
 
-				const new_mm_1 = mm_1 ? mm_1.val: '00';
+				const SetTrigger_1 = await this.getStateAsync('Setup.SetTrigger');
+				const SetTrigger_now_1 = SetTrigger_1 ? SetTrigger_1.val: '0';
 
-				Time.splice(1,1, new_mm_1);
+				if (SetTrigger_now_1 == 1) {
+
+					const new_mm_1 = mm_1 ? mm_1.val: '00';
+
+					Time.splice(1,1, new_mm_1);
+
+					time_t2arr.splice(1,1, new_mm_1);
+
+					this.log.warn('hier ist die neue mm für SetTrigger = 1 -- ' + new_mm_1);
+
+				} else if (SetTrigger_now_1 == 2) {
+
+					const new_mm_1 = mm_1 ? mm_1.val: '00';
+
+					Time.splice(1,1, new_mm_1);
+
+					time_t2arr.splice(1,1, new_mm_1);
+
+					this.log.warn('hier ist die neue mm für SetTrigger = 2 -- ' + new_mm_1);
+				}
+
+				//const new_mm_1 = mm_1 ? mm_1.val: '00';
+
+				//Time.splice(1,1, new_mm_1);
 
 			} else {
 
@@ -2044,7 +2107,7 @@ class TimeSwitchClock extends utils.Adapter {
 				const StatusTriggerStart = triggerStart_1.val;
 
 				const SetTrigger_1 = await this.getStateAsync('Setup.SetTrigger');
-				const SetTrigger_now_1 = SetTrigger_1 ? SetTrigger_1.val: false;
+				const SetTrigger_now_1 = SetTrigger_1 ? SetTrigger_1.val: '0';
 
 				const triggerStartAction_true = async () => {
 					if (StatusTriggerStart == true && SetSchedule.length !== 0 && SetTrigger_now_1 == 1) {
@@ -2052,26 +2115,89 @@ class TimeSwitchClock extends utils.Adapter {
 						this.Schedule_1();
 						this.log.info('next Schedule 1 - ' + this.mySchedule_1.nextInvocation());
 
-						let date = this.mySchedule_1.nextInvocation();
+						this.setState('trigger_1.t1_time', this.HH + ':' + this.MM, true);
+						this.setState('trigger_1.t1_weekdays', SetSchedule.sort(), true);
 
-						date = this.formatDate(new Date(date), 'hh:mm - DD.MM.YYYY');
+					} else if (StatusTriggerStart == true && SetTrigger_now_1 !== 1) {
 
-						this.setState('trigger_1.t1_next', date, true);
+						const time_1 = await this.getStateAsync('trigger_1.t1_time');
+						const read_time_1 = time_1.val;
+
+						const [hh, mm] = read_time_1.split(':');
+						const hh_1 = hh ? hh: 'not';
+						const mm_1 = mm ? mm: 'set';
+
+						time_t1arr.splice(0,1, hh_1);
+						time_t1arr.splice(1,1, mm_1);
+
+						const weekdays_t1 = await this.getStateAsync('trigger_1.t1_weekdays');
+						const read_weekdays_t1 = weekdays_t1.val;
+
+						this.log.warn('hh_1 -- ' + hh_1);
+						this.log.warn('mm_1 -- ' + mm_1);
+
+						this.log.warn('Zeit & Wochentage -- ' + time_t1arr + ' -- ' + read_weekdays_t1);
+
+						this.setState('trigger_1.trigger_1_is_set', '' + hh_1 + ':' + mm_1 + ' -- ' + read_weekdays_t1, true);
 
 
-					} else if (StatusTriggerStart == true && SetSchedule.length == 0 && SetTrigger_now_1 == 1) {
+						this.log.error('Hier muss das Schedule für 1 noch hin!!!');
 
-						this.log.error('kein Wochentag gesetzt in Trigger 1!');
-						this.setState('trigger_1.trigger_1_is_set', 'not scheduled', true);
-						this.cancelSchedule_1();
+						/*
+						this.Schedule_11 = async () => {
+
+							const HH = time_t1arr[0];
+							const MM = time_t1arr[1];
+
+							if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_1 !== 'undefined') {
+
+								this.mySchedule_1.cancel();
+
+								this.mySchedule_1 = schedule.scheduleJob(MM + ' ' + HH + ' ' + '*' + ' ' + '*' + ' ' + read_weekdays_t1, async () =>
+									this.setState('trigger_1.trigger_1', true, true) && this.log.info('Schedule 1 ausgelöst!')); +
+								this.setState('trigger_1.trigger_1_is_set', '' + HH + ':' + MM + ' -- ' + read_weekdays_t1, true) + this.log.error('neues Schedule - HH und MM -- ' + HH + ':' + MM + ' -- ' + read_weekdays_t1);
+
+							} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_1 == 'undefined') {
+
+								this.mySchedule_1 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + read_weekdays_t1.toString().trim(), async () =>
+									this.setState('trigger_1.trigger_1', true, true) && this.log.info('Schedule 1 ausgelöst!')); +
+								this.setState('trigger_1.trigger_1_is_set', '' + HH + ':' + MM + ' -- ' + read_weekdays_t1, true) + this.log.error('neues Schedule -- HH und MM -- ' + HH + ':' + MM + ' -- ' + read_weekdays_t1);
+
+							} else if (HH < 0 || HH > 23 || MM < 0 || MM > 59) {
+
+								this.log.error('Uhrzeit stimmt nicht! bei Schedule 1 -- ' + HH + ':' + MM);
+								this.setState('trigger_1.trigger_1_Start', false, true);
+
+							} else {
+
+								this.log.error('irgendwas stimmt nicht bei Schedule 1 -- Uhrzeit ' + Time);
+								this.setState('trigger_1.trigger_1_Start', false, true);
+
+							}
+						};
+
+						this.Schedule_11();
+						*/
+
+
+
+
+
+
+
+
+
+
+
+
 
 					} else if (StatusTriggerStart == false) {
 
 						this.cancelSchedule_1();
 						this.setState('trigger_1.trigger_1_is_set', 'not scheduled', true);
 
-					}
-				};
+					}};
+
 
 				triggerStartAction_true();
 
@@ -2101,13 +2227,46 @@ class TimeSwitchClock extends utils.Adapter {
 						this.Schedule_2();
 						this.log.info('next Schedule 2 - ' + this.mySchedule_2.nextInvocation());
 
-					} else if (StatusTriggerStart2 == true && SetSchedule.length == 0 && SetTrigger_now_2 == 2) {
+						this.setState('trigger_2.t2_time', this.HH + ':' + this.MM, true);
+						this.setState('trigger_2.t2_weekdays', SetSchedule.sort(), true);
+
+					} else if (StatusTriggerStart2 == true && SetTrigger_now_2 !== 2) {
+
+						const time_2 = await this.getStateAsync('trigger_2.t2_time');
+						const read_time_2 = time_2 ? time_2.val: '00:00';
+
+						const [hh, mm] = read_time_2.split(':');
+						const hh_2 = hh ? hh: 'not';
+						const mm_2 = mm ? mm: 'set';
+
+						time_t2arr.splice(0,1, hh_2);
+						time_t2arr.splice(1,1, mm_2);
+
+						const weekdays_t2 = await this.getStateAsync('trigger_2.t2_weekdays');
+						const read_weekdays_t2 = weekdays_t2 ? weekdays_t2.val:'0';
+
+						this.log.warn('hh_2 -- ' + hh_2);
+						this.log.warn('mm_2 -- ' + mm_2);
+
+						this.log.warn('Zeit & Wochentage -- t2 -- ' + time_t2arr + ' -- ' + read_weekdays_t2);
+
+						this.setState('trigger_2.trigger_2_is_set', '' + hh_2 + ':' + mm_2 + ' -- ' + read_weekdays_t2, true);
+
+
+						this.log.error('Hier muss das Schedule für 2 noch hin!!!');
+
+
+					}
+
+
+
+					/*else if (StatusTriggerStart2 == true && SetSchedule.length == 0 && SetTrigger_now_2 == 2) {
 
 						this.log.error('kein Wochentag gesetzt in Trigger 2!');
 						this.setState('trigger_2.trigger_2_is_set', 'not scheduled', true);
 						this.cancelSchedule_2();
 
-					} else if (StatusTriggerStart2 == false) {
+					} */ else if (StatusTriggerStart2 == false) {
 
 						this.cancelSchedule_2();
 						this.setState('trigger_2.trigger_2_is_set', 'not scheduled', true);
@@ -2318,9 +2477,6 @@ class TimeSwitchClock extends utils.Adapter {
 				}};
 
 			triggerAction_true();
-
-			SetSchedule.sort();
-			SetWeekdays.sort();
 
 		} else {
 			// The state was deleted
