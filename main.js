@@ -2607,9 +2607,9 @@ class TimeSwitchClock extends utils.Adapter {
 			if (HH_1) {
 
 				const SetTrigger_1 = await this.getStateAsync('Setup.SetTrigger');
-				const SetTrigger_now_1 = SetTrigger_1 ? SetTrigger_1.val: '0';
+				const SetTrigger = SetTrigger_1 ? SetTrigger_1.val: '0';
 
-				if (SetTrigger_now_1 == 1) {
+				if (SetTrigger == 1) {
 
 					const new_HH_1 = HH_1 ? HH_1.val: '00';
 
@@ -2621,7 +2621,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 					//this.log.warn('hier ist die neue HH für SetTrigger = 1 -- ' + new_HH_1);
 
-				} else if (SetTrigger_now_1 == 2) {
+				} else if (SetTrigger == 2) {
 
 					const new_HH_1 = HH_1 ? HH_1.val: '00';
 
@@ -2632,6 +2632,55 @@ class TimeSwitchClock extends utils.Adapter {
 					this.setState('trigger_2.t2_time', time_t2arr[0] + ':' + time_t2arr[1] , true);
 
 					//this.log.warn('hier ist die neue HH für SetTrigger = 2 -- ' + new_HH_1);
+
+				} else if (SetTrigger == 3) {
+
+					const new_HH_1 = HH_1 ? HH_1.val: '00';
+
+					Time.splice(0,1, new_HH_1);
+
+					time_t3arr.splice(0,1, new_HH_1);
+
+					this.setState('trigger_3.t3_time', time_t3arr[0] + ':' + time_t3arr[1] , true);
+
+					//this.log.warn('hier ist die neue HH für SetTrigger = 2 -- ' + new_HH_1);
+
+				} else if (SetTrigger == 4) {
+
+					const new_HH_1 = HH_1 ? HH_1.val: '00';
+
+					Time.splice(0,1, new_HH_1);
+
+					time_t4arr.splice(0,1, new_HH_1);
+
+					this.setState('trigger_4.t4_time', time_t4arr[0] + ':' + time_t4arr[1] , true);
+
+					//this.log.warn('hier ist die neue HH für SetTrigger = 2 -- ' + new_HH_1);
+
+				} else if (SetTrigger == 5) {
+
+					const new_HH_1 = HH_1 ? HH_1.val: '00';
+
+					Time.splice(0,1, new_HH_1);
+
+					time_t5arr.splice(0,1, new_HH_1);
+
+					this.setState('trigger_5.t5_time', time_t5arr[0] + ':' + time_t5arr[1] , true);
+
+					//this.log.warn('hier ist die neue HH für SetTrigger = 2 -- ' + new_HH_1);
+
+				} else if (SetTrigger == 6) {
+
+					const new_HH_1 = HH_1 ? HH_1.val: '00';
+
+					Time.splice(0,1, new_HH_1);
+
+					time_t6arr.splice(0,1, new_HH_1);
+
+					this.setState('trigger_6.t6_time', time_t6arr[0] + ':' + time_t6arr[1] , true);
+
+					//this.log.warn('hier ist die neue HH für SetTrigger = 2 -- ' + new_HH_1);
+
 				}
 
 
@@ -2640,6 +2689,8 @@ class TimeSwitchClock extends utils.Adapter {
 				this.log.error('Uhrzeit -HH- Error -- ');
 
 			}
+
+
 
 			//mm geändert:
 			const mm_1 = await this.getStateAsync('Setup.mm');
