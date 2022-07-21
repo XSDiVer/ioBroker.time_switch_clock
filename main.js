@@ -12,8 +12,24 @@ const SetWeekdays = [];
 const SetSchedule = [];
 const Time = [];
 
+//Array für Zeit pro Schedule
 const time_t1arr = [];
 const time_t2arr = [];
+const time_t3arr = [];
+const time_t4arr = [];
+const time_t5arr = [];
+const time_t6arr = [];
+
+//Array für Wochentage pro Schedule
+let weekdays_t1arr = [];
+let weekdays_t2arr = [];
+let weekdays_t3arr = [];
+let weekdays_t4arr = [];
+let weekdays_t5arr = [];
+let weekdays_t6arr = [];
+
+
+//Arrays für Wochentage? / Schedule?
 
 class TimeSwitchClock extends utils.Adapter {
 
@@ -169,64 +185,131 @@ class TimeSwitchClock extends utils.Adapter {
 
 		this.Schedule_1 = async () => {
 
-			const HH = Time[0];
-			const MM = Time[1];
+			const SetTrigger_1 = await this.getStateAsync('Setup.SetTrigger');
+			const SetTrigger = SetTrigger_1 ? SetTrigger_1.val: '0';
 
-			if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_1 !== 'undefined') {
+			const HH = time_t1arr[0];
+			const MM = time_t1arr[1];
+
+			const WDays = [SetSchedule];
+
+			const WDaysarr = [weekdays_t1arr];
+
+
+			if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_1 !== 'undefined' && SetTrigger == 1 && SetSchedule.length !== 0) {
 
 				this.mySchedule_1.cancel();
 
-				this.mySchedule_1 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
+				this.mySchedule_1 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDays.toString().trim(), async () =>
 					this.setState('trigger_1.trigger_1', true, true) && this.log.info('Schedule 1 ausgelöst!')); +
-				this.setState('trigger_1.trigger_1_is_set', '' + HH + ':' + MM + ' -- ' + SetWeekdays, true) + this.log.error('HH und MM -- ' + HH + ':' + MM);
+				this.setState('trigger_1.trigger_1_is_set', '' + HH + ':' + MM + ' -- ' + WDays, true) + this.log.info('next Schedule 1 -- ' + this.mySchedule_1.nextInvocation());
 
-			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_1 == 'undefined') {
+			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_1 == 'undefined' && SetTrigger == 1 && SetSchedule.length !== 0) {
 
-				this.mySchedule_1 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
+				this.mySchedule_1 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDays.toString().trim(), async () =>
 					this.setState('trigger_1.trigger_1', true, true) && this.log.info('Schedule 1 ausgelöst!')); +
-				this.setState('trigger_1.trigger_1_is_set', '' + HH + ':' + MM + ' -- ' + SetWeekdays, true) + this.log.error('HH und MM -- ' + HH + ':' + MM);
+				this.setState('trigger_1.trigger_1_is_set', '' + HH + ':' + MM + ' -- ' + WDays, true);
 
-			} else if (HH < 0 || HH > 23 || MM < 0 || MM > 59) {
+
+
+			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_1 !== 'undefined' && SetTrigger !== 1 && weekdays_t1arr.length !== 0) {
+
+				this.mySchedule_1.cancel();
+
+				this.mySchedule_1 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDaysarr.toString().trim(), async () =>
+					this.setState('trigger_1.trigger_1', true, true) && this.log.info('Schedule 1 ausgelöst!')); +
+				this.setState('trigger_1.trigger_1_is_set', '' + HH + ':' + MM + ' -- ' + WDaysarr, true) + this.log.info('next Schedule 1 -- ' + this.mySchedule_1.nextInvocation());
+
+			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_1 == 'undefined' && SetTrigger !== 1 && weekdays_t1arr.length !== 0) {
+
+				this.mySchedule_1 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDaysarr.toString().trim(), async () =>
+					this.setState('trigger_1.trigger_1', true, true) && this.log.info('Schedule 1 ausgelöst!')); +
+				this.setState('trigger_1.trigger_1_is_set', '' + HH + ':' + MM + ' -- ' + WDaysarr, true);
+
+			} else if (SetSchedule.length == 0 || weekdays_t1arr.length == 0) {
+
+
+				this.log.error('Kein Wochentag gesetzt bei Schedule 1');
+				this.setState('trigger_1.trigger_1_Start', false, true);
+
+			}
+
+
+			else if (HH < 0 || HH > 23 || MM < 0 || MM > 59) {
 
 				this.log.error('Uhrzeit stimmt nicht! bei Schedule 1 -- ' + HH + ':' + MM);
 				this.setState('trigger_1.trigger_1_Start', false, true);
 
 			} else {
 
-				this.log.error('irgendwas stimmt nicht bei Schedule 1 -- Uhrzeit ' + Time);
+				this.log.error('irgendwas stimmt nicht bei Schedule 1 -- Uhrzeit ' + HH + ':' + MM);
 				this.setState('trigger_1.trigger_1_Start', false, true);
 
 			}
 		};
 
 
+
 		this.Schedule_2 = async () => {
 
-			const HH = Time[0];
-			const MM = Time[1];
+			const SetTrigger_1 = await this.getStateAsync('Setup.SetTrigger');
+			const SetTrigger = SetTrigger_1 ? SetTrigger_1.val: '0';
 
-			if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_2 !== 'undefined') {
+			const HH = time_t2arr[0];
+			const MM = time_t2arr[1];
+
+			const WDays = [SetSchedule];
+
+			const WDaysarr = [weekdays_t2arr];
+
+
+			if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_2 !== 'undefined' && SetTrigger == 2 && SetSchedule.length !== 0) {
 
 				this.mySchedule_2.cancel();
 
-				this.mySchedule_2 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
+				this.mySchedule_2= schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDays.toString().trim(), async () =>
 					this.setState('trigger_2.trigger_2', true, true) && this.log.info('Schedule 2 ausgelöst!')); +
-				this.setState('trigger_2.trigger_2_is_set', '' + HH + ':' + MM + ' -- ' + SetWeekdays, true);
+				this.setState('trigger_2.trigger_2_is_set', '' + HH + ':' + MM + ' -- ' + WDays, true) + this.log.info('next Schedule 2 -- ' + this.mySchedule_2.nextInvocation());
 
-			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_2 == 'undefined') {
+			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_2 == 'undefined' && SetTrigger == 2 && SetSchedule.length !== 0) {
 
-				this.mySchedule_2 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
+				this.mySchedule_2 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDays.toString().trim(), async () =>
 					this.setState('trigger_2.trigger_2', true, true) && this.log.info('Schedule 2 ausgelöst!')); +
-				(this.setState('trigger_2.trigger_2_is_set', '' + HH + ':' + MM + ' -- ' + SetWeekdays, true) );
+				this.setState('trigger_2.trigger_2_is_set', '' + HH + ':' + MM + ' -- ' + WDays, true);
 
-			} else if (HH < 0 || HH > 23 || MM < 0 || MM > 59) {
+
+
+			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_2 !== 'undefined' && SetTrigger !== 2 && weekdays_t2arr.length !== 0) {
+
+				this.mySchedule_2.cancel();
+
+				this.mySchedule_2 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDaysarr.toString().trim(), async () =>
+					this.setState('trigger_2.trigger_2', true, true) && this.log.info('Schedule 2 ausgelöst!')); +
+				this.setState('trigger_2.trigger_2_is_set', '' + HH + ':' + MM + ' -- ' + WDaysarr, true) + this.log.info('next Schedule 2 -- ' + this.mySchedule_2.nextInvocation());
+
+			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_2 == 'undefined' && SetTrigger !== 2 && weekdays_t2arr.length !== 0) {
+
+				this.mySchedule_2 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDaysarr.toString().trim(), async () =>
+					this.setState('trigger_2.trigger_2', true, true) && this.log.info('Schedule 2 ausgelöst!')); +
+				this.setState('trigger_2.trigger_2_is_set', '' + HH + ':' + MM + ' -- ' + WDaysarr, true);
+
+			} else if (SetSchedule.length == 0 || weekdays_t2arr.length == 0) {
+
+
+				this.log.error('Kein Wochentag gesetzt bei Schedule 1');
+				this.setState('trigger_2.trigger_2_Start', false, true);
+
+			}
+
+
+			else if (HH < 0 || HH > 23 || MM < 0 || MM > 59) {
 
 				this.log.error('Uhrzeit stimmt nicht! bei Schedule 2 -- ' + HH + ':' + MM);
 				this.setState('trigger_2.trigger_2_Start', false, true);
 
 			} else {
 
-				this.log.error('irgendwas stimmt nicht bei Schedule 2 -- Uhrzeit ' + Time);
+				this.log.error('irgendwas stimmt nicht bei Schedule 2 -- Uhrzeit ' + HH + ':' + MM);
 				this.setState('trigger_2.trigger_2_Start', false, true);
 
 			}
@@ -235,31 +318,64 @@ class TimeSwitchClock extends utils.Adapter {
 
 		this.Schedule_3 = async () => {
 
-			const HH = Time[0];
-			const MM = Time[1];
+			const SetTrigger_1 = await this.getStateAsync('Setup.SetTrigger');
+			const SetTrigger = SetTrigger_1 ? SetTrigger_1.val: '0';
 
-			if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_3 !== 'undefined') {
+			const HH = time_t3arr[0];
+			const MM = time_t3arr[1];
+
+			const WDays = [SetSchedule];
+
+			const WDaysarr = [weekdays_t3arr];
+
+
+			if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_3 !== 'undefined' && SetTrigger == 3 && SetSchedule.length !== 0) {
 
 				this.mySchedule_3.cancel();
 
-				this.mySchedule_3 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
+				this.mySchedule_3 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDays.toString().trim(), async () =>
 					this.setState('trigger_3.trigger_3', true, true) && this.log.info('Schedule 3 ausgelöst!')); +
-				this.setState('trigger_3.trigger_3_is_set', '' + HH + ':' + MM + ' -- ' + SetWeekdays, true);
+				this.setState('trigger_3.trigger_3_is_set', '' + HH + ':' + MM + ' -- ' + WDays, true) + this.log.info('next Schedule 3 -- ' + this.mySchedule_3.nextInvocation());
 
-			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_3 == 'undefined') {
+			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_3 == 'undefined' && SetTrigger == 3 && SetSchedule.length !== 0) {
 
-				this.mySchedule_3 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
-					this.setState('trigger_3.trigger_3', true, true) && this.log.info('Schedule 2 ausgelöst!')); +
-				(this.setState('trigger_3.trigger_3_is_set', '' + HH + ':' + MM + ' -- ' + SetWeekdays, true) );
+				this.mySchedule_3 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDays.toString().trim(), async () =>
+					this.setState('trigger_3.trigger_3', true, true) && this.log.info('Schedule 3 ausgelöst!')); +
+				this.setState('trigger_3.trigger_3_is_set', '' + HH + ':' + MM + ' -- ' + WDays, true);
 
-			} else if (HH < 0 || HH > 23 || MM < 0 || MM > 59) {
+
+
+			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_3 !== 'undefined' && SetTrigger !== 3 && weekdays_t3arr.length !== 0) {
+
+				this.mySchedule_3.cancel();
+
+				this.mySchedule_3 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDaysarr.toString().trim(), async () =>
+					this.setState('trigger_3.trigger_3', true, true) && this.log.info('Schedule 3 ausgelöst!')); +
+				this.setState('trigger_3.trigger_3_is_set', '' + HH + ':' + MM + ' -- ' + WDaysarr, true) + this.log.info('next Schedule 3 -- ' + this.mySchedule_3.nextInvocation());
+
+			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_3 == 'undefined' && SetTrigger !== 3 && weekdays_t3arr.length !== 0) {
+
+				this.mySchedule_3 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDaysarr.toString().trim(), async () =>
+					this.setState('trigger_3.trigger_3', true, true) && this.log.info('Schedule 3 ausgelöst!')); +
+				this.setState('trigger_3.trigger_3_is_set', '' + HH + ':' + MM + ' -- ' + WDaysarr, true);
+
+			} else if (SetSchedule.length == 0 || weekdays_t3arr.length == 0) {
+
+
+				this.log.error('Kein Wochentag gesetzt bei Schedule 3');
+				this.setState('trigger_3.trigger_3_Start', false, true);
+
+			}
+
+
+			else if (HH < 0 || HH > 23 || MM < 0 || MM > 59) {
 
 				this.log.error('Uhrzeit stimmt nicht! bei Schedule 3 -- ' + HH + ':' + MM);
 				this.setState('trigger_3.trigger_3_Start', false, true);
 
 			} else {
 
-				this.log.error('irgendwas stimmt nicht bei Schedule 3 -- Uhrzeit ' + Time);
+				this.log.error('irgendwas stimmt nicht bei Schedule 3 -- Uhrzeit ' + HH + ':' + MM);
 				this.setState('trigger_3.trigger_3_Start', false, true);
 
 			}
@@ -268,31 +384,64 @@ class TimeSwitchClock extends utils.Adapter {
 
 		this.Schedule_4 = async () => {
 
-			const HH = Time[0];
-			const MM = Time[1];
+			const SetTrigger_1 = await this.getStateAsync('Setup.SetTrigger');
+			const SetTrigger = SetTrigger_1 ? SetTrigger_1.val: '0';
 
-			if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_4 !== 'undefined') {
+			const HH = time_t4arr[0];
+			const MM = time_t4arr[1];
+
+			const WDays = [SetSchedule];
+
+			const WDaysarr = [weekdays_t4arr];
+
+
+			if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_4 !== 'undefined' && SetTrigger == 4 && SetSchedule.length !== 0) {
 
 				this.mySchedule_4.cancel();
 
-				this.mySchedule_4 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
+				this.mySchedule_4 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDays.toString().trim(), async () =>
 					this.setState('trigger_4.trigger_4', true, true) && this.log.info('Schedule 4 ausgelöst!')); +
-				this.setState('trigger_4.trigger_4_is_set', '' + HH + ':' + MM + ' -- ' + SetWeekdays, true);
+				this.setState('trigger_4.trigger_4_is_set', '' + HH + ':' + MM + ' -- ' + WDays, true) + this.log.info('next Schedule 4 -- ' + this.mySchedule_4.nextInvocation());
 
-			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_4 == 'undefined') {
+			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_4 == 'undefined' && SetTrigger == 4 && SetSchedule.length !== 0) {
 
-				this.mySchedule_4 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
+				this.mySchedule_4 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDays.toString().trim(), async () =>
 					this.setState('trigger_4.trigger_4', true, true) && this.log.info('Schedule 4 ausgelöst!')); +
-				(this.setState('trigger_4.trigger_4_is_set', '' + HH + ':' + MM + ' -- ' + SetWeekdays, true) );
+				this.setState('trigger_4.trigger_4_is_set', '' + HH + ':' + MM + ' -- ' + WDays, true);
 
-			} else if (HH < 0 || HH > 23 || MM < 0 || MM > 59) {
+
+
+			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_4 !== 'undefined' && SetTrigger !== 4 && weekdays_t4arr.length !== 0) {
+
+				this.mySchedule_4.cancel();
+
+				this.mySchedule_4 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDaysarr.toString().trim(), async () =>
+					this.setState('trigger_4.trigger_4', true, true) && this.log.info('Schedule 4 ausgelöst!')); +
+				this.setState('trigger_4.trigger_4_is_set', '' + HH + ':' + MM + ' -- ' + WDaysarr, true) + this.log.info('next Schedule 4 -- ' + this.mySchedule_4.nextInvocation());
+
+			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_4 == 'undefined' && SetTrigger !== 4 && weekdays_t4arr.length !== 0) {
+
+				this.mySchedule_4 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDaysarr.toString().trim(), async () =>
+					this.setState('trigger_4.trigger_4', true, true) && this.log.info('Schedule 4 ausgelöst!')); +
+				this.setState('trigger_4.trigger_4_is_set', '' + HH + ':' + MM + ' -- ' + WDaysarr, true);
+
+			} else if (SetSchedule.length == 0 || weekdays_t4arr.length == 0) {
+
+
+				this.log.error('Kein Wochentag gesetzt bei Schedule 4');
+				this.setState('trigger_4.trigger_4_Start', false, true);
+
+			}
+
+
+			else if (HH < 0 || HH > 23 || MM < 0 || MM > 59) {
 
 				this.log.error('Uhrzeit stimmt nicht! bei Schedule 4 -- ' + HH + ':' + MM);
 				this.setState('trigger_4.trigger_4_Start', false, true);
 
 			} else {
 
-				this.log.error('irgendwas stimmt nicht bei Schedule 4 -- Uhrzeit ' + Time);
+				this.log.error('irgendwas stimmt nicht bei Schedule 4 -- Uhrzeit ' + HH + ':' + MM);
 				this.setState('trigger_4.trigger_4_Start', false, true);
 
 			}
@@ -301,31 +450,64 @@ class TimeSwitchClock extends utils.Adapter {
 
 		this.Schedule_5 = async () => {
 
-			const HH = Time[0];
-			const MM = Time[1];
+			const SetTrigger_1 = await this.getStateAsync('Setup.SetTrigger');
+			const SetTrigger = SetTrigger_1 ? SetTrigger_1.val: '0';
 
-			if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_5 !== 'undefined') {
+			const HH = time_t5arr[0];
+			const MM = time_t5arr[1];
+
+			const WDays = [SetSchedule];
+
+			const WDaysarr = [weekdays_t5arr];
+
+
+			if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_5 !== 'undefined' && SetTrigger == 5 && SetSchedule.length !== 0) {
 
 				this.mySchedule_5.cancel();
 
-				this.mySchedule_5 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
+				this.mySchedule_5 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDays.toString().trim(), async () =>
 					this.setState('trigger_5.trigger_5', true, true) && this.log.info('Schedule 5 ausgelöst!')); +
-				this.setState('trigger_5.trigger_5_is_set', '' + HH + ':' + MM + ' -- ' + SetWeekdays, true);
+				this.setState('trigger_5.trigger_5_is_set', '' + HH + ':' + MM + ' -- ' + WDays, true) + this.log.info('next Schedule 5 -- ' + this.mySchedule_5.nextInvocation());
 
-			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_5 == 'undefined') {
+			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_5 == 'undefined' && SetTrigger == 5 && SetSchedule.length !== 0) {
 
-				this.mySchedule_5 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
+				this.mySchedule_5 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDays.toString().trim(), async () =>
 					this.setState('trigger_5.trigger_5', true, true) && this.log.info('Schedule 5 ausgelöst!')); +
-				(this.setState('trigger_5.trigger_5_is_set', '' + HH + ':' + MM + ' -- ' + SetWeekdays, true) );
+				this.setState('trigger_5.trigger_5_is_set', '' + HH + ':' + MM + ' -- ' + WDays, true);
 
-			} else if (HH < 0 || HH > 23 || MM < 0 || MM > 59) {
+
+
+			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_5 !== 'undefined' && SetTrigger !== 5 && weekdays_t5arr.length !== 0) {
+
+				this.mySchedule_5.cancel();
+
+				this.mySchedule_5 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDaysarr.toString().trim(), async () =>
+					this.setState('trigger_5.trigger_5', true, true) && this.log.info('Schedule 5 ausgelöst!')); +
+				this.setState('trigger_5.trigger_5_is_set', '' + HH + ':' + MM + ' -- ' + WDaysarr, true) + this.log.info('next Schedule 5 -- ' + this.mySchedule_5.nextInvocation());
+
+			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_5 == 'undefined' && SetTrigger !== 5 && weekdays_t5arr.length !== 0) {
+
+				this.mySchedule_5 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDaysarr.toString().trim(), async () =>
+					this.setState('trigger_5.trigger_5', true, true) && this.log.info('Schedule 5 ausgelöst!')); +
+				this.setState('trigger_5.trigger_5_is_set', '' + HH + ':' + MM + ' -- ' + WDaysarr, true);
+
+			} else if (SetSchedule.length == 0 || weekdays_t5arr.length == 0) {
+
+
+				this.log.error('Kein Wochentag gesetzt bei Schedule 5');
+				this.setState('trigger_5.trigger_5_Start', false, true);
+
+			}
+
+
+			else if (HH < 0 || HH > 23 || MM < 0 || MM > 59) {
 
 				this.log.error('Uhrzeit stimmt nicht! bei Schedule 5 -- ' + HH + ':' + MM);
 				this.setState('trigger_5.trigger_5_Start', false, true);
 
 			} else {
 
-				this.log.error('irgendwas stimmt nicht bei Schedule 5 -- Uhrzeit ' + Time);
+				this.log.error('irgendwas stimmt nicht bei Schedule 5 -- Uhrzeit ' + HH + ':' + MM);
 				this.setState('trigger_5.trigger_5_Start', false, true);
 
 			}
@@ -334,31 +516,64 @@ class TimeSwitchClock extends utils.Adapter {
 
 		this.Schedule_6 = async () => {
 
-			const HH = Time[0];
-			const MM = Time[1];
+			const SetTrigger_1 = await this.getStateAsync('Setup.SetTrigger');
+			const SetTrigger = SetTrigger_1 ? SetTrigger_1.val: '0';
 
-			if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_6 !== 'undefined') {
+			const HH = time_t6arr[0];
+			const MM = time_t6arr[1];
+
+			const WDays = [SetSchedule];
+
+			const WDaysarr = [weekdays_t6arr];
+
+
+			if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_6 !== 'undefined' && SetTrigger == 6 && SetSchedule.length !== 0) {
 
 				this.mySchedule_6.cancel();
 
-				this.mySchedule_6 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
+				this.mySchedule_6 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDays.toString().trim(), async () =>
 					this.setState('trigger_6.trigger_6', true, true) && this.log.info('Schedule 6 ausgelöst!')); +
-				this.setState('trigger_6.trigger_6_is_set', '' + HH + ':' + MM + ' -- ' + SetWeekdays, true);
+				this.setState('trigger_6.trigger_6_is_set', '' + HH + ':' + MM + ' -- ' + WDays, true) + this.log.info('next Schedule 6 -- ' + this.mySchedule_6.nextInvocation());
 
-			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_6 == 'undefined') {
+			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_6 == 'undefined' && SetTrigger == 6 && SetSchedule.length !== 0) {
 
-				this.mySchedule_6 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + SetSchedule.toString().trim(), async () =>
+				this.mySchedule_6 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDays.toString().trim(), async () =>
 					this.setState('trigger_6.trigger_6', true, true) && this.log.info('Schedule 6 ausgelöst!')); +
-				(this.setState('trigger_6.trigger_6_is_set', '' + HH + ':' + MM + ' -- ' + SetWeekdays, true) );
+				this.setState('trigger_6.trigger_6_is_set', '' + HH + ':' + MM + ' -- ' + WDays, true);
 
-			} else if (HH < 0 || HH > 23 || MM < 0 || MM > 59) {
+
+
+			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_6 !== 'undefined' && SetTrigger !== 6 && weekdays_t6arr.length !== 0) {
+
+				this.mySchedule_6.cancel();
+
+				this.mySchedule_6 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDaysarr.toString().trim(), async () =>
+					this.setState('trigger_6.trigger_6', true, true) && this.log.info('Schedule 6 ausgelöst!')); +
+				this.setState('trigger_6.trigger_6_is_set', '' + HH + ':' + MM + ' -- ' + WDaysarr, true) + this.log.info('next Schedule 6 -- ' + this.mySchedule_6.nextInvocation());
+
+			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_6 == 'undefined' && SetTrigger !== 6 && weekdays_t6arr.length !== 0) {
+
+				this.mySchedule_6 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDaysarr.toString().trim(), async () =>
+					this.setState('trigger_6.trigger_6', true, true) && this.log.info('Schedule 6 ausgelöst!')); +
+				this.setState('trigger_6.trigger_6_is_set', '' + HH + ':' + MM + ' -- ' + WDaysarr, true);
+
+			} else if (SetSchedule.length == 0 || weekdays_t6arr.length == 0) {
+
+
+				this.log.error('Kein Wochentag gesetzt bei Schedule 6');
+				this.setState('trigger_6.trigger_6_Start', false, true);
+
+			}
+
+
+			else if (HH < 0 || HH > 23 || MM < 0 || MM > 59) {
 
 				this.log.error('Uhrzeit stimmt nicht! bei Schedule 6 -- ' + HH + ':' + MM);
 				this.setState('trigger_6.trigger_6_Start', false, true);
 
 			} else {
 
-				this.log.error('irgendwas stimmt nicht bei Schedule 6 -- Uhrzeit ' + Time);
+				this.log.error('irgendwas stimmt nicht bei Schedule 6 -- Uhrzeit ' + HH + ':' + MM);
 				this.setState('trigger_6.trigger_6_Start', false, true);
 
 			}
@@ -370,8 +585,8 @@ class TimeSwitchClock extends utils.Adapter {
 		//Cancel Schedules
 		this.cancelSchedule_1 = async () => {
 
-			this.HH = Time[0];
-			this.MM = Time[1];
+			this.HH = time_t1arr[0];
+			this.MM = time_t1arr[1];
 
 			try {
 				if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59 && typeof this.mySchedule_1 !== 'undefined') {
@@ -552,7 +767,7 @@ class TimeSwitchClock extends utils.Adapter {
 			native: {},
 		});
 
-		this.setState('Setup.HH', '00', true);
+		//this.setState('Setup.HH', '00', true);
 
 		await this.setObjectNotExistsAsync('Setup.mm', {
 			type: 'state',
@@ -566,7 +781,7 @@ class TimeSwitchClock extends utils.Adapter {
 			native: {},
 		});
 
-		this.setState('Setup.mm', '00', true);
+		//this.setState('Setup.mm', '00', true);
 
 		await this.setObjectNotExistsAsync('Setup.SetTrigger', {
 			type: 'state',
@@ -1643,9 +1858,15 @@ class TimeSwitchClock extends utils.Adapter {
 		this.setState('Weekdays.Friday', false, true);
 		this.setState('Weekdays.Saturday', true, true);
 
-		//Datenpunkt trigger 1 auf false setzen
+		//Datenpunkt trigger 1 auf false setzen (Aulöser für Anktion wenn true)
 		this.setState('trigger_1.trigger_1', false, true);
+
+		//trigger 1 Start auf false setzten - wird also nicht Scheduled
 		this.setState('trigger_1.trigger_1_Start', false, true);
+
+		//Setup.SetTrigger auf 0 setzen - somit wird keine Uhrzeit oder Wochentag versehentlich verstellt
+		//wenn an Uhrzeit oder Wochentagen etwas geändert wird
+		this.setState('Setup.SetTrigger', '0', true);
 
 		//hier werden Datenpunkt Änderungen im Log angezeigt
 
@@ -1943,6 +2164,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				const searchSO = (element) => element == 0;
 				SetSchedule.splice(SetSchedule.findIndex(searchSO),1);
+
 			}
 
 			const killMO = SetWeekdays.indexOf('Monday');
@@ -2020,7 +2242,9 @@ class TimeSwitchClock extends utils.Adapter {
 
 					time_t1arr.splice(0,1, new_HH_1);
 
-					this.log.warn('hier ist die neue HH für SetTrigger = 1 -- ' + new_HH_1);
+					this.setState('trigger_1.t1_time', time_t1arr[0] + ':' + time_t1arr[1] , true);
+
+					//this.log.warn('hier ist die neue HH für SetTrigger = 1 -- ' + new_HH_1);
 
 				} else if (SetTrigger_now_1 == 2) {
 
@@ -2030,7 +2254,9 @@ class TimeSwitchClock extends utils.Adapter {
 
 					time_t2arr.splice(0,1, new_HH_1);
 
-					this.log.warn('hier ist die neue HH für SetTrigger = 2 -- ' + new_HH_1);
+					this.setState('trigger_2.t2_time', time_t2arr[0] + ':' + time_t2arr[1] , true);
+
+					//this.log.warn('hier ist die neue HH für SetTrigger = 2 -- ' + new_HH_1);
 				}
 
 
@@ -2045,9 +2271,21 @@ class TimeSwitchClock extends utils.Adapter {
 			if (mm_1) {
 
 				const SetTrigger_1 = await this.getStateAsync('Setup.SetTrigger');
-				const SetTrigger_now_1 = SetTrigger_1 ? SetTrigger_1.val: '0';
+				const SetTrigger = SetTrigger_1 ? SetTrigger_1.val: '0';
 
-				if (SetTrigger_now_1 == 1) {
+				if (SetTrigger == 1) {
+
+					const new_mm_1 = mm_1 ? mm_1.val: '00';
+
+					Time.splice(1,1, new_mm_1);
+
+					time_t1arr.splice(1,1, new_mm_1);
+
+					this.setState('trigger_1.t1_time', time_t1arr[0] + ':' + time_t1arr[1] , true);
+
+					//this.log.warn('hier ist die neue mm für SetTrigger = 1 -- ' + new_mm_1);
+
+				} else if (SetTrigger == 2) {
 
 					const new_mm_1 = mm_1 ? mm_1.val: '00';
 
@@ -2055,17 +2293,9 @@ class TimeSwitchClock extends utils.Adapter {
 
 					time_t2arr.splice(1,1, new_mm_1);
 
-					this.log.warn('hier ist die neue mm für SetTrigger = 1 -- ' + new_mm_1);
+					this.setState('trigger_2.t2_time', time_t2arr[0] + ':' + time_t2arr[1] , true);
 
-				} else if (SetTrigger_now_1 == 2) {
-
-					const new_mm_1 = mm_1 ? mm_1.val: '00';
-
-					Time.splice(1,1, new_mm_1);
-
-					time_t2arr.splice(1,1, new_mm_1);
-
-					this.log.warn('hier ist die neue mm für SetTrigger = 2 -- ' + new_mm_1);
+					//this.log.warn('hier ist die neue mm für SetTrigger = 2 -- ' + new_mm_1);
 				}
 
 				//const new_mm_1 = mm_1 ? mm_1.val: '00';
@@ -2078,23 +2308,6 @@ class TimeSwitchClock extends utils.Adapter {
 
 			}
 
-			/*gibt es nicht mehr
-			//Uhrzeit geändert:
-			const Uhrzeit_1 = await this.getStateAsync('Setup.Uhrzeit1');
-			if (Uhrzeit_1) {
-
-				const status_Uhrzeit_1 = Uhrzeit_1.val;
-				const [HH_1, MM_1] = status_Uhrzeit_1.split(':');
-
-				Uhrzeit.splice(0,1, HH_1);
-				Uhrzeit.splice(1,1, MM_1);
-
-			} else {
-
-				this.log.error('Uhrzeit1 Error');
-
-			}
-			*/
 
 			//trigger_1_Start Datenpunkt wenn false - Schedule canceln - SetSchedule = SetWeekdays Array mit Zahlen -
 			//SetTrigger ist die Auswahl welcher Trigger mit mit Uhrzeit und Wochentagen gefüttert werden soll
@@ -2107,18 +2320,28 @@ class TimeSwitchClock extends utils.Adapter {
 				const StatusTriggerStart = triggerStart_1.val;
 
 				const SetTrigger_1 = await this.getStateAsync('Setup.SetTrigger');
-				const SetTrigger_now_1 = SetTrigger_1 ? SetTrigger_1.val: '0';
+				const SetTrigger = SetTrigger_1 ? SetTrigger_1.val: '0';
 
-				const triggerStartAction_true = async () => {
-					if (StatusTriggerStart == true && SetSchedule.length !== 0 && SetTrigger_now_1 == 1) {
+				const triggerStartAction_true_1 = async () => {
+
+
+
+					if (StatusTriggerStart == true && SetTrigger == 1) {
+
+						weekdays_t1arr = SetSchedule;
+
+						this.setState('trigger_1.t1_weekdays', JSON.stringify(SetSchedule.sort()), true);
+
+						const hh_1 = time_t1arr[0];
+						const mm_1 = time_t1arr[1];
+
+						this.setState('trigger_1.trigger_1_is_set',  hh_1 + ':' + mm_1 + ' -- ' + SetSchedule.sort(), true);
 
 						this.Schedule_1();
-						this.log.info('next Schedule 1 - ' + this.mySchedule_1.nextInvocation());
 
-						this.setState('trigger_1.t1_time', this.HH + ':' + this.MM, true);
-						this.setState('trigger_1.t1_weekdays', SetSchedule.sort(), true);
 
-					} else if (StatusTriggerStart == true && SetTrigger_now_1 !== 1) {
+
+					} else if (StatusTriggerStart == true && SetTrigger !== 1) {
 
 						const time_1 = await this.getStateAsync('trigger_1.t1_time');
 						const read_time_1 = time_1.val;
@@ -2131,63 +2354,13 @@ class TimeSwitchClock extends utils.Adapter {
 						time_t1arr.splice(1,1, mm_1);
 
 						const weekdays_t1 = await this.getStateAsync('trigger_1.t1_weekdays');
-						const read_weekdays_t1 = weekdays_t1.val;
+						const weekdays_t1_val = JSON.parse(weekdays_t1.val);
 
-						this.log.warn('hh_1 -- ' + hh_1);
-						this.log.warn('mm_1 -- ' + mm_1);
+						weekdays_t1arr = weekdays_t1_val;
 
-						this.log.warn('Zeit & Wochentage -- ' + time_t1arr + ' -- ' + read_weekdays_t1);
+						this.setState('trigger_1.trigger_1_is_set', hh_1 + ':' + mm_1 + ' -- ' + weekdays_t1arr, true);
 
-						this.setState('trigger_1.trigger_1_is_set', '' + hh_1 + ':' + mm_1 + ' -- ' + read_weekdays_t1, true);
-
-
-						this.log.error('Hier muss das Schedule für 1 noch hin!!!');
-
-						/*
-						this.Schedule_11 = async () => {
-
-							const HH = time_t1arr[0];
-							const MM = time_t1arr[1];
-
-							if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_1 !== 'undefined') {
-
-								this.mySchedule_1.cancel();
-
-								this.mySchedule_1 = schedule.scheduleJob(MM + ' ' + HH + ' ' + '*' + ' ' + '*' + ' ' + read_weekdays_t1, async () =>
-									this.setState('trigger_1.trigger_1', true, true) && this.log.info('Schedule 1 ausgelöst!')); +
-								this.setState('trigger_1.trigger_1_is_set', '' + HH + ':' + MM + ' -- ' + read_weekdays_t1, true) + this.log.error('neues Schedule - HH und MM -- ' + HH + ':' + MM + ' -- ' + read_weekdays_t1);
-
-							} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_1 == 'undefined') {
-
-								this.mySchedule_1 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + read_weekdays_t1.toString().trim(), async () =>
-									this.setState('trigger_1.trigger_1', true, true) && this.log.info('Schedule 1 ausgelöst!')); +
-								this.setState('trigger_1.trigger_1_is_set', '' + HH + ':' + MM + ' -- ' + read_weekdays_t1, true) + this.log.error('neues Schedule -- HH und MM -- ' + HH + ':' + MM + ' -- ' + read_weekdays_t1);
-
-							} else if (HH < 0 || HH > 23 || MM < 0 || MM > 59) {
-
-								this.log.error('Uhrzeit stimmt nicht! bei Schedule 1 -- ' + HH + ':' + MM);
-								this.setState('trigger_1.trigger_1_Start', false, true);
-
-							} else {
-
-								this.log.error('irgendwas stimmt nicht bei Schedule 1 -- Uhrzeit ' + Time);
-								this.setState('trigger_1.trigger_1_Start', false, true);
-
-							}
-						};
-
-						this.Schedule_11();
-						*/
-
-
-
-
-
-
-
-
-
-
+						this.Schedule_1();
 
 
 
@@ -2195,17 +2368,19 @@ class TimeSwitchClock extends utils.Adapter {
 
 						this.cancelSchedule_1();
 						this.setState('trigger_1.trigger_1_is_set', 'not scheduled', true);
+						weekdays_t1arr.splice(0, weekdays_t1arr.length);
 
 					}};
 
 
-				triggerStartAction_true();
+				triggerStartAction_true_1();
 
 			} else {
 
 				//this.log.error('datenpunkte trigger_2 existieren NICHT');
 
 			}
+
 
 
 			//trigger_2_Start Datenpunkt wenn false - Schedule canceln - SetSchedule = Weekdays Array mit Zahlen -
@@ -2216,70 +2391,70 @@ class TimeSwitchClock extends utils.Adapter {
 			if (trigger_2Start_test) {
 
 				const triggerStart_2 = await this.getStateAsync('trigger_2.trigger_2_Start');
-				const StatusTriggerStart2 = triggerStart_2.val;
+				const StatusTriggerStart = triggerStart_2.val;
 
-				const SetTrigger_2 = await this.getStateAsync('Setup.SetTrigger');
-				const SetTrigger_now_2 = SetTrigger_2.val;
+				const SetTrigger_1 = await this.getStateAsync('Setup.SetTrigger');
+				const SetTrigger = SetTrigger_1 ? SetTrigger_1.val: '0';
 
-				const triggerStartAction_2_true = async () => {
-					if (StatusTriggerStart2 == true && SetSchedule.length !== 0 && SetTrigger_now_2 == 2) {
+				const triggerStartAction_true_2 = async () => {
+
+
+
+					if (StatusTriggerStart == true && SetTrigger == 2) {
+
+						weekdays_t2arr = SetSchedule;
+
+						this.setState('trigger_2.t2_weekdays', JSON.stringify(SetSchedule.sort()), true);
+
+						const hh_1 = time_t2arr[0];
+						const mm_1 = time_t2arr[1];
+
+						this.setState('trigger_2.trigger_2_is_set',  hh_1 + ':' + mm_1 + ' -- ' + SetSchedule.sort(), true);
 
 						this.Schedule_2();
-						this.log.info('next Schedule 2 - ' + this.mySchedule_2.nextInvocation());
 
-						this.setState('trigger_2.t2_time', this.HH + ':' + this.MM, true);
-						this.setState('trigger_2.t2_weekdays', SetSchedule.sort(), true);
 
-					} else if (StatusTriggerStart2 == true && SetTrigger_now_2 !== 2) {
+
+					} else if (StatusTriggerStart == true && SetTrigger !== 2) {
 
 						const time_2 = await this.getStateAsync('trigger_2.t2_time');
-						const read_time_2 = time_2 ? time_2.val: '00:00';
+						const read_time_2 = time_2.val;
 
 						const [hh, mm] = read_time_2.split(':');
-						const hh_2 = hh ? hh: 'not';
-						const mm_2 = mm ? mm: 'set';
+						const hh_1 = hh ? hh: 'not';
+						const mm_1 = mm ? mm: 'set';
 
-						time_t2arr.splice(0,1, hh_2);
-						time_t2arr.splice(1,1, mm_2);
+						time_t2arr.splice(0,1, hh_1);
+						time_t2arr.splice(1,1, mm_1);
 
 						const weekdays_t2 = await this.getStateAsync('trigger_2.t2_weekdays');
-						const read_weekdays_t2 = weekdays_t2 ? weekdays_t2.val:'0';
+						const weekdays_t2_val = JSON.parse(weekdays_t2.val);
 
-						this.log.warn('hh_2 -- ' + hh_2);
-						this.log.warn('mm_2 -- ' + mm_2);
+						weekdays_t2arr = weekdays_t2_val;
 
-						this.log.warn('Zeit & Wochentage -- t2 -- ' + time_t2arr + ' -- ' + read_weekdays_t2);
+						this.setState('trigger_2.trigger_2_is_set', hh_1 + ':' + mm_1 + ' -- ' + weekdays_t2arr, true);
 
-						this.setState('trigger_2.trigger_2_is_set', '' + hh_2 + ':' + mm_2 + ' -- ' + read_weekdays_t2, true);
-
-
-						this.log.error('Hier muss das Schedule für 2 noch hin!!!');
-
-
-					}
+						this.Schedule_2();
 
 
 
-					/*else if (StatusTriggerStart2 == true && SetSchedule.length == 0 && SetTrigger_now_2 == 2) {
-
-						this.log.error('kein Wochentag gesetzt in Trigger 2!');
-						this.setState('trigger_2.trigger_2_is_set', 'not scheduled', true);
-						this.cancelSchedule_2();
-
-					} */ else if (StatusTriggerStart2 == false) {
+					} else if (StatusTriggerStart == false) {
 
 						this.cancelSchedule_2();
 						this.setState('trigger_2.trigger_2_is_set', 'not scheduled', true);
+						weekdays_t2arr.splice(0, weekdays_t2arr.length);
 
 					}};
 
-				triggerStartAction_2_true();
+
+				triggerStartAction_true_2();
 
 			} else {
 
 				//this.log.error('datenpunkte trigger_2 existieren NICHT');
 
 			}
+
 
 
 			//trigger_3_Start Datenpunkt wenn false - Schedule canceln - SetSchedule = Weekdays Array mit Zahlen -
@@ -2290,37 +2465,70 @@ class TimeSwitchClock extends utils.Adapter {
 			if (trigger_3Start_test) {
 
 				const triggerStart_3 = await this.getStateAsync('trigger_3.trigger_3_Start');
-				const StatusTriggerStart3 = triggerStart_3.val;
+				const StatusTriggerStart = triggerStart_3.val;
 
-				const SetTrigger_3 = await this.getStateAsync('Setup.SetTrigger');
-				const SetTrigger_now_3 = SetTrigger_3.val;
+				const SetTrigger_1 = await this.getStateAsync('Setup.SetTrigger');
+				const SetTrigger = SetTrigger_1 ? SetTrigger_1.val: '0';
 
-				const triggerStartAction_3_true = async () => {
-					if (StatusTriggerStart3 == true && SetSchedule.length !== 0 && SetTrigger_now_3 == 3) {
+				const triggerStartAction_true_3 = async () => {
+
+
+
+					if (StatusTriggerStart == true && SetTrigger == 3) {
+
+						weekdays_t3arr = SetSchedule;
+
+						this.setState('trigger_3.t3_weekdays', JSON.stringify(SetSchedule.sort()), true);
+
+						const hh_1 = time_t3arr[0];
+						const mm_1 = time_t3arr[1];
+
+						this.setState('trigger_3.trigger_3_is_set',  hh_1 + ':' + mm_1 + ' -- ' + SetSchedule.sort(), true);
 
 						this.Schedule_3();
-						this.log.info('next Schedule 3 - ' + this.mySchedule_3.nextInvocation());
 
-					} else if (StatusTriggerStart3 == true && SetSchedule.length == 0 && SetTrigger_now_3 == 3) {
 
-						this.log.error('kein Wochentag gesetzt in Trigger 3!');
-						this.setState('trigger_3.trigger_3_is_set', 'not scheduled', true);
+
+					} else if (StatusTriggerStart == true && SetTrigger !== 3) {
+
+						const time_3 = await this.getStateAsync('trigger_3.t3_time');
+						const read_time_3 = time_3.val;
+
+						const [hh, mm] = read_time_3.split(':');
+						const hh_1 = hh ? hh: 'not';
+						const mm_1 = mm ? mm: 'set';
+
+						time_t3arr.splice(0,1, hh_1);
+						time_t3arr.splice(1,1, mm_1);
+
+						const weekdays_t3 = await this.getStateAsync('trigger_3.t3_weekdays');
+						const weekdays_t3_val = JSON.parse(weekdays_t3.val);
+
+						weekdays_t3arr = weekdays_t3_val;
+
+						this.setState('trigger_3.trigger_3_is_set', hh_1 + ':' + mm_1 + ' -- ' + weekdays_t3arr, true);
+
+						this.Schedule_3();
+
+
+
+					} else if (StatusTriggerStart == false) {
+
 						this.cancelSchedule_3();
-
-					} else if (StatusTriggerStart3 == false) {
-
-						this.cancelSchedule_3();
 						this.setState('trigger_3.trigger_3_is_set', 'not scheduled', true);
+						weekdays_t3arr.splice(0, weekdays_t3arr.length);
 
 					}};
 
-				triggerStartAction_3_true();
+
+				triggerStartAction_true_3();
 
 			} else {
 
-				//this.log.error('datenpunkte trigger_3 existieren NICHT');
+				//this.log.error('datenpunkte trigger_2 existieren NICHT');
 
 			}
+
 
 
 			//trigger_4_Start Datenpunkt wenn false - Schedule canceln - SetSchedule = Weekdays Array mit Zahlen -
@@ -2330,41 +2538,68 @@ class TimeSwitchClock extends utils.Adapter {
 
 			if (trigger_4Start_test) {
 
-				//this.log.error('datenpunkte trigger_4 existieren alles ok!');
-
 				const triggerStart_4 = await this.getStateAsync('trigger_4.trigger_4_Start');
-				const StatusTriggerStart4 = triggerStart_4.val;
+				const StatusTriggerStart = triggerStart_4.val;
 
-				const SetTrigger_4 = await this.getStateAsync('Setup.SetTrigger');
-				const SetTrigger_now_4 = SetTrigger_4.val;
+				const SetTrigger_1 = await this.getStateAsync('Setup.SetTrigger');
+				const SetTrigger = SetTrigger_1 ? SetTrigger_1.val: '0';
 
-				const triggerStartAction_4_true = async () => {
+				const triggerStartAction_true_4 = async () => {
 
-					if (StatusTriggerStart4 == true && SetSchedule.length !== 0 && SetTrigger_now_4 == 4) {
+
+
+					if (StatusTriggerStart == true && SetTrigger == 4) {
+
+						weekdays_t4arr = SetSchedule;
+
+						this.setState('trigger_4.t4_weekdays', JSON.stringify(SetSchedule.sort()), true);
+
+						const hh_1 = time_t4arr[0];
+						const mm_1 = time_t4arr[1];
+
+						this.setState('trigger_4.trigger_4_is_set',  hh_1 + ':' + mm_1 + ' -- ' + SetSchedule.sort(), true);
 
 						this.Schedule_4();
-						this.log.info('next Schedule 4 - ' + this.mySchedule_4.nextInvocation());
 
-					} else if (StatusTriggerStart4 == true && SetSchedule.length == 0 && SetTrigger_now_4 == 4) {
 
-						this.log.error('kein Wochentag gesetzt in Trigger 4!');
-						this.setState('trigger_4.trigger_4_is_set', 'not scheduled', true);
+
+					} else if (StatusTriggerStart == true && SetTrigger !== 4) {
+
+						const time_4 = await this.getStateAsync('trigger_4.t4_time');
+						const read_time_4 = time_4.val;
+
+						const [hh, mm] = read_time_4.split(':');
+						const hh_1 = hh ? hh: 'not';
+						const mm_1 = mm ? mm: 'set';
+
+						time_t4arr.splice(0,1, hh_1);
+						time_t4arr.splice(1,1, mm_1);
+
+						const weekdays_t4 = await this.getStateAsync('trigger_4.t4_weekdays');
+						const weekdays_t4_val = JSON.parse(weekdays_t4.val);
+
+						weekdays_t4arr = weekdays_t4_val;
+
+						this.setState('trigger_4.trigger_4_is_set', hh_1 + ':' + mm_1 + ' -- ' + weekdays_t4arr, true);
+
+						this.Schedule_4();
+
+
+
+					} else if (StatusTriggerStart == false) {
+
 						this.cancelSchedule_4();
-
-					} else if (StatusTriggerStart4 == false) {
-
-						this.cancelSchedule_4();
 						this.setState('trigger_4.trigger_4_is_set', 'not scheduled', true);
+						weekdays_t4arr.splice(0, weekdays_t4arr.length);
 
-					}
+					}};
 
-				};
 
-				triggerStartAction_4_true();
+				triggerStartAction_true_4();
 
 			} else {
 
-				//this.log.error('datenpunkte trigger_4 existieren NICHT');
+				//this.log.error('datenpunkte trigger_2 existieren NICHT');
 
 			}
 
@@ -2378,40 +2613,70 @@ class TimeSwitchClock extends utils.Adapter {
 			if (trigger_5Start_test) {
 
 				const triggerStart_5 = await this.getStateAsync('trigger_5.trigger_5_Start');
-				const StatusTriggerStart5 = triggerStart_5.val;
+				const StatusTriggerStart = triggerStart_5.val;
 
-				const SetTrigger_5 = await this.getStateAsync('Setup.SetTrigger');
-				const SetTrigger_now_5 = SetTrigger_5.val;
+				const SetTrigger_1 = await this.getStateAsync('Setup.SetTrigger');
+				const SetTrigger = SetTrigger_1 ? SetTrigger_1.val: '0';
 
-				const triggerStartAction_5_true = async () => {
+				const triggerStartAction_true_5 = async () => {
 
-					if (StatusTriggerStart5 == true && SetSchedule.length !== 0 && SetTrigger_now_5 == 5) {
+
+
+					if (StatusTriggerStart == true && SetTrigger == 5) {
+
+						weekdays_t5arr = SetSchedule;
+
+						this.setState('trigger_5.t5_weekdays', JSON.stringify(SetSchedule.sort()), true);
+
+						const hh_1 = time_t5arr[0];
+						const mm_1 = time_t5arr[1];
+
+						this.setState('trigger_5.trigger_5_is_set',  hh_1 + ':' + mm_1 + ' -- ' + SetSchedule.sort(), true);
 
 						this.Schedule_5();
-						this.log.info('next Schedule 5 - ' + this.mySchedule_5.nextInvocation());
 
-					} else if (StatusTriggerStart5 == true && SetSchedule.length == 0 && SetTrigger_now_5 == 5) {
 
-						this.log.error('kein Wochentag gesetzt in Trigger 5!');
-						this.setState('trigger_5.trigger_5_is_set', 'not scheduled', true);
+
+					} else if (StatusTriggerStart == true && SetTrigger !== 5) {
+
+						const time_5 = await this.getStateAsync('trigger_5.t5_time');
+						const read_time_5 = time_5.val;
+
+						const [hh, mm] = read_time_5.split(':');
+						const hh_1 = hh ? hh: 'not';
+						const mm_1 = mm ? mm: 'set';
+
+						time_t5arr.splice(0,1, hh_1);
+						time_t5arr.splice(1,1, mm_1);
+
+						const weekdays_t5 = await this.getStateAsync('trigger_5.t5_weekdays');
+						const weekdays_t5_val = JSON.parse(weekdays_t5.val);
+
+						weekdays_t5arr = weekdays_t5_val;
+
+						this.setState('trigger_5.trigger_5_is_set', hh_1 + ':' + mm_1 + ' -- ' + weekdays_t5arr, true);
+
+						this.Schedule_5();
+
+
+
+					} else if (StatusTriggerStart == false) {
+
 						this.cancelSchedule_5();
-
-					} else if (StatusTriggerStart5 == false) {
-
-						this.cancelSchedule_5();
 						this.setState('trigger_5.trigger_5_is_set', 'not scheduled', true);
+						weekdays_t5arr.splice(0, weekdays_t5arr.length);
 
-					}
+					}};
 
-				};
 
-				triggerStartAction_5_true();
+				triggerStartAction_true_5();
 
 			} else {
 
-				//this.log.error('datenpunkte trigger_5 existieren NICHT');
+				//this.log.error('datenpunkte trigger_2 existieren NICHT');
 
 			}
+
 
 
 			//trigger_6_Start Datenpunkt wenn false - Schedule canceln - SetSchedule = Weekdays Array mit Zahlen -
@@ -2422,40 +2687,70 @@ class TimeSwitchClock extends utils.Adapter {
 			if (trigger_6Start_test) {
 
 				const triggerStart_6 = await this.getStateAsync('trigger_6.trigger_6_Start');
-				const StatusTriggerStart6 = triggerStart_6.val;
+				const StatusTriggerStart = triggerStart_6.val;
 
-				const SetTrigger_6 = await this.getStateAsync('Setup.SetTrigger');
-				const SetTrigger_now_6 = SetTrigger_6.val;
+				const SetTrigger_1 = await this.getStateAsync('Setup.SetTrigger');
+				const SetTrigger = SetTrigger_1 ? SetTrigger_1.val: '0';
 
-				const triggerStartAction_6_true = async () => {
+				const triggerStartAction_true_6 = async () => {
 
-					if (StatusTriggerStart6 == true && SetSchedule.length !== 0 && SetTrigger_now_6 == 6) {
+
+
+					if (StatusTriggerStart == true && SetTrigger == 6) {
+
+						weekdays_t6arr = SetSchedule;
+
+						this.setState('trigger_6.t6_weekdays', JSON.stringify(SetSchedule.sort()), true);
+
+						const hh_1 = time_t6arr[0];
+						const mm_1 = time_t6arr[1];
+
+						this.setState('trigger_6.trigger_6_is_set',  hh_1 + ':' + mm_1 + ' -- ' + SetSchedule.sort(), true);
 
 						this.Schedule_6();
-						this.log.info('next Schedule 6 - ' + this.mySchedule_6.nextInvocation());
 
-					} else if (StatusTriggerStart6 == true && SetSchedule.length == 0 && SetTrigger_now_6 == 6) {
 
-						this.log.error('kein Wochentag gesetzt in Trigger 6!');
-						this.setState('trigger_6.trigger_6_is_set', 'not scheduled', true);
+
+					} else if (StatusTriggerStart == true && SetTrigger !== 6) {
+
+						const time_6 = await this.getStateAsync('trigger_6.t6_time');
+						const read_time_6 = time_6.val;
+
+						const [hh, mm] = read_time_6.split(':');
+						const hh_1 = hh ? hh: 'not';
+						const mm_1 = mm ? mm: 'set';
+
+						time_t6arr.splice(0,1, hh_1);
+						time_t6arr.splice(1,1, mm_1);
+
+						const weekdays_t6 = await this.getStateAsync('trigger_6.t6_weekdays');
+						const weekdays_t6_val = JSON.parse(weekdays_t6.val);
+
+						weekdays_t6arr = weekdays_t6_val;
+
+						this.setState('trigger_6.trigger_6_is_set', hh_1 + ':' + mm_1 + ' -- ' + weekdays_t6arr, true);
+
+						this.Schedule_6();
+
+
+
+					} else if (StatusTriggerStart == false) {
+
 						this.cancelSchedule_6();
-
-					} else if (StatusTriggerStart6 == false) {
-
-						this.cancelSchedule_6();
 						this.setState('trigger_6.trigger_6_is_set', 'not scheduled', true);
+						weekdays_t6arr.splice(0, weekdays_t6arr.length);
 
-					}
+					}};
 
-				};
 
-				triggerStartAction_6_true();
+				triggerStartAction_true_6();
 
 			} else {
 
-				//this.log.error('datenpunkte trigger_6 existieren NICHT');
+				//this.log.error('datenpunkte trigger_2 existieren NICHT');
 
 			}
+
 
 
 			//trigger_1 Datenpunkt wenn true - wieder auf false setzen - weil nur als Auslöser gedacht für z.B. Blockly
