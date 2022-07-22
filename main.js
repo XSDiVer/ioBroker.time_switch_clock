@@ -2817,24 +2817,31 @@ class TimeSwitchClock extends utils.Adapter {
 
 					} else if (StatusTriggerStart == true && SetTrigger !== 1) {
 
-						const time_1 = await this.getStateAsync('trigger_1.t1_time');
-						const read_time_1 = time_1.val;
+						try {
+							const time_1 = await this.getStateAsync('trigger_1.t1_time');
+							const read_time_1 = time_1.val;
 
-						const [hh, mm] = read_time_1.split(':');
-						const hh_1 = hh ? hh: 'not';
-						const mm_1 = mm ? mm: 'set';
+							const [hh, mm] = read_time_1.split(':');
+							const hh_1 = hh ? hh: 'not';
+							const mm_1 = mm ? mm: 'set';
 
-						time_t1arr.splice(0,1, hh_1);
-						time_t1arr.splice(1,1, mm_1);
+							time_t1arr.splice(0,1, hh_1);
+							time_t1arr.splice(1,1, mm_1);
 
-						const weekdays_t1 = await this.getStateAsync('trigger_1.t1_weekdays');
-						const weekdays_t1_val = JSON.parse(weekdays_t1.val);
+							const weekdays_t1 = await this.getStateAsync('trigger_1.t1_weekdays');
+							const weekdays_t1_val = JSON.parse(weekdays_t1.val);
 
-						weekdays_t1arr = weekdays_t1_val;
+							weekdays_t1arr = weekdays_t1_val;
 
-						this.setState('trigger_1.trigger_1_is_set', hh_1 + ':' + mm_1 + ' -- ' + weekdays_t1arr, true);
+							this.setState('trigger_1.trigger_1_is_set', hh_1 + ':' + mm_1 + ' -- ' + weekdays_t1arr, true);
 
-						this.Schedule_1();
+							this.Schedule_1();
+
+						} catch (e1) {
+
+							this.log.error('Check the time of Schedule 1! -- ' + e1);
+
+						}
 
 
 
@@ -2891,25 +2898,33 @@ class TimeSwitchClock extends utils.Adapter {
 
 					} else if (StatusTriggerStart == true && SetTrigger !== 2) {
 
-						const time_2 = await this.getStateAsync('trigger_2.t2_time');
-						const read_time_2 = time_2.val;
+						try {
+							const time_2 = await this.getStateAsync('trigger_2.t2_time');
+							const read_time_2 = time_2.val;
 
-						const [hh, mm] = read_time_2.split(':');
-						const hh_1 = hh ? hh: 'not';
-						const mm_1 = mm ? mm: 'set';
+							const [hh, mm] = read_time_2.split(':');
+							const hh_1 = hh ? hh: 'not';
+							const mm_1 = mm ? mm: 'set';
 
-						time_t2arr.splice(0,1, hh_1);
-						time_t2arr.splice(1,1, mm_1);
+							time_t2arr.splice(0,1, hh_1);
+							time_t2arr.splice(1,1, mm_1);
 
-						const weekdays_t2 = await this.getStateAsync('trigger_2.t2_weekdays');
-						const weekdays_t2_val = JSON.parse(weekdays_t2.val);
+							const weekdays_t2 = await this.getStateAsync('trigger_2.t2_weekdays');
+							const weekdays_t2_val = JSON.parse(weekdays_t2.val);
 
-						weekdays_t2arr = weekdays_t2_val;
+							weekdays_t2arr = weekdays_t2_val;
 
-						this.setState('trigger_2.trigger_2_is_set', hh_1 + ':' + mm_1 + ' -- ' + weekdays_t2arr, true);
+							this.setState('trigger_2.trigger_2_is_set', hh_1 + ':' + mm_1 + ' -- ' + weekdays_t2arr, true);
 
-						this.Schedule_2();
+							this.Schedule_2();
 
+						} catch (e2) {
+
+							this.log.error('Check the time of Schedule 2! -- ' + e2);
+
+						}
+
+ 
 
 
 					} else if (StatusTriggerStart == false) {
@@ -2965,25 +2980,31 @@ class TimeSwitchClock extends utils.Adapter {
 
 					} else if (StatusTriggerStart == true && SetTrigger !== 3) {
 
-						const time_3 = await this.getStateAsync('trigger_3.t3_time');
-						const read_time_3 = time_3.val;
+						try {
+							const time_3 = await this.getStateAsync('trigger_3.t3_time');
+							const read_time_3 = time_3.val;
 
-						const [hh, mm] = read_time_3.split(':');
-						const hh_1 = hh ? hh: 'not';
-						const mm_1 = mm ? mm: 'set';
+							const [hh, mm] = read_time_3.split(':');
+							const hh_1 = hh ? hh: 'not';
+							const mm_1 = mm ? mm: 'set';
 
-						time_t3arr.splice(0,1, hh_1);
-						time_t3arr.splice(1,1, mm_1);
+							time_t3arr.splice(0,1, hh_1);
+							time_t3arr.splice(1,1, mm_1);
 
-						const weekdays_t3 = await this.getStateAsync('trigger_3.t3_weekdays');
-						const weekdays_t3_val = JSON.parse(weekdays_t3.val);
+							const weekdays_t3 = await this.getStateAsync('trigger_3.t3_weekdays');
+							const weekdays_t3_val = JSON.parse(weekdays_t3.val);
 
-						weekdays_t3arr = weekdays_t3_val;
+							weekdays_t3arr = weekdays_t3_val;
 
-						this.setState('trigger_3.trigger_3_is_set', hh_1 + ':' + mm_1 + ' -- ' + weekdays_t3arr, true);
+							this.setState('trigger_3.trigger_3_is_set', hh_1 + ':' + mm_1 + ' -- ' + weekdays_t3arr, true);
 
-						this.Schedule_3();
+							this.Schedule_3();
 
+						} catch (e3) {
+
+							this.log.error('Check the time of Schedule 3! -- ' + e3);
+
+						}
 
 
 					} else if (StatusTriggerStart == false) {
@@ -3039,24 +3060,31 @@ class TimeSwitchClock extends utils.Adapter {
 
 					} else if (StatusTriggerStart == true && SetTrigger !== 4) {
 
-						const time_4 = await this.getStateAsync('trigger_4.t4_time');
-						const read_time_4 = time_4.val;
+						try {
+							const time_4 = await this.getStateAsync('trigger_4.t4_time');
+							const read_time_4 = time_4.val;
 
-						const [hh, mm] = read_time_4.split(':');
-						const hh_1 = hh ? hh: 'not';
-						const mm_1 = mm ? mm: 'set';
+							const [hh, mm] = read_time_4.split(':');
+							const hh_1 = hh ? hh: 'not';
+							const mm_1 = mm ? mm: 'set';
 
-						time_t4arr.splice(0,1, hh_1);
-						time_t4arr.splice(1,1, mm_1);
+							time_t4arr.splice(0,1, hh_1);
+							time_t4arr.splice(1,1, mm_1);
 
-						const weekdays_t4 = await this.getStateAsync('trigger_4.t4_weekdays');
-						const weekdays_t4_val = JSON.parse(weekdays_t4.val);
+							const weekdays_t4 = await this.getStateAsync('trigger_4.t4_weekdays');
+							const weekdays_t4_val = JSON.parse(weekdays_t4.val);
 
-						weekdays_t4arr = weekdays_t4_val;
+							weekdays_t4arr = weekdays_t4_val;
 
-						this.setState('trigger_4.trigger_4_is_set', hh_1 + ':' + mm_1 + ' -- ' + weekdays_t4arr, true);
+							this.setState('trigger_4.trigger_4_is_set', hh_1 + ':' + mm_1 + ' -- ' + weekdays_t4arr, true);
 
-						this.Schedule_4();
+							this.Schedule_4();
+
+						} catch (e4) {
+
+							this.log.error('Check the time of Schedule 4! -- ' + e4);
+
+						}
 
 
 
@@ -3113,24 +3141,31 @@ class TimeSwitchClock extends utils.Adapter {
 
 					} else if (StatusTriggerStart == true && SetTrigger !== 5) {
 
-						const time_5 = await this.getStateAsync('trigger_5.t5_time');
-						const read_time_5 = time_5.val;
+						try {
+							const time_5 = await this.getStateAsync('trigger_5.t5_time');
+							const read_time_5 = time_5.val;
 
-						const [hh, mm] = read_time_5.split(':');
-						const hh_1 = hh ? hh: 'not';
-						const mm_1 = mm ? mm: 'set';
+							const [hh, mm] = read_time_5.split(':');
+							const hh_1 = hh ? hh: 'not';
+							const mm_1 = mm ? mm: 'set';
 
-						time_t5arr.splice(0,1, hh_1);
-						time_t5arr.splice(1,1, mm_1);
+							time_t5arr.splice(0,1, hh_1);
+							time_t5arr.splice(1,1, mm_1);
 
-						const weekdays_t5 = await this.getStateAsync('trigger_5.t5_weekdays');
-						const weekdays_t5_val = JSON.parse(weekdays_t5.val);
+							const weekdays_t5 = await this.getStateAsync('trigger_5.t5_weekdays');
+							const weekdays_t5_val = JSON.parse(weekdays_t5.val);
 
-						weekdays_t5arr = weekdays_t5_val;
+							weekdays_t5arr = weekdays_t5_val;
 
-						this.setState('trigger_5.trigger_5_is_set', hh_1 + ':' + mm_1 + ' -- ' + weekdays_t5arr, true);
+							this.setState('trigger_5.trigger_5_is_set', hh_1 + ':' + mm_1 + ' -- ' + weekdays_t5arr, true);
 
-						this.Schedule_5();
+							this.Schedule_5();
+
+						} catch (e5) {
+
+							this.log.error('Check the time of Schedule 5! -- ' + e5);
+
+						}
 
 
 
@@ -3187,24 +3222,31 @@ class TimeSwitchClock extends utils.Adapter {
 
 					} else if (StatusTriggerStart == true && SetTrigger !== 6) {
 
-						const time_6 = await this.getStateAsync('trigger_6.t6_time');
-						const read_time_6 = time_6.val;
+						try {
+							const time_6 = await this.getStateAsync('trigger_6.t6_time');
+							const read_time_6 = time_6.val;
 
-						const [hh, mm] = read_time_6.split(':');
-						const hh_1 = hh ? hh: 'not';
-						const mm_1 = mm ? mm: 'set';
+							const [hh, mm] = read_time_6.split(':');
+							const hh_1 = hh ? hh: 'not';
+							const mm_1 = mm ? mm: 'set';
 
-						time_t6arr.splice(0,1, hh_1);
-						time_t6arr.splice(1,1, mm_1);
+							time_t6arr.splice(0,1, hh_1);
+							time_t6arr.splice(1,1, mm_1);
 
-						const weekdays_t6 = await this.getStateAsync('trigger_6.t6_weekdays');
-						const weekdays_t6_val = JSON.parse(weekdays_t6.val);
+							const weekdays_t6 = await this.getStateAsync('trigger_6.t6_weekdays');
+							const weekdays_t6_val = JSON.parse(weekdays_t6.val);
 
-						weekdays_t6arr = weekdays_t6_val;
+							weekdays_t6arr = weekdays_t6_val;
 
-						this.setState('trigger_6.trigger_6_is_set', hh_1 + ':' + mm_1 + ' -- ' + weekdays_t6arr, true);
+							this.setState('trigger_6.trigger_6_is_set', hh_1 + ':' + mm_1 + ' -- ' + weekdays_t6arr, true);
 
-						this.Schedule_6();
+							this.Schedule_6();
+
+						} catch (e6) {
+
+							this.log.error('Check the time of Schedule 6! -- ' + e6);
+
+						}
 
 
 
