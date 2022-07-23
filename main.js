@@ -2609,6 +2609,9 @@ class TimeSwitchClock extends utils.Adapter {
 				const SetTrigger_1 = await this.getStateAsync('Setup.SetTrigger');
 				const SetTrigger = SetTrigger_1 ? SetTrigger_1.val: '0';
 
+				const number_of_triggers_1 = await this.getStateAsync('Setup.number_of_triggers');
+				const number_of_triggers = number_of_triggers_1.val;
+
 				if (SetTrigger == 1) {
 
 					const new_HH_1 = HH_1 ? HH_1.val: '00';
@@ -2621,7 +2624,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 					//this.log.warn('hier ist die neue HH für SetTrigger = 1 -- ' + new_HH_1);
 
-				} else if (SetTrigger == 2) {
+				} else if (SetTrigger == 2 && number_of_triggers >= 2) {
 
 					const new_HH_1 = HH_1 ? HH_1.val: '00';
 
@@ -2633,7 +2636,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 					//this.log.warn('hier ist die neue HH für SetTrigger = 2 -- ' + new_HH_1);
 
-				} else if (SetTrigger == 3) {
+				} else if (SetTrigger == 3 && number_of_triggers >= 3) {
 
 					const new_HH_1 = HH_1 ? HH_1.val: '00';
 
@@ -2645,7 +2648,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 					//this.log.warn('hier ist die neue HH für SetTrigger = 2 -- ' + new_HH_1);
 
-				} else if (SetTrigger == 4) {
+				} else if (SetTrigger == 4 && number_of_triggers >= 4) {
 
 					const new_HH_1 = HH_1 ? HH_1.val: '00';
 
@@ -2657,7 +2660,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 					//this.log.warn('hier ist die neue HH für SetTrigger = 2 -- ' + new_HH_1);
 
-				} else if (SetTrigger == 5) {
+				} else if (SetTrigger == 5 && number_of_triggers >= 5) {
 
 					const new_HH_1 = HH_1 ? HH_1.val: '00';
 
@@ -2669,7 +2672,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 					//this.log.warn('hier ist die neue HH für SetTrigger = 2 -- ' + new_HH_1);
 
-				} else if (SetTrigger == 6) {
+				} else if (SetTrigger == 6 && number_of_triggers == 6) {
 
 					const new_HH_1 = HH_1 ? HH_1.val: '00';
 
@@ -2699,6 +2702,9 @@ class TimeSwitchClock extends utils.Adapter {
 				const SetTrigger_1 = await this.getStateAsync('Setup.SetTrigger');
 				const SetTrigger = SetTrigger_1 ? SetTrigger_1.val: '0';
 
+				const number_of_triggers_1 = await this.getStateAsync('Setup.number_of_triggers');
+				const number_of_triggers = number_of_triggers_1.val;
+
 				if (SetTrigger == 1) {
 
 					const new_mm_1 = mm_1 ? mm_1.val: '00';
@@ -2711,7 +2717,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 					//this.log.warn('hier ist die neue mm für SetTrigger = 1 -- ' + new_mm_1);
 
-				} else if (SetTrigger == 2) {
+				} else if (SetTrigger == 2 && number_of_triggers >= 2) {
 
 					const new_mm_1 = mm_1 ? mm_1.val: '00';
 
@@ -2723,7 +2729,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 					//this.log.warn('hier ist die neue mm für SetTrigger = 2 -- ' + new_mm_1);
 
-				} else if (SetTrigger == 3) {
+				} else if (SetTrigger == 3 && number_of_triggers >= 3) {
 
 					const new_mm_1 = mm_1 ? mm_1.val: '00';
 
@@ -2735,7 +2741,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 					//this.log.warn('hier ist die neue mm für SetTrigger = 2 -- ' + new_mm_1);
 
-				} else if (SetTrigger == 4) {
+				} else if (SetTrigger == 4 && number_of_triggers >= 4) {
 
 					const new_mm_1 = mm_1 ? mm_1.val: '00';
 
@@ -2747,7 +2753,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 					//this.log.warn('hier ist die neue mm für SetTrigger = 2 -- ' + new_mm_1);
 
-				} else if (SetTrigger == 5) {
+				} else if (SetTrigger == 5 && number_of_triggers >= 5) {
 
 					const new_mm_1 = mm_1 ? mm_1.val: '00';
 
@@ -2759,7 +2765,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 					//this.log.warn('hier ist die neue mm für SetTrigger = 2 -- ' + new_mm_1);
 
-				} else if (SetTrigger == 6) {
+				} else if (SetTrigger == 6 && number_of_triggers == 6) {
 
 					const new_mm_1 = mm_1 ? mm_1.val: '00';
 
@@ -2877,11 +2883,14 @@ class TimeSwitchClock extends utils.Adapter {
 				const SetTrigger_1 = await this.getStateAsync('Setup.SetTrigger');
 				const SetTrigger = SetTrigger_1 ? SetTrigger_1.val: '0';
 
+				const number_of_triggers_1 = await this.getStateAsync('Setup.number_of_triggers');
+				const number_of_triggers = number_of_triggers_1.val;
+
 				const triggerStartAction_true_2 = async () => {
 
 
 
-					if (StatusTriggerStart == true && SetTrigger == 2) {
+					if (StatusTriggerStart == true && SetTrigger == 2 && number_of_triggers >= 2) {
 
 						weekdays_t2arr = SetSchedule;
 
@@ -2896,7 +2905,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 
 
-					} else if (StatusTriggerStart == true && SetTrigger !== 2) {
+					} else if (StatusTriggerStart == true && SetTrigger !== 2 && number_of_triggers >= 2) {
 
 						try {
 							const time_2 = await this.getStateAsync('trigger_2.t2_time');
@@ -2924,7 +2933,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 						}
 
- 
+
 
 
 					} else if (StatusTriggerStart == false) {
@@ -2959,11 +2968,14 @@ class TimeSwitchClock extends utils.Adapter {
 				const SetTrigger_1 = await this.getStateAsync('Setup.SetTrigger');
 				const SetTrigger = SetTrigger_1 ? SetTrigger_1.val: '0';
 
+				const number_of_triggers_1 = await this.getStateAsync('Setup.number_of_triggers');
+				const number_of_triggers = number_of_triggers_1.val;
+
 				const triggerStartAction_true_3 = async () => {
 
 
 
-					if (StatusTriggerStart == true && SetTrigger == 3) {
+					if (StatusTriggerStart == true && SetTrigger == 3 && number_of_triggers >= 3) {
 
 						weekdays_t3arr = SetSchedule;
 
@@ -2978,7 +2990,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 
 
-					} else if (StatusTriggerStart == true && SetTrigger !== 3) {
+					} else if (StatusTriggerStart == true && SetTrigger !== 3 && number_of_triggers >= 3) {
 
 						try {
 							const time_3 = await this.getStateAsync('trigger_3.t3_time');
@@ -3039,11 +3051,14 @@ class TimeSwitchClock extends utils.Adapter {
 				const SetTrigger_1 = await this.getStateAsync('Setup.SetTrigger');
 				const SetTrigger = SetTrigger_1 ? SetTrigger_1.val: '0';
 
+				const number_of_triggers_1 = await this.getStateAsync('Setup.number_of_triggers');
+				const number_of_triggers = number_of_triggers_1.val;
+
 				const triggerStartAction_true_4 = async () => {
 
 
 
-					if (StatusTriggerStart == true && SetTrigger == 4) {
+					if (StatusTriggerStart == true && SetTrigger == 4 && number_of_triggers >= 4) {
 
 						weekdays_t4arr = SetSchedule;
 
@@ -3058,7 +3073,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 
 
-					} else if (StatusTriggerStart == true && SetTrigger !== 4) {
+					} else if (StatusTriggerStart == true && SetTrigger !== 4 && number_of_triggers >= 4) {
 
 						try {
 							const time_4 = await this.getStateAsync('trigger_4.t4_time');
@@ -3120,11 +3135,14 @@ class TimeSwitchClock extends utils.Adapter {
 				const SetTrigger_1 = await this.getStateAsync('Setup.SetTrigger');
 				const SetTrigger = SetTrigger_1 ? SetTrigger_1.val: '0';
 
+				const number_of_triggers_1 = await this.getStateAsync('Setup.number_of_triggers');
+				const number_of_triggers = number_of_triggers_1.val;
+
 				const triggerStartAction_true_5 = async () => {
 
 
 
-					if (StatusTriggerStart == true && SetTrigger == 5) {
+					if (StatusTriggerStart == true && SetTrigger == 5 && number_of_triggers >= 5) {
 
 						weekdays_t5arr = SetSchedule;
 
@@ -3139,7 +3157,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 
 
-					} else if (StatusTriggerStart == true && SetTrigger !== 5) {
+					} else if (StatusTriggerStart == true && SetTrigger !== 5 && number_of_triggers >= 5) {
 
 						try {
 							const time_5 = await this.getStateAsync('trigger_5.t5_time');
@@ -3201,11 +3219,14 @@ class TimeSwitchClock extends utils.Adapter {
 				const SetTrigger_1 = await this.getStateAsync('Setup.SetTrigger');
 				const SetTrigger = SetTrigger_1 ? SetTrigger_1.val: '0';
 
+				const number_of_triggers_1 = await this.getStateAsync('Setup.number_of_triggers');
+				const number_of_triggers = number_of_triggers_1.val;
+
 				const triggerStartAction_true_6 = async () => {
 
 
 
-					if (StatusTriggerStart == true && SetTrigger == 6) {
+					if (StatusTriggerStart == true && SetTrigger == 6 && number_of_triggers == 6) {
 
 						weekdays_t6arr = SetSchedule;
 
@@ -3220,7 +3241,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 
 
-					} else if (StatusTriggerStart == true && SetTrigger !== 6) {
+					} else if (StatusTriggerStart == true && SetTrigger !== 6 && number_of_triggers == 6) {
 
 						try {
 							const time_6 = await this.getStateAsync('trigger_6.t6_time');
