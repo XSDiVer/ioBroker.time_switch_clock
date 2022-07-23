@@ -41,7 +41,7 @@ Hier ist ein Beispiel den man im VIS als View importieren kann,
 
 Die Inventwo Widges werden benötigt!
 
-Einfach im VIS unter VIEW importieren -(copy & paste)
+Einfach im VIS unter VIEW importieren - (copy & paste)
  
 <a href="https://github.com/XSDiVer/ioBroker.time_switch_clock/blob/main/Docs/example_View_inventwo"> example VIS View</a>
 
@@ -51,7 +51,7 @@ Einfach im VIS unter VIEW importieren -(copy & paste)
 <!-- Platzhalter für nächstes Change Log. -->
 
 ### 0.0.3 (2022-07-12)
-* Beta Version with example VIS View 
+* Beta Version with example VIS View (needs Inventwo Widges)
 
 ### 0.0.2 (2022-07-11)
 * (XSDiVer) initial release
