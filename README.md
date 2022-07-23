@@ -37,9 +37,13 @@ das erstellen einer Zeitschaltung erleichtern.
 
 
 Hier ist ein Beispiel den man im VIS als View importieren kann,
-sehr elementar gehalten - dient nur zur Veranschaulichung:
+- dient nur zur Veranschaulichung und zum testen:
+
+Die Inventwo Widges werden benötigt!
+
+Einfach im VIS unter VIEW importieren -(copy & paste)
  
-<a href="https://github.com/XSDiVer/ioBroker.time_switch_clock/blob/main/Docs/example_View"> example VIS View</a>
+<a href="https://github.com/XSDiVer/ioBroker.time_switch_clock/blob/main/Docs/example_View_inventwo"> example VIS View</a>
 
 -- todo: Astro Funktionen sollten implementiert werden.
 

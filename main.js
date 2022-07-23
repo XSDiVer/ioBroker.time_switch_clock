@@ -2606,6 +2606,14 @@ class TimeSwitchClock extends utils.Adapter {
 			const HH_1 = await this.getStateAsync('Setup.HH');
 			if (HH_1) {
 
+				let new_HH_1 = HH_1 ? HH_1.val: '00';
+
+				if (new_HH_1 < 10) {
+
+					new_HH_1 = ('0' + HH_1.val);
+
+				}
+
 				const SetTrigger_1 = await this.getStateAsync('Setup.SetTrigger');
 				const SetTrigger = SetTrigger_1 ? SetTrigger_1.val: '0';
 
@@ -2613,8 +2621,6 @@ class TimeSwitchClock extends utils.Adapter {
 				const number_of_triggers = number_of_triggers_1.val;
 
 				if (SetTrigger == 1) {
-
-					const new_HH_1 = HH_1 ? HH_1.val: '00';
 
 					Time.splice(0,1, new_HH_1);
 
@@ -2626,8 +2632,6 @@ class TimeSwitchClock extends utils.Adapter {
 
 				} else if (SetTrigger == 2 && number_of_triggers >= 2) {
 
-					const new_HH_1 = HH_1 ? HH_1.val: '00';
-
 					Time.splice(0,1, new_HH_1);
 
 					time_t2arr.splice(0,1, new_HH_1);
@@ -2637,8 +2641,6 @@ class TimeSwitchClock extends utils.Adapter {
 					//this.log.warn('hier ist die neue HH für SetTrigger = 2 -- ' + new_HH_1);
 
 				} else if (SetTrigger == 3 && number_of_triggers >= 3) {
-
-					const new_HH_1 = HH_1 ? HH_1.val: '00';
 
 					Time.splice(0,1, new_HH_1);
 
@@ -2650,8 +2652,6 @@ class TimeSwitchClock extends utils.Adapter {
 
 				} else if (SetTrigger == 4 && number_of_triggers >= 4) {
 
-					const new_HH_1 = HH_1 ? HH_1.val: '00';
-
 					Time.splice(0,1, new_HH_1);
 
 					time_t4arr.splice(0,1, new_HH_1);
@@ -2662,8 +2662,6 @@ class TimeSwitchClock extends utils.Adapter {
 
 				} else if (SetTrigger == 5 && number_of_triggers >= 5) {
 
-					const new_HH_1 = HH_1 ? HH_1.val: '00';
-
 					Time.splice(0,1, new_HH_1);
 
 					time_t5arr.splice(0,1, new_HH_1);
@@ -2673,8 +2671,6 @@ class TimeSwitchClock extends utils.Adapter {
 					//this.log.warn('hier ist die neue HH für SetTrigger = 2 -- ' + new_HH_1);
 
 				} else if (SetTrigger == 6 && number_of_triggers == 6) {
-
-					const new_HH_1 = HH_1 ? HH_1.val: '00';
 
 					Time.splice(0,1, new_HH_1);
 
@@ -2699,6 +2695,14 @@ class TimeSwitchClock extends utils.Adapter {
 			const mm_1 = await this.getStateAsync('Setup.mm');
 			if (mm_1) {
 
+				let new_mm_1 = mm_1 ? mm_1.val: '00';
+
+				if (new_mm_1 < 10) {
+
+					new_mm_1 = ('0' + mm_1.val);
+
+				}
+
 				const SetTrigger_1 = await this.getStateAsync('Setup.SetTrigger');
 				const SetTrigger = SetTrigger_1 ? SetTrigger_1.val: '0';
 
@@ -2706,8 +2710,6 @@ class TimeSwitchClock extends utils.Adapter {
 				const number_of_triggers = number_of_triggers_1.val;
 
 				if (SetTrigger == 1) {
-
-					const new_mm_1 = mm_1 ? mm_1.val: '00';
 
 					Time.splice(1,1, new_mm_1);
 
@@ -2719,8 +2721,6 @@ class TimeSwitchClock extends utils.Adapter {
 
 				} else if (SetTrigger == 2 && number_of_triggers >= 2) {
 
-					const new_mm_1 = mm_1 ? mm_1.val: '00';
-
 					Time.splice(1,1, new_mm_1);
 
 					time_t2arr.splice(1,1, new_mm_1);
@@ -2730,8 +2730,6 @@ class TimeSwitchClock extends utils.Adapter {
 					//this.log.warn('hier ist die neue mm für SetTrigger = 2 -- ' + new_mm_1);
 
 				} else if (SetTrigger == 3 && number_of_triggers >= 3) {
-
-					const new_mm_1 = mm_1 ? mm_1.val: '00';
 
 					Time.splice(1,1, new_mm_1);
 
@@ -2743,8 +2741,6 @@ class TimeSwitchClock extends utils.Adapter {
 
 				} else if (SetTrigger == 4 && number_of_triggers >= 4) {
 
-					const new_mm_1 = mm_1 ? mm_1.val: '00';
-
 					Time.splice(1,1, new_mm_1);
 
 					time_t4arr.splice(1,1, new_mm_1);
@@ -2755,8 +2751,6 @@ class TimeSwitchClock extends utils.Adapter {
 
 				} else if (SetTrigger == 5 && number_of_triggers >= 5) {
 
-					const new_mm_1 = mm_1 ? mm_1.val: '00';
-
 					Time.splice(1,1, new_mm_1);
 
 					time_t5arr.splice(1,1, new_mm_1);
@@ -2766,8 +2760,6 @@ class TimeSwitchClock extends utils.Adapter {
 					//this.log.warn('hier ist die neue mm für SetTrigger = 2 -- ' + new_mm_1);
 
 				} else if (SetTrigger == 6 && number_of_triggers == 6) {
-
-					const new_mm_1 = mm_1 ? mm_1.val: '00';
 
 					Time.splice(1,1, new_mm_1);
 
