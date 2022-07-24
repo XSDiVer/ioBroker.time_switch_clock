@@ -15,8 +15,9 @@
 
 Timer for e.g. water valves or other things
 
-Dieser Adapter löst bis zu 6 verschiedene Datenpunkte aus -trigger_1 - trigger_6-.
-Dieser Trigger kann in einem Blockly verwendet werden um einen Datenpunkt nach Wahl auszulösen.
+Dieser Adapter löst bis zu 6 verschiedene Datenpunkte in "goforit" muss im jeweiligen Trigger eingetragen werden,
+welcher Datenpunkt ausgelöst werden soll. Einfach die _id des ensprechenden Datenpunktes kopieren und in goforit einfügen.
+Zur eingestellten Zeit wird dieser Datenpunkt dann auf "true" gesetzt.
 
 Die einzelnen trigger können über -SetTrigger- ausgewählt werden.
 Einfach die gewünschte Nummer des Triggers der gesetzt werden soll in,
@@ -27,6 +28,10 @@ einstellen, an welchem Tag der -trigger_1 - trigger_6- ausgelöst werden soll.
 
 Bei -Uhrzeit- trägt man die Uhrzeit ein, um die der jeweilige -trigger_1 - trigger_6- ausgelöst werden soll.
 Die -Uhrzeit- wird im Format -HH:MM- gesetzt. Wobei HH für Stunden und MM für Minuten steht.
+
+Unter "timer" im jeweiligen Datenpunkt - kann man einstellen nach wievielen Sekunden der vorher
+geschaltete Datenpunkt wieder auf "false" gesetzt werden soll.
+
 
 Hat man alle -trigger_1 - trigger_6- wie gewünscht eingestellt, 
 sollte man  -SetTrigger- auf z.B. 0 setzen -- damit sich durch Änderungen an Uhrzeit
