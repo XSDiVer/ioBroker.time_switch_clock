@@ -28,6 +28,9 @@ let weekdays_t4arr = [];
 let weekdays_t5arr = [];
 let weekdays_t6arr = [];
 
+//Array für Datenpunkte die geschaltet werden sollen - goforit
+let DP_1 = [];
+
 
 //Arrays für Wochentage? / Schedule?
 
@@ -195,19 +198,31 @@ class TimeSwitchClock extends utils.Adapter {
 
 			const WDaysarr = [weekdays_t1arr];
 
+			const goandtrigger = [DP_1];
+
 
 			if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_1 !== 'undefined' && SetTrigger == 1 && SetSchedule.length !== 0) {
 
 				this.mySchedule_1.cancel();
 
 				this.mySchedule_1 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDays.toString().trim(), async () =>
-					this.setState('trigger_1.trigger_1', true, true) && this.log.info('Schedule 1 ausgelöst!')); +
+
+
+				//Test mit eingesetztem Datenpunkt ****************************************************
+					this.setForeignStateAsync(goandtrigger, true, true) && this.log.info('Schedule 1 ausgelöst!')); +
+				//*************************************************************************************
+
+
 				this.setState('trigger_1.trigger_1_is_set', '' + HH + ':' + MM + ' -- ' + WDays, true) + this.log.info('next Schedule 1 -- ' + this.mySchedule_1.nextInvocation());
 
 			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_1 == 'undefined' && SetTrigger == 1 && SetSchedule.length !== 0) {
 
 				this.mySchedule_1 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDays.toString().trim(), async () =>
-					this.setState('trigger_1.trigger_1', true, true) && this.log.info('Schedule 1 ausgelöst!')); +
+
+
+					this.setForeignStateAsync(goandtrigger, true, true) && this.log.info('Schedule 1 ausgelöst!')); +
+
+
 				this.setState('trigger_1.trigger_1_is_set', '' + HH + ':' + MM + ' -- ' + WDays, true);
 
 
@@ -217,13 +232,16 @@ class TimeSwitchClock extends utils.Adapter {
 				this.mySchedule_1.cancel();
 
 				this.mySchedule_1 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDaysarr.toString().trim(), async () =>
-					this.setState('trigger_1.trigger_1', true, true) && this.log.info('Schedule 1 ausgelöst!')); +
+
+
+					this.setForeignStateAsync(goandtrigger, true, true) && this.log.info('Schedule 1 ausgelöst!')); +
+
 				this.setState('trigger_1.trigger_1_is_set', '' + HH + ':' + MM + ' -- ' + WDaysarr, true) + this.log.info('next Schedule 1 -- ' + this.mySchedule_1.nextInvocation());
 
 			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_1 == 'undefined' && SetTrigger !== 1 && weekdays_t1arr.length !== 0) {
 
 				this.mySchedule_1 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDaysarr.toString().trim(), async () =>
-					this.setState('trigger_1.trigger_1', true, true) && this.log.info('Schedule 1 ausgelöst!')); +
+					this.setForeignStateAsync(goandtrigger, true, true) && this.log.info('Schedule 1 ausgelöst!')); +
 				this.setState('trigger_1.trigger_1_is_set', '' + HH + ':' + MM + ' -- ' + WDaysarr, true);
 
 			} else if (SetSchedule.length == 0 || weekdays_t1arr.length == 0) {
@@ -938,6 +956,28 @@ class TimeSwitchClock extends utils.Adapter {
 			},
 			native: {},
 		});
+
+
+
+
+		// neuer Test Datenpunkt um einen Datenpunkt einzutragen der geschaltet werden soll
+		//*********************************************************************************
+		await this.setObjectNotExistsAsync('trigger_1.goforit', {
+			type: 'state',
+			common: {
+				name: 'goforit',
+				type: 'string',
+				role: 'state',
+				read: true,
+				write: true,
+			},
+			native: {},
+		});
+
+		this.subscribeStates('trigger_1.goforit');
+		//********************************************************************************
+
+
 
 
 		//Permanente Datenpunkte erstellen ENDE
@@ -2608,9 +2648,13 @@ class TimeSwitchClock extends utils.Adapter {
 
 				let new_HH_1 = HH_1 ? HH_1.val: '00';
 
-				if (new_HH_1 < 10) {
+				if (new_HH_1 < 10 && new_HH_1.length == 1) {
 
 					new_HH_1 = ('0' + HH_1.val);
+
+				} else if (new_HH_1.length > 2) {
+
+					this.log.error('Stunden sind nicht 2 stellig!');
 
 				}
 
@@ -2697,9 +2741,13 @@ class TimeSwitchClock extends utils.Adapter {
 
 				let new_mm_1 = mm_1 ? mm_1.val: '00';
 
-				if (new_mm_1 < 10) {
+				if (new_mm_1 < 10 && new_mm_1.length == 1) {
 
 					new_mm_1 = ('0' + mm_1.val);
+
+				} else if (new_mm_1.length > 2) {
+
+					this.log.error('Minuten sind nicht 2 stellig!');
 
 				}
 
@@ -2793,6 +2841,28 @@ class TimeSwitchClock extends utils.Adapter {
 
 				const SetTrigger_1 = await this.getStateAsync('Setup.SetTrigger');
 				const SetTrigger = SetTrigger_1 ? SetTrigger_1.val: '0';
+
+
+				// Test Datenpunkt - holen aus DP den DP der später geschaltet werden soll
+				//*************************************************************************
+				const goforit_1 = await this.getStateAsync('trigger_1.goforit');
+				const goforit = goforit_1 ? goforit_1.val: 'None';
+
+				if (goforit !== '' && goforit !== 'None') {
+
+					DP_1 = goforit;
+
+				} else if (goforit == '') {
+
+					this.setStateAsync('trigger_1.goforit', 'None', true);
+
+
+				} else if (goforit == 'None') {
+
+					this.log.error('Kein Datenpunkt zum triggern gesetzt in Schedule 1!');
+
+				}
+				//*************************************************************************
 
 				const triggerStartAction_true_1 = async () => {
 
