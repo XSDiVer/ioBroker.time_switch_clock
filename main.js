@@ -8,6 +8,7 @@
 
 const utils = require('@iobroker/adapter-core');
 const schedule = require('node-schedule');
+const { resolve } = require('path');
 const SetWeekdays = [];
 const SetSchedule = [];
 const Time = [];
@@ -199,9 +200,10 @@ class TimeSwitchClock extends utils.Adapter {
 
 			this.log.error('Schedule 1 ausgelöst!');
 
+			clearTimeout (delay());
 			await delay (timer_t1arr);
 
-			this.log.warn('Schedule 1 auf false gesetzt! - 5 Sek später');
+			this.log.warn('Schedule 1 auf false gesetzt! - ' + timer_t1arr + ' Sek später');
 			this.setForeignStateAsync(DP_1arr.toString() , false);
 
 		};
