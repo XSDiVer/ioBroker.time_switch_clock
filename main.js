@@ -200,6 +200,8 @@ class TimeSwitchClock extends utils.Adapter {
 
 			const goandtrigger = [DP_1];
 
+			this.log.warn('DP_1arr -- ' + DP_1);
+
 
 			if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_1 !== 'undefined' && SetTrigger == 1 && SetSchedule.length !== 0) {
 
@@ -209,7 +211,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 
 				//Test mit eingesetztem Datenpunkt ****************************************************
-					this.setForeignStateAsync(goandtrigger, true, true) && this.log.info('Schedule 1 ausgelöst!')); +
+					this.setForeignStateAsync(goandtrigger.toString() , true) && this.log.info('Schedule 1 ausgelöst!')); +
 				//*************************************************************************************
 
 
@@ -220,7 +222,7 @@ class TimeSwitchClock extends utils.Adapter {
 				this.mySchedule_1 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDays.toString().trim(), async () =>
 
 
-					this.setForeignStateAsync(goandtrigger, true, true) && this.log.info('Schedule 1 ausgelöst!')); +
+					this.setForeignStateAsync(goandtrigger.toString() , true) && this.log.info('Schedule 1 ausgelöst!')); +
 
 
 				this.setState('trigger_1.trigger_1_is_set', '' + HH + ':' + MM + ' -- ' + WDays, true);
@@ -234,14 +236,14 @@ class TimeSwitchClock extends utils.Adapter {
 				this.mySchedule_1 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDaysarr.toString().trim(), async () =>
 
 
-					this.setForeignStateAsync(goandtrigger, true, true) && this.log.info('Schedule 1 ausgelöst!')); +
+					this.setForeignStateAsync(goandtrigger.toString() , true) && this.log.info('Schedule 1 ausgelöst!')); +
 
 				this.setState('trigger_1.trigger_1_is_set', '' + HH + ':' + MM + ' -- ' + WDaysarr, true) + this.log.info('next Schedule 1 -- ' + this.mySchedule_1.nextInvocation());
 
 			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_1 == 'undefined' && SetTrigger !== 1 && weekdays_t1arr.length !== 0) {
 
 				this.mySchedule_1 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDaysarr.toString().trim(), async () =>
-					this.setForeignStateAsync(goandtrigger, true, true) && this.log.info('Schedule 1 ausgelöst!')); +
+					this.setForeignStateAsync(goandtrigger.toString() , true) && this.log.info('Schedule 1 ausgelöst!')); +
 				this.setState('trigger_1.trigger_1_is_set', '' + HH + ':' + MM + ' -- ' + WDaysarr, true);
 
 			} else if (SetSchedule.length == 0 || weekdays_t1arr.length == 0) {
