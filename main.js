@@ -2343,6 +2343,9 @@ class TimeSwitchClock extends utils.Adapter {
 
 			this.setStateAsync('info.connection', { val: false, ack: true });
 			schedule.gracefulShutdown();
+
+			clearTimeout (this.delay());
+
 			this.log.info('Adapter gestoppt! - Alle Schedules gelöscht!');
 
 			callback();
