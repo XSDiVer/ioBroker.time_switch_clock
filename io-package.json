@@ -28,8 +28,7 @@
                 "zh-cn": "????"
             }
         },
-        "title": "time_switch_clock",
-        "titleLang": {
+            "titleLang": {
             "en": "time_switch_clock",
             "de": "Zeitschaltuhr",
             "ru": "time_switch_clock",
