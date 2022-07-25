@@ -189,19 +189,12 @@ class TimeSwitchClock extends utils.Adapter {
 			native: {},
 		});
 
-		//delay Funktion
-		function delay(n){
-			return new Promise(function(resolve){
-				setTimeout(resolve,n*1000);
-			});
-		}
 
 		this.Schedule_1_go = async () => {
 
 			this.log.error('Schedule 1 ausgelöst!');
 
-			clearTimeout (delay());
-			await delay (timer_t1arr);
+			await this.delay (timer_t1arr*1000);
 
 			this.log.warn('Schedule 1 auf false gesetzt! - ' + timer_t1arr + ' Sek später');
 			this.setForeignStateAsync(DP_1arr.toString() , false);
