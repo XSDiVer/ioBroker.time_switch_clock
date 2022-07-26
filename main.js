@@ -7,8 +7,10 @@
  */
 
 const utils = require('@iobroker/adapter-core');
+//const { timingSafeEqual } = require('crypto');
 const schedule = require('node-schedule');
-const { resolve } = require('path');
+//const { resolve } = require('path');
+//const { resolve } = require('path');
 const SetWeekdays = [];
 const SetSchedule = [];
 const Time = [];
@@ -35,7 +37,10 @@ let DP_1arr = [];
 
 //Zeit bis der Datenpunkt wieder auf false gesetzt wird in Sekunden
 let timer_t1arr = [];
+//timer_t2arr - 6arr
 
+
+let stopp_timer1_arr = [];
 
 //Arrays für Wochentage? / Schedule?
 
@@ -190,14 +195,53 @@ class TimeSwitchClock extends utils.Adapter {
 		});
 
 
+
+
+		//const myTimeout = function timeout(timer_t1arr) {
+		//	return new Promise(resolve => setTimeout(resolve, timer_t1arr));
+		//};
+
+		//let myTimeout = async () => {setTimeout(timer_t1arr*1000);};
+
+		//const waitS1 = delay => new Promise(resolve => this.setTimeout(resolve, delay*1000));
+
+		//this.clearTimeout(this.waitS1);
+
+
+
+
 		this.Schedule_1_go = async () => {
 
 			this.log.error('Schedule 1 ausgelöst!');
 
-			await this.delay (timer_t1arr*1000);
+			//this.log.warn('das ist die ID -- bevor gesetzt -- ' + stopp_timer1_arr);
 
-			this.log.warn('Schedule 1 auf false gesetzt! - ' + timer_t1arr + ' Sek später');
-			this.setForeignStateAsync(DP_1arr.toString() , false);
+
+			try {
+
+				const waitS1 = setTimeout(async () =>{this.log.warn('Schedule 1 auf false gesetzt! - ' + timer_t1arr + ' Sek später');
+					this.setForeignStateAsync(DP_1arr.toString() , false);
+
+				}, timer_t1arr*1000);
+
+				await waitS1;
+
+				stopp_timer1_arr = waitS1;
+
+				//this.log.warn('das ist die ID -- ' + stopp_timer1_arr);
+
+			} catch (e) {
+
+				this.log.warn('catch -- ' + e );
+
+			}
+
+
+
+
+
+
+			//this.log.warn('Schedule 1 auf false gesetzt! - ' + timer_t1arr + ' Sek später');
 
 		};
 
@@ -1011,12 +1055,11 @@ class TimeSwitchClock extends utils.Adapter {
 		if (this.config.numberoftriggers == 1) {
 
 			//alle anderen Datenpunkte löschen die aus Schdedule Anzahl > 1 sind
-			const trigger_2 = await this.getObjectAsync('trigger_2.trigger_2') || await this.getObjectAsync('trigger_2.trigger_2_is_set') || await this.getObjectAsync('trigger_2.trigger_2_Start');
+			const trigger_2 = await this.getObjectAsync('trigger_2.trigger_2_is_set') || await this.getObjectAsync('trigger_2.trigger_2_Start');
 			if (trigger_2) {
 
 				//this.log.warn('datenpunkte trigger_2 existieren');
 				//und werden gelöscht
-				await this.delObjectAsync('trigger_2.trigger_2');
 				await this.delObjectAsync('trigger_2.trigger_2_is_set');
 				await this.delObjectAsync('trigger_2.trigger_2_Start');
 				await this.delObjectAsync('trigger_2.t2_weekdays');
@@ -1029,12 +1072,12 @@ class TimeSwitchClock extends utils.Adapter {
 
 			}
 
-			const trigger_3 = await this.getObjectAsync('trigger_3.trigger_3') || await this.getObjectAsync('trigger_3.trigger_3_is_set') || await this.getObjectAsync('trigger_3.trigger_3_Start');
+			const trigger_3 = await this.getObjectAsync('trigger_3.trigger_3_is_set') || await this.getObjectAsync('trigger_3.trigger_3_Start');
 			if (trigger_3) {
 
 				//this.log.warn('datenpunkte trigger_3 existieren');
 				//und werden gelöscht
-				await this.delObjectAsync('trigger_3.trigger_3');
+				//await this.delObjectAsync('trigger_3.trigger_3');
 				await this.delObjectAsync('trigger_3.trigger_3_is_set');
 				await this.delObjectAsync('trigger_3.trigger_3_Start');
 				await this.delObjectAsync('trigger_3.t3_weekdays');
@@ -1100,7 +1143,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 		} else if (this.config.numberoftriggers == 2) {
 
-			await this.setObjectNotExistsAsync('trigger_2.trigger_2', {
+			/*await this.setObjectNotExistsAsync('trigger_2.trigger_2', {
 				type: 'state',
 				common: {
 					name: 'trigger_2',
@@ -1111,6 +1154,7 @@ class TimeSwitchClock extends utils.Adapter {
 				},
 				native: {},
 			});
+			*/
 
 			await this.setObjectNotExistsAsync('trigger_2.trigger_2_is_set', {
 				type: 'state',
@@ -1160,19 +1204,19 @@ class TimeSwitchClock extends utils.Adapter {
 				native: {},
 			});
 
-			this.subscribeStates('trigger_2.trigger_2');
+			//this.subscribeStates('trigger_2.trigger_2');
 			this.subscribeStates('trigger_2.trigger_2_Start');
 
-			this.setState('trigger_2.trigger_2', false, true);
+			//this.setState('trigger_2.trigger_2', false, true);
 			this.setState('trigger_2.trigger_2_Start', false, true);
 
 			//alle anderen Datenpunkte löschen die aus Schdedule Anzahl > 2 sind
-			const trigger_3 = await this.getObjectAsync('trigger_3.trigger_3') || await this.getObjectAsync('trigger_3.trigger_3_is_set') || await this.getObjectAsync('trigger_3.trigger_3_Start');
+			const trigger_3 = await this.getObjectAsync('trigger_3.trigger_3_is_set') || await this.getObjectAsync('trigger_3.trigger_3_Start');
 			if (trigger_3) {
 
 				//this.log.warn('datenpunkte trigger_3 existieren');
 				//und werden gelöscht
-				await this.delObjectAsync('trigger_3.trigger_3');
+				//await this.delObjectAsync('trigger_3.trigger_3');
 				await this.delObjectAsync('trigger_3.trigger_3_is_set');
 				await this.delObjectAsync('trigger_3.trigger_3_Start');
 				await this.delObjectAsync('trigger_3.t3_weekdays');
@@ -1237,6 +1281,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 		} else if (this.config.numberoftriggers == 3) {
 
+			/*
 			await this.setObjectNotExistsAsync('trigger_2.trigger_2', {
 				type: 'state',
 				common: {
@@ -1248,6 +1293,7 @@ class TimeSwitchClock extends utils.Adapter {
 				},
 				native: {},
 			});
+			*/
 
 			await this.setObjectNotExistsAsync('trigger_2.trigger_2_is_set', {
 				type: 'state',
@@ -1297,7 +1343,7 @@ class TimeSwitchClock extends utils.Adapter {
 				native: {},
 			});
 
-
+			/*
 			await this.setObjectNotExistsAsync('trigger_3.trigger_3', {
 				type: 'state',
 				common: {
@@ -1309,6 +1355,7 @@ class TimeSwitchClock extends utils.Adapter {
 				},
 				native: {},
 			});
+			*/
 
 			await this.setObjectNotExistsAsync('trigger_3.trigger_3_is_set', {
 				type: 'state',
@@ -1359,14 +1406,14 @@ class TimeSwitchClock extends utils.Adapter {
 			});
 
 
-			this.subscribeStates('trigger_2.trigger_2');
+			//this.subscribeStates('trigger_2.trigger_2');
 			this.subscribeStates('trigger_2.trigger_2_Start');
 
-			this.subscribeStates('trigger_3.trigger_3');
+			//this.subscribeStates('trigger_3.trigger_3');
 			this.subscribeStates('trigger_3.trigger_3_Start');
 
-			this.setState('trigger_2.trigger_2', false, true);
-			this.setState('trigger_3.trigger_3', false, true);
+			//this.setState('trigger_2.trigger_2', false, true);
+			//this.setState('trigger_3.trigger_3', false, true);
 
 			this.setState('trigger_2.trigger_2_Start', false, true);
 			this.setState('trigger_3.trigger_3_Start', false, true);
@@ -1426,6 +1473,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 		} else if (this.config.numberoftriggers == 4) {
 
+			/*
 			await this.setObjectNotExistsAsync('trigger_2.trigger_2', {
 				type: 'state',
 				common: {
@@ -1437,6 +1485,7 @@ class TimeSwitchClock extends utils.Adapter {
 				},
 				native: {},
 			});
+			*/
 
 			await this.setObjectNotExistsAsync('trigger_2.trigger_2_is_set', {
 				type: 'state',
@@ -1487,6 +1536,7 @@ class TimeSwitchClock extends utils.Adapter {
 			});
 
 
+			/*
 			await this.setObjectNotExistsAsync('trigger_3.trigger_3', {
 				type: 'state',
 				common: {
@@ -1498,6 +1548,7 @@ class TimeSwitchClock extends utils.Adapter {
 				},
 				native: {},
 			});
+			*/
 
 			await this.setObjectNotExistsAsync('trigger_3.trigger_3_is_set', {
 				type: 'state',
@@ -1608,17 +1659,17 @@ class TimeSwitchClock extends utils.Adapter {
 				native: {},
 			});
 
-			this.subscribeStates('trigger_2.trigger_2');
+			//this.subscribeStates('trigger_2.trigger_2');
 			this.subscribeStates('trigger_2.trigger_2_Start');
 
-			this.subscribeStates('trigger_3.trigger_3');
+			//this.subscribeStates('trigger_3.trigger_3');
 			this.subscribeStates('trigger_3.trigger_3_Start');
 
 			this.subscribeStates('trigger_4.trigger_4');
 			this.subscribeStates('trigger_4.trigger_4_Start');
 
-			this.setState('trigger_2.trigger_2', false, true);
-			this.setState('trigger_3.trigger_3', false, true);
+			//this.setState('trigger_2.trigger_2', false, true);
+			//this.setState('trigger_3.trigger_3', false, true);
 			this.setState('trigger_4.trigger_4', false, true);
 
 			this.setState('trigger_2.trigger_2_Start', false, true);
@@ -1662,6 +1713,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 		} else if (this.config.numberoftriggers == 5) {
 
+			/*
 			await this.setObjectNotExistsAsync('trigger_2.trigger_2', {
 				type: 'state',
 				common: {
@@ -1673,6 +1725,7 @@ class TimeSwitchClock extends utils.Adapter {
 				},
 				native: {},
 			});
+			*/
 
 			await this.setObjectNotExistsAsync('trigger_2.trigger_2_is_set', {
 				type: 'state',
@@ -1723,6 +1776,7 @@ class TimeSwitchClock extends utils.Adapter {
 			});
 
 
+			/*
 			await this.setObjectNotExistsAsync('trigger_3.trigger_3', {
 				type: 'state',
 				common: {
@@ -1734,6 +1788,7 @@ class TimeSwitchClock extends utils.Adapter {
 				},
 				native: {},
 			});
+			*/
 
 			await this.setObjectNotExistsAsync('trigger_3.trigger_3_is_set', {
 				type: 'state',
@@ -1906,10 +1961,10 @@ class TimeSwitchClock extends utils.Adapter {
 				native: {},
 			});
 
-			this.subscribeStates('trigger_2.trigger_2');
+			//this.subscribeStates('trigger_2.trigger_2');
 			this.subscribeStates('trigger_2.trigger_2_Start');
 
-			this.subscribeStates('trigger_3.trigger_3');
+			//this.subscribeStates('trigger_3.trigger_3');
 			this.subscribeStates('trigger_3.trigger_3_Start');
 
 			this.subscribeStates('trigger_4.trigger_4');
@@ -1918,8 +1973,8 @@ class TimeSwitchClock extends utils.Adapter {
 			this.subscribeStates('trigger_5.trigger_5');
 			this.subscribeStates('trigger_5.trigger_5_Start');
 
-			this.setState('trigger_2.trigger_2', false, true);
-			this.setState('trigger_3.trigger_3', false, true);
+			//this.setState('trigger_2.trigger_2', false, true);
+			//this.setState('trigger_3.trigger_3', false, true);
 			this.setState('trigger_4.trigger_4', false, true);
 			this.setState('trigger_5.trigger_5', false, true);
 
@@ -1948,6 +2003,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 		} else if (this.config.numberoftriggers == 6) {
 
+			/*
 			await this.setObjectNotExistsAsync('trigger_2.trigger_2', {
 				type: 'state',
 				common: {
@@ -1959,6 +2015,7 @@ class TimeSwitchClock extends utils.Adapter {
 				},
 				native: {},
 			});
+			*/
 
 			await this.setObjectNotExistsAsync('trigger_2.trigger_2_is_set', {
 				type: 'state',
@@ -2009,6 +2066,7 @@ class TimeSwitchClock extends utils.Adapter {
 			});
 
 
+			/*
 			await this.setObjectNotExistsAsync('trigger_3.trigger_3', {
 				type: 'state',
 				common: {
@@ -2020,6 +2078,7 @@ class TimeSwitchClock extends utils.Adapter {
 				},
 				native: {},
 			});
+			*/
 
 			await this.setObjectNotExistsAsync('trigger_3.trigger_3_is_set', {
 				type: 'state',
@@ -2252,10 +2311,10 @@ class TimeSwitchClock extends utils.Adapter {
 				native: {},
 			});
 
-			this.subscribeStates('trigger_2.trigger_2');
+			//this.subscribeStates('trigger_2.trigger_2');
 			this.subscribeStates('trigger_2.trigger_2_Start');
 
-			this.subscribeStates('trigger_3.trigger_3');
+			//this.subscribeStates('trigger_3.trigger_3');
 			this.subscribeStates('trigger_3.trigger_3_Start');
 
 			this.subscribeStates('trigger_4.trigger_4');
@@ -2267,8 +2326,8 @@ class TimeSwitchClock extends utils.Adapter {
 			this.subscribeStates('trigger_6.trigger_6');
 			this.subscribeStates('trigger_6.trigger_6_Start');
 
-			this.setState('trigger_2.trigger_2', false, true);
-			this.setState('trigger_3.trigger_3', false, true);
+			//this.setState('trigger_2.trigger_2', false, true);
+			//this.setState('trigger_3.trigger_3', false, true);
 			this.setState('trigger_4.trigger_4', false, true);
 			this.setState('trigger_5.trigger_5', false, true);
 			this.setState('trigger_6.trigger_6', false, true);
@@ -2297,7 +2356,7 @@ class TimeSwitchClock extends utils.Adapter {
 		this.setState('Weekdays.Saturday', true, true);
 
 		//Datenpunkt trigger 1 auf false setzen (Aulöser für Anktion wenn true)
-		this.setState('trigger_1.trigger_1', false, true);
+		//this.setState('trigger_1.trigger_1', false, true);
 
 		//trigger 1 Start auf false setzten - wird also nicht Scheduled
 		this.setState('trigger_1.trigger_1_Start', false, true);
@@ -2313,7 +2372,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 		this.subscribeStates('Setup.SetTrigger');
 
-		this.subscribeStates('trigger_1.trigger_1');
+		//this.subscribeStates('trigger_1.trigger_1');
 		this.subscribeStates('trigger_1.trigger_1_Start');
 
 		this.subscribeStates('Weekdays.Monday');
@@ -2337,7 +2396,7 @@ class TimeSwitchClock extends utils.Adapter {
 			this.setStateAsync('info.connection', { val: false, ack: true });
 			schedule.gracefulShutdown();
 
-			clearTimeout (this.delay());
+			clearTimeout(stopp_timer1_arr);
 
 			this.log.info('Adapter gestoppt! - Alle Schedules gelöscht!');
 
@@ -2965,6 +3024,9 @@ class TimeSwitchClock extends utils.Adapter {
 					} else if (StatusTriggerStart == false) {
 
 						this.cancelSchedule_1();
+
+						clearTimeout(stopp_timer1_arr);
+
 						this.setState('trigger_1.trigger_1_is_set', 'not scheduled', true);
 						weekdays_t1arr.splice(0, weekdays_t1arr.length);
 
@@ -3401,7 +3463,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 
 
-			//trigger_1 Datenpunkt wenn true - wieder auf false setzen - weil nur als Auslöser gedacht für z.B. Blockly
+			/*trigger_1 Datenpunkt wenn true - wieder auf false setzen - weil nur als Auslöser gedacht für z.B. Blockly
 			const triggerState = await this.getStateAsync('trigger_1.trigger_1');
 			const StatusTrigger = triggerState.val;
 
@@ -3420,6 +3482,7 @@ class TimeSwitchClock extends utils.Adapter {
 				}};
 
 			triggerAction_true();
+			*/
 
 		} else {
 			// The state was deleted
