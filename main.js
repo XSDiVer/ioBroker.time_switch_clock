@@ -214,37 +214,21 @@ class TimeSwitchClock extends utils.Adapter {
 
 			this.log.error('Schedule 1 ausgelöst!');
 
-			//this.log.warn('das ist die ID -- bevor gesetzt -- ' + stopp_timer1_arr);
+			const waitS1 = this.setTimeout( async () => {this.log.warn('Schedule 1 auf false gesetzt! - ' + timer_t1arr + ' Sek später');
+				this.setForeignStateAsync(DP_1arr.toString() , false);
 
+			}, timer_t1arr*1000);
 
-			try {
-
-				const waitS1 = setTimeout(async () =>{this.log.warn('Schedule 1 auf false gesetzt! - ' + timer_t1arr + ' Sek später');
-					this.setForeignStateAsync(DP_1arr.toString() , false);
-
-				}, timer_t1arr*1000);
-
-				await waitS1;
-
-				stopp_timer1_arr = waitS1;
-
-				//this.log.warn('das ist die ID -- ' + stopp_timer1_arr);
-
-			} catch (e) {
-
-				this.log.warn('catch -- ' + e );
-
-			}
-
-
-
-
-
-
-			//this.log.warn('Schedule 1 auf false gesetzt! - ' + timer_t1arr + ' Sek später');
+			stopp_timer1_arr = waitS1;
 
 		};
 
+		/*
+		const waitS1 = this.setTimeout(async () =>{this.log.warn('Schedule 1 auf false gesetzt! - ' + timer_t1arr + ' Sek später');
+				this.setForeignStateAsync(DP_1arr.toString() , false);
+
+			}, timer_t1arr*1000);
+		*/
 
 		//Schedule zusammen setzten
 
@@ -2396,7 +2380,7 @@ class TimeSwitchClock extends utils.Adapter {
 			this.setStateAsync('info.connection', { val: false, ack: true });
 			schedule.gracefulShutdown();
 
-			clearTimeout(stopp_timer1_arr);
+			this.clearTimeout(stopp_timer1_arr);
 
 			this.log.info('Adapter gestoppt! - Alle Schedules gelöscht!');
 
@@ -3025,7 +3009,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 						this.cancelSchedule_1();
 
-						clearTimeout(stopp_timer1_arr);
+						this.clearTimeout(stopp_timer1_arr);
 
 						this.setState('trigger_1.trigger_1_is_set', 'not scheduled', true);
 						weekdays_t1arr.splice(0, weekdays_t1arr.length);
