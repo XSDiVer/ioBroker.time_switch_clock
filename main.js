@@ -232,6 +232,11 @@ class TimeSwitchClock extends utils.Adapter {
 
 		//Schedule zusammen setzten
 
+
+		//this.log.error('Instanz -- ' + this.instance);
+		//this.log.error('namespace -- ' + this.namespace);
+
+
 		this.Schedule_1 = async () => {
 
 			const SetTrigger_1 = await this.getStateAsync('Setup.SetTrigger');
@@ -1061,7 +1066,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				//this.log.warn('datenpunkte trigger_3 existieren');
 				//und werden gelöscht
-				//await this.delObjectAsync('trigger_3.trigger_3');
+
 				await this.delObjectAsync('trigger_3.trigger_3_is_set');
 				await this.delObjectAsync('trigger_3.trigger_3_Start');
 				await this.delObjectAsync('trigger_3.t3_weekdays');
@@ -1073,12 +1078,12 @@ class TimeSwitchClock extends utils.Adapter {
 
 			}
 
-			const trigger_4 = await this.getObjectAsync('trigger_4.trigger_4') || await this.getObjectAsync('trigger_4.trigger_4_is_set') || await this.getObjectAsync('trigger_4.trigger_4_Start');
+			const trigger_4 = await this.getObjectAsync('trigger_4.trigger_4_is_set') || await this.getObjectAsync('trigger_4.trigger_4_Start');
 			if (trigger_4) {
 
 				//this.log.warn('datenpunkte trigger_4 existieren');
 				//und werden gelöscht
-				await this.delObjectAsync('trigger_4.trigger_4');
+
 				await this.delObjectAsync('trigger_4.trigger_4_is_set');
 				await this.delObjectAsync('trigger_4.trigger_4_Start');
 				await this.delObjectAsync('trigger_4.t4_weekdays');
@@ -1090,12 +1095,12 @@ class TimeSwitchClock extends utils.Adapter {
 
 			}
 
-			const trigger_5 = await this.getObjectAsync('trigger_5.trigger_5') || await this.getObjectAsync('trigger_5.trigger_5_is_set') || await this.getObjectAsync('trigger_5.trigger_5_Start');
+			const trigger_5 = await this.getObjectAsync('trigger_5.trigger_5_is_set') || await this.getObjectAsync('trigger_5.trigger_5_Start');
 			if (trigger_5) {
 
 				//this.log.warn('datenpunkte trigger_5 existieren');
 				//und werden gelöscht
-				await this.delObjectAsync('trigger_5.trigger_5');
+
 				await this.delObjectAsync('trigger_5.trigger_5_is_set');
 				await this.delObjectAsync('trigger_5.trigger_5_Start');
 				await this.delObjectAsync('trigger_5.t5_weekdays');
@@ -1107,12 +1112,12 @@ class TimeSwitchClock extends utils.Adapter {
 
 			}
 
-			const trigger_6 = await this.getObjectAsync('trigger_6.trigger_6') || await this.getObjectAsync('trigger_6.trigger_6_is_set') || await this.getObjectAsync('trigger_6.trigger_6_Start');
+			const trigger_6 = await this.getObjectAsync('trigger_6.trigger_6_is_set') || await this.getObjectAsync('trigger_6.trigger_6_Start');
 			if (trigger_6) {
 
 				//this.log.warn('datenpunkte trigger_6 existieren');
 				//und werden gelöscht
-				await this.delObjectAsync('trigger_6.trigger_6');
+
 				await this.delObjectAsync('trigger_6.trigger_6_is_set');
 				await this.delObjectAsync('trigger_6.trigger_6_Start');
 				await this.delObjectAsync('trigger_6.t6_weekdays');
@@ -1200,7 +1205,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				//this.log.warn('datenpunkte trigger_3 existieren');
 				//und werden gelöscht
-				//await this.delObjectAsync('trigger_3.trigger_3');
+
 				await this.delObjectAsync('trigger_3.trigger_3_is_set');
 				await this.delObjectAsync('trigger_3.trigger_3_Start');
 				await this.delObjectAsync('trigger_3.t3_weekdays');
@@ -1212,12 +1217,12 @@ class TimeSwitchClock extends utils.Adapter {
 
 			}
 
-			const trigger_4 = await this.getObjectAsync('trigger_4.trigger_4') || await this.getObjectAsync('trigger_4.trigger_4_is_set') || await this.getObjectAsync('trigger_4.trigger_4_Start');
+			const trigger_4 = await this.getObjectAsync('trigger_4.trigger_4_is_set') || await this.getObjectAsync('trigger_4.trigger_4_Start');
 			if (trigger_4) {
 
 				//this.log.warn('datenpunkte trigger_4 existieren');
 				//und werden gelöscht
-				await this.delObjectAsync('trigger_4.trigger_4');
+
 				await this.delObjectAsync('trigger_4.trigger_4_is_set');
 				await this.delObjectAsync('trigger_4.trigger_4_Start');
 				await this.delObjectAsync('trigger_4.t4_weekdays');
@@ -1229,12 +1234,12 @@ class TimeSwitchClock extends utils.Adapter {
 
 			}
 
-			const trigger_5 = await this.getObjectAsync('trigger_5.trigger_5') || await this.getObjectAsync('trigger_5.trigger_5_is_set') || await this.getObjectAsync('trigger_5.trigger_5_Start');
+			const trigger_5 = await this.getObjectAsync('trigger_5.trigger_5_is_set') || await this.getObjectAsync('trigger_5.trigger_5_Start');
 			if (trigger_5) {
 
 				//this.log.warn('datenpunkte trigger_5 existieren');
 				//und werden gelöscht
-				await this.delObjectAsync('trigger_5.trigger_5');
+
 				await this.delObjectAsync('trigger_5.trigger_5_is_set');
 				await this.delObjectAsync('trigger_5.trigger_5_Start');
 				await this.delObjectAsync('trigger_5.t5_weekdays');
@@ -1246,12 +1251,12 @@ class TimeSwitchClock extends utils.Adapter {
 
 			}
 
-			const trigger_6 = await this.getObjectAsync('trigger_6.trigger_6') || await this.getObjectAsync('trigger_6.trigger_6_is_set') || await this.getObjectAsync('trigger_6.trigger_6_Start');
+			const trigger_6 = await this.getObjectAsync('trigger_6.trigger_6_is_set') || await this.getObjectAsync('trigger_6.trigger_6_Start');
 			if (trigger_6) {
 
 				//this.log.warn('datenpunkte trigger_6 existieren');
 				//und werden gelöscht
-				await this.delObjectAsync('trigger_6.trigger_6');
+
 				await this.delObjectAsync('trigger_6.trigger_6_is_set');
 				await this.delObjectAsync('trigger_6.trigger_6_Start');
 				await this.delObjectAsync('trigger_6.t6_weekdays');
@@ -1404,12 +1409,12 @@ class TimeSwitchClock extends utils.Adapter {
 
 
 			//alle anderen Datenpunkte löschen die aus Schdedule Anzahl > 3 sind
-			const trigger_4 = await this.getObjectAsync('trigger_4.trigger_4') || await this.getObjectAsync('trigger_4.trigger_4_is_set') || await this.getObjectAsync('trigger_4.trigger_4_Start');
+			const trigger_4 = await this.getObjectAsync('trigger_4.trigger_4_is_set') || await this.getObjectAsync('trigger_4.trigger_4_Start');
 			if (trigger_4) {
 
 				//this.log.warn('datenpunkte trigger_4 existieren');
 				//und werden gelöscht
-				await this.delObjectAsync('trigger_4.trigger_4');
+
 				await this.delObjectAsync('trigger_4.trigger_4_is_set');
 				await this.delObjectAsync('trigger_4.trigger_4_Start');
 				await this.delObjectAsync('trigger_4.t4_weekdays');
@@ -1421,12 +1426,12 @@ class TimeSwitchClock extends utils.Adapter {
 
 			}
 
-			const trigger_5 = await this.getObjectAsync('trigger_5.trigger_5') || await this.getObjectAsync('trigger_5.trigger_5_is_set') || await this.getObjectAsync('trigger_5.trigger_5_Start');
+			const trigger_5 = await this.getObjectAsync('trigger_5.trigger_5_is_set') || await this.getObjectAsync('trigger_5.trigger_5_Start');
 			if (trigger_5) {
 
 				//this.log.warn('datenpunkte trigger_5 existieren');
 				//und werden gelöscht
-				await this.delObjectAsync('trigger_5.trigger_5');
+
 				await this.delObjectAsync('trigger_5.trigger_5_is_set');
 				await this.delObjectAsync('trigger_5.trigger_5_Start');
 				await this.delObjectAsync('trigger_5.t5_weekdays');
@@ -1438,12 +1443,12 @@ class TimeSwitchClock extends utils.Adapter {
 
 			}
 
-			const trigger_6 = await this.getObjectAsync('trigger_6.trigger_6') || await this.getObjectAsync('trigger_6.trigger_6_is_set') || await this.getObjectAsync('trigger_6.trigger_6_Start');
+			const trigger_6 = await this.getObjectAsync('trigger_6.trigger_6_is_set') || await this.getObjectAsync('trigger_6.trigger_6_Start');
 			if (trigger_6) {
 
 				//this.log.warn('datenpunkte trigger_6 existieren');
 				//und werden gelöscht
-				await this.delObjectAsync('trigger_6.trigger_6');
+
 				await this.delObjectAsync('trigger_6.trigger_6_is_set');
 				await this.delObjectAsync('trigger_6.trigger_6_Start');
 				await this.delObjectAsync('trigger_6.t6_weekdays');
@@ -1582,19 +1587,6 @@ class TimeSwitchClock extends utils.Adapter {
 				native: {},
 			});
 
-
-			await this.setObjectNotExistsAsync('trigger_4.trigger_4', {
-				type: 'state',
-				common: {
-					name: 'trigger_4',
-					type: 'boolean',
-					role: 'state',
-					read: true,
-					write: false,
-				},
-				native: {},
-			});
-
 			await this.setObjectNotExistsAsync('trigger_4.trigger_4_is_set', {
 				type: 'state',
 				common: {
@@ -1649,7 +1641,7 @@ class TimeSwitchClock extends utils.Adapter {
 			//this.subscribeStates('trigger_3.trigger_3');
 			this.subscribeStates('trigger_3.trigger_3_Start');
 
-			this.subscribeStates('trigger_4.trigger_4');
+			//this.subscribeStates('trigger_4.trigger_4');
 			this.subscribeStates('trigger_4.trigger_4_Start');
 
 			//this.setState('trigger_2.trigger_2', false, true);
@@ -1661,12 +1653,12 @@ class TimeSwitchClock extends utils.Adapter {
 			this.setState('trigger_4.trigger_4_Start', false, true);
 
 			//alle anderen Datenpunkte löschen die aus Schdedule Anzahl > 4 sind
-			const trigger_5 = await this.getObjectAsync('trigger_5.trigger_5') || await this.getObjectAsync('trigger_5.trigger_5_is_set') || await this.getObjectAsync('trigger_5.trigger_5_Start');
+			const trigger_5 = await this.getObjectAsync('trigger_5.trigger_5_is_set') || await this.getObjectAsync('trigger_5.trigger_5_Start');
 			if (trigger_5) {
 
 				//this.log.warn('datenpunkte trigger_5 existieren');
 				//und werden gelöscht
-				await this.delObjectAsync('trigger_5.trigger_5');
+
 				await this.delObjectAsync('trigger_5.trigger_5_is_set');
 				await this.delObjectAsync('trigger_5.trigger_5_Start');
 				await this.delObjectAsync('trigger_5.t5_weekdays');
@@ -1678,12 +1670,12 @@ class TimeSwitchClock extends utils.Adapter {
 
 			}
 
-			const trigger_6 = await this.getObjectAsync('trigger_6.trigger_6') || await this.getObjectAsync('trigger_6.trigger_6_is_set') || await this.getObjectAsync('trigger_6.trigger_6_Start');
+			const trigger_6 = await this.getObjectAsync('trigger_6.trigger_6_is_set') || await this.getObjectAsync('trigger_6.trigger_6_Start');
 			if (trigger_6) {
 
 				//this.log.warn('datenpunkte trigger_6 existieren');
 				//und werden gelöscht
-				await this.delObjectAsync('trigger_6.trigger_6');
+
 				await this.delObjectAsync('trigger_6.trigger_6_is_set');
 				await this.delObjectAsync('trigger_6.trigger_6_Start');
 				await this.delObjectAsync('trigger_6.t6_weekdays');
@@ -1822,19 +1814,6 @@ class TimeSwitchClock extends utils.Adapter {
 				native: {},
 			});
 
-
-			await this.setObjectNotExistsAsync('trigger_4.trigger_4', {
-				type: 'state',
-				common: {
-					name: 'trigger_4',
-					type: 'boolean',
-					role: 'state',
-					read: true,
-					write: false,
-				},
-				native: {},
-			});
-
 			await this.setObjectNotExistsAsync('trigger_4.trigger_4_is_set', {
 				type: 'state',
 				common: {
@@ -1880,19 +1859,6 @@ class TimeSwitchClock extends utils.Adapter {
 					role: 'state',
 					read: true,
 					write: true,
-				},
-				native: {},
-			});
-
-
-			await this.setObjectNotExistsAsync('trigger_5.trigger_5', {
-				type: 'state',
-				common: {
-					name: 'trigger_5',
-					type: 'boolean',
-					role: 'state',
-					read: true,
-					write: false,
 				},
 				native: {},
 			});
@@ -1945,21 +1911,14 @@ class TimeSwitchClock extends utils.Adapter {
 				native: {},
 			});
 
-			//this.subscribeStates('trigger_2.trigger_2');
 			this.subscribeStates('trigger_2.trigger_2_Start');
 
-			//this.subscribeStates('trigger_3.trigger_3');
 			this.subscribeStates('trigger_3.trigger_3_Start');
 
-			this.subscribeStates('trigger_4.trigger_4');
 			this.subscribeStates('trigger_4.trigger_4_Start');
 
-			this.subscribeStates('trigger_5.trigger_5');
 			this.subscribeStates('trigger_5.trigger_5_Start');
 
-			//this.setState('trigger_2.trigger_2', false, true);
-			//this.setState('trigger_3.trigger_3', false, true);
-			this.setState('trigger_4.trigger_4', false, true);
 			this.setState('trigger_5.trigger_5', false, true);
 
 			this.setState('trigger_2.trigger_2_Start', false, true);
@@ -1968,12 +1927,12 @@ class TimeSwitchClock extends utils.Adapter {
 			this.setState('trigger_5.trigger_5_Start', false, true);
 
 			//alle anderen Datenpunkte löschen die aus Schdedule Anzahl > 5 sind
-			const trigger_6 = await this.getObjectAsync('trigger_6.trigger_6') || await this.getObjectAsync('trigger_6.trigger_6_is_set') || await this.getObjectAsync('trigger_6.trigger_6_Start');
+			const trigger_6 = await this.getObjectAsync('trigger_6.trigger_6_is_set') || await this.getObjectAsync('trigger_6.trigger_6_Start');
 			if (trigger_6) {
 
 				//this.log.warn('datenpunkte trigger_6 existieren');
 				//und werden gelöscht
-				await this.delObjectAsync('trigger_6.trigger_6');
+
 				await this.delObjectAsync('trigger_6.trigger_6_is_set');
 				await this.delObjectAsync('trigger_6.trigger_6_Start');
 				await this.delObjectAsync('trigger_6.t6_weekdays');
@@ -2112,19 +2071,6 @@ class TimeSwitchClock extends utils.Adapter {
 				native: {},
 			});
 
-
-			await this.setObjectNotExistsAsync('trigger_4.trigger_4', {
-				type: 'state',
-				common: {
-					name: 'trigger_4',
-					type: 'boolean',
-					role: 'state',
-					read: true,
-					write: false,
-				},
-				native: {},
-			});
-
 			await this.setObjectNotExistsAsync('trigger_4.trigger_4_is_set', {
 				type: 'state',
 				common: {
@@ -2169,19 +2115,6 @@ class TimeSwitchClock extends utils.Adapter {
 					role: 'state',
 					read: true,
 					write: true,
-				},
-				native: {},
-			});
-
-
-			await this.setObjectNotExistsAsync('trigger_5.trigger_5', {
-				type: 'state',
-				common: {
-					name: 'trigger_5',
-					type: 'boolean',
-					role: 'state',
-					read: true,
-					write: false,
 				},
 				native: {},
 			});
@@ -2234,19 +2167,6 @@ class TimeSwitchClock extends utils.Adapter {
 				native: {},
 			});
 
-
-			await this.setObjectNotExistsAsync('trigger_6.trigger_6', {
-				type: 'state',
-				common: {
-					name: 'trigger_6',
-					type: 'boolean',
-					role: 'state',
-					read: true,
-					write: false,
-				},
-				native: {},
-			});
-
 			await this.setObjectNotExistsAsync('trigger_6.trigger_6_is_set', {
 				type: 'state',
 				common: {
@@ -2295,26 +2215,15 @@ class TimeSwitchClock extends utils.Adapter {
 				native: {},
 			});
 
-			//this.subscribeStates('trigger_2.trigger_2');
 			this.subscribeStates('trigger_2.trigger_2_Start');
 
-			//this.subscribeStates('trigger_3.trigger_3');
 			this.subscribeStates('trigger_3.trigger_3_Start');
 
-			this.subscribeStates('trigger_4.trigger_4');
 			this.subscribeStates('trigger_4.trigger_4_Start');
 
-			this.subscribeStates('trigger_5.trigger_5');
 			this.subscribeStates('trigger_5.trigger_5_Start');
 
-			this.subscribeStates('trigger_6.trigger_6');
 			this.subscribeStates('trigger_6.trigger_6_Start');
-
-			//this.setState('trigger_2.trigger_2', false, true);
-			//this.setState('trigger_3.trigger_3', false, true);
-			this.setState('trigger_4.trigger_4', false, true);
-			this.setState('trigger_5.trigger_5', false, true);
-			this.setState('trigger_6.trigger_6', false, true);
 
 			this.setState('trigger_2.trigger_2_Start', false, true);
 			this.setState('trigger_3.trigger_3_Start', false, true);
@@ -2427,7 +2336,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			};
 
-			if (id == 'time_switch_clock.0.Setup.HH') {
+			if (id == this.namespace + '.Setup.HH') {
 				Stunden();
 			}
 
@@ -2441,7 +2350,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			};
 
-			if (id == 'time_switch_clock.0.Setup.HH') {
+			if (id == this.namespace + '.Setup.HH') {
 				Minuten();
 			}
 
@@ -2460,7 +2369,7 @@ class TimeSwitchClock extends utils.Adapter {
 					this.log.error('Error SO = ' + statusSUN);
 				}};
 
-			if (id == 'time_switch_clock.0.Weekdays.Sunday') {
+			if (id == this.namespace + '.Weekdays.Sunday') {
 				Sunday();
 			}
 
@@ -2476,7 +2385,7 @@ class TimeSwitchClock extends utils.Adapter {
 					this.log.error('Error MO = ' + statusMON);
 				}};
 
-			if (id == 'time_switch_clock.0.Weekdays.Monday') {
+			if (id == this.namespace + '.Weekdays.Monday') {
 				Monday();
 			}
 
@@ -2492,7 +2401,7 @@ class TimeSwitchClock extends utils.Adapter {
 					this.log.error('Error DI = ' + statusTUE);
 				}};
 
-			if (id == 'time_switch_clock.0.Weekdays.Tuesday') {
+			if (id == this.namespace + '.Weekdays.Tuesday') {
 				Tuesday();
 			}
 
@@ -2508,7 +2417,7 @@ class TimeSwitchClock extends utils.Adapter {
 					this.log.error('Error MI = ' + statusWED);
 				}};
 
-			if (id == 'time_switch_clock.0.Weekdays.Wednesday') {
+			if (id == this.namespace + '.Weekdays.Wednesday') {
 				Wednesday();
 			}
 
@@ -2524,7 +2433,7 @@ class TimeSwitchClock extends utils.Adapter {
 					this.log.error('Error DO = ' + statusTHU);
 				}};
 
-			if (id == 'time_switch_clock.0.Weekdays.Thursday') {
+			if (id == this.namespace + '.Weekdays.Thursday') {
 				Thursday();
 			}
 
@@ -2540,7 +2449,7 @@ class TimeSwitchClock extends utils.Adapter {
 					this.log.error('Error FR = ' + statusFRI);
 				}};
 
-			if (id == 'time_switch_clock.0.Weekdays.Friday') {
+			if (id == this.namespace + '.Weekdays.Friday') {
 				Friday();
 			}
 
@@ -2556,7 +2465,7 @@ class TimeSwitchClock extends utils.Adapter {
 					this.log.error('Error SA = ' + statusSAT);
 				}};
 
-			if (id == 'time_switch_clock.0.Weekdays.Saturday') {
+			if (id == this.namespace + '.Weekdays.Saturday') {
 				Saturday();
 			}
 
