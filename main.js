@@ -264,10 +264,10 @@ class TimeSwitchClock extends utils.Adapter {
 
 			this.log.info('Schedule 1 ausgelöst!');
 
-			const waitS1 = this.setTimeout( async () => {this.log.info('Schedule 1 auf false gesetzt! - ' + timer_t1arr + ' Sek später');
+			const waitS1 = this.setTimeout( async () => {this.log.info('Schedule 1 auf false gesetzt! - ' + timer_t1arr + ' Minuten später');
 				this.setForeignStateAsync(DP_1arr.toString() , false);
 
-			}, timer_t1arr*1000);
+			}, timer_t1arr*60000);
 
 			stopp_timer1_arr = waitS1;
 
@@ -347,10 +347,10 @@ class TimeSwitchClock extends utils.Adapter {
 
 			this.log.info('Schedule 2 ausgelöst!');
 
-			const waitS2 = this.setTimeout( async () => {this.log.info('Schedule 2 auf false gesetzt! - ' + timer_t2arr + ' Sek später');
+			const waitS2 = this.setTimeout( async () => {this.log.info('Schedule 2 auf false gesetzt! - ' + timer_t2arr + ' Minuten später');
 				this.setForeignStateAsync(DP_2arr.toString() , false);
 
-			}, timer_t2arr*1000);
+			}, timer_t2arr*60000);
 
 			stopp_timer2_arr = waitS2;
 
@@ -429,10 +429,10 @@ class TimeSwitchClock extends utils.Adapter {
 
 			this.log.info('Schedule 3 ausgelöst!');
 
-			const waitS3 = this.setTimeout( async () => {this.log.info('Schedule 3 auf false gesetzt! - ' + timer_t3arr + ' Sek später');
+			const waitS3 = this.setTimeout( async () => {this.log.info('Schedule 3 auf false gesetzt! - ' + timer_t3arr + ' Minuten später');
 				this.setForeignStateAsync(DP_3arr.toString() , false);
 
-			}, timer_t3arr*1000);
+			}, timer_t3arr*60000);
 
 			stopp_timer3_arr = waitS3;
 
@@ -511,10 +511,10 @@ class TimeSwitchClock extends utils.Adapter {
 
 			this.log.info('Schedule 4 ausgelöst!');
 
-			const waitS4 = this.setTimeout( async () => {this.log.info('Schedule 4 auf false gesetzt! - ' + timer_t4arr + ' Sek später');
+			const waitS4 = this.setTimeout( async () => {this.log.info('Schedule 4 auf false gesetzt! - ' + timer_t4arr + ' Minuten später');
 				this.setForeignStateAsync(DP_4arr.toString() , false);
 
-			}, timer_t4arr*1000);
+			}, timer_t4arr*60000);
 
 			stopp_timer4_arr = waitS4;
 
@@ -593,10 +593,10 @@ class TimeSwitchClock extends utils.Adapter {
 
 			this.log.info('Schedule 5 ausgelöst!');
 
-			const waitS5 = this.setTimeout( async () => {this.log.info('Schedule 5 auf false gesetzt! - ' + timer_t5arr + ' Sek später');
+			const waitS5 = this.setTimeout( async () => {this.log.info('Schedule 5 auf false gesetzt! - ' + timer_t5arr + ' Minuten später');
 				this.setForeignStateAsync(DP_5arr.toString() , false);
 
-			}, timer_t5arr*1000);
+			}, timer_t5arr*60000);
 
 			stopp_timer5_arr = waitS5;
 
@@ -675,10 +675,10 @@ class TimeSwitchClock extends utils.Adapter {
 
 			this.log.info('Schedule 6 ausgelöst!');
 
-			const waitS6 = this.setTimeout( async () => {this.log.info('Schedule 6 auf false gesetzt! - ' + timer_t6arr + ' Sek später');
+			const waitS6 = this.setTimeout( async () => {this.log.info('Schedule 6 auf false gesetzt! - ' + timer_t6arr + ' Minuten später');
 				this.setForeignStateAsync(DP_6arr.toString() , false);
 
-			}, timer_t6arr*1000);
+			}, timer_t6arr*60000);
 
 			stopp_timer6_arr = waitS6;
 
@@ -2928,7 +2928,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				let new_HH_1 = HH_1 ? HH_1.val: '00';
 
-				if (new_HH_1 < 10 && new_HH_1.length == 1) {
+				if (new_HH_1 < 10 /*&& new_HH_1.length == 1*/) {
 
 					new_HH_1 = ('0' + HH_1.val);
 
@@ -3154,7 +3154,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				let new_mm_1 = mm_1 ? mm_1.val: '00';
 
-				if (new_mm_1 < 10 && new_mm_1.length == 1) {
+				if (new_mm_1 < 10 /*&& new_mm_1.length == 1*/) {
 
 					new_mm_1 = ('0' + mm_1.val);
 
