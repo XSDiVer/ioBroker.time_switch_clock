@@ -2629,6 +2629,36 @@ class TimeSwitchClock extends utils.Adapter {
 
 		if (state) {
 
+			/*
+			this.rewrite1 = async () => {
+
+				const t1_time_1 = await this.getStateAsync('trigger_1.t1_time');
+				const t1_time = t1_time_1.val;
+
+				let HHSet;
+				let mmSet;
+				[HHSet,mmSet]= t1_time.split(':');
+
+				await this.setStateAsync('Setup.HH',HHSet ,true);
+				await this.setStateAsync('Setup.mm',mmSet ,true);
+
+			};
+
+			const SetTrigger_1 = await this.getStateAsync('Setup.SetTrigger');
+			const SetTrigger = SetTrigger_1.val;
+
+			if (SetTrigger == 1) {
+
+				//this.rewrite1();
+
+			}
+			*/
+
+
+
+
+
+
 			const hours = await this.getStateAsync('Setup.HH');
 			const hoursval = hours ? hours.val: '00';
 
@@ -2928,7 +2958,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				let new_HH_1 = HH_1 ? HH_1.val: '00';
 
-				if (new_HH_1 < 10 /*&& new_HH_1.length == 1*/) {
+				if (new_HH_1 < 10 && new_HH_1.length == 1) {
 
 					new_HH_1 = ('0' + HH_1.val);
 
@@ -3154,7 +3184,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				let new_mm_1 = mm_1 ? mm_1.val: '00';
 
-				if (new_mm_1 < 10 /*&& new_mm_1.length == 1*/) {
+				if (new_mm_1 < 10 && new_mm_1.length == 1) {
 
 					new_mm_1 = ('0' + mm_1.val);
 
