@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "time_switch_clock",
-        "version": "0.0.4",
+        "version": "0.0.5",
         "news": {
+            "0.0.5": {
+                "en": "NPM fix",
+                "de": "NPM fix",
+                "ru": "NPM исправить",
+                "pt": "NPM correção",
+                "nl": "NPM",
+                "fr": "NPM fix",
+                "it": "Correzione NPM",
+                "es": "NPM fix",
+                "pl": "NPM",
+                "zh-cn": "NPM fix"
+            },
             "0.0.4": {
                 "en": "Beta Version with example VIS View (needs Inventwo Widges)\nand added some datapoints",
                 "de": "Beta Version mit Beispiel VIS View (benötigt Inventwo Widges)\nund einige datenpunkte hinzugefügt",
