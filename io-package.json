@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "time_switch_clock",
-        "version": "0.0.3",
+        "version": "0.0.4",
         "news": {
+            "0.0.4": {
+                "en": "Beta Version with example VIS View (needs Inventwo Widges)\nand added some datapoints",
+                "de": "Beta Version mit Beispiel VIS View (benötigt Inventwo Widges)\nund einige datenpunkte hinzugefügt",
+                "ru": "Beta Version с примером VIS View (обязательно Inventwo Widges)\nи добавили некоторые пункты данных",
+                "pt": "Versão Beta com exemplo VIS View (necessidade de Inventwo Widges)\ne adicionou alguns datapoints",
+                "nl": "Beta Version met voorbeeld VIS View (needs Inventwo Widges)\nen wat gegevens toevoegen",
+                "fr": "Beta Version avec exemple VIS View (néces Inventwo Widges)\net ajouté quelques points de données",
+                "it": "Versione Beta con esempio VIS View (bisogno Inventwo Widges)\ne aggiunto alcuni datapoint",
+                "es": "Versión beta con ejemplo VIS View (necesidades Inventwo Widges)\ny agregar algunos puntos de datos",
+                "pl": "Beta Version with the VS View (ang.)\ni dodał niektóre punkty danych",
+                "zh-cn": "Beta Version with example VIS View(needs Inventwo Widges)\n增加一些数据点"
+            },
             "0.0.3": {
                 "en": "Beta Version without VIS Widget",
                 "de": "Beta Version ohne VIS Widget",
@@ -28,7 +40,7 @@
                 "zh-cn": "????"
             }
         },
-            "titleLang": {
+        "titleLang": {
             "en": "time_switch_clock",
             "de": "Zeitschaltuhr",
             "ru": "time_switch_clock",
