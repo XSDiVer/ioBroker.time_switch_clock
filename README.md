@@ -73,7 +73,8 @@ Einfach im VIS unter VIEW importieren - (copy & paste)
 -- todo: Astro Funktionen sollten implementiert werden.
 
 ## Changelog
-<!-- Platzhalter für nächstes Change Log. -->
+Beta Version with example VIS View (needs Inventwo Widges)
+and added some datapoints
 
 ### 0.0.3 (2022-07-12)
 * Beta Version with example VIS View (needs Inventwo Widges)
