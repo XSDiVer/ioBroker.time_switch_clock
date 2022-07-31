@@ -18,14 +18,13 @@ Timer for e.g. water valves or other things
 ![Screenshot_1](https://github.com/XSDiVer/ioBroker.time_switch_clock/blob/main/Docs/img/Screenshot_1.png)
 
 
-goforit_1           = der Datenpunkt der geschaltet werden soll
-t1_time             = Startuhrzeit - wann der DP auf True gsetzt werden soll im Format HH:MM
-t1_weekdays         = An welchen Wochentagen geschaltet werden soll (Sonntag = 0 bis Samstag = 6)
-timer_1             = Nach wievielen Minuten der DP wieder auf False gesetzt werden soll
-trigger_1_Start     = wenn der wert auf True gesetzt wird ist der Trigger aktiv und schaltet
-trigger_1_is_set    = wenn trigger_1_Start True ist- werden hier nochmal Wochentage und Uhrzeit angezeigt /
-                        wenn trigger_1_Start auf False steht zeigt DP 'not scheduled' an.
-
+goforit_1           = der Datenpunkt der geschaltet werden soll<br />
+t1_time             = Startuhrzeit - wann der DP auf True gsetzt werden soll im Format HH:MM<br />
+t1_weekdays         = An welchen Wochentagen geschaltet werden soll (Sonntag = 0 bis Samstag = 6)<br />
+timer_1             = Nach wievielen Minuten der DP wieder auf False gesetzt werden soll<br />
+trigger_1_Start     = wenn der wert auf True gesetzt wird ist der Trigger aktiv und schaltet<br />
+trigger_1_is_set    = wenn trigger_1_Start True ist- werden hier nochmal Wochentage und Uhrzeit angezeigt /<br />
+                        wenn trigger_1_Start auf False steht zeigt DP 'not scheduled' an.<br />
 
 Dieser Adapter löst bis zu 6 verschiedene Datenpunkte in "goforit" muss im jeweiligen Trigger eingetragen werden,
 welcher Datenpunkt ausgelöst werden soll. Einfach die _id des ensprechenden Datenpunktes kopieren und in goforit einfügen.
