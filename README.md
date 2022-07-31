@@ -15,7 +15,7 @@
 
 Timer for e.g. water valves or other things
 
-<img src=“https://github.com/XSDiVer/ioBroker.time_switch_clock/blob/main/Docs/Screenshot_1.png“>
+![Screenshot_1](./img/Screenshot_1.png)
 
 
 Dieser Adapter löst bis zu 6 verschiedene Datenpunkte in "goforit" muss im jeweiligen Trigger eingetragen werden,
