@@ -53,6 +53,8 @@ Einfach im VIS unter VIEW importieren - (copy & paste)
  
 <a href="https://github.com/XSDiVer/ioBroker.time_switch_clock/blob/main/Docs/example_View_inventwo"> example VIS View</a>
 
+![Screenshot_VIS](https://github.com/XSDiVer/ioBroker.time_switch_clock/blob/main/Docs/img/Screenshot_VIS.png)
+
 -- todo: Astro Funktionen sollten implementiert werden.
 
 ## Changelog
