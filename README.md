@@ -74,7 +74,7 @@ Einfach im VIS unter VIEW importieren - (copy & paste)
 
 ## Changelog
 
-### **WORK IN PROGRESS**
+### 0.0.6 (2022-07-31)
 * added bluefox to collaborators on NPM
 
 ### 0.0.5 (2022-07-31)

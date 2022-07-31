@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "time_switch_clock",
-        "version": "0.0.5",
+        "version": "0.0.6",
         "news": {
+            "0.0.6": {
+                "en": "added bluefox to collaborators on NPM",
+                "de": "bluefox zu Mitarbeitern auf NPM hinzugefügt",
+                "ru": "добавлено bluefox для сотрудничества в NPM",
+                "pt": "adicionado bluefox para colaboradores no NPM",
+                "nl": "voegde Bluefox toe aan collaborateurs op NPM",
+                "fr": "ajouté bluefox aux collaborateurs sur NPM",
+                "it": "aggiunto bluefox a collaboratori su NPM",
+                "es": "añadido bluefox a colaboradores en NPM",
+                "pl": "dodał także dodatki do kompilatorów na NPM",
+                "zh-cn": "加入国家预防机制的协作者"
+            },
             "0.0.5": {
                 "en": "NPM fix",
                 "de": "NPM fix",
