@@ -74,7 +74,7 @@ Einfach im VIS unter VIEW importieren - (copy & paste)
 
 ## Changelog
 
-## **WORK IN PROGRESS**
+### **WORK IN PROGRESS**
 * NPM fix
 
 ### 0.0.4 (2022-07-31)
