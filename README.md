@@ -74,7 +74,7 @@ Einfach im VIS unter VIEW importieren - (copy & paste)
 
 ## Changelog
 ### 0.0.4 (2022-07-31)
-Beta Version with example VIS View (needs Inventwo Widges)
+* Beta Version with example VIS View (needs Inventwo Widges)
 and added some datapoints
 
 ### 0.0.3 (2022-07-12)
