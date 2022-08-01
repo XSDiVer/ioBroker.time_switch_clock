@@ -13,7 +13,9 @@
 
 ## time_switch_clock adapter for ioBroker
 
-Timer for e.g. water valves or other things
+Timer for e.g. water valves or lamps e.t.c.
+
+Dieser Adapter löst bis zu 6 verschiedene Datenpunkte aus.
 
 ![Screenshot_1](https://github.com/XSDiVer/ioBroker.time_switch_clock/blob/main/Docs/img/Screenshot_1.png)
 
@@ -31,8 +33,8 @@ Timer for e.g. water valves or other things
 Hier wird einfach die id des entsprechenden Datenpunkts rein kopiert:
 
 ![Screenshot_id](https://github.com/XSDiVer/ioBroker.time_switch_clock/blob/main/Docs/img/Screenshot_id.png)
-
-Dieser Adapter löst bis zu 6 verschiedene Datenpunkte in "goforit" muss im jeweiligen Trigger eingetragen werden,
+ 
+In "goforit" muss im jeweiligen Trigger eingetragen werden,
 welcher Datenpunkt ausgelöst werden soll. Einfach die _id des ensprechenden Datenpunktes kopieren und in goforit einfügen.
 Zur eingestellten Zeit wird dieser Datenpunkt dann auf "true" gesetzt.
 
