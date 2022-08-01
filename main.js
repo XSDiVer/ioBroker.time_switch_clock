@@ -703,7 +703,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				} else if (SetSchedule.length == 0) {
 
-					this.log.error('Kein Wochentag gesetzt bei Trigger 1!');
+					//this.log.error('Kein Wochentag gesetzt bei Trigger 1!');
 					//this.log.warn('SetSchedule -- 1 -- ' + SetSchedule);
 
 				} else if (typeof this.mySchedule_1 == 'undefined') {
@@ -738,7 +738,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				} else if (SetSchedule.length == 0) {
 
-					this.log.error('Kein Wochentag gesetzt bei Trigger 2!');
+					//this.log.error('Kein Wochentag gesetzt bei Trigger 2!');
 					//this.log.warn('SetSchedule -- 1 -- ' + SetSchedule);
 
 				} else if (typeof this.mySchedule_2 == 'undefined') {
@@ -773,7 +773,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				} else if (SetSchedule.length == 0) {
 
-					this.log.error('Kein Wochentag gesetzt bei Trigger 3!');
+					//this.log.error('Kein Wochentag gesetzt bei Trigger 3!');
 					//this.log.warn('SetSchedule -- 1 -- ' + SetSchedule);
 
 				} else if (typeof this.mySchedule_3 == 'undefined') {
@@ -808,7 +808,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				} else if (SetSchedule.length == 0) {
 
-					this.log.error('Kein Wochentag gesetzt bei Trigger 4!');
+					//this.log.error('Kein Wochentag gesetzt bei Trigger 4!');
 					//this.log.warn('SetSchedule -- 1 -- ' + SetSchedule);
 
 				} else if (typeof this.mySchedule_4 == 'undefined') {
@@ -843,7 +843,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				} else if (SetSchedule.length == 0) {
 
-					this.log.error('Kein Wochentag gesetzt bei Trigger 5!');
+					//this.log.error('Kein Wochentag gesetzt bei Trigger 5!');
 					//this.log.warn('SetSchedule -- 1 -- ' + SetSchedule);
 
 				} else if (typeof this.mySchedule_5 == 'undefined') {
@@ -878,7 +878,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				} else if (SetSchedule.length == 0) {
 
-					this.log.error('Kein Wochentag gesetzt bei Trigger 6!');
+					//this.log.error('Kein Wochentag gesetzt bei Trigger 6!');
 					//this.log.warn('SetSchedule -- 1 -- ' + SetSchedule);
 
 				} else if (typeof this.mySchedule_6 == 'undefined') {
