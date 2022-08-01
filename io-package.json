@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "time_switch_clock",
-        "version": "0.0.6",
+        "version": "0.0.7",
         "news": {
+            "0.0.7": {
+                "en": "some fixes",
+                "de": "einige korrekturen",
+                "ru": "некоторые исправления",
+                "pt": "algumas correções",
+                "nl": "wat reparaties",
+                "fr": "quelques corrections",
+                "it": "alcune correzioni",
+                "es": "algunos arreglos",
+                "pl": "pewne rozwiązanie",
+                "zh-cn": "有些缺陷"
+            },
             "0.0.6": {
                 "en": "added bluefox to collaborators on NPM",
                 "de": "bluefox zu Mitarbeitern auf NPM hinzugefügt",

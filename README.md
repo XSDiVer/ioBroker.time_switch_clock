@@ -76,7 +76,7 @@ Einfach im VIS unter VIEW importieren - (copy & paste)
 
 ## Changelog
 
-### **WORK IN PROGRESS**
+### 0.0.7 (2022-08-01)
 * some fixes
 
 ### 0.0.6 (2022-07-31)
