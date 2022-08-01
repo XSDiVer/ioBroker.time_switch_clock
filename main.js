@@ -708,7 +708,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				} else if (typeof this.mySchedule_1 == 'undefined') {
 
-					this.log.info('Schedule_1 nothing to cancel' );
+					//this.log.info('Schedule_1 nothing to cancel' );
 
 				} else {
 
@@ -743,7 +743,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				} else if (typeof this.mySchedule_2 == 'undefined') {
 
-					this.log.info('Schedule_2 nothing to cancel' );
+					//this.log.info('Schedule_2 nothing to cancel' );
 
 				} else {
 
@@ -778,7 +778,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				} else if (typeof this.mySchedule_3 == 'undefined') {
 
-					this.log.info('Schedule_3 nothing to cancel' );
+					//this.log.info('Schedule_3 nothing to cancel' );
 
 				} else {
 
@@ -813,7 +813,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				} else if (typeof this.mySchedule_4 == 'undefined') {
 
-					this.log.info('Schedule_4 nothing to cancel' );
+					//this.log.info('Schedule_4 nothing to cancel' );
 
 				} else {
 
@@ -848,7 +848,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				} else if (typeof this.mySchedule_5 == 'undefined') {
 
-					this.log.info('Schedule_5 nothing to cancel' );
+					//this.log.info('Schedule_5 nothing to cancel' );
 
 				} else {
 
@@ -883,7 +883,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				} else if (typeof this.mySchedule_6 == 'undefined') {
 
-					this.log.info('Schedule_6 nothing to cancel' );
+					//this.log.info('Schedule_6 nothing to cancel' );
 
 				} else {
 
@@ -2748,65 +2748,6 @@ class TimeSwitchClock extends utils.Adapter {
 	async onStateChange(id, state) {
 
 		if (state) {
-
-			/*
-			this.rewrite1 = async () => {
-
-				const t1_time_1 = await this.getStateAsync('trigger_1.t1_time');
-				const t1_time = t1_time_1.val;
-
-				const [hh, mm] = t1_time.split(':');
-				const hh_1 = hh ? hh: 'not';
-				const mm_1 = mm ? mm: 'set';
-
-				await this.setStateAsync('Setup.HH',HHSet ,true);
-				await this.setStateAsync('Setup.mm',mmSet ,true);
-
-			};
-
-			const SetTrigger_1 = await this.getStateAsync('Setup.SetTrigger');
-			const SetTrigger = SetTrigger_1.val;
-
-			if (SetTrigger == 1) {
-
-				//this.rewrite1();
-
-			}
-			*/
-
-
-
-
-
-
-			const hours = await this.getStateAsync('Setup.HH');
-			const hoursval = hours ? hours.val: '00';
-
-			const Stunden = async () => {
-
-				this.log.info('HH wurde geändert -- ' + hoursval);
-
-			};
-
-			if (id == this.namespace + '.Setup.HH') {
-				Stunden();
-			}
-
-
-			const minutes = await this.getStateAsync('Setup.mm');
-			const minutesval = minutes ? minutes.val: '00';
-
-			const Minuten = async () => {
-
-				this.log.info('mm wurden geändert -- ' + minutesval);
-
-			};
-
-			if (id == this.namespace + '.Setup.mm') {
-				Minuten();
-			}
-
-
 
 			//bei Änderung der Datenpunkte true oder false auswerten
 			const SUN = await this.getStateAsync('Weekdays.Sunday');
