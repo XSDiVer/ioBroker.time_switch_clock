@@ -13,11 +13,6 @@
 
 ## time_switch_clock adapter for ioBroker
 
-
-Bitte nicht installieren - das Log wird vollgeschrieben, weil ein paar Datenpunkte nicht gesetzt sind.
-Ich bitte noch um etwas Geduld...
-
-
 Timer for e.g. water valves or lamps e.t.c.
 
 Dieser Adapter löst bis zu 6 verschiedene Datenpunkte aus.

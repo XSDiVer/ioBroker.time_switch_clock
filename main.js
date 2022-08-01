@@ -323,7 +323,7 @@ class TimeSwitchClock extends utils.Adapter {
 			} else if (SetSchedule.length == 0 || weekdays_t2arr.length == 0) {
 
 
-				this.log.error('Kein Wochentag gesetzt bei Schedule 1');
+				this.log.error('Kein Wochentag gesetzt bei Schedule 2');
 				this.setStateAsync('trigger_2.trigger_2_Start', false, true);
 
 			}
@@ -699,11 +699,12 @@ class TimeSwitchClock extends utils.Adapter {
 
 				} else if (this.HH < 0 || this.HH > 23 || this.MM < 0 || this.MM > 59) {
 
-					this.log.error('Keine gültige Uhrzeit!');
+					this.log.error('Keine gültige Uhrzeit bei Trigger 1!');
 
 				} else if (SetSchedule.length == 0) {
 
-					this.log.error('Kein Wochentag gesetzt!');
+					this.log.error('Kein Wochentag gesetzt bei Trigger 1!');
+					//this.log.warn('SetSchedule -- 1 -- ' + SetSchedule);
 
 				} else if (typeof this.mySchedule_1 == 'undefined') {
 
@@ -711,11 +712,11 @@ class TimeSwitchClock extends utils.Adapter {
 
 				} else {
 
-					this.log.error('Unknown Error -- 347');
+					this.log.error('Keine gültige Uhrzeit bei Schedule 1!');
 
 				}} catch (e) {
 
-				this.log.error('catch -- ' + e);
+				this.log.error('catch trigger 1 -- ' + e);
 
 			}
 
@@ -724,121 +725,176 @@ class TimeSwitchClock extends utils.Adapter {
 
 		this.cancelSchedule_2 = async () => {
 
+			this.HH = time_t2arr[0];
+			this.MM = time_t2arr[1];
+
 			try {
-				this.HH = Time[0];
-				this.MM = Time[1];
-				if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59) {
+				if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59 && typeof this.mySchedule_2 !== 'undefined') {
 					this.mySchedule_2.cancel() && this.log.info('Schedule 2 wurde gelöscht!');
 
 				} else if (this.HH < 0 || this.HH > 23 || this.MM < 0 || this.MM > 59) {
 
-					this.log.error('Keine gültige Uhrzeit!');
+					this.log.error('Keine gültige Uhrzeit bei Trigger 2!');
 
 				} else if (SetSchedule.length == 0) {
 
-					//this.log.error('Kein Wochentag gesetzt!');
-				}
-			} catch (notinuse) {
+					this.log.error('Kein Wochentag gesetzt bei Trigger 2!');
+					//this.log.warn('SetSchedule -- 1 -- ' + SetSchedule);
 
-				//this.log.info('Schedule_2_Start ist false' + notinuse);
+				} else if (typeof this.mySchedule_2 == 'undefined') {
+
+					this.log.info('Schedule_2 nothing to cancel' );
+
+				} else {
+
+					this.log.error('Keine gültige Uhrzeit bei Schedule 2!');
+
+				}} catch (e) {
+
+				this.log.error('catch trigger 2 -- ' + e);
 
 			}
+
 		};
 
 
 		this.cancelSchedule_3 = async () => {
 
+			this.HH = time_t3arr[0];
+			this.MM = time_t3arr[1];
+
 			try {
-				this.HH = Time[0];
-				this.MM = Time[1];
-				if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59) {
+				if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59 && typeof this.mySchedule_3 !== 'undefined') {
 					this.mySchedule_3.cancel() && this.log.info('Schedule 3 wurde gelöscht!');
 
 				} else if (this.HH < 0 || this.HH > 23 || this.MM < 0 || this.MM > 59) {
 
-					this.log.error('Keine gültige Uhrzeit!');
+					this.log.error('Keine gültige Uhrzeit bei Trigger 3!');
 
 				} else if (SetSchedule.length == 0) {
 
-					//this.log.error('Kein Wochentag gesetzt!');
-				}
-			} catch (notinuse) {
+					this.log.error('Kein Wochentag gesetzt bei Trigger 3!');
+					//this.log.warn('SetSchedule -- 1 -- ' + SetSchedule);
 
-				//this.log.info('Schedule_3_Start ist false' + notinuse);
+				} else if (typeof this.mySchedule_3 == 'undefined') {
+
+					this.log.info('Schedule_3 nothing to cancel' );
+
+				} else {
+
+					this.log.error('Keine gültige Uhrzeit bei Schedule 3!');
+
+				}} catch (e) {
+
+				this.log.error('catch trigger 3 -- ' + e);
 
 			}
+
 		};
 
 
 		this.cancelSchedule_4 = async () => {
 
+			this.HH = time_t4arr[0];
+			this.MM = time_t4arr[1];
+
 			try {
-				this.HH = Time[0];
-				this.MM = Time[1];
-				if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59) {
+				if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59 && typeof this.mySchedule_4 !== 'undefined') {
 					this.mySchedule_4.cancel() && this.log.info('Schedule 4 wurde gelöscht!');
 
 				} else if (this.HH < 0 || this.HH > 23 || this.MM < 0 || this.MM > 59) {
 
-					this.log.error('Keine gültige Uhrzeit!');
+					this.log.error('Keine gültige Uhrzeit bei Trigger 4!');
 
 				} else if (SetSchedule.length == 0) {
 
-					//this.log.error('Kein Wochentag gesetzt!');
-				}
-			} catch (notinuse) {
+					this.log.error('Kein Wochentag gesetzt bei Trigger 4!');
+					//this.log.warn('SetSchedule -- 1 -- ' + SetSchedule);
 
-				this.log.info('Schedule_4_Start ist false' + notinuse);
+				} else if (typeof this.mySchedule_4 == 'undefined') {
+
+					this.log.info('Schedule_4 nothing to cancel' );
+
+				} else {
+
+					this.log.error('Keine gültige Uhrzeit bei Schedule 4!');
+
+				}} catch (e) {
+
+				this.log.error('catch trigger 4 -- ' + e);
 
 			}
+
 		};
 
 
 		this.cancelSchedule_5 = async () => {
 
+			this.HH = time_t5arr[0];
+			this.MM = time_t5arr[1];
+
 			try {
-				this.HH = Time[0];
-				this.MM = Time[1];
-				if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59) {
+				if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59 && typeof this.mySchedule_5 !== 'undefined') {
 					this.mySchedule_5.cancel() && this.log.info('Schedule 5 wurde gelöscht!');
 
 				} else if (this.HH < 0 || this.HH > 23 || this.MM < 0 || this.MM > 59) {
 
-					this.log.error('Keine gültige Uhrzeit!');
+					this.log.error('Keine gültige Uhrzeit bei Trigger 5!');
 
 				} else if (SetSchedule.length == 0) {
 
-					//this.log.error('Kein Wochentag gesetzt!');
-				}
-			} catch (notinuse) {
+					this.log.error('Kein Wochentag gesetzt bei Trigger 5!');
+					//this.log.warn('SetSchedule -- 1 -- ' + SetSchedule);
 
-				this.log.info('Schedule_5_Start ist false' + notinuse);
+				} else if (typeof this.mySchedule_5 == 'undefined') {
+
+					this.log.info('Schedule_5 nothing to cancel' );
+
+				} else {
+
+					this.log.error('Keine gültige Uhrzeit bei Schedule 5!');
+
+				}} catch (e) {
+
+				this.log.error('catch trigger 5 -- ' + e);
 
 			}
+
 		};
 
 
 		this.cancelSchedule_6 = async () => {
 
+			this.HH = time_t6arr[0];
+			this.MM = time_t6arr[1];
+
 			try {
-				this.HH = Time[0];
-				this.MM = Time[1];
-				if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59) {
+				if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59 && typeof this.mySchedule_6 !== 'undefined') {
 					this.mySchedule_6.cancel() && this.log.info('Schedule 6 wurde gelöscht!');
 
 				} else if (this.HH < 0 || this.HH > 23 || this.MM < 0 || this.MM > 59) {
 
-					this.log.error('Keine gültige Uhrzeit!');
+					this.log.error('Keine gültige Uhrzeit bei Trigger 6!');
 
 				} else if (SetSchedule.length == 0) {
 
-					//this.log.error('Kein Wochentag gesetzt!');
-				}
-			} catch (notinuse) {
+					this.log.error('Kein Wochentag gesetzt bei Trigger 6!');
+					//this.log.warn('SetSchedule -- 1 -- ' + SetSchedule);
 
-				this.log.info('Schedule_6_Start ist false' + notinuse);
+				} else if (typeof this.mySchedule_6 == 'undefined') {
+
+					this.log.info('Schedule_6 nothing to cancel' );
+
+				} else {
+
+					this.log.error('Keine gültige Uhrzeit bei Schedule 6!');
+
+				}} catch (e) {
+
+				this.log.error('catch trigger 6 -- ' + e);
 
 			}
+
 		};
 
 		//Cancel Schedules ENDE
@@ -2635,9 +2691,9 @@ class TimeSwitchClock extends utils.Adapter {
 				const t1_time_1 = await this.getStateAsync('trigger_1.t1_time');
 				const t1_time = t1_time_1.val;
 
-				let HHSet;
-				let mmSet;
-				[HHSet,mmSet]= t1_time.split(':');
+				const [hh, mm] = t1_time.split(':');
+				const hh_1 = hh ? hh: 'not';
+				const mm_1 = mm ? mm: 'set';
 
 				await this.setStateAsync('Setup.HH',HHSet ,true);
 				await this.setStateAsync('Setup.mm',mmSet ,true);
@@ -3287,7 +3343,8 @@ class TimeSwitchClock extends utils.Adapter {
 				} else if (goforit == 'None') {
 
 					this.setStateAsync('trigger_1.trigger_1_Start', false, true);
-					this.log.error('Kein Datenpunkt zum triggern gesetzt in Schedule 1!');
+					this.log.error('Kein Datenpunkt zum triggern gesetzt in Schedule 1! Bitte ändern!');
+					this.setStateAsync('trigger_1.goforit_1', 'please_Set', true);
 
 				}
 
@@ -3301,12 +3358,18 @@ class TimeSwitchClock extends utils.Adapter {
 				} else if (timer == '') {
 
 					this.setStateAsync('trigger_1.trigger_1_Start', false, true);
-					this.log.error('Keine gültige Zeit in Sekunden bei "timer" angegeben, wann Schedule 1 wieder auf false gesetzt werden soll!');
+					this.log.error('Keine gültige Zeit in Minuten bei "timer" angegeben, wann Schedule 1 wieder auf false gesetzt werden soll!');
+					this.setStateAsync('trigger_1.timer_1', 'please_Set', true);
 
 				} else if (timer <= 0) {
 
 					this.setStateAsync('trigger_1.trigger_1_Start', false, true);
 					this.log.error('"timer" darf keinen negativen Wert haben, bei Trigger 1 bitte korrigieren!');
+					this.setStateAsync('trigger_1.timer_1', 'please_Set', true);
+
+				} else {
+
+					//this.setStateAsync('trigger_1.timer_1', 'please_Set', true);
 
 				}
 
@@ -3317,6 +3380,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 
 					if (StatusTriggerStart == true && SetTrigger == 1) {
+
 
 						weekdays_t1arr = SetSchedule;
 
@@ -3337,21 +3401,30 @@ class TimeSwitchClock extends utils.Adapter {
 							const time_1 = await this.getStateAsync('trigger_1.t1_time');
 							const read_time_1 = time_1.val;
 
-							const [hh, mm] = read_time_1.split(':');
-							const hh_1 = hh ? hh: 'not';
-							const mm_1 = mm ? mm: 'set';
+							if (read_time_1 == '') {
 
-							time_t1arr.splice(0,1, hh_1);
-							time_t1arr.splice(1,1, mm_1);
+								this.log.error('Uhrzeit bei Trigger 1 muss gesetzt werden!');
+								this.setStateAsync('trigger_1.t1_time', 'please_Set', true);
+								this.setStateAsync('trigger_1.trigger_1_Start', false, true);
 
-							const weekdays_t1 = await this.getStateAsync('trigger_1.t1_weekdays');
-							const weekdays_t1_val = JSON.parse(weekdays_t1.val);
+							} else {
 
-							weekdays_t1arr = weekdays_t1_val;
+								const [hh, mm] = read_time_1.split(':');
+								const hh_1 = hh ? hh: 'not';
+								const mm_1 = mm ? mm: 'set';
 
-							this.setStateAsync('trigger_1.trigger_1_is_set', hh_1 + ':' + mm_1 + ' -- ' + weekdays_t1arr, true);
+								time_t1arr.splice(0,1, hh_1);
+								time_t1arr.splice(1,1, mm_1);
 
-							this.Schedule_1();
+								const weekdays_t1 = await this.getStateAsync('trigger_1.t1_weekdays');
+								const weekdays_t1_val = JSON.parse(weekdays_t1.val);
+
+								weekdays_t1arr = weekdays_t1_val;
+
+								this.setStateAsync('trigger_1.trigger_1_is_set', hh_1 + ':' + mm_1 + ' -- ' + weekdays_t1arr, true);
+
+								this.Schedule_1();
+							}
 
 						} catch (e1) {
 
@@ -3413,6 +3486,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 					this.setStateAsync('trigger_2.trigger_2_Start', false, true);
 					this.log.error('Kein Datenpunkt zum triggern gesetzt in Schedule 2!');
+					this.setStateAsync('trigger_2.goforit_2', 'please_Set', true);
 
 				}
 
@@ -3426,7 +3500,7 @@ class TimeSwitchClock extends utils.Adapter {
 				} else if (timer == '') {
 
 					this.setStateAsync('trigger_2.trigger_2_Start', false, true);
-					this.log.error('Keine gültige Zeit in Sekunden bei "timer" angegeben, wann Schedule 2 wieder auf false gesetzt werden soll!');
+					this.log.error('Keine gültige Zeit in Minuten bei "timer" angegeben, wann Schedule 2 wieder auf false gesetzt werden soll!');
 
 				} else if (timer <= 0) {
 
@@ -3538,6 +3612,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 					this.setStateAsync('trigger_3.trigger_3_Start', false, true);
 					this.log.error('Kein Datenpunkt zum triggern gesetzt in Schedule 3!');
+					this.setStateAsync('trigger_3.goforit_3', 'please_Set', true);
 
 				}
 
@@ -3551,7 +3626,7 @@ class TimeSwitchClock extends utils.Adapter {
 				} else if (timer == '') {
 
 					this.setStateAsync('trigger_3.trigger_3_Start', false, true);
-					this.log.error('Keine gültige Zeit in Sekunden bei "timer" angegeben, wann Schedule 3 wieder auf false gesetzt werden soll!');
+					this.log.error('Keine gültige Zeit in Minuten bei "timer" angegeben, wann Schedule 3 wieder auf false gesetzt werden soll!');
 
 				} else if (timer <= 0) {
 
@@ -3661,6 +3736,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 					this.setStateAsync('trigger_4.trigger_4_Start', false, true);
 					this.log.error('Kein Datenpunkt zum triggern gesetzt in Schedule 4!');
+					this.setStateAsync('trigger_4.goforit_4', 'please_Set', true);
 
 				}
 
@@ -3674,7 +3750,7 @@ class TimeSwitchClock extends utils.Adapter {
 				} else if (timer == '') {
 
 					this.setStateAsync('trigger_4.trigger_4_Start', false, true);
-					this.log.error('Keine gültige Zeit in Sekunden bei "timer" angegeben, wann Schedule 4 wieder auf false gesetzt werden soll!');
+					this.log.error('Keine gültige Zeit in Minuten bei "timer" angegeben, wann Schedule 4 wieder auf false gesetzt werden soll!');
 
 				} else if (timer <= 0) {
 
@@ -3784,6 +3860,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 					this.setStateAsync('trigger_5.trigger_5_Start', false, true);
 					this.log.error('Kein Datenpunkt zum triggern gesetzt in Schedule 5!');
+					this.setStateAsync('trigger_5.goforit_5', 'please_Set', true);
 
 				}
 
@@ -3797,7 +3874,7 @@ class TimeSwitchClock extends utils.Adapter {
 				} else if (timer == '') {
 
 					this.setStateAsync('trigger_5.trigger_5_Start', false, true);
-					this.log.error('Keine gültige Zeit in Sekunden bei "timer" angegeben, wann Schedule 5 wieder auf false gesetzt werden soll!');
+					this.log.error('Keine gültige Zeit in Minuten bei "timer" angegeben, wann Schedule 5 wieder auf false gesetzt werden soll!');
 
 				} else if (timer <= 0) {
 
@@ -3907,6 +3984,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 					this.setStateAsync('trigger_6.trigger_6_Start', false, true);
 					this.log.error('Kein Datenpunkt zum triggern gesetzt in Schedule 6!');
+					this.setStateAsync('trigger_6.goforit_6', 'please_Set', true);
 
 				}
 
@@ -3920,7 +3998,7 @@ class TimeSwitchClock extends utils.Adapter {
 				} else if (timer == '') {
 
 					this.setStateAsync('trigger_6.trigger_6_Start', false, true);
-					this.log.error('Keine gültige Zeit in Sekunden bei "timer" angegeben, wann Schedule 6 wieder auf false gesetzt werden soll!');
+					this.log.error('Keine gültige Zeit in Minuten bei "timer" angegeben, wann Schedule 6 wieder auf false gesetzt werden soll!');
 
 				} else if (timer <= 0) {
 
