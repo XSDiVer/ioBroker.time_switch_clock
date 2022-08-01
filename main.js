@@ -213,7 +213,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				this.mySchedule_1 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*' + ' ' + '*' + ' ' + WDays.toString().trim(), async () =>
 					this.setForeignStateAsync(goandtrigger.toString() , true) && this.Schedule_1_go());
-				this.setStateAsync('trigger_1.trigger_1_is_set', '' + HH + ':' + MM + ' -- ' + WDays, true) + this.log.info('next Schedule 1 -- ' + this.mySchedule_1.nextInvocation());
+				this.setStateAsync('trigger_1.trigger_1_is_set', '' + HH + ':' + MM + ' -- ' + WDays, true) /*+ this.log.info('next Schedule 1 -- ' + this.mySchedule_1.nextInvocation())*/;
 
 			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_1 == 'undefined' && SetTrigger == 1 && SetSchedule.length !== 0) {
 
@@ -229,7 +229,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				this.mySchedule_1 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*' + ' ' + '*' + ' ' + WDaysarr.toString().trim(), async () =>
 					this.setForeignStateAsync(goandtrigger.toString() , true) && this.Schedule_1_go());
-				this.setStateAsync('trigger_1.trigger_1_is_set', '' + HH + ':' + MM + ' -- ' + WDaysarr, true) + this.log.info('next Schedule 1 -- ' + this.mySchedule_1.nextInvocation());
+				this.setStateAsync('trigger_1.trigger_1_is_set', '' + HH + ':' + MM + ' -- ' + WDaysarr, true) /*+ this.log.info('next Schedule 1 -- ' + this.mySchedule_1.nextInvocation())*/;
 
 			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_1 == 'undefined' && SetTrigger !== 1 && weekdays_t1arr.length !== 0) {
 
@@ -296,7 +296,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				this.mySchedule_2= schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDays.toString().trim(), async () =>
 					this.setForeignStateAsync(goandtrigger.toString() , true) && this.Schedule_2_go());
-				this.setStateAsync('trigger_2.trigger_2_is_set', '' + HH + ':' + MM + ' -- ' + WDays, true) + this.log.info('next Schedule 2 -- ' + this.mySchedule_2.nextInvocation());
+				this.setStateAsync('trigger_2.trigger_2_is_set', '' + HH + ':' + MM + ' -- ' + WDays, true) /*+ this.log.info('next Schedule 2 -- ' + this.mySchedule_2.nextInvocation())*/;
 
 			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_2 == 'undefined' && SetTrigger == 2 && SetSchedule.length !== 0) {
 
@@ -312,7 +312,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				this.mySchedule_2 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDaysarr.toString().trim(), async () =>
 					this.setForeignStateAsync(goandtrigger.toString() , true) && this.Schedule_2_go());
-				this.setStateAsync('trigger_2.trigger_2_is_set', '' + HH + ':' + MM + ' -- ' + WDaysarr, true) + this.log.info('next Schedule 2 -- ' + this.mySchedule_2.nextInvocation());
+				this.setStateAsync('trigger_2.trigger_2_is_set', '' + HH + ':' + MM + ' -- ' + WDaysarr, true) /*+ this.log.info('next Schedule 2 -- ' + this.mySchedule_2.nextInvocation())*/;
 
 			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_2 == 'undefined' && SetTrigger !== 2 && weekdays_t2arr.length !== 0) {
 
@@ -378,7 +378,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				this.mySchedule_3 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDays.toString().trim(), async () =>
 					this.setForeignStateAsync(goandtrigger.toString() , true) && this.Schedule_3_go());
-				this.setStateAsync('trigger_3.trigger_3_is_set', '' + HH + ':' + MM + ' -- ' + WDays, true) + this.log.info('next Schedule 3 -- ' + this.mySchedule_3.nextInvocation());
+				this.setStateAsync('trigger_3.trigger_3_is_set', '' + HH + ':' + MM + ' -- ' + WDays, true) /*+ this.log.info('next Schedule 3 -- ' + this.mySchedule_3.nextInvocation())*/;
 
 			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_3 == 'undefined' && SetTrigger == 3 && SetSchedule.length !== 0) {
 
@@ -394,7 +394,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				this.mySchedule_3 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDaysarr.toString().trim(), async () =>
 					this.setForeignStateAsync(goandtrigger.toString() , true) && this.Schedule_3_go());
-				this.setStateAsync('trigger_3.trigger_3_is_set', '' + HH + ':' + MM + ' -- ' + WDaysarr, true) + this.log.info('next Schedule 3 -- ' + this.mySchedule_3.nextInvocation());
+				this.setStateAsync('trigger_3.trigger_3_is_set', '' + HH + ':' + MM + ' -- ' + WDaysarr, true) /*+ this.log.info('next Schedule 3 -- ' + this.mySchedule_3.nextInvocation())*/;
 
 			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_3 == 'undefined' && SetTrigger !== 3 && weekdays_t3arr.length !== 0) {
 
@@ -460,7 +460,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				this.mySchedule_4 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDays.toString().trim(), async () =>
 					this.setForeignStateAsync(goandtrigger.toString() , true) && this.Schedule_4_go());
-				this.setStateAsync('trigger_4.trigger_4_is_set', '' + HH + ':' + MM + ' -- ' + WDays, true) + this.log.info('next Schedule 4 -- ' + this.mySchedule_4.nextInvocation());
+				this.setStateAsync('trigger_4.trigger_4_is_set', '' + HH + ':' + MM + ' -- ' + WDays, true) /*+ this.log.info('next Schedule 4 -- ' + this.mySchedule_4.nextInvocation())*/;
 
 			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_4 == 'undefined' && SetTrigger == 4 && SetSchedule.length !== 0) {
 
@@ -476,7 +476,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				this.mySchedule_4 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDaysarr.toString().trim(), async () =>
 					this.setForeignStateAsync(goandtrigger.toString() , true) && this.Schedule_4_go());
-				this.setStateAsync('trigger_4.trigger_4_is_set', '' + HH + ':' + MM + ' -- ' + WDaysarr, true) + this.log.info('next Schedule 4 -- ' + this.mySchedule_4.nextInvocation());
+				this.setStateAsync('trigger_4.trigger_4_is_set', '' + HH + ':' + MM + ' -- ' + WDaysarr, true) /*+ this.log.info('next Schedule 4 -- ' + this.mySchedule_4.nextInvocation())*/;
 
 			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_4 == 'undefined' && SetTrigger !== 4 && weekdays_t4arr.length !== 0) {
 
@@ -542,7 +542,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				this.mySchedule_5 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDays.toString().trim(), async () =>
 					this.setForeignStateAsync(goandtrigger.toString() , true) && this.Schedule_5_go());
-				this.setStateAsync('trigger_5.trigger_5_is_set', '' + HH + ':' + MM + ' -- ' + WDays, true) + this.log.info('next Schedule 5 -- ' + this.mySchedule_5.nextInvocation());
+				this.setStateAsync('trigger_5.trigger_5_is_set', '' + HH + ':' + MM + ' -- ' + WDays, true) /*+ this.log.info('next Schedule 5 -- ' + this.mySchedule_5.nextInvocation())*/;
 
 			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_5 == 'undefined' && SetTrigger == 5 && SetSchedule.length !== 0) {
 
@@ -558,7 +558,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				this.mySchedule_5 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDaysarr.toString().trim(), async () =>
 					this.setForeignStateAsync(goandtrigger.toString() , true) && this.Schedule_5_go());
-				this.setStateAsync('trigger_5.trigger_5_is_set', '' + HH + ':' + MM + ' -- ' + WDaysarr, true) + this.log.info('next Schedule 5 -- ' + this.mySchedule_5.nextInvocation());
+				this.setStateAsync('trigger_5.trigger_5_is_set', '' + HH + ':' + MM + ' -- ' + WDaysarr, true) /*+ this.log.info('next Schedule 5 -- ' + this.mySchedule_5.nextInvocation())*/;
 
 			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_5 == 'undefined' && SetTrigger !== 5 && weekdays_t5arr.length !== 0) {
 
@@ -624,7 +624,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				this.mySchedule_6 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDays.toString().trim(), async () =>
 					this.setForeignStateAsync(goandtrigger.toString() , true) && this.Schedule_6_go());
-				this.setStateAsync('trigger_6.trigger_6_is_set', '' + HH + ':' + MM + ' -- ' + WDays, true) + this.log.info('next Schedule 6 -- ' + this.mySchedule_6.nextInvocation());
+				this.setStateAsync('trigger_6.trigger_6_is_set', '' + HH + ':' + MM + ' -- ' + WDays, true) /*+ this.log.info('next Schedule 6 -- ' + this.mySchedule_6.nextInvocation())*/;
 
 			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_6 == 'undefined' && SetTrigger == 6 && SetSchedule.length !== 0) {
 
@@ -640,7 +640,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 				this.mySchedule_6 = schedule.scheduleJob(MM.toString().trim() + ' ' + HH.toString().trim() + ' ' + '*'.toString().trim() + ' ' + '*'.toString().trim() + ' ' + WDaysarr.toString().trim(), async () =>
 					this.setForeignStateAsync(goandtrigger.toString() , true) && this.Schedule_6_go());
-				this.setStateAsync('trigger_6.trigger_6_is_set', '' + HH + ':' + MM + ' -- ' + WDaysarr, true) + this.log.info('next Schedule 6 -- ' + this.mySchedule_6.nextInvocation());
+				this.setStateAsync('trigger_6.trigger_6_is_set', '' + HH + ':' + MM + ' -- ' + WDaysarr, true) /*+ this.log.info('next Schedule 6 -- ' + this.mySchedule_6.nextInvocation())*/;
 
 			} else if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_6 == 'undefined' && SetTrigger !== 6 && weekdays_t6arr.length !== 0) {
 
@@ -2755,9 +2755,9 @@ class TimeSwitchClock extends utils.Adapter {
 
 			const Sunday = async () => {
 				if (statusSUN == true) {
-					this.log.info('SO ist ' + statusSUN);
+					//this.log.info('SO ist ' + statusSUN);
 				} else if (statusSUN == false) {
-					this.log.info('So ist ' + statusSUN);
+					//this.log.info('So ist ' + statusSUN);
 				} else {
 					this.log.error('Error SO = ' + statusSUN);
 				}};
@@ -2771,9 +2771,9 @@ class TimeSwitchClock extends utils.Adapter {
 
 			const Monday = async () => {
 				if (statusMON == true) {
-					this.log.info('MO ist ' + statusMON);
+					//this.log.info('MO ist ' + statusMON);
 				} else if (statusMON == false) {
-					this.log.info('MO ist ' + statusMON);
+					//this.log.info('MO ist ' + statusMON);
 				} else {
 					this.log.error('Error MO = ' + statusMON);
 				}};
@@ -2787,9 +2787,9 @@ class TimeSwitchClock extends utils.Adapter {
 
 			const Tuesday = async () => {
 				if (statusTUE == true) {
-					this.log.info('DI ist ' + statusTUE);
+					//this.log.info('DI ist ' + statusTUE);
 				} else if (statusTUE == false) {
-					this.log.info('DI ist ' + statusTUE);
+					//this.log.info('DI ist ' + statusTUE);
 				} else {
 					this.log.error('Error DI = ' + statusTUE);
 				}};
@@ -2803,9 +2803,9 @@ class TimeSwitchClock extends utils.Adapter {
 
 			const Wednesday = async () => {
 				if (statusWED == true) {
-					this.log.info('MI ist ' + statusWED);
+					//this.log.info('MI ist ' + statusWED);
 				} else if (statusWED == false) {
-					this.log.info('MI ist ' + statusWED);
+					//this.log.info('MI ist ' + statusWED);
 				} else {
 					this.log.error('Error MI = ' + statusWED);
 				}};
@@ -2819,11 +2819,11 @@ class TimeSwitchClock extends utils.Adapter {
 
 			const Thursday = async () => {
 				if (statusTHU == true) {
-					this.log.info('DO ist ' + statusTHU);
+					//this.log.info('DO ist ' + statusTHU);
 				} else if (statusTHU == false) {
-					this.log.info('DO ist ' + statusTHU);
+					//this.log.info('DO ist ' + statusTHU);
 				} else {
-					this.log.error('Error DO = ' + statusTHU);
+					//this.log.error('Error DO = ' + statusTHU);
 				}};
 
 			if (id == this.namespace + '.Weekdays.Thursday') {
@@ -2835,9 +2835,9 @@ class TimeSwitchClock extends utils.Adapter {
 
 			const Friday = async () => {
 				if (statusFRI == true) {
-					this.log.info('FR ist ' + statusFRI);
+					//this.log.info('FR ist ' + statusFRI);
 				} else if (statusFRI == false) {
-					this.log.info('FR ist ' + statusFRI);
+					//this.log.info('FR ist ' + statusFRI);
 				} else {
 					this.log.error('Error FR = ' + statusFRI);
 				}};
@@ -2851,9 +2851,9 @@ class TimeSwitchClock extends utils.Adapter {
 
 			const Saturday = async () => {
 				if (statusSAT == true) {
-					this.log.info ('SA ist ' + statusSAT);
+					//this.log.info ('SA ist ' + statusSAT);
 				} else if (statusSAT == false) {
-					this.log.info('SA ist ' + statusSAT);
+					//this.log.info('SA ist ' + statusSAT);
 				} else {
 					this.log.error('Error SA = ' + statusSAT);
 				}};
