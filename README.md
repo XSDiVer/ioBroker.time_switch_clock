@@ -5,7 +5,7 @@
 [![Downloads](https://img.shields.io/npm/dm/iobroker.time_switch_clock.svg)](https://www.npmjs.com/package/iobroker.time_switch_clock)
 ![Number of Installations](https://iobroker.live/badges/time_switch_clock-installed.svg)
 ![Current version in stable repository](https://iobroker.live/badges/time_switch_clock-stable.svg)
-[![Dependency Status](https://img.shields.io/badge/creator-XSDiVer-blueviolet/XSDiVer/iobroker.time_switch_clock.svg)](https://img.shields.io/badge/creator-XSDiVer-blueviolet/XSDiVer/iobroker.time_switch_clock)
+[![Status](https://img.shields.io/badge/creator-XSDiVer-blueviolet)](https://img.shields.io/badge/creator-XSDiVer-blueviolet)
 [![Dependency Status](https://img.shields.io/david/XSDiVer/iobroker.time_switch_clock.svg)](https://david-dm.org/XSDiVer/iobroker.time_switch_clock)
 
 [![NPM](https://nodei.co/npm/iobroker.time_switch_clock.png?downloads=true)](https://nodei.co/npm/iobroker.time_switch_clock/)
