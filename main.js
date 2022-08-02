@@ -3017,7 +3017,9 @@ class TimeSwitchClock extends utils.Adapter {
 			const HH_1 = await this.getStateAsync('Setup.HH');
 			if (HH_1) {
 
-				let new_HH_1 = HH_1 ? HH_1.val: '00';
+				const new_HH = HH_1 ? HH_1.val: '00';
+
+				let new_HH_1 = new_HH.toString();
 
 				if (new_HH_1 < 10 && new_HH_1.length == 1) {
 
@@ -3041,7 +3043,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 					time_t1arr.splice(0,1, new_HH_1);
 
-					this.setStateAsync('trigger_1.t1_time', time_t1arr[0] + ':' + time_t1arr[1] , true);
+					this.setStateAsync('trigger_1.t1_time', time_t1arr[0] + ':' + time_t1arr[1], true);
 
 					weekdays_t1arr = SetSchedule;
 					this.setStateAsync('trigger_1.t1_weekdays', JSON.stringify(SetSchedule.sort()), true);
@@ -3243,7 +3245,9 @@ class TimeSwitchClock extends utils.Adapter {
 			const mm_1 = await this.getStateAsync('Setup.mm');
 			if (mm_1) {
 
-				let new_mm_1 = mm_1 ? mm_1.val: '00';
+				const new_mm = mm_1.toString() ? mm_1.val: '00';
+
+				let new_mm_1 = new_mm.toString();
 
 				if (new_mm_1 < 10 && new_mm_1.length == 1) {
 
