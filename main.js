@@ -695,7 +695,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			try {
 				if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59 && typeof this.mySchedule_1 !== 'undefined') {
-					this.mySchedule_1.cancel() && this.log.info('Schedule 1 wurde gelöscht!');
+					this.mySchedule_1.cancel();
 
 				} else if (this.HH < 0 || this.HH > 23 || this.MM < 0 || this.MM > 59) {
 
@@ -730,7 +730,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			try {
 				if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59 && typeof this.mySchedule_2 !== 'undefined') {
-					this.mySchedule_2.cancel() && this.log.info('Schedule 2 wurde gelöscht!');
+					this.mySchedule_2.cancel();
 
 				} else if (this.HH < 0 || this.HH > 23 || this.MM < 0 || this.MM > 59) {
 
@@ -765,7 +765,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			try {
 				if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59 && typeof this.mySchedule_3 !== 'undefined') {
-					this.mySchedule_3.cancel() && this.log.info('Schedule 3 wurde gelöscht!');
+					this.mySchedule_3.cancel();
 
 				} else if (this.HH < 0 || this.HH > 23 || this.MM < 0 || this.MM > 59) {
 
@@ -800,7 +800,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			try {
 				if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59 && typeof this.mySchedule_4 !== 'undefined') {
-					this.mySchedule_4.cancel() && this.log.info('Schedule 4 wurde gelöscht!');
+					this.mySchedule_4.cancel();
 
 				} else if (this.HH < 0 || this.HH > 23 || this.MM < 0 || this.MM > 59) {
 
@@ -835,7 +835,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			try {
 				if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59 && typeof this.mySchedule_5 !== 'undefined') {
-					this.mySchedule_5.cancel() && this.log.info('Schedule 5 wurde gelöscht!');
+					this.mySchedule_5.cancel();
 
 				} else if (this.HH < 0 || this.HH > 23 || this.MM < 0 || this.MM > 59) {
 
@@ -870,7 +870,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			try {
 				if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59 && typeof this.mySchedule_6 !== 'undefined') {
-					this.mySchedule_6.cancel() && this.log.info('Schedule 6 wurde gelöscht!');
+					this.mySchedule_6.cancel();
 
 				} else if (this.HH < 0 || this.HH > 23 || this.MM < 0 || this.MM > 59) {
 
@@ -3339,7 +3339,7 @@ class TimeSwitchClock extends utils.Adapter {
 				const goforit_1 = await this.getStateAsync('trigger_1.goforit_1');
 				const goforit = goforit_1 ? goforit_1.val: 'None';
 
-				if (goforit !== '' && goforit !== 'None') {
+				if (goforit !== '' && goforit !== 'None' && goforit !== 'please_Set') {
 
 					DP_1arr = goforit;
 
@@ -3354,6 +3354,11 @@ class TimeSwitchClock extends utils.Adapter {
 					this.setStateAsync('trigger_1.trigger_1_Start', false, true);
 					this.log.error('Kein Datenpunkt zum triggern gesetzt in Schedule 1! Bitte ändern!');
 					this.setStateAsync('trigger_1.goforit_1', 'please_Set', true);
+
+				} else if (goforit == 'please_Set' && StatusTriggerStart == true) {
+
+					this.setStateAsync('trigger_1.trigger_1_Start', false, true);
+					this.log.error('Bitte Datenpunkt in -goforit- bei Trigger 1 eintragen!');
 
 				}
 
@@ -3481,7 +3486,7 @@ class TimeSwitchClock extends utils.Adapter {
 				const goforit_2 = await this.getStateAsync('trigger_2.goforit_2');
 				const goforit = goforit_2 ? goforit_2.val: 'None';
 
-				if (goforit !== '' && goforit !== 'None') {
+				if (goforit !== '' && goforit !== 'None' && goforit !== 'please_Set') {
 
 					DP_2arr = goforit;
 
@@ -3496,6 +3501,11 @@ class TimeSwitchClock extends utils.Adapter {
 					this.setStateAsync('trigger_2.trigger_2_Start', false, true);
 					this.log.error('Kein Datenpunkt zum triggern gesetzt in Schedule 2!');
 					this.setStateAsync('trigger_2.goforit_2', 'please_Set', true);
+
+				} else if (goforit == 'please_Set' && StatusTriggerStart == true) {
+
+					this.setStateAsync('trigger_2.trigger_2_Start', false, true);
+					this.log.error('Bitte Datenpunkt in -goforit- bei Trigger 2 eintragen!');
 
 				}
 
@@ -3607,7 +3617,7 @@ class TimeSwitchClock extends utils.Adapter {
 				const goforit_3 = await this.getStateAsync('trigger_3.goforit_3');
 				const goforit = goforit_3 ? goforit_3.val: 'None';
 
-				if (goforit !== '' && goforit !== 'None') {
+				if (goforit !== '' && goforit !== 'None' && goforit !== 'please_Set') {
 
 					DP_3arr = goforit;
 
@@ -3622,6 +3632,11 @@ class TimeSwitchClock extends utils.Adapter {
 					this.setStateAsync('trigger_3.trigger_3_Start', false, true);
 					this.log.error('Kein Datenpunkt zum triggern gesetzt in Schedule 3!');
 					this.setStateAsync('trigger_3.goforit_3', 'please_Set', true);
+
+				} else if (goforit == 'please_Set' && StatusTriggerStart == true) {
+
+					this.setStateAsync('trigger_3.trigger_3_Start', false, true);
+					this.log.error('Bitte Datenpunkt in -goforit- bei Trigger 3 eintragen!');
 
 				}
 
@@ -3731,7 +3746,7 @@ class TimeSwitchClock extends utils.Adapter {
 				const goforit_4 = await this.getStateAsync('trigger_4.goforit_4');
 				const goforit = goforit_4 ? goforit_4.val: 'None';
 
-				if (goforit !== '' && goforit !== 'None') {
+				if (goforit !== '' && goforit !== 'None' && goforit !== 'please_Set') {
 
 					DP_4arr = goforit;
 
@@ -3746,6 +3761,11 @@ class TimeSwitchClock extends utils.Adapter {
 					this.setStateAsync('trigger_4.trigger_4_Start', false, true);
 					this.log.error('Kein Datenpunkt zum triggern gesetzt in Schedule 4!');
 					this.setStateAsync('trigger_4.goforit_4', 'please_Set', true);
+
+				} else if (goforit == 'please_Set' && StatusTriggerStart == true) {
+
+					this.setStateAsync('trigger_4.trigger_4_Start', false, true);
+					this.log.error('Bitte Datenpunkt in -goforit- bei Trigger 4 eintragen!');
 
 				}
 
@@ -3855,7 +3875,7 @@ class TimeSwitchClock extends utils.Adapter {
 				const goforit_5 = await this.getStateAsync('trigger_5.goforit_5');
 				const goforit = goforit_5 ? goforit_5.val: 'None';
 
-				if (goforit !== '' && goforit !== 'None') {
+				if (goforit !== '' && goforit !== 'None' && goforit !== 'please_Set') {
 
 					DP_5arr = goforit;
 
@@ -3870,6 +3890,11 @@ class TimeSwitchClock extends utils.Adapter {
 					this.setStateAsync('trigger_5.trigger_5_Start', false, true);
 					this.log.error('Kein Datenpunkt zum triggern gesetzt in Schedule 5!');
 					this.setStateAsync('trigger_5.goforit_5', 'please_Set', true);
+
+				} else if (goforit == 'please_Set' && StatusTriggerStart == true) {
+
+					this.setStateAsync('trigger_5.trigger_5_Start', false, true);
+					this.log.error('Bitte Datenpunkt in -goforit- bei Trigger 5 eintragen!');
 
 				}
 
@@ -3979,7 +4004,7 @@ class TimeSwitchClock extends utils.Adapter {
 				const goforit_6 = await this.getStateAsync('trigger_6.goforit_6');
 				const goforit = goforit_6 ? goforit_6.val: 'None';
 
-				if (goforit !== '' && goforit !== 'None') {
+				if (goforit !== '' && goforit !== 'None' && goforit !== 'please_Set') {
 
 					DP_6arr = goforit;
 
@@ -3994,6 +4019,11 @@ class TimeSwitchClock extends utils.Adapter {
 					this.setStateAsync('trigger_6.trigger_6_Start', false, true);
 					this.log.error('Kein Datenpunkt zum triggern gesetzt in Schedule 6!');
 					this.setStateAsync('trigger_6.goforit_6', 'please_Set', true);
+
+				} else if (goforit == 'please_Set' && StatusTriggerStart == true) {
+
+					this.setStateAsync('trigger_6.trigger_6_Start', false, true);
+					this.log.error('Bitte Datenpunkt in -goforit- bei Trigger 6 eintragen!');
 
 				}
 
