@@ -18,23 +18,19 @@ Timer for e.g. water valves or lamps e.t.c.
 
 Dieser Adapter löst bis zu 6 verschiedene Datenpunkte aus.
 
+[![trigger_1_is_set](https://img.shields.io/badge/-Setup.SetTrigger-blue)](https://img.shields.io/badge/-Setup.SetTrigger-blue) - als erstes unter SetTrigger, den Trigger (1 - 6) einstellen, welcher geändert werden soll.<br />
+
 ![Screenshot_1](https://github.com/XSDiVer/ioBroker.time_switch_clock/blob/main/Docs/img/Screenshot_1.png)
 
  
 [![goforit_1](https://img.shields.io/badge/-goforit__1-blue)](https://img.shields.io/badge/-goforit__1-blue) = der Datenpunkt der geschaltet werden soll (siehe auch Screenshot unten)<br />
-[![t1_time](https://img.shields.io/badge/creator-XSDiVer-blueviolet)](https://img.shields.io/badge/creator-XSDiVer-blueviolet)
-[![t1_weekdays](https://img.shields.io/badge/creator-XSDiVer-blueviolet)](https://img.shields.io/badge/creator-XSDiVer-blueviolet)
-[![timer_1](https://img.shields.io/badge/creator-XSDiVer-blueviolet)](https://img.shields.io/badge/creator-XSDiVer-blueviolet)
-[![trigger_1_Start](https://img.shields.io/badge/creator-XSDiVer-blueviolet)](https://img.shields.io/badge/creator-XSDiVer-blueviolet)
-[![trigger_1_is_set](https://img.shields.io/badge/creator-XSDiVer-blueviolet)](https://img.shields.io/badge/creator-XSDiVer-blueviolet)
-
-<b>goforit_1</b>           
-<b>t1_time</b>             = Startuhrzeit - wann der DP auf True gsetzt werden soll im Format HH:MM<br />
-<b>t1_weekdays</b>         = An welchen Wochentagen geschaltet werden soll (Sonntag = 0 bis Samstag = 6)<br />
-<b>timer_1</b>             = Nach wievielen Minuten der DP wieder auf False gesetzt werden soll<br />
-<b>trigger_1_Start</b>     = wenn der wert auf True gesetzt wird ist der Trigger aktiv und schaltet<br />
-<b>trigger_1_is_set</b>    = wenn trigger_1_Start True ist- werden hier nochmal Wochentage und Uhrzeit angezeigt /<br />
+[![t1_time](https://img.shields.io/badge/-t1__time-blue)](https://img.shields.io/badge/-t1__time-blue) = Startuhrzeit - wann der DP auf True gsetzt werden soll im Format HH:MM<br />
+[![t1_weekdays](https://img.shields.io/badge/-tt1__weekdays-blue)](https://img.shields.io/badge/-tt1__weekdays-blue) = An welchen Wochentagen geschaltet werden soll (Sonntag = 0 bis Samstag = 6)<br />
+[![timer_1](https://img.shields.io/badge/-timer__1-blue)](https://img.shields.io/badge/-timer__1-blue) = Nach wievielen Minuten der DP wieder auf False gesetzt werden soll<br />
+[![trigger_1_Start](https://img.shields.io/badge/-trigger__1__Start-blue)](https://img.shields.io/badge/-trigger__1__Start-blue) = wenn der wert auf True gesetzt wird ist der Trigger aktiv und schaltet<br />
+[![trigger_1_is_set](https://img.shields.io/badge/-trigger__1__is__set-blue)](https://img.shields.io/badge/-trigger__1__is__set-blue) = wenn trigger_1_Start True ist- werden hier nochmal Wochentage und Uhrzeit angezeigt /<br />
                              wenn trigger_1_Start auf False steht zeigt DP 'not scheduled' an.<br /><br />
+
 
 <b>zu goforit_1</b>
 
