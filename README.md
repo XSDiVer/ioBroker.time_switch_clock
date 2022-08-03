@@ -21,7 +21,14 @@ Dieser Adapter löst bis zu 6 verschiedene Datenpunkte aus.
 ![Screenshot_1](https://github.com/XSDiVer/ioBroker.time_switch_clock/blob/main/Docs/img/Screenshot_1.png)
 
  
-<b>goforit_1</b>           = der Datenpunkt der geschaltet werden soll (siehe auch Screenshot unten)<br />
+[![goforit_1](https://img.shields.io/badge/-goforit__1-blue)](https://img.shields.io/badge/-goforit__1-blue) = der Datenpunkt der geschaltet werden soll (siehe auch Screenshot unten)<br />
+[![t1_time](https://img.shields.io/badge/creator-XSDiVer-blueviolet)](https://img.shields.io/badge/creator-XSDiVer-blueviolet)
+[![t1_weekdays](https://img.shields.io/badge/creator-XSDiVer-blueviolet)](https://img.shields.io/badge/creator-XSDiVer-blueviolet)
+[![timer_1](https://img.shields.io/badge/creator-XSDiVer-blueviolet)](https://img.shields.io/badge/creator-XSDiVer-blueviolet)
+[![trigger_1_Start](https://img.shields.io/badge/creator-XSDiVer-blueviolet)](https://img.shields.io/badge/creator-XSDiVer-blueviolet)
+[![trigger_1_is_set](https://img.shields.io/badge/creator-XSDiVer-blueviolet)](https://img.shields.io/badge/creator-XSDiVer-blueviolet)
+
+<b>goforit_1</b>           
 <b>t1_time</b>             = Startuhrzeit - wann der DP auf True gsetzt werden soll im Format HH:MM<br />
 <b>t1_weekdays</b>         = An welchen Wochentagen geschaltet werden soll (Sonntag = 0 bis Samstag = 6)<br />
 <b>timer_1</b>             = Nach wievielen Minuten der DP wieder auf False gesetzt werden soll<br />
