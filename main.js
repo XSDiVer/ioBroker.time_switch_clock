@@ -84,6 +84,16 @@ class TimeSwitchClock extends utils.Adapter {
 
 		this.log.info('Adapter TimeSwitchClock gestartet!');
 
+		//extended Datapoints setup:
+
+		if (this.config.extended_Datapoints == true) {
+
+			this.log.warn('extended_Datapoints - are under construction');
+
+		}
+
+
+
 		//States der Datenpunkte auslesen:
 		const SUN = await this.getStateAsync('Weekdays.07_Sunday');
 		const statusSUN = SUN ? SUN.val: true;

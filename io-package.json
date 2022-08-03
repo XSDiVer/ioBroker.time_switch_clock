@@ -145,7 +145,8 @@
         ]
     },
     "native": {
-        "numberoftriggers": 1
+        "numberoftriggers": 1,
+        "extended_Datapoints": false
     },
     "objects": [],
     "instanceObjects": [
@@ -179,6 +180,18 @@
                 "type": "number",
                 "read": true,
                 "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "extended_Datapoints",
+            "type": "state",
+            "common": {
+                "role": "state",
+                "name": "extended_Datapoints",
+                "type": "boolean",
+                "read": true,
+                "write": true
             },
             "native": {}
         }

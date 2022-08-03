@@ -14,7 +14,16 @@
                     "md": 6,
                     "lg": 6,
                     "label": "number of triggers"
-                }
+                },
+                       "extended_Datapoints": {
+                        "newLine": true,
+                        "type": "checkbox",
+                        "label": "extended Datapoints - (under construction...)",
+                        "sm": 12,
+                        "md": 6,
+                        "lg": 3
+                    }
+                               
         
             }
         }
