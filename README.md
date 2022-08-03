@@ -20,6 +20,8 @@ Dieser Adapter löst bis zu 6 verschiedene Datenpunkte aus.
 
 [![trigger_1_is_set](https://img.shields.io/badge/-Setup.SetTrigger-blue)](https://img.shields.io/badge/-Setup.SetTrigger-blue) - als erstes unter SetTrigger, den Trigger (1 - 6) einstellen, welcher geändert werden soll.<br />
 
+Dann kann man unter Setup & Weekdays die Uhrzeit & die Wochentage für den entsprechend gewählten Trigger einstellen.
+
 ![Screenshot_1](https://github.com/XSDiVer/ioBroker.time_switch_clock/blob/main/Docs/img/Screenshot_1.png)
 
  
