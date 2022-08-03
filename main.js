@@ -85,25 +85,25 @@ class TimeSwitchClock extends utils.Adapter {
 		this.log.info('Adapter TimeSwitchClock gestartet!');
 
 		//States der Datenpunkte auslesen:
-		const SUN = await this.getStateAsync('Weekdays.Sunday');
+		const SUN = await this.getStateAsync('Weekdays.07_Sunday');
 		const statusSUN = SUN ? SUN.val: true;
 
-		const MON = await this.getStateAsync('Weekdays.Monday');
+		const MON = await this.getStateAsync('Weekdays.01_Monday');
 		const statusMON = MON ? MON.val: false;
 
-		const TUE = await this.getStateAsync('Weekdays.Tuesday');
+		const TUE = await this.getStateAsync('Weekdays.02_Tuesday');
 		const statusTUE = TUE ? TUE.val: false;
 
-		const WED = await this.getStateAsync('Weekdays.Wednesday');
+		const WED = await this.getStateAsync('Weekdays.03_Wednesday');
 		const statusWED = WED ? WED.val: false;
 
-		const THU = await this.getStateAsync('Weekdays.Thursday');
+		const THU = await this.getStateAsync('Weekdays.04_Thursday');
 		const statusTHU = THU ? THU.val: false;
 
-		const FRI = await this.getStateAsync('Weekdays.Friday');
+		const FRI = await this.getStateAsync('Weekdays.05_Friday');
 		const statusFRI = FRI ? FRI.val: false;
 
-		const SAT = await this.getStateAsync('Weekdays.Saturday');
+		const SAT = await this.getStateAsync('Weekdays.06_Saturday');
 		const statusSAT = SAT ? SAT.val: true;
 
 		//in Array einfügen oder löschen wenn false
@@ -955,7 +955,7 @@ class TimeSwitchClock extends utils.Adapter {
 			native: {},
 		});
 
-		await this.setObjectNotExistsAsync('Weekdays.Sunday', {
+		await this.setObjectNotExistsAsync('Weekdays.07_Sunday', {
 			type: 'state',
 			common: {
 				name: 'Sunday',
@@ -967,7 +967,7 @@ class TimeSwitchClock extends utils.Adapter {
 			native: {},
 		});
 
-		await this.setObjectNotExistsAsync('Weekdays.Monday', {
+		await this.setObjectNotExistsAsync('Weekdays.01_Monday', {
 			type: 'state',
 			common: {
 				name: 'Monday',
@@ -979,7 +979,7 @@ class TimeSwitchClock extends utils.Adapter {
 			native: {},
 		});
 
-		await this.setObjectNotExistsAsync('Weekdays.Tuesday', {
+		await this.setObjectNotExistsAsync('Weekdays.02_Tuesday', {
 			type: 'state',
 			common: {
 				name: 'Tuesday',
@@ -991,7 +991,7 @@ class TimeSwitchClock extends utils.Adapter {
 			native: {},
 		});
 
-		await this.setObjectNotExistsAsync('Weekdays.Wednesday', {
+		await this.setObjectNotExistsAsync('Weekdays.03_Wednesday', {
 			type: 'state',
 			common: {
 				name: 'Wednesday',
@@ -1003,7 +1003,7 @@ class TimeSwitchClock extends utils.Adapter {
 			native: {},
 		});
 
-		await this.setObjectNotExistsAsync('Weekdays.Thursday', {
+		await this.setObjectNotExistsAsync('Weekdays.04_Thursday', {
 			type: 'state',
 			common: {
 				name: 'Thursday',
@@ -1015,7 +1015,7 @@ class TimeSwitchClock extends utils.Adapter {
 			native: {},
 		});
 
-		await this.setObjectNotExistsAsync('Weekdays.Friday', {
+		await this.setObjectNotExistsAsync('Weekdays.05_Friday', {
 			type: 'state',
 			common: {
 				name: 'Friday',
@@ -1027,7 +1027,7 @@ class TimeSwitchClock extends utils.Adapter {
 			native: {},
 		});
 
-		await this.setObjectNotExistsAsync('Weekdays.Saturday', {
+		await this.setObjectNotExistsAsync('Weekdays.06_Saturday', {
 			type: 'state',
 			common: {
 				name: 'Saturday',
@@ -2656,13 +2656,13 @@ class TimeSwitchClock extends utils.Adapter {
 		this.setStateAsync('info.connection', true, true);
 
 		//Wochentage auf einen Wert setzten
-		this.setStateAsync('Weekdays.Sunday', true, true);
-		this.setStateAsync('Weekdays.Monday', false, true);
-		this.setStateAsync('Weekdays.Tuesday', false, true);
-		this.setStateAsync('Weekdays.Wednesday', false, true);
-		this.setStateAsync('Weekdays.Thursday', false, true);
-		this.setStateAsync('Weekdays.Friday', false, true);
-		this.setStateAsync('Weekdays.Saturday', true, true);
+		this.setStateAsync('Weekdays.07_Sunday', true, true);
+		this.setStateAsync('Weekdays.01_Monday', false, true);
+		this.setStateAsync('Weekdays.02_Tuesday', false, true);
+		this.setStateAsync('Weekdays.03_Wednesday', false, true);
+		this.setStateAsync('Weekdays.04_Thursday', false, true);
+		this.setStateAsync('Weekdays.05_Friday', false, true);
+		this.setStateAsync('Weekdays.06_Saturday', true, true);
 
 		//Datenpunkt trigger 1 auf false setzen (Aulöser für Anktion wenn true)
 		//this.setState('trigger_1.trigger_1', false, true);
@@ -2684,13 +2684,13 @@ class TimeSwitchClock extends utils.Adapter {
 		//this.subscribeStates('trigger_1.trigger_1');
 		this.subscribeStates('trigger_1.trigger_1_Start');
 
-		this.subscribeStates('Weekdays.Monday');
-		this.subscribeStates('Weekdays.Tuesday');
-		this.subscribeStates('Weekdays.Wednesday');
-		this.subscribeStates('Weekdays.Thursday');
-		this.subscribeStates('Weekdays.Friday');
-		this.subscribeStates('Weekdays.Saturday');
-		this.subscribeStates('Weekdays.Sunday');
+		this.subscribeStates('Weekdays.07_Sunday');
+		this.subscribeStates('Weekdays.01_Monday');
+		this.subscribeStates('Weekdays.02_Tuesday');
+		this.subscribeStates('Weekdays.03_Wednesday');
+		this.subscribeStates('Weekdays.04_Thursday');
+		this.subscribeStates('Weekdays.05_Friday');
+		this.subscribeStates('Weekdays.06_Saturday');
 
 	}
 
@@ -2750,7 +2750,7 @@ class TimeSwitchClock extends utils.Adapter {
 		if (state) {
 
 			//bei Änderung der Datenpunkte true oder false auswerten
-			const SUN = await this.getStateAsync('Weekdays.Sunday');
+			const SUN = await this.getStateAsync('Weekdays.07_Sunday');
 			const statusSUN = SUN ? SUN.val: false;
 
 			const Sunday = async () => {
@@ -2762,11 +2762,11 @@ class TimeSwitchClock extends utils.Adapter {
 					this.log.error('Error SO = ' + statusSUN);
 				}};
 
-			if (id == this.namespace + '.Weekdays.Sunday') {
+			if (id == this.namespace + '.Weekdays.07_Sunday') {
 				Sunday();
 			}
 
-			const MON = await this.getStateAsync('Weekdays.Monday');
+			const MON = await this.getStateAsync('Weekdays.01_Monday');
 			const statusMON = MON ? MON.val: false;
 
 			const Monday = async () => {
@@ -2778,11 +2778,11 @@ class TimeSwitchClock extends utils.Adapter {
 					this.log.error('Error MO = ' + statusMON);
 				}};
 
-			if (id == this.namespace + '.Weekdays.Monday') {
+			if (id == this.namespace + '.Weekdays.01_Monday') {
 				Monday();
 			}
 
-			const TUE = await this.getStateAsync('Weekdays.Tuesday');
+			const TUE = await this.getStateAsync('Weekdays.02_Tuesday');
 			const statusTUE = TUE ? TUE.val: false;
 
 			const Tuesday = async () => {
@@ -2794,11 +2794,11 @@ class TimeSwitchClock extends utils.Adapter {
 					this.log.error('Error DI = ' + statusTUE);
 				}};
 
-			if (id == this.namespace + '.Weekdays.Tuesday') {
+			if (id == this.namespace + '.Weekdays.02_Tuesday') {
 				Tuesday();
 			}
 
-			const WED = await this.getStateAsync('Weekdays.Wednesday');
+			const WED = await this.getStateAsync('Weekdays.03_Wednesday');
 			const statusWED = WED ? WED.val: false;
 
 			const Wednesday = async () => {
@@ -2810,11 +2810,11 @@ class TimeSwitchClock extends utils.Adapter {
 					this.log.error('Error MI = ' + statusWED);
 				}};
 
-			if (id == this.namespace + '.Weekdays.Wednesday') {
+			if (id == this.namespace + '.Weekdays.03_Wednesday') {
 				Wednesday();
 			}
 
-			const THU = await this.getStateAsync('Weekdays.Thursday');
+			const THU = await this.getStateAsync('Weekdays.04_Thursday');
 			const statusTHU = THU ? THU.val: false;
 
 			const Thursday = async () => {
@@ -2826,11 +2826,11 @@ class TimeSwitchClock extends utils.Adapter {
 					//this.log.error('Error DO = ' + statusTHU);
 				}};
 
-			if (id == this.namespace + '.Weekdays.Thursday') {
+			if (id == this.namespace + '.Weekdays.04_Thursday') {
 				Thursday();
 			}
 
-			const FRI = await this.getStateAsync('Weekdays.Friday');
+			const FRI = await this.getStateAsync('Weekdays.05_Friday');
 			const statusFRI = FRI ? FRI.val: false;
 
 			const Friday = async () => {
@@ -2842,11 +2842,11 @@ class TimeSwitchClock extends utils.Adapter {
 					this.log.error('Error FR = ' + statusFRI);
 				}};
 
-			if (id == this.namespace + '.Weekdays.Friday') {
+			if (id == this.namespace + '.Weekdays.05_Friday') {
 				Friday();
 			}
 
-			const SAT = await this.getStateAsync('Weekdays.Saturday');
+			const SAT = await this.getStateAsync('Weekdays.06_Saturday');
 			const statusSAT = SAT ? SAT.val: true;
 
 			const Saturday = async () => {
@@ -2858,7 +2858,7 @@ class TimeSwitchClock extends utils.Adapter {
 					this.log.error('Error SA = ' + statusSAT);
 				}};
 
-			if (id == this.namespace + '.Weekdays.Saturday') {
+			if (id == this.namespace + '.Weekdays.06_Saturday') {
 				Saturday();
 			}
 
