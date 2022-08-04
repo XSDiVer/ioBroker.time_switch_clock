@@ -2200,7 +2200,7 @@
                 "lc-border-color": "",
                 "lc-border-radius": 10,
                 "lc-zindex": 0,
-                "oid1": "time_switch_clock.0.Weekdays.Saturday",
+                "oid1": "time_switch_clock.0.Weekdays.06_Saturday",
                 "iValueFalse1": "false",
                 "iValueTrue1": "true",
                 "iText1": "SA",
@@ -2222,7 +2222,7 @@
                 "visibility-oid": "time_switch_clock.0.Setup.SetTrigger"
             },
             "style": {
-                "left": "30px",
+                "left": "380px",
                 "top": "530px",
                 "width": "70px",
                 "height": "40px",
@@ -2320,7 +2320,7 @@
                 "lc-border-color": "",
                 "lc-border-radius": 10,
                 "lc-zindex": 0,
-                "oid1": "time_switch_clock.0.Weekdays.Sunday",
+                "oid1": "time_switch_clock.0.Weekdays.07_Sunday",
                 "iValueFalse1": "false",
                 "iValueTrue1": "true",
                 "iText1": "SO",
@@ -2342,7 +2342,7 @@
                 "visibility-oid": "time_switch_clock.0.Setup.SetTrigger"
             },
             "style": {
-                "left": "100px",
+                "left": "450px",
                 "top": "530px",
                 "width": "70px",
                 "height": "40px",
@@ -2440,7 +2440,7 @@
                 "lc-border-color": "",
                 "lc-border-radius": 10,
                 "lc-zindex": 0,
-                "oid1": "time_switch_clock.0.Weekdays.Monday",
+                "oid1": "time_switch_clock.0.Weekdays.01_Monday",
                 "iValueFalse1": "false",
                 "iValueTrue1": "true",
                 "iText1": "MO",
@@ -2462,7 +2462,7 @@
                 "visibility-oid": "time_switch_clock.0.Setup.SetTrigger"
             },
             "style": {
-                "left": "200px",
+                "left": "30px",
                 "top": "530px",
                 "width": "70px",
                 "height": "40px",
@@ -2560,7 +2560,7 @@
                 "lc-border-color": "",
                 "lc-border-radius": 10,
                 "lc-zindex": 0,
-                "oid1": "time_switch_clock.0.Weekdays.Tuesday",
+                "oid1": "time_switch_clock.0.Weekdays.02_Tuesday",
                 "iValueFalse1": "false",
                 "iValueTrue1": "true",
                 "iText1": "DI",
@@ -2582,7 +2582,7 @@
                 "visibility-oid": "time_switch_clock.0.Setup.SetTrigger"
             },
             "style": {
-                "left": "270px",
+                "left": "100px",
                 "top": "530px",
                 "width": "70px",
                 "height": "40px",
@@ -2680,7 +2680,7 @@
                 "lc-border-color": "",
                 "lc-border-radius": 10,
                 "lc-zindex": 0,
-                "oid1": "time_switch_clock.0.Weekdays.Wednesday",
+                "oid1": "time_switch_clock.0.Weekdays.03_Wednesday",
                 "iValueFalse1": "false",
                 "iValueTrue1": "true",
                 "iText1": "MI",
@@ -2702,7 +2702,7 @@
                 "visibility-oid": "time_switch_clock.0.Setup.SetTrigger"
             },
             "style": {
-                "left": "340px",
+                "left": "170px",
                 "top": "530px",
                 "width": "70px",
                 "height": "40px",
@@ -2800,7 +2800,7 @@
                 "lc-border-color": "",
                 "lc-border-radius": 10,
                 "lc-zindex": 0,
-                "oid1": "time_switch_clock.0.Weekdays.Thursday",
+                "oid1": "time_switch_clock.0.Weekdays.04_Thursday",
                 "iValueFalse1": "false",
                 "iValueTrue1": "true",
                 "iText1": "DO",
@@ -2822,7 +2822,7 @@
                 "visibility-oid": "time_switch_clock.0.Setup.SetTrigger"
             },
             "style": {
-                "left": "410px",
+                "left": "240px",
                 "top": "530px",
                 "width": "70px",
                 "height": "40px",
@@ -2920,7 +2920,7 @@
                 "lc-border-color": "",
                 "lc-border-radius": 10,
                 "lc-zindex": 0,
-                "oid1": "time_switch_clock.0.Weekdays.Friday",
+                "oid1": "time_switch_clock.0.Weekdays.05_Friday",
                 "iValueFalse1": "false",
                 "iValueTrue1": "true",
                 "iText1": "FR",
@@ -2942,7 +2942,7 @@
                 "visibility-oid": "time_switch_clock.0.Setup.SetTrigger"
             },
             "style": {
-                "left": "480px",
+                "left": "310px",
                 "top": "530px",
                 "width": "70px",
                 "height": "40px",
@@ -3016,10 +3016,10 @@
                 "visibility-oid": "time_switch_clock.0.trigger_1.t1_weekdays"
             },
             "style": {
-                "left": "717px",
-                "top": "125px",
-                "width": "46px",
-                "height": "27px",
+                "left": "620px",
+                "top": "120px",
+                "width": "50px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -3091,10 +3091,10 @@
                 "visibility-oid": "time_switch_clock.0.trigger_1.t1_weekdays"
             },
             "style": {
-                "left": "767px",
-                "top": "125px",
-                "width": "46px",
-                "height": "27px",
+                "left": "670px",
+                "top": "120px",
+                "width": "50px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -3166,10 +3166,10 @@
                 "visibility-oid": "time_switch_clock.0.trigger_1.t1_weekdays"
             },
             "style": {
-                "left": "807px",
-                "top": "125px",
-                "width": "46px",
-                "height": "27px",
+                "left": "710px",
+                "top": "120px",
+                "width": "50px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -3241,10 +3241,10 @@
                 "visibility-oid": "time_switch_clock.0.trigger_1.t1_weekdays"
             },
             "style": {
-                "left": "847px",
-                "top": "125px",
-                "width": "46px",
-                "height": "27px",
+                "left": "750px",
+                "top": "120px",
+                "width": "50px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -3316,10 +3316,10 @@
                 "visibility-oid": "time_switch_clock.0.trigger_1.t1_weekdays"
             },
             "style": {
-                "left": "897px",
-                "top": "125px",
-                "width": "46px",
-                "height": "27px",
+                "left": "800px",
+                "top": "120px",
+                "width": "50px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -3391,10 +3391,10 @@
                 "visibility-oid": "time_switch_clock.0.trigger_1.t1_weekdays"
             },
             "style": {
-                "left": "617px",
-                "top": "125px",
-                "width": "46px",
-                "height": "27px",
+                "left": "850px",
+                "top": "120px",
+                "width": "50px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -3466,10 +3466,10 @@
                 "visibility-oid": "time_switch_clock.0.trigger_1.t1_weekdays"
             },
             "style": {
-                "left": "667px",
-                "top": "125px",
-                "width": "46px",
-                "height": "27px",
+                "left": "900px",
+                "top": "120px",
+                "width": "50px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -4484,10 +4484,10 @@
                 "visibility-oid": "time_switch_clock.0.trigger_2.t2_weekdays"
             },
             "style": {
-                "left": "1010px",
+                "left": "1240px",
                 "top": "120px",
-                "width": "46px",
-                "height": "27px",
+                "width": "50px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -4559,10 +4559,10 @@
                 "visibility-oid": "time_switch_clock.0.trigger_2.t2_weekdays"
             },
             "style": {
-                "left": "1060px",
+                "left": "1290px",
                 "top": "120px",
-                "width": "46px",
-                "height": "27px",
+                "width": "50px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -4634,10 +4634,10 @@
                 "visibility-oid": "time_switch_clock.0.trigger_2.t2_weekdays"
             },
             "style": {
-                "left": "1110px",
+                "left": "1010px",
                 "top": "120px",
-                "width": "46px",
-                "height": "27px",
+                "width": "50px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -4709,10 +4709,10 @@
                 "visibility-oid": "time_switch_clock.0.trigger_2.t2_weekdays"
             },
             "style": {
-                "left": "1160px",
+                "left": "1060px",
                 "top": "120px",
-                "width": "46px",
-                "height": "27px",
+                "width": "50px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -4784,10 +4784,10 @@
                 "visibility-oid": "time_switch_clock.0.trigger_2.t2_weekdays"
             },
             "style": {
-                "left": "1200px",
+                "left": "1100px",
                 "top": "120px",
-                "width": "46px",
-                "height": "27px",
+                "width": "50px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -4859,10 +4859,10 @@
                 "visibility-oid": "time_switch_clock.0.trigger_2.t2_weekdays"
             },
             "style": {
-                "left": "1240px",
+                "left": "1140px",
                 "top": "120px",
-                "width": "46px",
-                "height": "27px",
+                "width": "50px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -4934,10 +4934,10 @@
                 "visibility-oid": "time_switch_clock.0.trigger_2.t2_weekdays"
             },
             "style": {
-                "left": "1290px",
+                "left": "1190px",
                 "top": "120px",
-                "width": "46px",
-                "height": "27px",
+                "width": "50px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -6637,13 +6637,13 @@
                 "visibility-cond": "==",
                 "visibility-val": "true",
                 "visibility-groups-action": "hide",
-                "visibility-oid": "time_switch_clock.0.Weekdays.Saturday"
+                "visibility-oid": "time_switch_clock.0.Weekdays.06_Saturday"
             },
             "style": {
-                "left": "60px",
-                "top": "150px",
-                "width": "46px",
-                "height": "27px",
+                "left": "324px",
+                "top": "160px",
+                "width": "40px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -6712,13 +6712,13 @@
                 "visibility-cond": "==",
                 "visibility-val": "true",
                 "visibility-groups-action": "hide",
-                "visibility-oid": "time_switch_clock.0.Weekdays.Sunday"
+                "visibility-oid": "time_switch_clock.0.Weekdays.07_Sunday"
             },
             "style": {
-                "left": "110px",
-                "top": "150px",
-                "width": "46px",
-                "height": "27px",
+                "left": "372px",
+                "top": "160px",
+                "width": "40px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -6787,13 +6787,13 @@
                 "visibility-cond": "==",
                 "visibility-val": "true",
                 "visibility-groups-action": "hide",
-                "visibility-oid": "time_switch_clock.0.Weekdays.Monday"
+                "visibility-oid": "time_switch_clock.0.Weekdays.01_Monday"
             },
             "style": {
-                "left": "160px",
-                "top": "150px",
-                "width": "46px",
-                "height": "27px",
+                "left": "90px",
+                "top": "160px",
+                "width": "40px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -6862,13 +6862,13 @@
                 "visibility-cond": "==",
                 "visibility-val": "true",
                 "visibility-groups-action": "hide",
-                "visibility-oid": "time_switch_clock.0.Weekdays.Tuesday"
+                "visibility-oid": "time_switch_clock.0.Weekdays.02_Tuesday"
             },
             "style": {
-                "left": "210px",
-                "top": "150px",
-                "width": "46px",
-                "height": "27px",
+                "left": "141px",
+                "top": "160px",
+                "width": "40px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -6937,13 +6937,13 @@
                 "visibility-cond": "==",
                 "visibility-val": "true",
                 "visibility-groups-action": "hide",
-                "visibility-oid": "time_switch_clock.0.Weekdays.Wednesday"
+                "visibility-oid": "time_switch_clock.0.Weekdays.03_Wednesday"
             },
             "style": {
-                "left": "250px",
-                "top": "150px",
-                "width": "46px",
-                "height": "27px",
+                "left": "181px",
+                "top": "160px",
+                "width": "40px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -7012,13 +7012,13 @@
                 "visibility-cond": "==",
                 "visibility-val": "true",
                 "visibility-groups-action": "hide",
-                "visibility-oid": "time_switch_clock.0.Weekdays.Thursday"
+                "visibility-oid": "time_switch_clock.0.Weekdays.04_Thursday"
             },
             "style": {
-                "left": "290px",
-                "top": "150px",
-                "width": "46px",
-                "height": "27px",
+                "left": "221px",
+                "top": "160px",
+                "width": "40px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -7087,13 +7087,13 @@
                 "visibility-cond": "consist",
                 "visibility-val": "true",
                 "visibility-groups-action": "hide",
-                "visibility-oid": "time_switch_clock.0.Weekdays.Friday"
+                "visibility-oid": "time_switch_clock.0.Weekdays.05_Friday"
             },
             "style": {
-                "left": "340px",
-                "top": "150px",
-                "width": "46px",
-                "height": "27px",
+                "left": "272px",
+                "top": "160px",
+                "width": "40px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -7803,10 +7803,10 @@
                 "visibility-oid": "time_switch_clock.0.trigger_3.t3_weekdays"
             },
             "style": {
-                "left": "620px",
-                "top": "420px",
-                "width": "46px",
-                "height": "27px",
+                "left": "850px",
+                "top": "406px",
+                "width": "50px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -7878,10 +7878,10 @@
                 "visibility-oid": "time_switch_clock.0.trigger_3.t3_weekdays"
             },
             "style": {
-                "left": "670px",
-                "top": "420px",
-                "width": "46px",
-                "height": "27px",
+                "left": "900px",
+                "top": "406px",
+                "width": "50px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -7953,10 +7953,10 @@
                 "visibility-oid": "time_switch_clock.0.trigger_3.t3_weekdays"
             },
             "style": {
-                "left": "720px",
-                "top": "420px",
-                "width": "46px",
-                "height": "27px",
+                "left": "630px",
+                "top": "406px",
+                "width": "50px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -8028,10 +8028,10 @@
                 "visibility-oid": "time_switch_clock.0.trigger_3.t3_weekdays"
             },
             "style": {
-                "left": "770px",
-                "top": "420px",
-                "width": "46px",
-                "height": "27px",
+                "left": "680px",
+                "top": "406px",
+                "width": "50px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -8103,10 +8103,10 @@
                 "visibility-oid": "time_switch_clock.0.trigger_3.t3_weekdays"
             },
             "style": {
-                "left": "810px",
-                "top": "420px",
-                "width": "46px",
-                "height": "27px",
+                "left": "720px",
+                "top": "406px",
+                "width": "50px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -8178,10 +8178,10 @@
                 "visibility-oid": "time_switch_clock.0.trigger_3.t3_weekdays"
             },
             "style": {
-                "left": "850px",
-                "top": "420px",
-                "width": "46px",
-                "height": "27px",
+                "left": "760px",
+                "top": "406px",
+                "width": "50px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -8253,10 +8253,10 @@
                 "visibility-oid": "time_switch_clock.0.trigger_3.t3_weekdays"
             },
             "style": {
-                "left": "900px",
-                "top": "420px",
-                "width": "46px",
-                "height": "27px",
+                "left": "810px",
+                "top": "406px",
+                "width": "50px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -10366,10 +10366,10 @@
                 "visibility-oid": "time_switch_clock.0.trigger_4.t4_weekdays"
             },
             "style": {
-                "left": "1011px",
-                "top": "420px",
-                "width": "46px",
-                "height": "27px",
+                "left": "1230px",
+                "top": "406px",
+                "width": "50px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -10441,10 +10441,10 @@
                 "visibility-oid": "time_switch_clock.0.trigger_4.t4_weekdays"
             },
             "style": {
-                "left": "1061px",
-                "top": "420px",
-                "width": "46px",
-                "height": "27px",
+                "left": "1280px",
+                "top": "406px",
+                "width": "50px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -10516,10 +10516,10 @@
                 "visibility-oid": "time_switch_clock.0.trigger_4.t4_weekdays"
             },
             "style": {
-                "left": "1111px",
-                "top": "420px",
-                "width": "46px",
-                "height": "27px",
+                "left": "1010px",
+                "top": "406px",
+                "width": "50px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -10591,10 +10591,10 @@
                 "visibility-oid": "time_switch_clock.0.trigger_4.t4_weekdays"
             },
             "style": {
-                "left": "1161px",
-                "top": "420px",
-                "width": "46px",
-                "height": "27px",
+                "left": "1060px",
+                "top": "406px",
+                "width": "50px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -10666,10 +10666,10 @@
                 "visibility-oid": "time_switch_clock.0.trigger_4.t4_weekdays"
             },
             "style": {
-                "left": "1201px",
-                "top": "420px",
-                "width": "46px",
-                "height": "27px",
+                "left": "1100px",
+                "top": "406px",
+                "width": "50px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -10741,10 +10741,10 @@
                 "visibility-oid": "time_switch_clock.0.trigger_4.t4_weekdays"
             },
             "style": {
-                "left": "1241px",
-                "top": "420px",
-                "width": "46px",
-                "height": "27px",
+                "left": "1140px",
+                "top": "406px",
+                "width": "50px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
@@ -10816,10 +10816,10 @@
                 "visibility-oid": "time_switch_clock.0.trigger_4.t4_weekdays"
             },
             "style": {
-                "left": "1291px",
-                "top": "420px",
-                "width": "46px",
-                "height": "27px",
+                "left": "1190px",
+                "top": "406px",
+                "width": "50px",
+                "height": "30px",
                 "color": "#ffffff",
                 "text-align": "left",
                 "font-size": "x-large",
