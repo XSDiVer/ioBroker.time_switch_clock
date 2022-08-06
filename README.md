@@ -72,9 +72,9 @@ sind diese aktiviert - erhält man im jeweiligen Trigger zwei extra Datenpunkte,
 'true' & 'false'- selbst definieren kann. 
 
 [![t1_true](https://img.shields.io/badge/01_t1_true-blue)](https://img.shields.io/badge/01_t1_true-blue) <br />
-[![02_t1_false](https://img.shields.io/badge/02_t1_false-blue)](https://img.shields.io/badge/02_t1_false-blue)
+[![02_t1_false](https://img.shields.io/badge/02_t1_false-blue)](https://img.shields.io/badge/02_t1_false-blue)<br />
 
-so kann man z.B. ein Hue - Lampe dimmen, indem man das gewünschte 'Level' im Datenpunkt einbringt.
+so kann man z.B. ein Hue - Lampe dimmen, indem man das gewünschte 'Level' im Datenpunkt einbringt.<br />
 Man kann z.B. auch bei den nanoleafs 'effect' ändern... e.t.c.<br /><br />
 
 
