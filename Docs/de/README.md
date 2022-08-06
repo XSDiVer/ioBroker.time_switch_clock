@@ -17,11 +17,7 @@ Zeitschaltuhr für Ventile, Lampen und viele andere Dinge.
 
 Dieser Adapter löst bis zu 6 verschiedene Datenpunkte aus.
 
-## Documentation
-
-[🇺🇸 Documentation](./Docs/en/README.md)
-
-[🇩🇪 Dokumentation](./Docs/de/README.md)
+## Dokumentation
 
 [![trigger_1_is_set](https://img.shields.io/badge/-Setup.SetTrigger-blue)](https://img.shields.io/badge/-Setup.SetTrigger-blue) - als erstes unter SetTrigger, den Trigger (1 - 6) einstellen, welcher geändert werden soll.<br />
 
