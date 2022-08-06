@@ -71,11 +71,11 @@ SetTrigger wird nach 2 Minuten Inaktivität automatisch auf 0 gesetzt.<br /><br 
 sind diese aktiviert - erhält man im jeweiligen Trigger zwei extra Datenpunkte, über die man
 'false' & 'true' - selbst definieren kann. 
 
-[![t1_true](https://img.shields.io/badge/01_t1_true-blue)](https://img.shields.io/badge/01_t1_true-blue) 
+[![t1_true](https://img.shields.io/badge/01_t1_true-blue)](https://img.shields.io/badge/01_t1_true-blue) <br />
 [![02_t1_false](https://img.shields.io/badge/02_t1_false-blue)](https://img.shields.io/badge/02_t1_false-blue)
 
 so kann man z.B. ein Hue - Lampe dimmen, indem man das gewünschte 'Level' im Datenpunkt einbringt.
-Man kann z.B. auch bei den nanoleafs 'effect' ändern... e.t.c<br /><br />
+Man kann z.B. auch bei den nanoleafs 'effect' ändern... e.t.c.<br /><br />
 
 
 Dieser Adapter ist vorallem zur Verarbeitung mit der VIS gedacht und soll
