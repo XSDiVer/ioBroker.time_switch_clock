@@ -1,4 +1,4 @@
-![Logo](admin/time_switch_clock.png)
+![Logo](../../admin/time_switch_clock.png)
 # ioBroker.time_switch_clock
 
 [![NPM version](https://img.shields.io/npm/v/iobroker.time_switch_clock.svg)](https://www.npmjs.com/package/iobroker.time_switch_clock)
