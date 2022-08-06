@@ -244,9 +244,6 @@ class TimeSwitchClock extends utils.Adapter {
 			}
 
 
-			this.log.error('t1_true_arr -- ' + t1_true_arr);
-
-
 			if (HH >= 0 && HH <= 23 && MM >= 0 && MM <= 59 && typeof this.mySchedule_1 !== 'undefined' && SetTrigger == 1 && SetSchedule.length !== 0) {
 
 				this.mySchedule_1.cancel();
