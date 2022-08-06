@@ -99,7 +99,7 @@ Hier ist ein Beispiel den man im VIS als View importieren kann,
 ## Changelog
 
 ### **WORK IN PROGRESS**
-* added extended_Datapoints in the Mainsetup,
+* added extended Datapoints in the Mainsetup,
 so you can trigger own defined strings - not only 'true' & 'false'
 
 ### 0.0.7 (2022-08-01)
