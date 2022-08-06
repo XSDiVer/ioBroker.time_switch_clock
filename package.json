@@ -1,6 +1,6 @@
 {
   "name": "iobroker.time_switch_clock",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Timer for e.g. water valves or other things",
   "author": {
     "name": "XSDiVer",

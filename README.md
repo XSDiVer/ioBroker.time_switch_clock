@@ -98,7 +98,7 @@ Hier ist ein Beispiel den man im VIS als View importieren kann,
 
 ## Changelog
 
-### **WORK IN PROGRESS**
+### 0.0.8 (2022-08-06)
 * added extended Datapoints in the Mainsetup,
 so you can trigger own defined strings - not only 'true' & 'false'
 

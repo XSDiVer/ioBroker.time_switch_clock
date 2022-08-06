@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "time_switch_clock",
-        "version": "0.0.7",
+        "version": "0.0.8",
         "news": {
+            "0.0.8": {
+                "en": "* added extended Datapoints in the Mainsetup,\nso you can trigger own defined strings - not only 'true' & 'false'",
+                "de": "* erweiterte Datapoints im Mainsetup hinzugefügt,\nso können sie eigene definierte strings auslösen - nicht nur true & false",
+                "ru": "* добавлены расширенные данные в Mainsetup,\nчтобы вы могли вызвать собственные определенные строки - не только true & false",
+                "pt": "* adicionado Datapoints estendidos no Mainsetup,\nassim que você pode desencadear próprias cadeias definidas - não só verdadeiro & falso",
+                "nl": "Vertaling:,\nzodat je eigen definitieve strings kan activeren, niet alleen waar",
+                "fr": "* ajouté des datapoints étendus dans le Mainsetup,\nafin que vous puissiez déclencher ses propres chaînes définies - non seulement true & false",
+                "it": "* aggiunto i Datapoint prolungati nel Mainsetup,\nin modo da poter attivare le proprie stringhe definite - non solo vero & falso",
+                "es": "* añadido Datapoints extendidos en el Mainsetup,\npara que usted puede desencadenar sus propias cadenas definidas - no sólo verdadero \" falso",
+                "pl": "* dodano rozszerzone punkty danych w Mainsetup,\nmożesz wywołać własne struny – nie tylko prawdziwe i fałszywe",
+                "zh-cn": "* 增加主要集群的数据点,\n因此,你可以触发自己界定的特色,不仅真正和谎言。"
+            },
             "0.0.7": {
                 "en": "some fixes",
                 "de": "einige korrekturen",
