@@ -38,6 +38,9 @@ Here is an example that can be imported into VIS as a view,
 
 ## Changelog
 
+### **WORK IN PROGRESS**
+* Readme update in English & German 
+
 ### 0.0.8 (2022-08-06)
 * added extended Datapoints in the Mainsetup,
 so you can trigger own defined strings - not only 'true' & 'false'
