@@ -17,7 +17,11 @@ Timer for e.g. water valves or lamps e.t.c.
 
 This adapter triggers up to 6 different data points.
 
-## Documentation
+## Documentation<br />
+
+[🇺🇸 Documentation](./docs/en/README.md)<br /><br />
+
+[🇩🇪 Dokumentation](./docs/de/README.md)<br /><br />
 
 [![trigger_1_is_set](https://img.shields.io/badge/-Setup.SetTrigger-blue)](https://img.shields.io/badge/-Setup.SetTrigger-blue) - First, under SetTrigger, set the trigger (1 - 6) which one should be changed.<br />
 
