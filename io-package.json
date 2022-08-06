@@ -146,7 +146,12 @@
     },
     "native": {
         "numberoftriggers": 1,
-        "extended_Datapoints": false
+        "extended_Datapoints_T1": false,
+        "extended_Datapoints_T2": false,
+        "extended_Datapoints_T3": false,
+        "extended_Datapoints_T4": false,
+        "extended_Datapoints_T5": false,
+        "extended_Datapoints_T6": false
     },
     "objects": [],
     "instanceObjects": [
@@ -180,78 +185,6 @@
                 "type": "number",
                 "read": true,
                 "write": false
-            },
-            "native": {}
-        },
-        {
-            "_id": "extended_Datapoints_T1",
-            "type": "state",
-            "common": {
-                "role": "state",
-                "name": "extended_Datapoints_T1",
-                "type": "boolean",
-                "read": true,
-                "write": true
-            },
-            "native": {}
-        },
-        {
-            "_id": "extended_Datapoints_T2",
-            "type": "state",
-            "common": {
-                "role": "state",
-                "name": "extended_Datapoints_T2",
-                "type": "boolean",
-                "read": true,
-                "write": true
-            },
-            "native": {}
-        },
-        {
-            "_id": "extended_Datapoints_T3",
-            "type": "state",
-            "common": {
-                "role": "state",
-                "name": "extended_Datapoints_T3",
-                "type": "boolean",
-                "read": true,
-                "write": true
-            },
-            "native": {}
-        },
-        {
-            "_id": "extended_Datapoints_T4",
-            "type": "state",
-            "common": {
-                "role": "state",
-                "name": "extended_Datapoints_T4",
-                "type": "boolean",
-                "read": true,
-                "write": true
-            },
-            "native": {}
-        },
-        {
-            "_id": "extended_Datapoints_T5",
-            "type": "state",
-            "common": {
-                "role": "state",
-                "name": "extended_Datapoints_T5",
-                "type": "boolean",
-                "read": true,
-                "write": true
-            },
-            "native": {}
-        },
-        {
-            "_id": "extended_Datapoints_T6",
-            "type": "state",
-            "common": {
-                "role": "state",
-                "name": "extended_Datapoints_T6",
-                "type": "boolean",
-                "read": true,
-                "write": true
             },
             "native": {}
         }
