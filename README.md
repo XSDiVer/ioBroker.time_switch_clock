@@ -63,18 +63,30 @@ geschaltete Datenpunkt wieder auf "false" gesetzt werden soll.
 Hat man alle -trigger_1 - trigger_6- wie gewünscht eingestellt, 
 sollte man  -SetTrigger- auf z.B. 0 setzen -- damit sich durch Änderungen an Uhrzeit
 oder Wochentagen -- kein -trigger_1 - trigger_6- verstellt, bzw. neu gesetzt wird.
-SetTrigger wird nach 2 Minuten Inaktivität automatisch auf 0 gesetzt.
+SetTrigger wird nach 2 Minuten Inaktivität automatisch auf 0 gesetzt.<br /><br />
+
+<b>extended Datapoints aktivieren:</b><br />
+
+- in den Einstellungen kann man extended Datapoints für jeden Trigger (1 - 6) separat aktivieren <br />
+sind diese aktiviert - erhält man im jeweiligen Trigger zwei extra Datenpunkte, über die man
+'false' & 'true' - selbst definieren kann. 
+
+[![t1_true](https://img.shields.io/badge/01_t1_true-blue)](https://img.shields.io/badge/01_t1_true-blue) 
+[![02_t1_false](https://img.shields.io/badge/02_t1_false-blue)](https://img.shields.io/badge/02_t1_false-blue)
+
+so kann man z.B. ein Hue - Lampe dimmen, indem man das gewünschte 'Level' im Datenpunkt einbringt.
+Man kann z.B. auch bei den nanoleafs 'effect' ändern... e.t.c<br /><br />
+
 
 Dieser Adapter ist vorallem zur Verarbeitung mit der VIS gedacht und soll
 das erstellen einer Zeitschaltung erleichtern.
 
 
 Hier ist ein Beispiel den man im VIS als View importieren kann,
-- dient nur zur Veranschaulichung und zum testen:
 
-Die Inventwo Widges werden benötigt!
+ - Die Inventwo Widges werden benötigt!
 
-Einfach im VIS unter VIEW importieren - (copy & paste)
+ - Einfach im VIS unter VIEW importieren - (copy & paste)
  
 <a href="https://github.com/XSDiVer/ioBroker.time_switch_clock/blob/main/Docs/example_View_inventwo"> example VIS View</a>
 

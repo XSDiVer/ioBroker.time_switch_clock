@@ -15,10 +15,47 @@
                     "lg": 6,
                     "label": "number of triggers"
                 },
-                       "extended_Datapoints": {
+                       "extended_Datapoints_T1": {
                         "newLine": true,
                         "type": "checkbox",
-                        "label": "extended Datapoints - (under construction...)",
+                        "label": "extended Datapoints for Trigger 1",
+                        "sm": 12,
+                        "md": 6,
+                        "lg": 3
+                    },
+                        "extended_Datapoints_T2": {
+                        "type": "checkbox",
+                        "label": "extended Datapoints for Trigger 2",
+                        "sm": 12,
+                        "md": 6,
+                        "lg": 3
+                    },
+                    "extended_Datapoints_T3": {
+                        "newLine": true,
+                        "type": "checkbox",
+                        "label": "extended Datapoints for Trigger 3",
+                        "sm": 12,
+                        "md": 6,
+                        "lg": 3
+                    },
+                    "extended_Datapoints_T4": {
+                        "type": "checkbox",
+                        "label": "extended Datapoints for Trigger 4",
+                        "sm": 12,
+                        "md": 6,
+                        "lg": 3
+                    },
+                    "extended_Datapoints_T5": {
+                        "newLine": true,
+                        "type": "checkbox",
+                        "label": "extended Datapoints for Trigger 5",
+                        "sm": 12,
+                        "md": 6,
+                        "lg": 3
+                    },
+                    "extended_Datapoints_T6": {
+                        "type": "checkbox",
+                        "label": "extended Datapoints for Trigger 6",
                         "sm": 12,
                         "md": 6,
                         "lg": 3
