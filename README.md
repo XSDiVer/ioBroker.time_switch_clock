@@ -19,73 +19,11 @@ This adapter triggers up to 6 different data points.
 
 ## Documentation<br />
 
-[🇺🇸 Documentation](./Docs/en/README.md)<br /><br />
+[🇺🇸 Documentation](./Docs/en/README.md)<br />
 
 [🇩🇪 Dokumentation](./Docs/de/README.md)<br /><br />
 
-[![trigger_1_is_set](https://img.shields.io/badge/-Setup.SetTrigger-blue)](https://img.shields.io/badge/-Setup.SetTrigger-blue) - First, under SetTrigger, set the trigger (1 - 6) which one should be changed.<br />
-
-Then you can set the time and weekdays for the selected trigger under Setup & Weekdays.<br /><br />
-
-
-<b>Function of the data points in the trigger:</b><br />
-![Screenshot_1](https://github.com/XSDiVer/ioBroker.time_switch_clock/blob/main/Docs/img/Screenshot_1.png)
-
- 
-[![goforit_1](https://img.shields.io/badge/-goforit__1-blue)](https://img.shields.io/badge/-goforit__1-blue) - the data point wich should be switched (see screenshot below)<br />
-[![t1_time](https://img.shields.io/badge/-t1__time-blue)](https://img.shields.io/badge/-t1__time-blue) - Start time - when the DP should be set to true in the format HH:MM<br />
-[![t1_weekdays](https://img.shields.io/badge/-t1__weekdays-blue)](https://img.shields.io/badge/-t1__weekdays-blue) - On which days of the week switching should take place (Sunday = 0 to Saturday = 6)<br />
-[![timer_1](https://img.shields.io/badge/-timer__1-blue)](https://img.shields.io/badge/-timer__1-blue) - After how many minutes the DP should be set to False again<br />
-[![trigger_1_Start](https://img.shields.io/badge/-trigger__1__Start-blue)](https://img.shields.io/badge/-trigger__1__Start-blue) - if the value is set to 'true' the trigger is active<br />
-[![trigger_1_is_set](https://img.shields.io/badge/-trigger__1__is__set-blue)](https://img.shields.io/badge/-trigger__1__is__set-blue) - if 'trigger_1_Start' is 'true' - the days of the week and the time are displayed here again /<br />
-                             if trigger_1_Start is 'false', DP displays 'not scheduled'.<br /><br />
-
-
-<b>about goforit_1</b>
-
-The id of the corresponding data point is simply copied here:
-
-![Screenshot_id](https://github.com/XSDiVer/ioBroker.time_switch_clock/blob/main/Docs/img/Screenshot_id.png)
- 
-In 'goforit' it must be entered in the respective trigger,
-which data point should be triggered. Simply copy the _id of the corresponding data point and paste it into goforit.
-At the set time, this data point is then set to 'true'.
-
-The individual triggers can be selected via 'SetTrigger'.
-Simply the desired number of the trigger to be set in,
-Enter 'SetTrigger' -- Example: for Trigger_1 enter a 1 in 'SetTrigger'.
-
-Now you can use the data points: -01_Monday, 02_Tuesday, 03_Wednesday, 04_Thursday, 05_Friday, 06_Saturday & 07_Sunday-
-set on which day the 'trigger_1' - 'trigger_6' should be triggered.
-
-Bei -Uhrzeit- trägt man die Uhrzeit ein, um die der jeweilige -trigger_1 - trigger_6- ausgelöst werden soll.
-Die -Uhrzeit- wird im Format -HH:MM- gesetzt. Wobei HH für Stunden und MM für Minuten steht.
-
-Under 'timer' in the respective data point - you can set after how many minutes before
-switched data point should be set to 'false' again.
-
-
-If you have set all 'trigger_1' - 'trigger_6' as desired,
-you should set 'SetTrigger' to e.g. 0 -- so that changes to the time
-or days of the week have no effect to the triggers.
-SetTrigger is automatically set to 0 after 2 minutes of inactivity.<br /><br />
-
-<b>Activate extended data points:</b><br />
-
-- in the mainsettings you can activate 'extended datapoints' separately for each trigger (1 - 6) <br />
-if these are activated - you get two extra data points in the respective trigger, which you can use
-'true' & 'false'- can defined by yourself.
-
-[![t1_true](https://img.shields.io/badge/01_t1_true-blue)](https://img.shields.io/badge/01_t1_true-blue) <br />
-[![02_t1_false](https://img.shields.io/badge/02_t1_false-blue)](https://img.shields.io/badge/02_t1_false-blue)<br />
-
-For example, you can dim a Hue lamp by entering the desired 'level' in the data point,<br />
-or you can also change the 'effect' of the nanoleafs... e.t.c.<br /><br />
-
-
-This adapter is primarily intended and intended for processing with the VIS
-facilitate the creation of a time switch.
-
+With this adapter you can switch up to 6 different data points at a desired time.<br />
 
 Here is an example that can be imported into VIS as a view,
 
