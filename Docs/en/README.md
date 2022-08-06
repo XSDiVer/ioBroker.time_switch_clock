@@ -13,7 +13,7 @@
 
 ## time_switch_clock adapter for ioBroker
 
-Zeitschaltuhr für Ventile, Lampen und viele andere Dinge.
+Timer for e.g. water valves or lamps e.t.c.
 
 Dieser Adapter löst bis zu 6 verschiedene Datenpunkte aus.
 
