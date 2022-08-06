@@ -67,9 +67,9 @@ SetTrigger wird nach 2 Minuten Inaktivität automatisch auf 0 gesetzt.<br /><br 
 
 <b>extended Datapoints aktivieren:</b><br />
 
-- in den Einstellungen kann man extended Datapoints für jeden Trigger (1 - 6) separat aktivieren <br />
+- in den Einstellungen kann man 'extended Datapoints' für jeden Trigger (1 - 6) separat aktivieren <br />
 sind diese aktiviert - erhält man im jeweiligen Trigger zwei extra Datenpunkte, über die man
-'false' & 'true' - selbst definieren kann. 
+'true' & 'false'- selbst definieren kann. 
 
 [![t1_true](https://img.shields.io/badge/01_t1_true-blue)](https://img.shields.io/badge/01_t1_true-blue) <br />
 [![02_t1_false](https://img.shields.io/badge/02_t1_false-blue)](https://img.shields.io/badge/02_t1_false-blue)
