@@ -66,7 +66,7 @@ sollte man  -SetTrigger- auf z.B. 0 setzen -- damit sich durch Änderungen an Uh
 oder Wochentagen -- kein -trigger_1 - trigger_6- verstellt, bzw. neu gesetzt wird.
 SetTrigger wird nach 2 Minuten Inaktivität automatisch auf 0 gesetzt.<br /><br />
 
-<b>extended Datapoints aktivieren:</b><br />
+<b>erweiterte Datenpunkte aktivieren:</b><br />
 
 ![extended_DP](https://github.com/XSDiVer/ioBroker.time_switch_clock/blob/main/Docs/img/extended_DP.png)<br />
 
