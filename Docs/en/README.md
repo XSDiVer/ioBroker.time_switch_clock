@@ -54,8 +54,8 @@ Enter 'SetTrigger' -- Example: for Trigger_1 enter a 1 in 'SetTrigger'.
 Now you can use the data points: -01_Monday, 02_Tuesday, 03_Wednesday, 04_Thursday, 05_Friday, 06_Saturday & 07_Sunday-
 set on which day the 'trigger_1' - 'trigger_6' should be triggered.
 
-Bei -Uhrzeit- trägt man die Uhrzeit ein, um die der jeweilige -trigger_1 - trigger_6- ausgelöst werden soll.
-Die -Uhrzeit- wird im Format -HH:MM- gesetzt. Wobei HH für Stunden und MM für Minuten steht.
+at 'time'you enter the time at which the respective 'trigger_1' - 'trigger_6' should be triggered.
+The -time- is set in the format -HH:MM-. HH stands for hours and MM for minutes.
 
 Under 'timer' in the respective data point - you can set after how many minutes before
 switched data point should be set to 'false' again.
