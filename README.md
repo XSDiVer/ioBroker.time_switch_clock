@@ -75,6 +75,8 @@ sind diese aktiviert - erhält man im jeweiligen Trigger zwei extra Datenpunkte,
 [![02_t1_false](https://img.shields.io/badge/02_t1_false-blue)](https://img.shields.io/badge/02_t1_false-blue)<br />
 
 so kann man z.B. ein Hue - Lampe dimmen, indem man das gewünschte 'Level' im Datenpunkt einbringt.<br />
+(kommt ein kleiner Fehler im Log.: State value to set for "hue.0.device" has to be type "number" but received type "string" - 
+muss noch gefixed werden - funktioniert aber.) <br />
 Man kann z.B. auch bei den nanoleafs 'effect' ändern... e.t.c.<br /><br />
 
 
