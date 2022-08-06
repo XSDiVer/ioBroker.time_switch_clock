@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "time_switch_clock",
-        "version": "0.0.8",
+        "version": "0.0.9",
         "news": {
+            "0.0.9": {
+                "en": "Readme update in English & German",
+                "de": "Readme Update auf Englisch & Deutsch",
+                "ru": "Обновление Readme на английском и немецком языках",
+                "pt": "Readme update in English & German",
+                "nl": "Lees me update in het Engels",
+                "fr": "Readme mise à jour en anglais et allemand",
+                "it": "Aggiornamento Readme in inglese e tedesco",
+                "es": "Actualización de Readme en Inglés & Alemán",
+                "pl": "Readme uaktualnienie",
+                "zh-cn": "英文和德文更新"
+            },
             "0.0.8": {
                 "en": "* added extended Datapoints in the Mainsetup,\nso you can trigger own defined strings - not only 'true' & 'false'",
                 "de": "* erweiterte Datapoints im Mainsetup hinzugefügt,\nso können sie eigene definierte strings auslösen - nicht nur true & false",

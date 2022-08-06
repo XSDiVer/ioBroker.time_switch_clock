@@ -38,7 +38,7 @@ Here is an example that can be imported into VIS as a view,
 
 ## Changelog
 
-### **WORK IN PROGRESS**
+### 0.0.9 (2022-08-06)
 * Readme update in English & German 
 
 ### 0.0.8 (2022-08-06)
