@@ -68,6 +68,8 @@ SetTrigger is automatically set to 0 after 2 minutes of inactivity.<br /><br />
 
 <b>Activate extended data points:</b><br />
 
+![extended_DP](https://github.com/XSDiVer/ioBroker.time_switch_clock/blob/main/Docs/img/extended_DP.png)<br />
+
 - in the mainsettings you can activate 'extended datapoints' separately for each trigger (1 - 6) <br />
 if these are activated - you get two extra data points in the respective trigger, which you can use
 'true' & 'false'- can defined by yourself.

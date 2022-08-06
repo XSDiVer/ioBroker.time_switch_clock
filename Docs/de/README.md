@@ -37,7 +37,7 @@ Dann kann man unter Setup & Weekdays die Uhrzeit & die Wochentage für den entsp
                              wenn trigger_1_Start auf False steht zeigt DP 'not scheduled' an.<br /><br />
 
 
-<b>zu goforit_1</b>
+<b>zu goforit_1:</b>
 
 Hier wird einfach die id des entsprechenden Datenpunkts rein kopiert:
 
@@ -67,6 +67,8 @@ oder Wochentagen -- kein -trigger_1 - trigger_6- verstellt, bzw. neu gesetzt wir
 SetTrigger wird nach 2 Minuten Inaktivität automatisch auf 0 gesetzt.<br /><br />
 
 <b>extended Datapoints aktivieren:</b><br />
+
+![extended_DP](https://github.com/XSDiVer/ioBroker.time_switch_clock/blob/main/Docs/img/extended_DP.png)<br />
 
 - in den Einstellungen kann man 'extended Datapoints' für jeden Trigger (1 - 6) separat aktivieren <br />
 sind diese aktiviert - erhält man im jeweiligen Trigger zwei extra Datenpunkte, über die man
