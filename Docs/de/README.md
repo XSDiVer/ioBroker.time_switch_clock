@@ -11,7 +11,7 @@
 
 **Tests:** ![Test and Release](https://github.com/XSDiVer/ioBroker.time_switch_clock/workflows/Test%20and%20Release/badge.svg)
 
-## time_switch_clock adapter for ioBroker
+## time_switch_clock adapter für ioBroker
 
 Zeitschaltuhr für Ventile, Lampen und viele andere Dinge.
 
