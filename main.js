@@ -36,6 +36,10 @@ let DP_4arr = [];
 let DP_5arr = [];
 let DP_6arr = [];
 
+//Array für typeof.Datenpunkte die in goforit eingetragen sind / number oder string oder boolean
+let typeofarr1 = [];
+
+
 //Zeit bis der Timer Datenpunkt wieder auf false gesetzt wird in Sekunden
 let timer_t1arr = [];
 let timer_t2arr = [];
@@ -3853,9 +3857,33 @@ class TimeSwitchClock extends utils.Adapter {
 				const goforit_1 = await this.getStateAsync('trigger_1.goforit_1');
 				const goforit = goforit_1 ? goforit_1.val: 'None';
 
+				//******************************************
+				//goforit eingetragenen Datenpunkt ckecken
+				//******************************************
+				//**************** 29091977 ****************
+
 				if (goforit !== '' && goforit !== 'None' && goforit !== 'please_Set') {
 
-					DP_1arr = goforit;
+					try {
+						const goforit_type_1 = await this.getForeignStateAsync(goforit);
+						const goforit_type = (typeof goforit_type_1.val);
+
+						//this.log.error('gofot ist state -- ' + goforit_type);
+
+						typeofarr1 = goforit_type;
+						DP_1arr = goforit;
+
+						this.log.error('gofot ist state -- Array -- ' + typeofarr1);
+
+					} catch (e) {
+
+						this.log.error('Der Datenpunkt bei goforit in Trigger 1 ist ungültig' + e);
+
+						if (StatusTriggerStart == true) {
+							this.setStateAsync('trigger_1.trigger_1_Start', false, true);
+						}
+
+					}
 
 				} else if (goforit == '') {
 
