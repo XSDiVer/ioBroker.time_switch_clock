@@ -8,6 +8,7 @@
 
 const utils = require('@iobroker/adapter-core');
 const schedule = require('node-schedule');
+const { stringify } = require('querystring');
 const SetWeekdays = [];
 const SetSchedule = [];
 const Time = [];
@@ -305,6 +306,26 @@ class TimeSwitchClock extends utils.Adapter {
 
 			this.log.info('Schedule 1 ausgelöst!');
 
+			//******************************************
+			//goforit eingetragenen Datenpunkt ckecken
+			//******************************************
+			//**************** 29091977 ****************
+
+			//muss glaube ich weiter oben hin...
+			if (typeofarr1 == 'string') {
+
+				this.log.warn('typeof Array -- String -- ' + typeofarr1);
+
+			} else if (typeofarr1 == 'number') {
+
+				this.log.warn('typeof Array -- Number -- ' + typeofarr1);
+
+
+			} else if (typeofarr1 == 'boolean') {
+
+				this.log.warn('typeof Array -- Boolean -- ' + typeofarr1);
+
+			}
 
 			let setdatapoint_false = [t1_false_arr];
 
@@ -317,7 +338,6 @@ class TimeSwitchClock extends utils.Adapter {
 				setdatapoint_false = t1_false_arr;
 
 			}
-
 
 			const waitS1 = this.setTimeout( async () => {this.log.info('Schedule 1 auf false gesetzt! - ' + timer_t1arr + ' Minuten später');
 				this.setForeignStateAsync(DP_1arr.toString() , setdatapoint_false);
@@ -3864,24 +3884,26 @@ class TimeSwitchClock extends utils.Adapter {
 
 				if (goforit !== '' && goforit !== 'None' && goforit !== 'please_Set') {
 
-					try {
+					const valid_DP1 = await this.getForeignObjectAsync(goforit);
+					const validDP = valid_DP1;
+
+					if (validDP != null) {
+
 						const goforit_type_1 = await this.getForeignStateAsync(goforit);
 						const goforit_type = (typeof goforit_type_1.val);
-
-						//this.log.error('gofot ist state -- ' + goforit_type);
 
 						typeofarr1 = goforit_type;
 						DP_1arr = goforit;
 
-						this.log.error('gofot ist state -- Array -- ' + typeofarr1);
+						this.log.warn('goforit ist state -- Array -- ' + typeofarr1);
 
-					} catch (e) {
-
-						this.log.error('Der Datenpunkt bei goforit in Trigger 1 ist ungültig' + e);
+					} else {
 
 						if (StatusTriggerStart == true) {
 							this.setStateAsync('trigger_1.trigger_1_Start', false, true);
 						}
+
+						this.log.error('In Trigger 1, goforit -- ' + goforit + ' -- existiert nicht! Bitte ändern');
 
 					}
 
