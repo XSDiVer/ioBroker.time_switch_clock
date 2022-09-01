@@ -8,7 +8,7 @@
 
 const utils = require('@iobroker/adapter-core');
 const schedule = require('node-schedule');
-const { stringify } = require('querystring');
+//const { stringify } = require('querystring');
 const SetWeekdays = [];
 const SetSchedule = [];
 const Time = [];
