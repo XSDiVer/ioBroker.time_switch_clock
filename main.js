@@ -101,7 +101,7 @@ class TimeSwitchClock extends utils.Adapter {
 		});
 		this.on('ready', this.onReady.bind(this));
 		this.on('stateChange', this.onStateChange.bind(this));
-		this.on('objectChange', this.onObjectChange.bind(this));
+		// this.on('objectChange', this.onObjectChange.bind(this));
 		// this.on('message', this.onMessage.bind(this));
 		this.on('unload', this.onUnload.bind(this));
 	}
@@ -307,7 +307,7 @@ class TimeSwitchClock extends utils.Adapter {
 			this.log.info('Schedule 1 ausgelöst!');
 
 			//******************************************
-			//goforit eingetragenen Datenpunkt ckecken
+			//goforit eingetragenen Datenpunkt checken
 			//******************************************
 			//**************** 29091977 ****************
 
@@ -1714,6 +1714,14 @@ class TimeSwitchClock extends utils.Adapter {
 
 		} else if (this.config.numberoftriggers == 2) {
 
+			await this.setObjectNotExistsAsync('trigger_2', {
+				type: 'folder',
+				common: {
+					name: 'trigger_2',
+				},
+				native: {},
+			});
+
 			await this.setObjectNotExistsAsync('trigger_2.trigger_2_is_set', {
 				type: 'state',
 				common: {
@@ -2742,6 +2750,14 @@ class TimeSwitchClock extends utils.Adapter {
 
 		} else if (this.config.numberoftriggers == 6) {
 
+			await this.setObjectNotExistsAsync('trigger_2', {
+				type: 'folder',
+				common: {
+					name: 'trigger_2',
+				},
+				native: {},
+			});
+
 			await this.setObjectNotExistsAsync('trigger_2.trigger_2_is_set', {
 				type: 'state',
 				common: {
@@ -2815,6 +2831,14 @@ class TimeSwitchClock extends utils.Adapter {
 					def: 2,
 					read: true,
 					write: true,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_3', {
+				type: 'folder',
+				common: {
+					name: 'trigger_3',
 				},
 				native: {},
 			});
@@ -2896,6 +2920,14 @@ class TimeSwitchClock extends utils.Adapter {
 				native: {},
 			});
 
+			await this.setObjectNotExistsAsync('trigger_4', {
+				type: 'folder',
+				common: {
+					name: 'trigger_4',
+				},
+				native: {},
+			});
+
 			await this.setObjectNotExistsAsync('trigger_4.trigger_4_is_set', {
 				type: 'state',
 				common: {
@@ -2973,6 +3005,14 @@ class TimeSwitchClock extends utils.Adapter {
 				native: {},
 			});
 
+			await this.setObjectNotExistsAsync('trigger_5', {
+				type: 'folder',
+				common: {
+					name: 'trigger_5',
+				},
+				native: {},
+			});
+
 			await this.setObjectNotExistsAsync('trigger_5.trigger_5_is_set', {
 				type: 'state',
 				common: {
@@ -3046,6 +3086,14 @@ class TimeSwitchClock extends utils.Adapter {
 					def: 5,
 					read: true,
 					write: true,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_6', {
+				type: 'folder',
+				common: {
+					name: 'trigger_6',
 				},
 				native: {},
 			});
@@ -3153,11 +3201,6 @@ class TimeSwitchClock extends utils.Adapter {
 		//Datepunkt abfragen erstellen / löschen ENDE
 		//*****************************************
 
-
-		// Reset the connection indicator during startup
-
-		this.setStateAsync('info.connection', true, true);
-
 		//Wochentage auf einen Wert setzten
 		this.setStateAsync('Weekdays.07_Sunday', true, true);
 		this.setStateAsync('Weekdays.01_Monday', false, true);
@@ -3205,7 +3248,7 @@ class TimeSwitchClock extends utils.Adapter {
 		try {
 			// Here you must clear all timeouts or intervals that may still be active
 
-			this.setStateAsync('info.connection', { val: false, ack: true });
+			//this.setStateAsync('info.connection', { val: false, ack: true });
 			schedule.gracefulShutdown();
 
 			this.clearTimeout(SetTrigger_Stop_arr);
@@ -3231,7 +3274,7 @@ class TimeSwitchClock extends utils.Adapter {
 	  * @param {string} id
 	  * @param {ioBroker.Object | null | undefined} obj
 	 */
-	onObjectChange(id, obj) {
+	/*onObjectChange(id, obj) {
 		if (obj) {
 			// The object was changed
 			this.log.error(`object ${id} changed: ${JSON.stringify(obj)}`);
@@ -3241,6 +3284,7 @@ class TimeSwitchClock extends utils.Adapter {
 			this.log.error(`object ${id} deleted`);
 		}
 	}
+	*/
 
 	/**
 	 * Is called if a subscribed state changes

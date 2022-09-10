@@ -177,23 +177,26 @@
     "objects": [],
     "instanceObjects": [
         {
-            "_id": "info",
-            "type": "channel",
+            "_id": "Setup",
+            "type": "folder",
             "common": {
-                "name": "Information"
+                "name": "Setup"
             },
             "native": {}
         },
         {
-            "_id": "info.connection",
-            "type": "state",
+            "_id": "Weekdays",
+            "type": "folder",
             "common": {
-                "role": "indicator.connected",
-                "name": "Device or service connected",
-                "type": "boolean",
-                "read": true,
-                "write": false,
-                "def": false
+                "name": "Weekdays"
+            },
+            "native": {}
+        },
+        {
+            "_id": "trigger_1",
+            "type": "folder",
+            "common": {
+                "name": "trigger_1"
             },
             "native": {}
         },
