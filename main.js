@@ -1715,13 +1715,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			//Überflüssige Datenpunkte löschen - alle die > numberoftriggers Anzahl ist, werden gelöscht
 
-			await this.delObjectAsync('trigger_' + del + '.trigger_' + del + '_is_set');
-			await this.delObjectAsync('trigger_' + del + '.trigger_' + del + '_Start');
-			await this.delObjectAsync('trigger_' + del + '.t' + del + '_weekdays');
-			await this.delObjectAsync('trigger_' + del + '.t' + del + '_time');
-			await this.delObjectAsync('trigger_' + del + '.goforit_' + del);
-			await this.delObjectAsync('trigger_' + del + '.timer_' + del);
-			await this.delObjectAsync('trigger_' + del);
+			this.delObjectAsync('trigger_' + del, { recursive: true });
 
 		}
 
