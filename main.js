@@ -85,9 +85,6 @@ let t6_false_arr = [];
 //nach SetTimeout die TimeOut ID in Array schreiben um SetTrigger wieder auf '0' zu setzten
 let SetTrigger_Stop_arr = [];
 
-//merken - wird gebraucht
-//this.log.error('Instanz -- ' + this.instance);
-//this.log.error('namespace -- ' + this.namespace);
 
 class TimeSwitchClock extends utils.Adapter {
 
@@ -111,8 +108,536 @@ class TimeSwitchClock extends utils.Adapter {
 	 */
 	async onReady() {
 		// Initialize your adapter here
-
 		this.log.info('Adapter TimeSwitchClock gestartet!');
+
+
+		//Die Anzahl der Trigger die in der Konfig ausgewählt wurde
+		this.setStateAsync('Setup.number_of_triggers', + this.config.numberoftriggers, true );
+
+		if (this.config.numberoftriggers == null) {
+
+			this.log.error('numberoftriggers is NULL!');
+
+		} else if (this.config.numberoftriggers !== null) {
+
+			this.log.info('Schedule Anzahl ist -- ' + this.config.numberoftriggers);
+
+		}
+
+
+		//Überprüfen ob die Datenpunkte angelegt sind, wenn nicht werden sie neu angelegt
+		//in Abhängigkeit zur Anzahl der Trigger die in der this.config eingestellt sind
+		for (let i = 1; i <= this.config.numberoftriggers; i++){
+
+			//Datenpunkte erstellen - in Abhängigkeit wie viele in numberoftriggers eingestellt sind
+
+			await this.setObjectNotExistsAsync('trigger_' + i, {
+				type: 'folder',
+				common: {
+					name: 'trigger_' + i,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_' + i + '.trigger_' + i + '_is_set', {
+				type: 'state',
+				common: {
+					name: 'trigger_' + i + '_is_set',
+					type: 'string',
+					role: 'state',
+					read: true,
+					write: false,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_' + i + '.trigger_' + i + '_Start', {
+				type: 'state',
+				common: {
+					name: 'trigger_' + i + '_Start',
+					type: 'boolean',
+					role: 'state',
+					def: false,
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_' + i + '.t' + i + '_weekdays', {
+				type: 'state',
+				common: {
+					name: 't' + i + '_weekdays',
+					type: 'array',
+					role: 'list',
+					def: '[0,6]',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_' + i + '.t' + i + '_time', {
+				type: 'state',
+				common: {
+					name: 't' + i + '_time',
+					type: 'string',
+					role: 'state',
+					def: '00:00',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_' + i + '.goforit_' + i, {
+				type: 'state',
+				common: {
+					name: 'goforit_' + i,
+					type: 'string',
+					role: 'state',
+					def: 'please_Set',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			await this.setObjectNotExistsAsync('trigger_' + i + '.timer_' + i, {
+				type: 'state',
+				common: {
+					name: 'timer_' + i,
+					type: 'number',
+					role: 'state',
+					def: i,
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			this.subscribeStates('trigger_' + i + '.trigger_' + i + '_Start');
+			this.subscribeStates('trigger_' + i + '.goforit_' + i);
+			this.subscribeStates('trigger_' + i + '.timer_' + i);
+
+			this.setStateAsync('trigger_' + i + '.trigger_' + i + '_Start', false, true);
+
+		}
+
+
+
+		for (let del = 6; del > this.config.numberoftriggers; del--){
+
+			//Überflüssige Datenpunkte löschen - alle die > numberoftriggers Anzahl ist, werden gelöscht
+
+			this.delObjectAsync('trigger_' + del, { recursive: true });
+
+		}
+
+		//Datenpunkte für Trigger erstellen/löschen Ende
+
+
+		//Permanente Datenpunkte erstellen
+		await this.setObjectNotExistsAsync('Setup.HH', {
+			type: 'state',
+			common: {
+				name: 'HH',
+				type: 'string',
+				role: 'state',
+				read: true,
+				write: true,
+			},
+			native: {},
+		});
+
+		this.setStateAsync('Setup.HH', '00', true);
+
+		await this.setObjectNotExistsAsync('Setup.mm', {
+			type: 'state',
+			common: {
+				name: 'mm',
+				type: 'string',
+				role: 'state',
+				read: true,
+				write: true,
+			},
+			native: {},
+		});
+
+		this.setStateAsync('Setup.mm', '00', true);
+
+		await this.setObjectNotExistsAsync('Setup.SetTrigger', {
+			type: 'state',
+			common: {
+				name: 'SetTrigger',
+				type: 'string',
+				role: 'state',
+				read: true,
+				write: true,
+			},
+			native: {},
+		});
+
+		await this.setObjectNotExistsAsync('Weekdays.07_Sunday', {
+			type: 'state',
+			common: {
+				name: 'Sunday',
+				type: 'boolean',
+				role: 'state',
+				read: true,
+				write: true,
+			},
+			native: {},
+		});
+
+		await this.setObjectNotExistsAsync('Weekdays.01_Monday', {
+			type: 'state',
+			common: {
+				name: 'Monday',
+				type: 'boolean',
+				role: 'state',
+				read: true,
+				write: true,
+			},
+			native: {},
+		});
+
+		await this.setObjectNotExistsAsync('Weekdays.02_Tuesday', {
+			type: 'state',
+			common: {
+				name: 'Tuesday',
+				type: 'boolean',
+				role: 'state',
+				read: true,
+				write: true,
+			},
+			native: {},
+		});
+
+		await this.setObjectNotExistsAsync('Weekdays.03_Wednesday', {
+			type: 'state',
+			common: {
+				name: 'Wednesday',
+				type: 'boolean',
+				role: 'state',
+				read: true,
+				write: true,
+			},
+			native: {},
+		});
+
+		await this.setObjectNotExistsAsync('Weekdays.04_Thursday', {
+			type: 'state',
+			common: {
+				name: 'Thursday',
+				type: 'boolean',
+				role: 'state',
+				read: true,
+				write: true,
+			},
+			native: {},
+		});
+
+		await this.setObjectNotExistsAsync('Weekdays.05_Friday', {
+			type: 'state',
+			common: {
+				name: 'Friday',
+				type: 'boolean',
+				role: 'state',
+				read: true,
+				write: true,
+			},
+			native: {},
+		});
+
+		await this.setObjectNotExistsAsync('Weekdays.06_Saturday', {
+			type: 'state',
+			common: {
+				name: 'Saturday',
+				type: 'boolean',
+				role: 'state',
+				read: true,
+				write: true,
+			},
+			native: {},
+		});
+
+		//Permanente Datenpunkte erstellen ENDE
+
+
+		//extended Datapoint setup:
+
+		//Extended DP for Trigger 1:
+		if (this.config.extended_Datapoints_T1 == true) {
+
+			this.log.info('extended_Datapoints - are enabled for Trigger 1');
+
+			await this.setObjectNotExistsAsync('trigger_1.01_t1_true', {
+				type: 'state',
+				common: {
+					name: 't1_true',
+					type: 'string',
+					role: 'state',
+					def: 'true',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			this.subscribeStates('trigger_1.01_t1_true');
+
+
+			await this.setObjectNotExistsAsync('trigger_1.02_t1_false', {
+				type: 'state',
+				common: {
+					name: 't1_false',
+					type: 'string',
+					role: 'state',
+					def: 'false',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			this.subscribeStates('trigger_1.02_t1_false');
+
+
+		} else if (this.config.extended_Datapoints_T1 == false) {
+
+			await this.delObjectAsync('trigger_1.01_t1_true');
+			await this.delObjectAsync('trigger_1.02_t1_false');
+
+		}
+
+
+		//Extended DP for Trigger 2:
+		if (this.config.extended_Datapoints_T2 == true && this.config.numberoftriggers >= 2) {
+
+			this.log.info('extended_Datapoints - are enabled for Trigger 2');
+
+			await this.setObjectNotExistsAsync('trigger_2.01_t2_true', {
+				type: 'state',
+				common: {
+					name: 't2_true',
+					type: 'string',
+					role: 'state',
+					def: 'true',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			this.subscribeStates('trigger_2.01_t2_true');
+
+
+			await this.setObjectNotExistsAsync('trigger_2.02_t2_false', {
+				type: 'state',
+				common: {
+					name: 't2_false',
+					type: 'string',
+					role: 'state',
+					def: 'false',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			this.subscribeStates('trigger_2.02_t2_false');
+
+
+		} else if (this.config.extended_Datapoints_T2 == false || this.config.numberoftriggers < 2) {
+
+			await this.delObjectAsync('trigger_2.01_t2_true');
+			await this.delObjectAsync('trigger_2.02_t2_false');
+
+		}
+
+
+		//Extended DP for Trigger 3:
+		if (this.config.extended_Datapoints_T3 == true && this.config.numberoftriggers >= 3) {
+
+			this.log.info('extended_Datapoints - are enabled for Trigger 3');
+
+			await this.setObjectNotExistsAsync('trigger_3.01_t3_true', {
+				type: 'state',
+				common: {
+					name: 't3_true',
+					type: 'string',
+					role: 'state',
+					def: 'true',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			this.subscribeStates('trigger_3.01_t3_true');
+
+
+			await this.setObjectNotExistsAsync('trigger_3.02_t3_false', {
+				type: 'state',
+				common: {
+					name: 't3_false',
+					type: 'string',
+					role: 'state',
+					def: 'false',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			this.subscribeStates('trigger_3.02_t3_false');
+
+
+		} else if (this.config.extended_Datapoints_T3 == false || this.config.numberoftriggers < 3) {
+
+			await this.delObjectAsync('trigger_3.01_t3_true');
+			await this.delObjectAsync('trigger_3.02_t3_false');
+
+		}
+
+
+		//Extended DP for Trigger 4:
+		if (this.config.extended_Datapoints_T4 == true && this.config.numberoftriggers >= 4) {
+
+			this.log.info('extended_Datapoints - are enabled for Trigger 4');
+
+			await this.setObjectNotExistsAsync('trigger_4.01_t4_true', {
+				type: 'state',
+				common: {
+					name: 't4_true',
+					type: 'string',
+					role: 'state',
+					def: 'true',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			this.subscribeStates('trigger_4.01_t4_true');
+
+
+			await this.setObjectNotExistsAsync('trigger_4.02_t4_false', {
+				type: 'state',
+				common: {
+					name: 't4_false',
+					type: 'string',
+					role: 'state',
+					def: 'false',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			this.subscribeStates('trigger_4.02_t4_false');
+
+
+		} else if (this.config.extended_Datapoints_T4 == false || this.config.numberoftriggers < 4) {
+
+			await this.delObjectAsync('trigger_4.01_t4_true');
+			await this.delObjectAsync('trigger_4.02_t4_false');
+
+		}
+
+
+		//Extended DP for Trigger 5:
+		if (this.config.extended_Datapoints_T5 == true && this.config.numberoftriggers >= 5) {
+
+			this.log.info('extended_Datapoints - are enabled for Trigger 5');
+
+			await this.setObjectNotExistsAsync('trigger_5.01_t5_true', {
+				type: 'state',
+				common: {
+					name: 't5_true',
+					type: 'string',
+					role: 'state',
+					def: 'true',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			this.subscribeStates('trigger_5.01_t5_true');
+
+
+			await this.setObjectNotExistsAsync('trigger_5.02_t5_false', {
+				type: 'state',
+				common: {
+					name: 't5_false',
+					type: 'string',
+					role: 'state',
+					def: 'false',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			this.subscribeStates('trigger_5.02_t5_false');
+
+
+		} else if (this.config.extended_Datapoints_T5 == false || this.config.numberoftriggers < 5) {
+
+			await this.delObjectAsync('trigger_5.01_t5_true');
+			await this.delObjectAsync('trigger_5.02_t5_false');
+
+		}
+
+
+		//Extended DP for Trigger 6:
+		if (this.config.extended_Datapoints_T6 == true && this.config.numberoftriggers == 6) {
+
+			this.log.info('extended_Datapoints - are enabled for Trigger 6');
+
+			await this.setObjectNotExistsAsync('trigger_6.01_t6_true', {
+				type: 'state',
+				common: {
+					name: 't6_true',
+					type: 'string',
+					role: 'state',
+					def: 'true',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			this.subscribeStates('trigger_6.01_t6_true');
+
+
+			await this.setObjectNotExistsAsync('trigger_6.02_t6_false', {
+				type: 'state',
+				common: {
+					name: 't6_false',
+					type: 'string',
+					role: 'state',
+					def: 'false',
+					read: true,
+					write: true,
+				},
+				native: {},
+			});
+
+			this.subscribeStates('trigger_6.02_t6_false');
+
+
+		} else if (this.config.extended_Datapoints_T6 == false || this.config.numberoftriggers < 6) {
+
+			await this.delObjectAsync('trigger_6.01_t6_true');
+			await this.delObjectAsync('trigger_6.02_t6_false');
+
+		}
+
+		//extended Datapoints ENDE
+
 
 		//States der Datenpunkte auslesen:
 		const SUN = await this.getStateAsync('Weekdays.07_Sunday');
@@ -136,14 +661,48 @@ class TimeSwitchClock extends utils.Adapter {
 		const SAT = await this.getStateAsync('Weekdays.06_Saturday');
 		const statusSAT = SAT ? SAT.val: true;
 
+
+		//Wochentage auf einen Wert setzten
+
+		this.setStateAsync('Weekdays.01_Monday', false, true);
+		this.setStateAsync('Weekdays.02_Tuesday', false, true);
+		this.setStateAsync('Weekdays.03_Wednesday', false, true);
+		this.setStateAsync('Weekdays.04_Thursday', false, true);
+		this.setStateAsync('Weekdays.05_Friday', false, true);
+		this.setStateAsync('Weekdays.06_Saturday', true, true);
+		this.setStateAsync('Weekdays.07_Sunday', true, true);
+
+		//Setup.SetTrigger auf 0 setzen - somit wird keine Uhrzeit oder Wochentag versehentlich verstellt
+		//wenn an Uhrzeit oder Wochentagen etwas geändert wird
+		this.setStateAsync('Setup.SetTrigger', '0', true);
+
+		//hier werden Datenpunkt Änderungen im Log angezeigt
+
+		this.subscribeStates('Setup.HH');
+		this.subscribeStates('Setup.mm');
+
+		this.subscribeStates('Setup.SetTrigger');
+
+		//this.subscribeStates('trigger_1.trigger_1');
+		this.subscribeStates('trigger_1.trigger_1_Start');
+
+		this.subscribeStates('Weekdays.07_Sunday');
+		this.subscribeStates('Weekdays.01_Monday');
+		this.subscribeStates('Weekdays.02_Tuesday');
+		this.subscribeStates('Weekdays.03_Wednesday');
+		this.subscribeStates('Weekdays.04_Thursday');
+		this.subscribeStates('Weekdays.05_Friday');
+		this.subscribeStates('Weekdays.06_Saturday');
+
+
 		//in Array einfügen oder löschen wenn false
 		//Sunday
 		if (statusSUN == true) {
-			SetWeekdays.splice(0,1, 'Sunday');
-			SetSchedule.splice(0,0, 0);
+			SetWeekdays[0] = 'Sunday';
+			SetSchedule[0] = 0;
 
 		}  else if (statusSUN == false) {
-			SetWeekdays.splice(0,1, '');
+			SetWeekdays[0] = '';
 
 		}	else {
 			this.log.error('else... ' + statusSUN);
@@ -151,11 +710,11 @@ class TimeSwitchClock extends utils.Adapter {
 
 		//Monday
 		if (statusMON == true) {
-			SetWeekdays.splice(1,1, 'Monday');
-			SetSchedule.splice(0,0, 1);
+			SetWeekdays[1] = 'Monday';
+			SetSchedule[1] = 1;
 
 		}  else if (statusMON == false) {
-			SetWeekdays.splice(1,1, '');
+			SetWeekdays[1] = '';
 
 		}	else {
 			this.log.error('else... ' + statusMON);
@@ -163,11 +722,11 @@ class TimeSwitchClock extends utils.Adapter {
 
 		//Tuesday
 		if (statusTUE == true) {
-			SetWeekdays.splice(2,1, 'Tuesday');
-			SetSchedule.splice(0,0, 2);
+			SetWeekdays[2] = 'Tuesday';
+			SetSchedule[2] = 2;
 
 		}  else if (statusTUE == false) {
-			SetWeekdays.splice(2,1, '');
+			SetWeekdays[2] = '';
 
 		}	else {
 			this.log.error('else... ' + statusTUE);
@@ -175,11 +734,11 @@ class TimeSwitchClock extends utils.Adapter {
 
 		//Wednesday
 		if (statusWED == true) {
-			SetWeekdays.splice(3,1, 'Wednesday');
-			SetSchedule.splice(0,0, 3);
+			SetWeekdays[3] = 'Wednesday';
+			SetSchedule[3] = 3;
 
 		}  else if (statusWED == false) {
-			SetWeekdays.splice(3,1, '');
+			SetWeekdays[3] = '';
 
 		}	else {
 			this.log.error('else... ' + statusWED);
@@ -187,11 +746,11 @@ class TimeSwitchClock extends utils.Adapter {
 
 		//Thursday
 		if (statusTHU == true) {
-			SetWeekdays.splice(4,1, 'Thursday');
-			SetSchedule.splice(0,0, 4);
+			SetWeekdays[4] = 'Thursday';
+			SetSchedule[4] = 4;
 
 		}  else if (statusTHU == false) {
-			SetWeekdays.splice(4,1, '');
+			SetWeekdays[4] = '';
 
 		}	else {
 			this.log.error('else... ' + statusTHU);
@@ -199,11 +758,11 @@ class TimeSwitchClock extends utils.Adapter {
 
 		//Friday
 		if (statusFRI == true) {
-			SetWeekdays.splice(5,1, 'Friday');
-			SetSchedule.splice(0,0, 5);
+			SetWeekdays[5] = 'Friday';
+			SetSchedule[5] = 5;
 
 		}  else if (statusFRI == false) {
-			SetWeekdays.splice(5,1, '');
+			SetWeekdays[5] = '';
 
 		}	else {
 			this.log.error('else... ' + statusFRI);
@@ -211,11 +770,11 @@ class TimeSwitchClock extends utils.Adapter {
 
 		//Saturday
 		if (statusSAT == true) {
-			SetWeekdays.splice(6,1, 'Saturday');
-			SetSchedule.splice(0,0, 6);
+			SetWeekdays[6] = 'Saturday';
+			SetSchedule[6] = 6;
 
 		}  else if (statusSAT == false) {
-			SetWeekdays.splice(6,1, '');
+			SetWeekdays[6] = '';
 
 		}	else {
 			this.log.error('else... ' + statusSAT);
@@ -309,21 +868,20 @@ class TimeSwitchClock extends utils.Adapter {
 			//******************************************
 			//goforit eingetragenen Datenpunkt checken
 			//******************************************
-			//**************** 29091977 ****************
 
 			//muss glaube ich weiter oben hin...
 			if (typeofarr1 == 'string') {
 
-				this.log.warn('typeof Array -- String -- ' + typeofarr1);
+				//this.log.warn('typeof Array -- String -- ' + typeofarr1);
 
 			} else if (typeofarr1 == 'number') {
 
-				this.log.warn('typeof Array -- Number -- ' + typeofarr1);
+				//this.log.warn('typeof Array -- Number -- ' + typeofarr1);
 
 
 			} else if (typeofarr1 == 'boolean') {
 
-				this.log.warn('typeof Array -- Boolean -- ' + typeofarr1);
+				//this.log.warn('typeof Array -- Boolean -- ' + typeofarr1);
 
 			}
 
@@ -895,869 +1453,113 @@ class TimeSwitchClock extends utils.Adapter {
 
 		//Schedule zusammen setzten - ENDE
 
+	}
 
-		//Cancel Schedules
-		this.cancelSchedule_1 = async () => {
+	//onReady Ende
+
+
+	//Cancel Schedules Start
+	//hier weiter...
+
+	async cancelSchedule(x) {
+
+		if (x == 1) {
 
 			this.HH = time_t1arr[0];
 			this.MM = time_t1arr[1];
 
-			try {
-				if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59 && typeof this.mySchedule_1 !== 'undefined') {
-					this.mySchedule_1.cancel();
-
-				} else if (this.HH < 0 || this.HH > 23 || this.MM < 0 || this.MM > 59) {
-
-					this.log.error('Keine gültige Uhrzeit bei Trigger 1!');
-
-				} else if (SetSchedule.length == 0) {
-
-					//this.log.error('Kein Wochentag gesetzt bei Trigger 1!');
-					//this.log.warn('SetSchedule -- 1 -- ' + SetSchedule);
-
-				} else if (typeof this.mySchedule_1 == 'undefined') {
-
-					//this.log.info('Schedule_1 nothing to cancel' );
-
-				} else {
-
-					this.log.error('Keine gültige Uhrzeit bei Schedule 1!');
-
-				}} catch (e) {
-
-				this.log.error('catch trigger 1 -- ' + e);
-
+			if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59 && typeof this.mySchedule_1 !== 'undefined' && x == 1) {
+				this.mySchedule_1.cancel();
 			}
 
-		};
-
-
-		this.cancelSchedule_2 = async () => {
+		} else if (x == 2) {
 
 			this.HH = time_t2arr[0];
 			this.MM = time_t2arr[1];
 
-			try {
-				if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59 && typeof this.mySchedule_2 !== 'undefined') {
-					this.mySchedule_2.cancel();
-
-				} else if (this.HH < 0 || this.HH > 23 || this.MM < 0 || this.MM > 59) {
-
-					this.log.error('Keine gültige Uhrzeit bei Trigger 2!');
-
-				} else if (SetSchedule.length == 0) {
-
-					//this.log.error('Kein Wochentag gesetzt bei Trigger 2!');
-					//this.log.warn('SetSchedule -- 1 -- ' + SetSchedule);
-
-				} else if (typeof this.mySchedule_2 == 'undefined') {
-
-					//this.log.info('Schedule_2 nothing to cancel' );
-
-				} else {
-
-					this.log.error('Keine gültige Uhrzeit bei Schedule 2!');
-
-				}} catch (e) {
-
-				this.log.error('catch trigger 2 -- ' + e);
-
+			if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59 && typeof this.mySchedule_2 !== 'undefined' && x == 2) {
+				this.mySchedule_2.cancel();
 			}
 
-		};
-
-
-		this.cancelSchedule_3 = async () => {
+		} else if (x == 3) {
 
 			this.HH = time_t3arr[0];
 			this.MM = time_t3arr[1];
 
-			try {
-				if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59 && typeof this.mySchedule_3 !== 'undefined') {
-					this.mySchedule_3.cancel();
-
-				} else if (this.HH < 0 || this.HH > 23 || this.MM < 0 || this.MM > 59) {
-
-					this.log.error('Keine gültige Uhrzeit bei Trigger 3!');
-
-				} else if (SetSchedule.length == 0) {
-
-					//this.log.error('Kein Wochentag gesetzt bei Trigger 3!');
-					//this.log.warn('SetSchedule -- 1 -- ' + SetSchedule);
-
-				} else if (typeof this.mySchedule_3 == 'undefined') {
-
-					//this.log.info('Schedule_3 nothing to cancel' );
-
-				} else {
-
-					this.log.error('Keine gültige Uhrzeit bei Schedule 3!');
-
-				}} catch (e) {
-
-				this.log.error('catch trigger 3 -- ' + e);
-
+			if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59 && typeof this.mySchedule_3 !== 'undefined' && x == 3) {
+				this.mySchedule_3.cancel();
 			}
 
-		};
-
-
-		this.cancelSchedule_4 = async () => {
+		} else if (x == 4) {
 
 			this.HH = time_t4arr[0];
 			this.MM = time_t4arr[1];
 
-			try {
-				if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59 && typeof this.mySchedule_4 !== 'undefined') {
-					this.mySchedule_4.cancel();
-
-				} else if (this.HH < 0 || this.HH > 23 || this.MM < 0 || this.MM > 59) {
-
-					this.log.error('Keine gültige Uhrzeit bei Trigger 4!');
-
-				} else if (SetSchedule.length == 0) {
-
-					//this.log.error('Kein Wochentag gesetzt bei Trigger 4!');
-					//this.log.warn('SetSchedule -- 1 -- ' + SetSchedule);
-
-				} else if (typeof this.mySchedule_4 == 'undefined') {
-
-					//this.log.info('Schedule_4 nothing to cancel' );
-
-				} else {
-
-					this.log.error('Keine gültige Uhrzeit bei Schedule 4!');
-
-				}} catch (e) {
-
-				this.log.error('catch trigger 4 -- ' + e);
-
+			if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59 && typeof this.mySchedule_4 !== 'undefined' && x == 4) {
+				this.mySchedule_4.cancel();
 			}
 
-		};
-
-
-		this.cancelSchedule_5 = async () => {
+		} else if (x == 5) {
 
 			this.HH = time_t5arr[0];
 			this.MM = time_t5arr[1];
 
-			try {
-				if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59 && typeof this.mySchedule_5 !== 'undefined') {
-					this.mySchedule_5.cancel();
-
-				} else if (this.HH < 0 || this.HH > 23 || this.MM < 0 || this.MM > 59) {
-
-					this.log.error('Keine gültige Uhrzeit bei Trigger 5!');
-
-				} else if (SetSchedule.length == 0) {
-
-					//this.log.error('Kein Wochentag gesetzt bei Trigger 5!');
-					//this.log.warn('SetSchedule -- 1 -- ' + SetSchedule);
-
-				} else if (typeof this.mySchedule_5 == 'undefined') {
-
-					//this.log.info('Schedule_5 nothing to cancel' );
-
-				} else {
-
-					this.log.error('Keine gültige Uhrzeit bei Schedule 5!');
-
-				}} catch (e) {
-
-				this.log.error('catch trigger 5 -- ' + e);
-
+			if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59 && typeof this.mySchedule_5 !== 'undefined' && x == 5) {
+				this.mySchedule_5.cancel();
 			}
 
-		};
-
-
-		this.cancelSchedule_6 = async () => {
+		} else if (x == 6) {
 
 			this.HH = time_t6arr[0];
 			this.MM = time_t6arr[1];
 
-			try {
-				if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59 && typeof this.mySchedule_6 !== 'undefined') {
-					this.mySchedule_6.cancel();
-
-				} else if (this.HH < 0 || this.HH > 23 || this.MM < 0 || this.MM > 59) {
-
-					this.log.error('Keine gültige Uhrzeit bei Trigger 6!');
-
-				} else if (SetSchedule.length == 0) {
-
-					//this.log.error('Kein Wochentag gesetzt bei Trigger 6!');
-					//this.log.warn('SetSchedule -- 1 -- ' + SetSchedule);
-
-				} else if (typeof this.mySchedule_6 == 'undefined') {
-
-					//this.log.info('Schedule_6 nothing to cancel' );
-
-				} else {
-
-					this.log.error('Keine gültige Uhrzeit bei Schedule 6!');
-
-				}} catch (e) {
-
-				this.log.error('catch trigger 6 -- ' + e);
-
+			if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59 && typeof this.mySchedule_6 !== 'undefined' && x == 6) {
+				this.mySchedule_6.cancel();
 			}
-
-		};
-
-		//Cancel Schedules ENDE
-
-
-
-		this.setStateAsync('Setup.number_of_triggers', + this.config.numberoftriggers, true );
-
-		if (this.config.numberoftriggers == null) {
-
-			this.log.error('numberoftriggers is NULL!');
-
-		} else if (this.config.numberoftriggers !== null) {
-
-			//this.log.info('Schedule Anzahl ist -- ' + this.config.numberoftriggers);
-
 		}
-
-
-		//Permanente Datenpunkte erstellen
-		await this.setObjectNotExistsAsync('Setup.HH', {
-			type: 'state',
-			common: {
-				name: 'HH',
-				type: 'string',
-				role: 'state',
-				read: true,
-				write: true,
-			},
-			native: {},
-		});
-
-		this.setStateAsync('Setup.HH', '00', true);
-
-		await this.setObjectNotExistsAsync('Setup.mm', {
-			type: 'state',
-			common: {
-				name: 'mm',
-				type: 'string',
-				role: 'state',
-				read: true,
-				write: true,
-			},
-			native: {},
-		});
-
-		this.setStateAsync('Setup.mm', '00', true);
-
-		await this.setObjectNotExistsAsync('Setup.SetTrigger', {
-			type: 'state',
-			common: {
-				name: 'SetTrigger',
-				type: 'string',
-				role: 'state',
-				read: true,
-				write: true,
-			},
-			native: {},
-		});
-
-		await this.setObjectNotExistsAsync('Weekdays.07_Sunday', {
-			type: 'state',
-			common: {
-				name: 'Sunday',
-				type: 'boolean',
-				role: 'state',
-				read: true,
-				write: true,
-			},
-			native: {},
-		});
-
-		await this.setObjectNotExistsAsync('Weekdays.01_Monday', {
-			type: 'state',
-			common: {
-				name: 'Monday',
-				type: 'boolean',
-				role: 'state',
-				read: true,
-				write: true,
-			},
-			native: {},
-		});
-
-		await this.setObjectNotExistsAsync('Weekdays.02_Tuesday', {
-			type: 'state',
-			common: {
-				name: 'Tuesday',
-				type: 'boolean',
-				role: 'state',
-				read: true,
-				write: true,
-			},
-			native: {},
-		});
-
-		await this.setObjectNotExistsAsync('Weekdays.03_Wednesday', {
-			type: 'state',
-			common: {
-				name: 'Wednesday',
-				type: 'boolean',
-				role: 'state',
-				read: true,
-				write: true,
-			},
-			native: {},
-		});
-
-		await this.setObjectNotExistsAsync('Weekdays.04_Thursday', {
-			type: 'state',
-			common: {
-				name: 'Thursday',
-				type: 'boolean',
-				role: 'state',
-				read: true,
-				write: true,
-			},
-			native: {},
-		});
-
-		await this.setObjectNotExistsAsync('Weekdays.05_Friday', {
-			type: 'state',
-			common: {
-				name: 'Friday',
-				type: 'boolean',
-				role: 'state',
-				read: true,
-				write: true,
-			},
-			native: {},
-		});
-
-		await this.setObjectNotExistsAsync('Weekdays.06_Saturday', {
-			type: 'state',
-			common: {
-				name: 'Saturday',
-				type: 'boolean',
-				role: 'state',
-				read: true,
-				write: true,
-			},
-			native: {},
-		});
-
-		await this.setObjectNotExistsAsync('trigger_1.trigger_1_is_set', {
-			type: 'state',
-			common: {
-				name: 'trigger_1_is_set',
-				type: 'string',
-				role: 'state',
-				read: true,
-				write: false,
-			},
-			native: {},
-		});
-
-		await this.setObjectNotExistsAsync('trigger_1.trigger_1_Start', {
-			type: 'state',
-			common: {
-				name: 'trigger_1_Start',
-				type: 'boolean',
-				role: 'state',
-				def: false,
-				read: true,
-				write: true,
-			},
-			native: {},
-		});
-
-		await this.setObjectNotExistsAsync('trigger_1.t1_weekdays', {
-			type: 'state',
-			common: {
-				name: 't1_weekdays',
-				type: 'array',
-				role: 'list',
-				def: '[0,6]',
-				read: true,
-				write: true,
-			},
-			native: {},
-		});
-
-		await this.setObjectNotExistsAsync('trigger_1.t1_time', {
-			type: 'state',
-			common: {
-				name: 't1_time',
-				type: 'string',
-				role: 'state',
-				def: '00:00',
-				read: true,
-				write: true,
-			},
-			native: {},
-		});
-
-		await this.setObjectNotExistsAsync('trigger_1.goforit_1', {
-			type: 'state',
-			common: {
-				name: 'goforit_1',
-				type: 'string',
-				role: 'state',
-				def: 'please_Set',
-				read: true,
-				write: true,
-			},
-			native: {},
-		});
-
-		await this.setObjectNotExistsAsync('trigger_1.timer_1', {
-			type: 'state',
-			common: {
-				name: 'timer_1',
-				type: 'number',
-				role: 'state',
-				def: 1,
-				read: true,
-				write: true,
-			},
-			native: {},
-		});
-
-		this.subscribeStates('trigger_1.goforit_1');
-		this.subscribeStates('trigger_1.timer_1');
-
-		//Permanente Datenpunkte erstellen ENDE
-
-
-		//**********************************
-		//extended Datapoints setup:	 /**
-		//**********************************
-
-		//Extended DP for Trigger 1:
-		if (this.config.extended_Datapoints_T1 == true) {
-
-			this.log.info('extended_Datapoints - are enabled for Trigger 1');
-
-			await this.setObjectNotExistsAsync('trigger_1.01_t1_true', {
-				type: 'state',
-				common: {
-					name: 't1_true',
-					type: 'string',
-					role: 'state',
-					def: 'true',
-					read: true,
-					write: true,
-				},
-				native: {},
-			});
-
-			this.subscribeStates('trigger_1.01_t1_true');
-
-
-			await this.setObjectNotExistsAsync('trigger_1.02_t1_false', {
-				type: 'state',
-				common: {
-					name: 't1_false',
-					type: 'string',
-					role: 'state',
-					def: 'false',
-					read: true,
-					write: true,
-				},
-				native: {},
-			});
-
-			this.subscribeStates('trigger_1.02_t1_false');
-
-
-		} else if (this.config.extended_Datapoints_T1 == false) {
-
-			await this.delObjectAsync('trigger_1.01_t1_true');
-			await this.delObjectAsync('trigger_1.02_t1_false');
-
-		}
-
-
-		//Extended DP for Trigger 2:
-		if (this.config.extended_Datapoints_T2 == true && this.config.numberoftriggers >= 2) {
-
-			this.log.info('extended_Datapoints - are enabled for Trigger 2');
-
-			await this.setObjectNotExistsAsync('trigger_2.01_t2_true', {
-				type: 'state',
-				common: {
-					name: 't2_true',
-					type: 'string',
-					role: 'state',
-					def: 'true',
-					read: true,
-					write: true,
-				},
-				native: {},
-			});
-
-			this.subscribeStates('trigger_2.01_t2_true');
-
-
-			await this.setObjectNotExistsAsync('trigger_2.02_t2_false', {
-				type: 'state',
-				common: {
-					name: 't2_false',
-					type: 'string',
-					role: 'state',
-					def: 'false',
-					read: true,
-					write: true,
-				},
-				native: {},
-			});
-
-			this.subscribeStates('trigger_2.02_t2_false');
-
-
-		} else if (this.config.extended_Datapoints_T2 == false || this.config.numberoftriggers < 2) {
-
-			await this.delObjectAsync('trigger_2.01_t2_true');
-			await this.delObjectAsync('trigger_2.02_t2_false');
-
-		}
-
-
-		//Extended DP for Trigger 3:
-		if (this.config.extended_Datapoints_T3 == true && this.config.numberoftriggers >= 3) {
-
-			this.log.info('extended_Datapoints - are enabled for Trigger 3');
-
-			await this.setObjectNotExistsAsync('trigger_3.01_t3_true', {
-				type: 'state',
-				common: {
-					name: 't3_true',
-					type: 'string',
-					role: 'state',
-					def: 'true',
-					read: true,
-					write: true,
-				},
-				native: {},
-			});
-
-			this.subscribeStates('trigger_3.01_t3_true');
-
-
-			await this.setObjectNotExistsAsync('trigger_3.02_t3_false', {
-				type: 'state',
-				common: {
-					name: 't3_false',
-					type: 'string',
-					role: 'state',
-					def: 'false',
-					read: true,
-					write: true,
-				},
-				native: {},
-			});
-
-			this.subscribeStates('trigger_3.02_t3_false');
-
-
-		} else if (this.config.extended_Datapoints_T3 == false || this.config.numberoftriggers < 3) {
-
-			await this.delObjectAsync('trigger_3.01_t3_true');
-			await this.delObjectAsync('trigger_3.02_t3_false');
-
-		}
-
-
-		//Extended DP for Trigger 4:
-		if (this.config.extended_Datapoints_T4 == true && this.config.numberoftriggers >= 4) {
-
-			this.log.info('extended_Datapoints - are enabled for Trigger 4');
-
-			await this.setObjectNotExistsAsync('trigger_4.01_t4_true', {
-				type: 'state',
-				common: {
-					name: 't4_true',
-					type: 'string',
-					role: 'state',
-					def: 'true',
-					read: true,
-					write: true,
-				},
-				native: {},
-			});
-
-			this.subscribeStates('trigger_4.01_t4_true');
-
-
-			await this.setObjectNotExistsAsync('trigger_4.02_t4_false', {
-				type: 'state',
-				common: {
-					name: 't4_false',
-					type: 'string',
-					role: 'state',
-					def: 'false',
-					read: true,
-					write: true,
-				},
-				native: {},
-			});
-
-			this.subscribeStates('trigger_4.02_t4_false');
-
-
-		} else if (this.config.extended_Datapoints_T4 == false || this.config.numberoftriggers < 4) {
-
-			await this.delObjectAsync('trigger_4.01_t4_true');
-			await this.delObjectAsync('trigger_4.02_t4_false');
-
-		}
-
-
-		//Extended DP for Trigger 5:
-		if (this.config.extended_Datapoints_T5 == true && this.config.numberoftriggers >= 5) {
-
-			this.log.info('extended_Datapoints - are enabled for Trigger 5');
-
-			await this.setObjectNotExistsAsync('trigger_5.01_t5_true', {
-				type: 'state',
-				common: {
-					name: 't5_true',
-					type: 'string',
-					role: 'state',
-					def: 'true',
-					read: true,
-					write: true,
-				},
-				native: {},
-			});
-
-			this.subscribeStates('trigger_5.01_t5_true');
-
-
-			await this.setObjectNotExistsAsync('trigger_5.02_t5_false', {
-				type: 'state',
-				common: {
-					name: 't5_false',
-					type: 'string',
-					role: 'state',
-					def: 'false',
-					read: true,
-					write: true,
-				},
-				native: {},
-			});
-
-			this.subscribeStates('trigger_5.02_t5_false');
-
-
-		} else if (this.config.extended_Datapoints_T5 == false || this.config.numberoftriggers < 5) {
-
-			await this.delObjectAsync('trigger_5.01_t5_true');
-			await this.delObjectAsync('trigger_5.02_t5_false');
-
-		}
-
-
-		//Extended DP for Trigger 6:
-		if (this.config.extended_Datapoints_T6 == true && this.config.numberoftriggers == 6) {
-
-			this.log.info('extended_Datapoints - are enabled for Trigger 6');
-
-			await this.setObjectNotExistsAsync('trigger_6.01_t6_true', {
-				type: 'state',
-				common: {
-					name: 't6_true',
-					type: 'string',
-					role: 'state',
-					def: 'true',
-					read: true,
-					write: true,
-				},
-				native: {},
-			});
-
-			this.subscribeStates('trigger_6.01_t6_true');
-
-
-			await this.setObjectNotExistsAsync('trigger_6.02_t6_false', {
-				type: 'state',
-				common: {
-					name: 't6_false',
-					type: 'string',
-					role: 'state',
-					def: 'false',
-					read: true,
-					write: true,
-				},
-				native: {},
-			});
-
-			this.subscribeStates('trigger_6.02_t6_false');
-
-
-		} else if (this.config.extended_Datapoints_T6 == false || this.config.numberoftriggers < 6) {
-
-			await this.delObjectAsync('trigger_6.01_t6_true');
-			await this.delObjectAsync('trigger_6.02_t6_false');
-
-		}
-
-		//**********************************
-		//extended Datapoints ENDE		 /**
-		//**********************************
-
-
-		//Überprüfen ob die Datenpunkte angelegt sind, wenn nicht werden sie neu angelegt
-		//in Abhängigkeit zur Anzahl der Trigger die in der this.config eingestellt sind
-
-		for (let i = 1; i <= this.config.numberoftriggers; i++){
-
-			//Datenpunkte erstellen - in Abhängigkeit wie viele in numberoftriggers eingestellt sind
-
-			await this.setObjectNotExistsAsync('trigger_' + i, {
-				type: 'folder',
-				common: {
-					name: 'trigger_' + i,
-				},
-				native: {},
-			});
-
-			await this.setObjectNotExistsAsync('trigger_' + i + '.trigger_' + i + '_is_set', {
-				type: 'state',
-				common: {
-					name: 'trigger_' + i + '_is_set',
-					type: 'string',
-					role: 'state',
-					read: true,
-					write: false,
-				},
-				native: {},
-			});
-
-			await this.setObjectNotExistsAsync('trigger_' + i + '.trigger_' + i + '_Start', {
-				type: 'state',
-				common: {
-					name: 'trigger_' + i + '_Start',
-					type: 'boolean',
-					role: 'state',
-					def: false,
-					read: true,
-					write: true,
-				},
-				native: {},
-			});
-
-			await this.setObjectNotExistsAsync('trigger_' + i + '.t' + i + '_weekdays', {
-				type: 'state',
-				common: {
-					name: 't' + i + '_weekdays',
-					type: 'array',
-					role: 'list',
-					def: '[0,6]',
-					read: true,
-					write: true,
-				},
-				native: {},
-			});
-
-			await this.setObjectNotExistsAsync('trigger_' + i + '.t' + i + '_time', {
-				type: 'state',
-				common: {
-					name: 't' + i + '_time',
-					type: 'string',
-					role: 'state',
-					def: '00:00',
-					read: true,
-					write: true,
-				},
-				native: {},
-			});
-
-			await this.setObjectNotExistsAsync('trigger_' + i + '.goforit_' + i, {
-				type: 'state',
-				common: {
-					name: 'goforit_' + i,
-					type: 'string',
-					role: 'state',
-					def: 'please_Set',
-					read: true,
-					write: true,
-				},
-				native: {},
-			});
-
-			await this.setObjectNotExistsAsync('trigger_' + i + '.timer_' + i, {
-				type: 'state',
-				common: {
-					name: 'timer_' + i,
-					type: 'number',
-					role: 'state',
-					def: i,
-					read: true,
-					write: true,
-				},
-				native: {},
-			});
-
-			this.subscribeStates('trigger_' + i + '.trigger_' + i + '_Start');
-			this.subscribeStates('trigger_' + i + '.goforit_' + i);
-			this.subscribeStates('trigger_' + i + '.timer_' + i);
-
-			this.setStateAsync('trigger_' + i + '.trigger_' + i + '_Start', false, true);
-
-		}
-
-
-
-		for (let del = 6; del > this.config.numberoftriggers; del--){
-
-			//Überflüssige Datenpunkte löschen - alle die > numberoftriggers Anzahl ist, werden gelöscht
-
-			this.delObjectAsync('trigger_' + del, { recursive: true });
-
-		}
-
-
-		//Wochentage auf einen Wert setzten
-		this.setStateAsync('Weekdays.07_Sunday', true, true);
-		this.setStateAsync('Weekdays.01_Monday', false, true);
-		this.setStateAsync('Weekdays.02_Tuesday', false, true);
-		this.setStateAsync('Weekdays.03_Wednesday', false, true);
-		this.setStateAsync('Weekdays.04_Thursday', false, true);
-		this.setStateAsync('Weekdays.05_Friday', false, true);
-		this.setStateAsync('Weekdays.06_Saturday', true, true);
-
-		//Datenpunkt trigger 1 auf false setzen (Aulöser für Anktion wenn true)
-		//this.setState('trigger_1.trigger_1', false, true);
-
-		//trigger 1 Start auf false setzten - wird also nicht Scheduled
-		this.setStateAsync('trigger_1.trigger_1_Start', false, true);
-
-		//Setup.SetTrigger auf 0 setzen - somit wird keine Uhrzeit oder Wochentag versehentlich verstellt
-		//wenn an Uhrzeit oder Wochentagen etwas geändert wird
-		this.setStateAsync('Setup.SetTrigger', '0', true);
-
-		//hier werden Datenpunkt Änderungen im Log angezeigt
-
-		this.subscribeStates('Setup.HH');
-		this.subscribeStates('Setup.mm');
-
-		this.subscribeStates('Setup.SetTrigger');
-
-		//this.subscribeStates('trigger_1.trigger_1');
-		this.subscribeStates('trigger_1.trigger_1_Start');
-
-		this.subscribeStates('Weekdays.07_Sunday');
-		this.subscribeStates('Weekdays.01_Monday');
-		this.subscribeStates('Weekdays.02_Tuesday');
-		this.subscribeStates('Weekdays.03_Wednesday');
-		this.subscribeStates('Weekdays.04_Thursday');
-		this.subscribeStates('Weekdays.05_Friday');
-		this.subscribeStates('Weekdays.06_Saturday');
 
 	}
+
+
+	/*
+	async cancelSchedule_1() {
+
+		//this.log.error('test -- ' + this.myScheduleCancel[1]);
+
+		this.HH = time_t1arr[0];
+		this.MM = time_t1arr[1];
+
+		try {
+			if (SetSchedule.length !== 0 && this.HH >= 0 && this.HH <= 23 && this.MM >= 0 && this.MM <= 59 && typeof this.mySchedule_1 !== 'undefined') {
+				this.mySchedule_1.cancel();
+
+			} else if (this.HH < 0 || this.HH > 23 || this.MM < 0 || this.MM > 59) {
+
+				this.log.error('Keine gültige Uhrzeit bei Trigger 1!');
+
+			} else if (SetSchedule.length == 0) {
+
+				//this.log.error('Kein Wochentag gesetzt bei Trigger 1!');
+				//this.log.warn('SetSchedule -- 1 -- ' + SetSchedule);
+
+			} else if (typeof this.mySchedule_1 == 'undefined') {
+
+				//this.log.info('Schedule_1 nothing to cancel' );
+
+			} else {
+
+				this.log.error('Keine gültige Uhrzeit bei Schedule 1!');
+
+			}} catch (e) {
+
+			this.log.error('catch trigger 1 -- ' + e);
+
+		}
+
+	}
+	*/
+
+	//Cancel Schedules ENDE
 
 	/**
 	 * Is called when adapter shuts down - callback has to be called under any circumstances!
@@ -1931,10 +1733,10 @@ class TimeSwitchClock extends utils.Adapter {
 			//bei Änderung des der Datenpunkte Array neu schreiben
 			//Sunday
 			if (statusSUN == true) {
-				SetWeekdays.splice(0,1, 'Sunday');
+				SetWeekdays[0] = 'Sunday';
 
 			}  else if (statusSUN == false) {
-				SetWeekdays.splice(0,1, 'x');
+				SetWeekdays[0] = 'x';
 
 			}	else {
 				this.log.error('else... ' + statusSUN);
@@ -1942,10 +1744,10 @@ class TimeSwitchClock extends utils.Adapter {
 
 			//Monday
 			if (statusMON == true) {
-				SetWeekdays.splice(1,1, 'Monday');
+				SetWeekdays[1] = 'Monday';
 
 			}  else if (statusMON == false) {
-				SetWeekdays.splice(1,1, 'x');
+				SetWeekdays[1] = 'x';
 
 			}	else {
 				this.log.error('else... ' + statusMON);
@@ -1953,10 +1755,10 @@ class TimeSwitchClock extends utils.Adapter {
 
 			//Tuesday
 			if (statusTUE == true) {
-				SetWeekdays.splice(2,1, 'Tuesday');
+				SetWeekdays[2] = 'Tuesday';
 
 			}  else if (statusTUE == false) {
-				SetWeekdays.splice(2,1, 'x');
+				SetWeekdays[2] = 'x';
 
 			}	else {
 				this.log.error('else... ' + statusTUE);
@@ -1964,10 +1766,10 @@ class TimeSwitchClock extends utils.Adapter {
 
 			//Wednesday
 			if (statusWED == true) {
-				SetWeekdays.splice(3,1, 'Wednesday');
+				SetWeekdays[3] = 'Wednesday';
 
 			}  else if (statusWED == false) {
-				SetWeekdays.splice(3,1, 'x');
+				SetWeekdays[3] = 'x';
 
 			}	else {
 				this.log.error('else... ' + statusWED);
@@ -1975,10 +1777,10 @@ class TimeSwitchClock extends utils.Adapter {
 
 			//Thursday
 			if (statusTHU == true) {
-				SetWeekdays.splice(4,1, 'Thursday');
+				SetWeekdays[4] = 'Thursday';
 
 			}  else if (statusTHU == false) {
-				SetWeekdays.splice(4,1, 'x');
+				SetWeekdays[4] = 'x';
 
 			}	else {
 				this.log.error('else... ' + statusTHU);
@@ -1986,10 +1788,10 @@ class TimeSwitchClock extends utils.Adapter {
 
 			//Friday
 			if (statusFRI == true) {
-				SetWeekdays.splice(5,1, 'Friday');
+				SetWeekdays[5] = 'Friday';
 
 			}  else if (statusFRI == false) {
-				SetWeekdays.splice(5,1, 'x');
+				SetWeekdays[5] = 'x';
 
 			}	else {
 				this.log.error('else... ' + statusFRI);
@@ -1997,10 +1799,10 @@ class TimeSwitchClock extends utils.Adapter {
 
 			//Saturday
 			if (statusSAT == true) {
-				SetWeekdays.splice(6,1, 'Saturday');
+				SetWeekdays[6] =  'Saturday';
 
 			}  else if (statusSAT == false) {
-				SetWeekdays.splice(6,1, 'x');
+				SetWeekdays[6] = 'x';
 
 			}	else {
 				this.log.error('else... ' + statusSAT);
@@ -2010,7 +1812,7 @@ class TimeSwitchClock extends utils.Adapter {
 			//Array SetWochentage auf Werte überprüfen und neues Array SetSchedule schreiben
 			const killSO = SetWeekdays.indexOf('Sunday');
 			if (killSO !== -1 && SetSchedule.indexOf(0) == -1) {
-				SetSchedule.splice(0,0, 0);
+				SetSchedule[0] = 0;
 
 			} else if (killSO == -1 && SetSchedule.indexOf(0) == 0) {
 
@@ -2021,7 +1823,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			const killMO = SetWeekdays.indexOf('Monday');
 			if (killMO != -1 && SetSchedule.indexOf(1) == -1) {
-				SetSchedule.splice(0,0, 1);
+				SetSchedule[1] = 1;
 
 			} else if (killMO == -1 && SetSchedule.indexOf(1) !== -1) {
 
@@ -2031,7 +1833,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			const killDI = SetWeekdays.indexOf('Tuesday');
 			if (killDI != -1 && SetSchedule.indexOf(2) == -1) {
-				SetSchedule.splice(0,0, 2);
+				SetSchedule[2] = 2;
 
 			} else if (killDI == -1 && SetSchedule.indexOf(2) !==-1) {
 
@@ -2041,7 +1843,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			const killMI = SetWeekdays.indexOf('Wednesday');
 			if (killMI != -1 && SetSchedule.indexOf(3) == -1) {
-				SetSchedule.splice(0,0, 3);
+				SetSchedule[3] = 3;
 
 			} else if (killMI == -1 && SetSchedule.indexOf(3) !== -1) {
 
@@ -2051,7 +1853,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			const killDO = SetWeekdays.indexOf('Thursday');
 			if (killDO != -1 && SetSchedule.indexOf(4) == -1) {
-				SetSchedule.splice(0,0, 4);
+				SetSchedule[4] = 4;
 
 			} else if (killDO == -1 && SetSchedule.indexOf(4) !== -1) {
 
@@ -2061,7 +1863,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			const killFR = SetWeekdays.indexOf('Friday');
 			if (killFR != -1 && SetSchedule.indexOf(5) == -1) {
-				SetSchedule.splice(0,0, 5);
+				SetSchedule[5] = 5;
 
 			} else if (killFR == -1 && SetSchedule.indexOf(5) !== -1) {
 
@@ -2071,7 +1873,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			const killSA = SetWeekdays.indexOf('Saturday');
 			if (killSA != -1 && SetSchedule.indexOf(6) == -1) {
-				SetSchedule.splice(0,0, 6);
+				SetSchedule[6] = 6;
 
 			} else if (killSA == -1 && SetSchedule.indexOf(6) !== -1) {
 
@@ -2458,7 +2260,7 @@ class TimeSwitchClock extends utils.Adapter {
 						typeofarr1 = goforit_type;
 						DP_1arr = goforit;
 
-						this.log.warn('goforit ist state -- Array -- ' + typeofarr1);
+						//this.log.warn('goforit ist state -- Array -- ' + typeofarr1);
 
 					} else {
 
@@ -2577,7 +2379,8 @@ class TimeSwitchClock extends utils.Adapter {
 
 					} else if (StatusTriggerStart == false) {
 
-						this.cancelSchedule_1();
+						//this.checkTime(1);
+						this.cancelSchedule(1);
 
 						this.clearTimeout(stopp_timer1_arr);
 
@@ -2603,7 +2406,6 @@ class TimeSwitchClock extends utils.Adapter {
 			const trigger_2Start = await this.getObjectAsync('trigger_2.trigger_2_Start');
 
 			if (trigger_2Start) {
-
 
 				if (this.config.extended_Datapoints_T2 == true) {
 
@@ -2744,7 +2546,8 @@ class TimeSwitchClock extends utils.Adapter {
 
 					} else if (StatusTriggerStart == false) {
 
-						this.cancelSchedule_2();
+						//this.checkTime(2);
+						this.cancelSchedule(2);
 
 						this.clearTimeout(stopp_timer2_arr);
 
@@ -2909,7 +2712,8 @@ class TimeSwitchClock extends utils.Adapter {
 
 					} else if (StatusTriggerStart == false) {
 
-						this.cancelSchedule_3();
+						//this.checkTime(3);
+						this.cancelSchedule(3);
 
 						this.clearTimeout(stopp_timer3_arr);
 
@@ -3073,7 +2877,8 @@ class TimeSwitchClock extends utils.Adapter {
 
 					} else if (StatusTriggerStart == false) {
 
-						this.cancelSchedule_4();
+						//this.checkTime(4);
+						this.cancelSchedule(4);
 
 						this.clearTimeout(stopp_timer4_arr);
 
@@ -3238,7 +3043,8 @@ class TimeSwitchClock extends utils.Adapter {
 
 					} else if (StatusTriggerStart == false) {
 
-						this.cancelSchedule_5();
+						//this.checkTime(5);
+						this.cancelSchedule(5);
 
 						this.clearTimeout(stopp_timer5_arr);
 
@@ -3403,7 +3209,8 @@ class TimeSwitchClock extends utils.Adapter {
 
 					} else if (StatusTriggerStart == false) {
 
-						this.cancelSchedule_6();
+						//this.checkTime(6);
+						this.cancelSchedule(6);
 
 						this.clearTimeout(stopp_timer6_arr);
 
