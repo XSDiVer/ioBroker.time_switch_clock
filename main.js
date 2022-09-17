@@ -1812,7 +1812,7 @@ class TimeSwitchClock extends utils.Adapter {
 			//Array SetWochentage auf Werte überprüfen und neues Array SetSchedule schreiben
 			const killSO = SetWeekdays.indexOf('Sunday');
 			if (killSO !== -1 && SetSchedule.indexOf(0) == -1) {
-				SetSchedule[0] = 0;
+				SetSchedule.splice(0,0, 0);
 
 			} else if (killSO == -1 && SetSchedule.indexOf(0) == 0) {
 
@@ -1823,7 +1823,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			const killMO = SetWeekdays.indexOf('Monday');
 			if (killMO != -1 && SetSchedule.indexOf(1) == -1) {
-				SetSchedule[1] = 1;
+				SetSchedule.splice(0,0, 1);
 
 			} else if (killMO == -1 && SetSchedule.indexOf(1) !== -1) {
 
@@ -1833,7 +1833,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			const killDI = SetWeekdays.indexOf('Tuesday');
 			if (killDI != -1 && SetSchedule.indexOf(2) == -1) {
-				SetSchedule[2] = 2;
+				SetSchedule.splice(0,0, 2);
 
 			} else if (killDI == -1 && SetSchedule.indexOf(2) !==-1) {
 
@@ -1843,7 +1843,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			const killMI = SetWeekdays.indexOf('Wednesday');
 			if (killMI != -1 && SetSchedule.indexOf(3) == -1) {
-				SetSchedule[3] = 3;
+				SetSchedule.splice(0,0, 3);
 
 			} else if (killMI == -1 && SetSchedule.indexOf(3) !== -1) {
 
@@ -1853,7 +1853,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			const killDO = SetWeekdays.indexOf('Thursday');
 			if (killDO != -1 && SetSchedule.indexOf(4) == -1) {
-				SetSchedule[4] = 4;
+				SetSchedule.splice(0,0, 4);
 
 			} else if (killDO == -1 && SetSchedule.indexOf(4) !== -1) {
 
@@ -1863,7 +1863,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			const killFR = SetWeekdays.indexOf('Friday');
 			if (killFR != -1 && SetSchedule.indexOf(5) == -1) {
-				SetSchedule[5] = 5;
+				SetSchedule.splice(0,0, 5);
 
 			} else if (killFR == -1 && SetSchedule.indexOf(5) !== -1) {
 
@@ -1873,7 +1873,7 @@ class TimeSwitchClock extends utils.Adapter {
 
 			const killSA = SetWeekdays.indexOf('Saturday');
 			if (killSA != -1 && SetSchedule.indexOf(6) == -1) {
-				SetSchedule[6] = 6;
+				SetSchedule.splice(0,0, 6);
 
 			} else if (killSA == -1 && SetSchedule.indexOf(6) !== -1) {
 
