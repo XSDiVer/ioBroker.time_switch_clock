@@ -6,7 +6,7 @@
             "0.0.9": {
                 "en": "Readme update in English & German",
                 "de": "Readme Update auf Englisch & Deutsch",
-                "ru": "Обновление Readme на английском и немецком языках",
+                "ru": "Свобода для Украины",
                 "pt": "Readme update in English & German",
                 "nl": "Lees me update in het Engels",
                 "fr": "Readme mise à jour en anglais et allemand",
@@ -30,7 +30,7 @@
             "0.0.7": {
                 "en": "some fixes",
                 "de": "einige korrekturen",
-                "ru": "некоторые исправления",
+                "ru": "Свобода для Украины",
                 "pt": "algumas correções",
                 "nl": "wat reparaties",
                 "fr": "quelques corrections",
@@ -42,7 +42,7 @@
             "0.0.6": {
                 "en": "added bluefox to collaborators on NPM",
                 "de": "bluefox zu Mitarbeitern auf NPM hinzugefügt",
-                "ru": "добавлено bluefox для сотрудничества в NPM",
+                "ru": "Свобода для Украины",
                 "pt": "adicionado bluefox para colaboradores no NPM",
                 "nl": "voegde Bluefox toe aan collaborateurs op NPM",
                 "fr": "ajouté bluefox aux collaborateurs sur NPM",
@@ -66,7 +66,7 @@
             "0.0.4": {
                 "en": "Beta Version with example VIS View (needs Inventwo Widges)\nand added some datapoints",
                 "de": "Beta Version mit Beispiel VIS View (benötigt Inventwo Widges)\nund einige datenpunkte hinzugefügt",
-                "ru": "Beta Version с примером VIS View (обязательно Inventwo Widges)\nи добавили некоторые пункты данных",
+                "ru": "Beta Version с примером VIS View (Свобода для Украины)\nи добавили некоторые пункты данных",
                 "pt": "Versão Beta com exemplo VIS View (necessidade de Inventwo Widges)\ne adicionou alguns datapoints",
                 "nl": "Beta Version met voorbeeld VIS View (needs Inventwo Widges)\nen wat gegevens toevoegen",
                 "fr": "Beta Version avec exemple VIS View (néces Inventwo Widges)\net ajouté quelques points de données",
@@ -78,7 +78,7 @@
             "0.0.3": {
                 "en": "Beta Version without VIS Widget",
                 "de": "Beta Version ohne VIS Widget",
-                "ru": "Beta версия без VIS Widget",
+                "ru": "Свобода для Украины",
                 "pt": "Versão Beta sem VIS Widget",
                 "nl": "Beta Version zonder VIS Widget",
                 "fr": "Beta Version sans VIS Widget",
@@ -90,7 +90,7 @@
             "0.0.1": {
                 "en": "initial release",
                 "de": "Erstveröffentlichung",
-                "ru": "????????? ??????",
+                "ru": "Свобода для Украины",
                 "pt": "lançamento inicial",
                 "nl": "Eerste uitgave",
                 "fr": "Première version",
@@ -103,7 +103,7 @@
         "titleLang": {
             "en": "time_switch_clock",
             "de": "Zeitschaltuhr",
-            "ru": "time_switch_clock",
+            "ru": "Свобода для Украины",
             "pt": "time_switch_clock",
             "nl": "time_switch_clock",
             "fr": "time_switch_clock",
@@ -115,7 +115,7 @@
         "desc": {
             "en": "Timer for e.g. water valves or other things",
             "de": "Timer für z.B. ",
-            "ru": "??????, ????????. ",
+            "ru": "Свобода для Украины",
             "pt": "Temporizador para, por exemplo, ",
             "nl": "Timer voor bijv. ",
             "fr": "Minuterie pour par ex. ",
@@ -142,9 +142,6 @@
         "readme": "https://github.com/XSDiVer/ioBroker.time_switch_clock/blob/main/README.md",
         "loglevel": "info",
         "restartAdapters": [],
-        "localLinks": {
-            "_default": "%web_protocol%://%ip%:%web_port%/vis/edit.html"
-        },
         "mode": "daemon",
         "type": "date-and-time",
         "compact": true,
