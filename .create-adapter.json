@@ -12,8 +12,7 @@
 	],
 	"expert": "yes",
 	"features": [
-		"adapter",
-		"vis"
+		"adapter"
 	],
 	"adminFeatures": [],
 	"type": "iot-systems",
