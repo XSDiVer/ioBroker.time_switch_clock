@@ -67,7 +67,7 @@ and added some datapoints
 ## License
 MIT License
 
-Copyright (c) 2022 XSDiVer <Tachyonen@quantentunnel.de>
+Copyright (c) 2023 XSDiVer <Tachyonen@quantentunnel.de>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
