@@ -13,7 +13,8 @@
                 "it": "Aggiornamento Readme in inglese e tedesco",
                 "es": "Actualización de Readme en Inglés & Alemán",
                 "pl": "Readme uaktualnienie",
-                "zh-cn": "英文和德文更新"
+                "zh-cn": "英文和德文更新",
+                "uk": "Оновлення Readme англійською та німецькою мовами"
             },
             "0.0.8": {
                 "en": "* added extended Datapoints in the Mainsetup,\nso you can trigger own defined strings - not only 'true' & 'false'",
@@ -25,7 +26,8 @@
                 "it": "* aggiunto i Datapoint prolungati nel Mainsetup,\nin modo da poter attivare le proprie stringhe definite - non solo vero & falso",
                 "es": "* añadido Datapoints extendidos en el Mainsetup,\npara que usted puede desencadenar sus propias cadenas definidas - no sólo verdadero \" falso",
                 "pl": "* dodano rozszerzone punkty danych w Mainsetup,\nmożesz wywołać własne struny – nie tylko prawdziwe i fałszywe",
-                "zh-cn": "* 增加主要集群的数据点,\n因此,你可以触发自己界定的特色,不仅真正和谎言。"
+                "zh-cn": "* 增加主要集群的数据点,\n因此,你可以触发自己界定的特色,不仅真正和谎言。",
+                "uk": "* додано розширені точки даних у Mainsetup,\nщоб ви могли запускати власні визначені рядки - не тільки \"true\" & \"false\""
             },
             "0.0.7": {
                 "en": "some fixes",
@@ -37,7 +39,8 @@
                 "it": "alcune correzioni",
                 "es": "algunos arreglos",
                 "pl": "pewne rozwiązanie",
-                "zh-cn": "有些缺陷"
+                "zh-cn": "有些缺陷",
+                "uk": "деякі виправлення"
             },
             "0.0.6": {
                 "en": "added bluefox to collaborators on NPM",
@@ -49,7 +52,8 @@
                 "it": "aggiunto bluefox a collaboratori su NPM",
                 "es": "añadido bluefox a colaboradores en NPM",
                 "pl": "dodał także dodatki do kompilatorów na NPM",
-                "zh-cn": "加入国家预防机制的协作者"
+                "zh-cn": "加入国家预防机制的协作者",
+                "uk": "додав bluefox до співавторів на NPM"
             },
             "0.0.5": {
                 "en": "NPM fix",
@@ -61,7 +65,8 @@
                 "it": "Correzione NPM",
                 "es": "NPM fix",
                 "pl": "NPM",
-                "zh-cn": "NPM fix"
+                "zh-cn": "NPM fix",
+                "uk": "Виправлення NPM"
             },
             "0.0.4": {
                 "en": "Beta Version with example VIS View (needs Inventwo Widges)\nand added some datapoints",
@@ -73,7 +78,8 @@
                 "it": "Versione Beta con esempio VIS View (bisogno Inventwo Widges)\ne aggiunto alcuni datapoint",
                 "es": "Versión beta con ejemplo VIS View (necesidades Inventwo Widges)\ny agregar algunos puntos de datos",
                 "pl": "Beta Version with the VS View (ang.)\ni dodał niektóre punkty danych",
-                "zh-cn": "Beta Version with example VIS View(needs Inventwo Widges)\n增加一些数据点"
+                "zh-cn": "Beta Version with example VIS View(needs Inventwo Widges)\n增加一些数据点",
+                "uk": "Бета-версія з прикладом перегляду VIS (потрібні Inventwo Widges)\nі додав деякі точки даних"
             },
             "0.0.3": {
                 "en": "Beta Version without VIS Widget",
@@ -85,7 +91,8 @@
                 "it": "Versione Beta senza VIS Widget",
                 "es": "Versión beta sin VIS Widget",
                 "pl": "Wersja bez VIS Widget",
-                "zh-cn": "Beta Version no VISWdget"
+                "zh-cn": "Beta Version no VISWdget",
+                "uk": "Бета-версія без віджета VIS"
             },
             "0.0.1": {
                 "en": "initial release",
@@ -97,7 +104,8 @@
                 "it": "Versione iniziale",
                 "es": "Versión inicial",
                 "pl": "Pierwsze wydanie",
-                "zh-cn": "????"
+                "zh-cn": "????",
+                "uk": "початковий випуск"
             }
         },
         "titleLang": {
@@ -110,7 +118,8 @@
             "it": "time_switch_clock",
             "es": "time_switch_clock",
             "pl": "zegar_przelacznika_czasu",
-            "zh-cn": "time_switch_clock"
+            "zh-cn": "time_switch_clock",
+            "uk": "time_switch_clock"
         },
         "desc": {
             "en": "Timer for e.g. water valves or other things",
@@ -122,7 +131,8 @@
             "it": "Timer per es. ",
             "es": "Temporizador para, p. ",
             "pl": "Timer m.in. ",
-            "zh-cn": "?????"
+            "zh-cn": "?????",
+            "uk": "Таймер для напр. водяні клапани або інші речі"
         },
         "authors": [
             "XSDiVer <Tachyonen@quantentunnel.de>"
