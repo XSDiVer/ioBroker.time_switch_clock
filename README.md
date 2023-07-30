@@ -38,6 +38,11 @@ Here is an example that can be imported into VIS as a view,
 
 ## Changelog
 
+<!--
+  Placeholder for the next version (at the beginning of the line):
+  ### **WORK IN PROGRESS**
+-->
+
 ### 0.0.9 (2022-08-06)
 * Readme update in English & German 
 

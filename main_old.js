@@ -1,6 +1,8 @@
 // @ts-nocheck
 'use strict';
 
+//test ignore
+
 //const { Adapter } = require('@iobroker/adapter-core');
 /*
  * Created with @iobroker/create-adapter v2.1.1
